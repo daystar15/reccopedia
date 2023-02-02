@@ -43,6 +43,10 @@ public class TestController {
 	public List<Map<String, Object>> test4() {
 		return testDAO.selectPostListTEST();
 	}
-
-
+	
+	// 회원가입	
+	@GetMapping("/user/sign_up_view")
+	public String signUpView() {
+		return "test/user";
+	}
 }
