@@ -8,13 +8,13 @@
 		INSERT INTO `user`
 			(
 				`name`
-				`info`
-				`email`
-				`password`
-				`backgroundImagePath`
-				`profileImagePath`
-				`createdAt`
-				`updatedAt`
+				, `info`
+				, `email`
+				, `password`
+				, `backgroundImagePath`
+				, `profileImagePath`
+				, `createdAt`
+				, `updatedAt`
 			)
 		VALUES
 			(
@@ -28,5 +28,24 @@
 				, NOW()
 			)
 	</insert>
+	
+	<select id="getUserByLoginEmailPassword" parameterType="map" resultType="com.reccopedia.user.model.User">
+		SELECT 
+			`id`
+			, `name`
+			, `info`
+			, `email`
+			, `password`
+			, `backgroundImagePath`
+			, `profileImagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`user`
+		WHERE
+			`email` = #{email}
+			AND
+			`password`= #{password}
+	</select>
 
 </mapper> 	

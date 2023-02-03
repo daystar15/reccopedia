@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.reccopedia.user.model.User;
 import com.reccopedia.user.userBO.UserBO;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
@@ -19,6 +21,7 @@ public class UserRestController {
 	@Autowired
 	private UserBO userBO;
 
+	// 회원가입
 	@PostMapping("/sign_up")
 	public Map<String, Object> signUp(
 			@RequestParam("name") String name,
@@ -39,4 +42,30 @@ public class UserRestController {
 		
 		return result;
 	}
+	
+	// 로그인
+	@PostMapping("/sign_in")
+	public Map<String, Object> signIn(
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			HttpSession session) {
+		
+		// username은 user / 비번 cbb42cef-6deb-47ef-9fcb-c278a4d242e8
+		// 비밀번호 암호화
+		// String 암호화된Password = 
+		
+		User user = userBO.getUserByLoginEmailPassword(email, password);
+		Map<String, Object> result = new HashMap<>();
+				
+		if (user != null) {
+			result.put("code", 1);
+			//session.setAttribute("userEmail", user.getEmail());
+			//session.setAttribute("userEmail", user.getPassword());
+		} else {
+			result.put("code", "로그인 실패");
+		}
+		
+		return result;
+	}
+	
 }

@@ -8,6 +8,6 @@
  		SELECT
  			*
  		FROM
- 			`post`
+ 			`user`
  	</select>
 </mapper> 	

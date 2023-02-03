@@ -49,4 +49,11 @@ public class TestController {
 	public String signUpView() {
 		return "test/user";
 	}
+	
+	// 로그인	
+		@GetMapping("/user/sign_in_view")
+		public String signInView() {
+			return "test/login";
+		}
+	
 }
