@@ -61,23 +61,23 @@
 			}
 			
 			// ajax
-			let url = $("#signUpForm").attr("action");
-			let params = $("#signUpForm").serialize();
+			$.ajax({
+				type: "post"
+				, url: "/user/sign_up"
+				, data: {"name":name, "email":email, "password":password}
 			
-			//console.log(params);
-			
-			$.post(url, params)
-			.done(function(data) {
-				// response
-				if (data.code == 1) {
-					// 성공
-					alert("가입을 환영합니다")
-					location.reload();
-				} else {
-					// 실패
-					alert(data.errorMessage)
+				, success:function(data) {
+					if (data == 1) {
+						alert("회원가입에 성공");
+						window.location.reload();
+					} else {
+						alert(data.errorMessage);
+					}
 				}
-			}); //---ajax
+				, error:function(e) {
+					alert("회원가입에 실패");
+				}
+			})
 			
 		}); //---회원가입 버튼
 		

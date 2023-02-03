@@ -4,7 +4,7 @@
 
 <mapper namespace="com.reccopedia.user.userDAO.UserDAO">
 
-	<select id="insertUser" parameterType="map" resultType="com.reccopedia.user.model.User">
+	<insert id="insertUser" parameterType="map">
 		INSERT INTO `user`
 			(
 				`name`
@@ -27,6 +27,6 @@
 				, NOW()
 				, NOW()
 			)
-	</select>
+	</insert>
 
 </mapper> 	

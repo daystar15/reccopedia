@@ -25,10 +25,11 @@ public class UserRestController {
 			@RequestParam("email") String email,
 			@RequestParam("password") String password) {
 		
-		int signUpCount = userBO.insertUser(name, email, password);
-		Map<String, Object> result = new HashMap<>();
 		
-		if (signUpCount == 1) {
+		Map<String, Object> result = new HashMap<>();
+		int insertUserRow = userBO.insertUser(name, email, password);
+		
+		if (insertUserRow == 1) {
 			result.put("code", 1);
 			result.put("result", "성공");
 		} else {
@@ -37,6 +38,5 @@ public class UserRestController {
 		}
 		
 		return result;
-		
 	}
 }
