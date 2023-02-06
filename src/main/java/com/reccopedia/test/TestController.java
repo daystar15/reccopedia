@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,6 +45,7 @@ public class TestController {
 		return testDAO.selectPostListTEST();
 	}
 	
+<<<<<<< Updated upstream
 	// 회원가입	
 	@GetMapping("/user/sign_up_view")
 	public String signUpView() {
@@ -56,4 +58,110 @@ public class TestController {
 			return "test/login";
 		}
 	
+=======
+	// 메인 페이지
+	@GetMapping("/main")
+	public String main(Model model) {
+		model.addAttribute("viewName", "contents/main");
+		return "template/layout";
+	}
+	
+	// 어드민 업로드 페이지
+	@GetMapping("/admin/upload_view")
+	public String uploadView() {
+		
+		return "admin/upload";
+	}
+	
+	// 유저페이지
+	@GetMapping("/user/user_view")
+	public String userView(Model model) {
+		model.addAttribute("viewName", "user/userPage");
+		return "template/layout";
+	}
+
+	// 유저페이지 - 평가페이지
+	@GetMapping("/user/evaluate_view")
+	public String evaluateView(Model model) {
+		model.addAttribute("viewName", "user/keepEvaluate");
+		return "template/layout";
+	}
+	
+	// 유저페이지 - 보는중
+	@GetMapping("/user/watching_view")
+	public String watchingView(Model model) {
+		model.addAttribute("viewName", "user/keepWatching");
+		return "template/layout";
+	}
+	
+	// 유저페이지 - 보고싶어요
+	@GetMapping("/user/wish_view")
+	public String wishView(Model model) {
+	model.addAttribute("viewName", "user/keepWish");
+		return "template/layout";
+	}
+	
+	// 컨텐츠페이지 - 기본정보
+	@GetMapping("/contents/overview_view")
+	public String overviewView(Model model) {
+	model.addAttribute("viewName", "contents/overview");
+		return "template/layout";
+	}
+	
+	// 컨텐츠페이지 - 컨텐츠 개별 페이지
+	@GetMapping("/contents/contents_view")
+	public String contentsView(Model model) {
+	model.addAttribute("viewName", "contents/contentsPage");
+		return "template/layout";
+	}
+	
+	// 평가하기 페이지
+	@GetMapping("/review_view")
+	public String reviewView(Model model) {
+	model.addAttribute("viewName", "review/review");
+		return "template/layout";
+	}
+	
+	// 댓글 페이지
+	@GetMapping("/comment_view")
+	public String commentView(Model model) {
+	model.addAttribute("viewName", "comment/comment");
+		return "template/layout";
+	}
+	
+	// 컬렉션 수정 페이지
+	@GetMapping("/collection/update_view")
+	public String collectionUpdateView(Model model) {
+	model.addAttribute("viewName", "collection/collectionUpdate");
+		return "template/layout";
+	}
+	
+	// 컬렉션 페이지
+	@GetMapping("/collection/collection_view")
+	public String collectionPageView(Model model) {
+	model.addAttribute("viewName", "collection/collectionPage");
+		return "template/layout";
+	}
+	
+	// 컬렉션 목록 페이지
+	@GetMapping("/collection/collection_list_view")
+	public String collectionListView(Model model) {
+	model.addAttribute("viewName", "collection/collectionList");
+		return "template/layout";
+	}
+	
+	// 컬렉션 찾기 페이지
+	@GetMapping("/collection/collection_find_view")
+	public String collectionFindView(Model model) {
+	model.addAttribute("viewName", "collection/collectionFind");
+		return "template/layout";
+	}
+	
+	// 컬렉션 생성 페이지
+	@GetMapping("/collection/collection_create_view")
+	public String collectionCreateView(Model model) {
+	model.addAttribute("viewName", "collection/collectionCreate");
+		return "template/layout";
+	}
+>>>>>>> Stashed changes
 }
