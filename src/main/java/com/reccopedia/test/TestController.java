@@ -45,20 +45,13 @@ public class TestController {
 		return testDAO.selectPostListTEST();
 	}
 	
-<<<<<<< Updated upstream
-	// 회원가입	
-	@GetMapping("/user/sign_up_view")
-	public String signUpView() {
-		return "test/user";
+	// 로그인	
+	@GetMapping("/user/sign_in_view")
+	public String signInView() {
+		return "test/login";
 	}
 	
-	// 로그인	
-		@GetMapping("/user/sign_in_view")
-		public String signInView() {
-			return "test/login";
-		}
-	
-=======
+
 	// 메인 페이지
 	@GetMapping("/main")
 	public String main(Model model) {
@@ -163,5 +156,5 @@ public class TestController {
 	model.addAttribute("viewName", "collection/collectionCreate");
 		return "template/layout";
 	}
->>>>>>> Stashed changes
+
 }

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.reccopedia.user.bo.UserBO;
 import com.reccopedia.user.model.User;
-import com.reccopedia.user.userBO.UserBO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -27,7 +27,6 @@ public class UserRestController {
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
 			@RequestParam("password") String password) {
-		
 		
 		Map<String, Object> result = new HashMap<>();
 		int insertUserRow = userBO.insertUser(name, email, password);

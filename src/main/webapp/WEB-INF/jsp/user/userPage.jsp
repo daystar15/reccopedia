@@ -7,6 +7,7 @@
 		</div>
 		<!-- 설정 버튼 끝-->
 		<!-- 백그라운드이미지 -->
+		<%-- 기본 이미지, 유저가 업로드 하면 이미지 변경됨 --%>
 		<div class="user_background">
 			<img src="/static/images/user_page_background.jpg" alt="">
 		</div>
@@ -79,3 +80,11 @@
 		</ul>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		$('.setting').on('click',function() {
+			alert(111);
+		})
+	});
+</script>

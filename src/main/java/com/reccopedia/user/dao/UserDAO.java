@@ -1,4 +1,4 @@
-package com.reccopedia.user.userDAO;
+package com.reccopedia.user.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

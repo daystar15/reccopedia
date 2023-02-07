@@ -685,11 +685,12 @@
 	</div>
 </div>
 
+
 <!-- 모달배경 -->
-<div class="modal_back none"></div>
+<!-- <div class="modal_back none"></div> -->
 
 <!-- 회원가입 -->
-<div class="sign_up_modal none">
+<!-- <div class="sign_up_modal none">
 	<div class="modal_box">
 		<div class="modal_top">
 			<h1 class="modal_logo">
@@ -718,10 +719,10 @@
 			</p>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <!-- 로그인 -->
-<div class="sign_in_modal none">
+<!--<div class="sign_in_modal none">
 	<div class="modal_box">
 		<div class="modal_top">
 			<h1 class="modal_logo">
@@ -744,7 +745,7 @@
                 <div class="forget_password">
                     <a href="#">비밀번호를 잊어버리셨나요?</a>
                 </div> 
-                -->
+                
 		<div class="go_sign_up">
 			<p>
 				계정이 없으신가요?
@@ -752,13 +753,14 @@
 			</p>
 		</div>
 	</div>
-</div>
+</div> -->
 
-<script>
+<!-- <script>
     $(document).ready(function () {
         $('.sign_up').on('click', function() {
             $(".sign_up_modal").removeClass('none');
             $(".modal_back").removeClass('none');
+            $(".go_sign_up").removeClass('none');
         });
 
         $('.sign_up_modal .go_sign_in p a').on('click', function() {
@@ -769,6 +771,7 @@
         $('.sign_in').on('click', function() {
             $(".sign_in_modal").removeClass('none');
             $(".modal_back").removeClass('none');
+            $(".go_sign_in").removeClass('none');
         });
 
         $('.sign_in_modal .go_sign_up p a').on('click', function() {
@@ -782,4 +785,4 @@
             $(".sign_in_modal").addClass('none');
         });
     });
-</script>
+</script> -->

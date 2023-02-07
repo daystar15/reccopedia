@@ -1,10 +1,10 @@
-package com.reccopedia.user.userBO;
+package com.reccopedia.user.bo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.reccopedia.user.dao.UserDAO;
 import com.reccopedia.user.model.User;
-import com.reccopedia.user.userDAO.UserDAO;
 
 @Service
 public class UserBO {
