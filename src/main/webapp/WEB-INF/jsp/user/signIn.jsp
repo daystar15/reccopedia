@@ -59,7 +59,7 @@
 			
 				, success:function(data) {
 					if (data.code == 1) {
-						alert("로그인에 성공");
+						alert("로그인에 성공하였습니다.");
 						$(".modal_back").remove();
 						$(".modal_box").remove();
 						$('.before_login').remove();

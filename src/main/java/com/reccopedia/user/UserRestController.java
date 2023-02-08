@@ -20,6 +20,23 @@ public class UserRestController {
 	
 	@Autowired
 	private UserBO userBO;
+	
+	// 중복확인
+	@RequestMapping("/is_duplicated_email")
+	public Map<String, Object> isDuplicatedEmail(
+			@RequestParam("email") String email) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		int existEmailRowCount = userBO.existEmail(email);
+		if (existEmailRowCount > 0) {
+			result.put("result", true);
+		} else {
+			result.put("result", false);
+		}
+		
+		return result;
+	}
 
 	// 회원가입
 	@PostMapping("/sign_up")
@@ -58,8 +75,10 @@ public class UserRestController {
 				
 		if (user != null) {
 			result.put("code", 1);
-			//session.setAttribute("userEmail", user.getEmail());
-			//session.setAttribute("userEmail", user.getPassword());
+			// 로그인 상태 유지
+			session.setAttribute("userEmail", user.getEmail());
+			session.setAttribute("userName", user.getName());
+			session.setAttribute("userPassword", user.getPassword());
 		} else {
 			result.put("code", "로그인 실패");
 		}

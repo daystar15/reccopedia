@@ -4,6 +4,15 @@
 
 <mapper namespace="com.reccopedia.user.dao.UserDAO">
 
+	<select id="existEmail" parameterType="String" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`user`
+		WHERE
+			`email` = #{email}
+	</select>
+
 	<insert id="insertUser" parameterType="map">
 		INSERT INTO `user`
 			(

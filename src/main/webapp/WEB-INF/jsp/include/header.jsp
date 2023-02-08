@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div class="inner">
     <div>
-        <h1 class="logo"><a href="#"><img src="/static/images/logo.png" alt=""></a></h1>
+        <h1 class="logo"><a href="/main"><img src="/static/images/logo.png" alt=""></a></h1>
         <div class="menu">
             <a href="#">영화</a>
             <a href="#">TV</a>
@@ -29,6 +29,7 @@
         <div class="after_login none">
             <div class="my_account">
                 <a href="/user/evaluate_view" id="go_review">평가하기</a>
+                <a href="/user/sign_out" id="logoutBtn">로그아웃</a>
                 <a href="/user/user_view" id="go_userPage">
                     <span class="comment_user_profile">
                         <img src="/static/images/test.jpg" alt="">

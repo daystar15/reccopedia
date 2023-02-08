@@ -11,6 +11,10 @@ public class UserBO {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	public int existEmail(String email) {
+		return userDAO.existEmail(email);
+	}
 
 	public int insertUser(String name, String email, String password) {
 		return userDAO.insertUser(name, email, password, null, null, null);

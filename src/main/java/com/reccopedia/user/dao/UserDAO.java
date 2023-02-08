@@ -7,6 +7,8 @@ import com.reccopedia.user.model.User;
 
 @Repository
 public interface UserDAO {
+	
+	public int existEmail(String email);
 
 	public int insertUser(
 			@Param("name") String name, 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.reccopedia.test.dao.TestDAO;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class TestController {
 	
@@ -51,13 +53,20 @@ public class TestController {
 		return "test/login";
 	}
 	
-
-	
+	// 로그아웃
+	@GetMapping("/user/sign_out")
+	public String signOut(HttpSession session) {
+		// 로그아웃 - 세션에 있는 것을 모두 비운다.
+		session.removeAttribute("userEmail");
+		session.removeAttribute("userPassword");
+		session.removeAttribute("userName");
+		
+		return "redirect:/main";
+	}
 	
 	// 어드민 업로드 페이지
 	@GetMapping("/admin/upload_view")
 	public String uploadView() {
-		
 		return "admin/upload";
 	}
 	
@@ -65,6 +74,13 @@ public class TestController {
 	@GetMapping("/user/user_view")
 	public String userView(Model model) {
 		model.addAttribute("viewName", "user/userPage");
+		return "template/layout";
+	}
+	
+	// 유저페이지
+	@GetMapping("/user/user_update_view")
+	public String userUpdateView(Model model) {
+		model.addAttribute("viewName", "user/userPageUpdate");
 		return "template/layout";
 	}
 
