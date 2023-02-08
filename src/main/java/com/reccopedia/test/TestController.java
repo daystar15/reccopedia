@@ -52,12 +52,7 @@ public class TestController {
 	}
 	
 
-	// 메인 페이지
-	@GetMapping("/main")
-	public String main(Model model) {
-		model.addAttribute("viewName", "contents/main");
-		return "template/layout";
-	}
+	
 	
 	// 어드민 업로드 페이지
 	@GetMapping("/admin/upload_view")
@@ -94,19 +89,7 @@ public class TestController {
 		return "template/layout";
 	}
 	
-	// 컨텐츠페이지 - 기본정보
-	@GetMapping("/contents/overview_view")
-	public String overviewView(Model model) {
-	model.addAttribute("viewName", "contents/overview");
-		return "template/layout";
-	}
 	
-	// 컨텐츠페이지 - 컨텐츠 개별 페이지
-	@GetMapping("/contents/contents_view")
-	public String contentsView(Model model) {
-	model.addAttribute("viewName", "contents/contentsPage");
-		return "template/layout";
-	}
 	
 	// 평가하기 페이지
 	@GetMapping("/review_view")
