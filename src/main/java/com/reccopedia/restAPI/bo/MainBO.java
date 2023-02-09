@@ -2,6 +2,7 @@ package com.reccopedia.restAPI.bo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class MainBO {
 		 List<MainView> popularList = new ArrayList();
 		 
 		 // 컨텐츠 목록 가져오기
-		 List<Contents> contentsList = resttemplateservice.popularUrlAPI();
+		 List<Map<String, Object>> contentsList = resttemplateservice.popularUrlAPI();
 	 
 		 for (Contents content : contentsList) {
 			 MainView main = new MainView();
