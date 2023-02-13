@@ -16,11 +16,6 @@ public class Contents {
 	private String status;
 	private String contentGallery;
 	private String contentVideo;
-	private int year;
-	private String posterImage;
-	private String production_countries;
-	private Date createdAt;
-	private Date updatedAt;
 	
 	public int getId() {
 		return id;
@@ -124,5 +119,11 @@ public class Contents {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	private int year;
+	private String posterImage;
+	private String production_countries;
+	private Date createdAt;
+	private Date updatedAt;
+	
 	
 }

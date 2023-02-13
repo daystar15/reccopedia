@@ -16,6 +16,4 @@ public class MainView {
 		this.contents = contents;
 	}
 
-	
-	
 }

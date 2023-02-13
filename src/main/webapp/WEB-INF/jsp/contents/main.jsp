@@ -6,7 +6,7 @@
 			<h2 class="main_title">박스오피스 순위</h2>
 			<div class="contents">
 				<ul>
-					
+					<c:forEach var="title" items="${title}">
 					<li>
 						<a href="#">
 							<div>
@@ -14,7 +14,7 @@
 									<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
 								</div>
 							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
+							<h3 class="content_subject">title.title</h3>
 							<div class="content_info">
 								<span class="year">2022</span> &middot; <span class="country">일본</span>
 							</div>
@@ -24,7 +24,7 @@
 							</div>
 						</a>
 					</li>
-
+					</c:forEach>
 					<li>
 						<a href="#">
 							<div>
