@@ -6,15 +6,15 @@
 			<h2 class="main_title">박스오피스 순위</h2>
 			<div class="contents">
 				<ul>
-					<c:forEach var="title" items="${title}">
+					<c:forEach var="popular" items="${popularResult}">
 					<li>
-						<a href="#">
+						<a href="">
 							<div>
 								<div class="poster">
-									<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
+									<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${popular.poster_path}" alt="">
 								</div>
 							</div>
-							<h3 class="content_subject">title.title</h3>
+							<h3 class="content_subject">${popular.title}</h3>
 							<div class="content_info">
 								<span class="year">2022</span> &middot; <span class="country">일본</span>
 							</div>
@@ -25,143 +25,7 @@
 						</a>
 					</li>
 					</c:forEach>
-					<li>
-						<a href="#">
-							<div>
-								<div class="poster">
-									<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-								</div>
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="content_info">
-								<span class="year">2022</span> &middot; <span class="country">일본</span>
-							</div>
-							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 17% </span> &middot; <span class="accumulate"> 199만명 </span>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="content_info">
-								<span class="year">2022</span> &middot; <span class="country">일본</span>
-							</div>
-							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 17% </span> &middot; <span class="accumulate"> 199만명 </span>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="content_info">
-								<span class="year">2022</span> &middot; <span class="country">일본</span>
-							</div>
-							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 17% </span> &middot; <span class="accumulate"> 199만명 </span>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="content_info">
-								<span class="year">2022</span> &middot; <span class="country">일본</span>
-							</div>
-							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 17% </span> &middot; <span class="accumulate"> 199만명 </span>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="content_info">
-								<span class="year">2022</span> &middot; <span class="country">일본</span>
-							</div>
-							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 17% </span> &middot; <span class="accumulate"> 199만명 </span>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="content_info">
-								<span class="year">2022</span> &middot; <span class="country">일본</span>
-							</div>
-							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 17% </span> &middot; <span class="accumulate"> 199만명 </span>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="content_info">
-								<span class="year">2022</span> &middot; <span class="country">일본</span>
-							</div>
-							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 17% </span> &middot; <span class="accumulate"> 199만명 </span>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="content_info">
-								<span class="year">2022</span> &middot; <span class="country">일본</span>
-							</div>
-							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 17% </span> &middot; <span class="accumulate"> 199만명 </span>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="content_info">
-								<span class="year">2022</span> &middot; <span class="country">일본</span>
-							</div>
-							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 17% </span> &middot; <span class="accumulate"> 199만명 </span>
-							</div>
-						</a>
-					</li>
+					
 				
 				</ul>
 			</div>
@@ -175,99 +39,48 @@
 	</div>
 	<div class="section">
 		<div class="inner">
-			<h2 class="main_title">평균별점이 높은 작품</h2>
+			<h2 class="main_title">넷플릭스 작품</h2>
 			<div class="contents">
 				<ul>
+					<c:forEach var="netflix" items="${netflixResult}">
 					<li>
 						<a href="#">
 							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
+								<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${netflix.poster_path}" alt="">
 							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
+							<h3 class="content_subject">${netflix.title}</h3>
 							<div class="point">평균 &starf; 4.2</div>
 						</a>
 					</li>
+					</c:forEach>
+					
+				</ul>
+			</div>
+		</div>
+		<div class="left">
+			<img src="/static/images/arrow.png" alt="">
+		</div>
+		<div class="right">
+			<img src="/static/images/arrow.png" alt="">
+		</div>
+	</div>
+	<div class="section">
+		<div class="inner">
+			<h2 class="main_title">최고 순위 작품</h2>
+			<div class="contents">
+				<ul>
+					<c:forEach var="toprated" items="${topratedResult}">
 					<li>
 						<a href="#">
 							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
+								<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${toprated.poster_path}" alt="">
 							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
+							<h3 class="content_subject">${toprated.title}</h3>
 							<div class="point">평균 &starf; 4.2</div>
 						</a>
 					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="point">평균 &starf; 4.2</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="point">평균 &starf; 4.2</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="point">평균 &starf; 4.2</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="point">평균 &starf; 4.2</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="point">평균 &starf; 4.2</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="point">평균 &starf; 4.2</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="point">평균 &starf; 4.2</div>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<div class="poster">
-								<span class="rank">1</span> <img src="/static/images/test.jpg" alt="">
-							</div>
-							<h3 class="content_subject">더 퍼스트 슬램덩크</h3>
-							<div class="point">평균 &starf; 4.2</div>
-						</a>
-					</li>
+					</c:forEach>
+					
 				</ul>
 			</div>
 		</div>

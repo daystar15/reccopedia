@@ -1,5 +1,7 @@
 package com.reccopedia.contents;
 
+import java.util.List;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,15 @@ public class ContentsController {
 	@GetMapping("/main")
 	public String main(Model model) throws JsonProcessingException {
 		
-		Map<String, Object> result = contentsBO.generateMainMap();
+		List<Map<String, Object>> popularResult = contentsBO.generatePopularMap();
+		List<Map<String, Object>> netflixResult = contentsBO.generateNetflixMap();
+		List<Map<String, Object>> topratedResult = contentsBO.generateTopRatedMap();
+
 		
-		model.addAttribute("title", result.get("overview"));
+		model.addAttribute("popularResult", popularResult);
+		model.addAttribute("netflixResult", netflixResult);
+		model.addAttribute("topratedResult", topratedResult);
+
 		model.addAttribute("viewName", "contents/main");
 		return "template/layout";
 	}
