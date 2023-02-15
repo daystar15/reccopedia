@@ -44,7 +44,12 @@ public class ContentsController {
 	
 	// 컨텐츠페이지 - 컨텐츠 개별 페이지
 	@GetMapping("/contents/contents_view")
-	public String contentsView(Model model) {
+	public String contentsView(Model model, int id) throws JsonProcessingException {
+		Map<String, Object> contentInfo = contentsBO.generateContent(id);
+		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
+		
+		model.addAttribute("crew", contentResult);
+		model.addAttribute("contents", contentInfo);
 		model.addAttribute("viewName", "contents/contentsPage");
 		return "template/layout";
 	}

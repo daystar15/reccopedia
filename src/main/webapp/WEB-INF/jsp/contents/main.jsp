@@ -8,7 +8,7 @@
 				<ul>
 					<c:forEach var="popular" items="${popularResult}">
 					<li>
-						<a href="">
+						<a href="/contents/contents_view?id=${popular.id}">
 							<div>
 								<div class="poster">
 									<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${popular.poster_path}" alt="">
@@ -501,6 +501,14 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		$(".contents ul li a").on('click', function() {
+			
+		}); // -- 컨텐츠 클릭 시 
+	})
+</script>
 
 
 <!-- 모달배경 -->

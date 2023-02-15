@@ -449,7 +449,7 @@ textarea {
     top: 30%;
     transform: translateX(-50%);
     background: #fff;
-    z-index: 200;
+    z-index: 800;
     padding: 2rem 0;
 }
 .modal_box .modal_logo {

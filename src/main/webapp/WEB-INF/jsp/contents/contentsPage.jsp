@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="contets_wrap">
 	<div class="contents_background">
 		<div>
-			<img src="/static/images/test_background.jpg" alt="">
+			<img src="https://image.tmdb.org/t/p/w500${contents.backdrop_path}" alt="">
 		</div>
 	</div>
 	<div class="contets_top">
 		<div class="contents_short_box">
 			<div class="contents_poster">
-				<img src="/static/images/test.jpg" alt="">
+				<img src="https://image.tmdb.org/t/p/w500${contents.poster_path}" alt="">
 			</div>
 			<div class="contents_info">
-				<h2>{제목}</h2>
-				<h3>{년도} &#183; {장르} &#183; {제작국가}</h3>
+				<h2>${contents.title}</h2>
+				<h3>${contents.release_date} &#183; ${contents.genres} &#183; ${contents.production_countries}</h3>
 				<h4>평균 &#9733;{3.8} ({44만명})</h4>
 				<div>
 					<div class="star-rating">
@@ -85,10 +86,12 @@
 						<a href="#">더보기</a>
 					</div>
 					<div class="basic_info_bottom">
-						<p>{subject}</p>
-						<p>{year} &#183; {country} &#183; {genre}</p>
-						<p>{runningTime} &#183; {grade}</p>
-						<p class="summary">{해군 최신 전투기 F-14기를 모는 젊은 조종사 매버릭 대위(톰 크루즈)는 최고의 실력을 자부하는 파일럿으로 최정예 전투기 조종사를 양성하는 ‘탑건’ 훈련학교에 입학하게 된다. 그리고 그곳에서 생도들의 교육을 담당하는 해군 최신 전투기 F-14기를 모는 젊은 조종사 매버릭 대위(톰 크루즈)는 최고의 실력을 자부하는 파일럿으로 최정예 전투기 조종사를 양성하는 ‘탑건’ 훈련학교에 입학하게 된다. 그리고 그곳에서 생도들의 교육을 담당하는}</p>
+						<p>${contents.title}</p>
+						<p>${contents.release_date} &#183; ${contents.production_countries} &#183; ${contents.genres}</p>
+						<p>${contents.runtime} &#183; ${contents.adult}</p>
+						<p class="summary">
+							${contents.overview}
+						</p>
 					</div>
 				</div>
 				<div class="contents_cast contents_comm">
@@ -96,7 +99,7 @@
 					<ul class="contents_cast_box">
 						<!-- c:if director != null 시작 -->
 						<li>
-							<p class="name">{director}</p>
+							<p class="name">${crew}</p>
 							<p class="job">감독</p>
 						</li>
 						<!-- c:if director != null 끝 -->
