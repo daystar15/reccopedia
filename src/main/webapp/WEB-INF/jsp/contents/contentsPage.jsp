@@ -9,11 +9,11 @@
 	<div class="contets_top">
 		<div class="contents_short_box">
 			<div class="contents_poster">
-				<img src="https://image.tmdb.org/t/p/w500${contents.poster_path}" alt="">
+				<img src="https://image.tmdb.org/t/p/original${contents.poster_path}" alt="">
 			</div>
 			<div class="contents_info">
 				<h2>${contents.title}</h2>
-				<h3>${contents.release_date} &#183; ${genre} &#183; ${contents.production_countries}</h3>
+				<h3>${year} &#183; ${genre} &#183; ${countryResult}</h3>
 				<h4>평균 &#9733;{3.8} ({44만명})</h4>
 				<div>
 					<div class="star-rating">
@@ -87,7 +87,7 @@
 					</div>
 					<div class="basic_info_bottom">
 						<p>${contents.title}</p>
-						<p>${contents.release_date} &#183; ${contents.production_countries} &#183; ${genre}</p>
+						<p>${year} &#183; ${countryResult} &#183; ${genre}</p>
 						<p>${contents.runtime} &#183; ${contents.adult}</p>
 						<p class="summary">
 							${contents.overview}
@@ -130,7 +130,7 @@
 							<h5 class="contents_title">코멘트</h5>
 							<span>{comment.id}</span>
 						</div>
-						<a href="#">더보기</a>
+						<a href="/comment_view?id=${contents.id}">더보기</a>
 					</div>
 					<div class="comments">
 						<ul>
@@ -191,15 +191,23 @@
 					<div class="gallery">
 						<h5 class="contents_title">갤러리</h5>
 						<ul>
+							<c:forEach var="image" items="${images}">
 							<li>
-								<!-- <img src="" alt=""> -->
+								<img src="https://image.tmdb.org/t/p/w154/${image} " alt="">
 							</li>
+							</c:forEach>
 						</ul>
 					</div>
 					<div class="video">
 						<h5 class="contents_title">동영상</h5>
 						<ul>
-							<li></li>
+							<c:forEach var="video" items="${yutube}">
+							<li>
+								<a href="https://www.youtube.com/watch?v=${video}">
+									<img src="https://img.youtube.com/vi/${video}/mqdefault.jpg" alt="">
+								</a>
+							</li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>
@@ -267,7 +275,7 @@
 <div class="comment_modal none">
 	<div class="modal_box">
 		<div class="write_comment_top">
-			<h6>{작품명}</h6>
+			<h6>${contents.title}</h6>
 			<span class="comment_close"> <img src="/static/images/close.png" alt="">
 			</span>
 		</div>

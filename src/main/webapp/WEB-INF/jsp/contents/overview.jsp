@@ -26,7 +26,7 @@
 				<td>{year}</td>
 			</tr>
 			<tr>
-				<td>{country}</td>
+				<td>{countryResult}</td>
 			</tr>
 			<tr>
 				<td>${genre}</td>

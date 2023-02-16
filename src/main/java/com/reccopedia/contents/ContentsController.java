@@ -23,11 +23,13 @@ public class ContentsController {
 	public String main(Model model) throws JsonProcessingException {
 		
 		List<Map<String, Object>> popularResult = contentsBO.generatePopularMap();
+		List<Map<String, Object>> nowResult = contentsBO.generateNowMap();
 		List<Map<String, Object>> netflixResult = contentsBO.generateNetflixMap();
 		List<Map<String, Object>> topratedResult = contentsBO.generateTopRatedMap();
-
+		
 		
 		model.addAttribute("popularResult", popularResult);
+		model.addAttribute("nowResult", nowResult);
 		model.addAttribute("netflixResult", netflixResult);
 		model.addAttribute("topratedResult", topratedResult);
 
@@ -41,7 +43,9 @@ public class ContentsController {
 		Map<String, Object> contentInfo = contentsBO.generateContent(id);
 		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
 		String GenreResult = contentsBO.generateGenre(id);
+		String countryResult = contentsBO.generateCountry(id);
 		
+		model.addAttribute("countryResult", countryResult);
 		model.addAttribute("genre", GenreResult);
 		model.addAttribute("viewName", "contents/overview");
 		model.addAttribute("crews", contentResult);
@@ -55,7 +59,15 @@ public class ContentsController {
 		Map<String, Object> contentInfo = contentsBO.generateContent(id);
 		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
 		String GenreResult = contentsBO.generateGenre(id);
+		String countryResult = contentsBO.generateCountry(id);
+		List<String> yutube = contentsBO.generateVideo(id);
+		List<String> images = contentsBO.generateImages(id);
+		String year = contentsBO.generateYear(id);
 		
+		model.addAttribute("countryResult", countryResult);
+		model.addAttribute("year", year);
+		model.addAttribute("yutube", yutube);
+		model.addAttribute("images", images);
 		model.addAttribute("genre", GenreResult);
 		model.addAttribute("crews", contentResult);
 		model.addAttribute("contents", contentInfo);

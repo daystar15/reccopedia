@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="nav_box">
 	<div>
-		<img src="/static/images/right-arrow.png" alt="">
+		<img src="/static/images/right-arrow.png" alt="" onclick="goBack();">
 		<h2>코멘트</h2>
 	</div>
 </div>
@@ -51,3 +51,9 @@
 	</div>
 	<!-- 댓글 박스 하나 끝 -->
 </div>
+
+<script type="text/javascript">
+	function goBack(){
+		window.history.back();
+	}
+</script>

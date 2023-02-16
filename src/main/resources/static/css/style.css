@@ -1396,15 +1396,17 @@ textarea {
     -webkit-line-clamp: 3;
     height: 4.8rem;
 }
+.gallery ul {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
 .gallery ul li {
-    width: 130px;
-    height: 90px;
-    background: #000;
+    width: 200px;
+    margin-bottom: 1rem;
 }
 .video ul li {
-    width: 250px;
-    height: 180px;
-    background: #000;
+    margin-bottom: 1rem;
 }
 .contain_collection ul li,
 .contain_collection ul li .box,

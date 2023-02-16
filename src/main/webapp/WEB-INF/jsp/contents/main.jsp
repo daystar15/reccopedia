@@ -1,22 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="main_wrap">
 	<div class="section">
 		<div class="inner">
 			<h2 class="main_title">박스오피스 순위</h2>
 			<div class="contents">
 				<ul>
-					<c:forEach var="popular" items="${popularResult}">
+					<c:forEach var="now" items="${nowResult}">
 					<li>
-						<a href="/contents/contents_view?id=${popular.id}">
+						<a href="/contents/contents_view?id=${now.id}">
 							<div>
 								<div class="poster">
-									<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${popular.poster_path}" alt="">
+									<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${now.poster_path}" alt="">
 								</div>
 							</div>
-							<h3 class="content_subject">${popular.title}</h3>
+							<h3 class="content_subject">${now.title}</h3>
 							<div class="content_info">
-								<span class="year">2022</span> &middot; <span class="country">일본</span>
+								<span class="year">${year}</span> &middot; <span class="country">일본</span>
 							</div>
 							<div class="point">평균 &starf; 4.2</div>
 							<div class="reserve">
@@ -44,7 +45,7 @@
 				<ul>
 					<c:forEach var="netflix" items="${netflixResult}">
 					<li>
-						<a href="#">
+						<a href="/contents/contents_view?id=${netflix.id}">
 							<div class="poster">
 								<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${netflix.poster_path}" alt="">
 							</div>
@@ -71,7 +72,7 @@
 				<ul>
 					<c:forEach var="toprated" items="${topratedResult}">
 					<li>
-						<a href="#">
+						<a href="/contents/contents_view?id=${toprated.id}">
 							<div class="poster">
 								<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${toprated.poster_path}" alt="">
 							</div>
