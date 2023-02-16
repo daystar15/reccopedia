@@ -13,7 +13,7 @@
 			</div>
 			<div class="contents_info">
 				<h2>${contents.title}</h2>
-				<h3>${contents.release_date} &#183; ${contents.genres} &#183; ${contents.production_countries}</h3>
+				<h3>${contents.release_date} &#183; ${genre} &#183; ${contents.production_countries}</h3>
 				<h4>평균 &#9733;{3.8} ({44만명})</h4>
 				<div>
 					<div class="star-rating">
@@ -83,11 +83,11 @@
 				<div class="basic_info contents_comm">
 					<div class="basic_info_top">
 						<h5 class="contents_title">기본 정보</h5>
-						<a href="#">더보기</a>
+						<a href="/contents/overview_view?id=${contents.id}">더보기</a>
 					</div>
 					<div class="basic_info_bottom">
 						<p>${contents.title}</p>
-						<p>${contents.release_date} &#183; ${contents.production_countries} &#183; ${contents.genres}</p>
+						<p>${contents.release_date} &#183; ${contents.production_countries} &#183; ${genre}</p>
 						<p>${contents.runtime} &#183; ${contents.adult}</p>
 						<p class="summary">
 							${contents.overview}
@@ -97,52 +97,20 @@
 				<div class="contents_cast contents_comm">
 					<h5 class="contents_title">출연/제작</h5>
 					<ul class="contents_cast_box">
-						<!-- c:if director != null 시작 -->
+					
+					<%-- <c:if ${crews.department} eq 'Directing'>
 						<li>
-							<p class="name">${crew}</p>
-							<p class="job">감독</p>
+							<p class="name">${crews.name}</p>
+							<p class="job">${crews.job}</p>
 						</li>
-						<!-- c:if director != null 끝 -->
+					</c:if> --%>
+					<c:forEach var="crew" items="${crews}">	
 						<li>
-							<p class="name">{actorName}</p>
-							<p class="job">{playName}</p>
+							<p class="name">${crew.name}</p>
+							<p class="job">${crew.character}</p>
 						</li>
-						<li>
-							<p class="name">{actorName}</p>
-							<p class="job">{playName}</p>
-						</li>
-						<li>
-							<p class="name">{actorName}</p>
-							<p class="job">{playName}</p>
-						</li>
-						<li>
-							<p class="name">{actorName}</p>
-							<p class="job">{playName}</p>
-						</li>
-						<li>
-							<p class="name">{actorName}</p>
-							<p class="job">{playName}</p>
-						</li>
-						<li>
-							<p class="name">{actorName}</p>
-							<p class="job">{playName}</p>
-						</li>
-						<li>
-							<p class="name">{actorName}</p>
-							<p class="job">{playName}</p>
-						</li>
-						<li>
-							<p class="name">{actorName}</p>
-							<p class="job">{playName}</p>
-						</li>
-						<li>
-							<p class="name">{actorName}</p>
-							<p class="job">{playName}</p>
-						</li>
-						<li>
-							<p class="name">{actorName}</p>
-							<p class="job">{playName}</p>
-						</li>
+					</c:forEach>
+						
 					</ul>
 				</div>
 				<div class="contents_point_graph contents_comm">

@@ -212,7 +212,7 @@ public class RestTemplateService {
             HttpHeaders header = new HttpHeaders();
             HttpEntity<?> entity = new HttpEntity<>(header);
  
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + id + "/credits" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&watch_region=KR&language=ko").build();
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + id + "/credits" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
  
             //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
             ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);

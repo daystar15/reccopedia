@@ -37,8 +37,15 @@ public class ContentsController {
 	
 	// 컨텐츠페이지 - 기본정보
 	@GetMapping("/contents/overview_view")
-	public String overviewView(Model model) {
+	public String overviewView(Model model, int id) throws JsonProcessingException {
+		Map<String, Object> contentInfo = contentsBO.generateContent(id);
+		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
+		String GenreResult = contentsBO.generateGenre(id);
+		
+		model.addAttribute("genre", GenreResult);
 		model.addAttribute("viewName", "contents/overview");
+		model.addAttribute("crews", contentResult);
+		model.addAttribute("contents", contentInfo);
 		return "template/layout";
 	}
 	
@@ -47,8 +54,10 @@ public class ContentsController {
 	public String contentsView(Model model, int id) throws JsonProcessingException {
 		Map<String, Object> contentInfo = contentsBO.generateContent(id);
 		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
+		String GenreResult = contentsBO.generateGenre(id);
 		
-		model.addAttribute("crew", contentResult);
+		model.addAttribute("genre", GenreResult);
+		model.addAttribute("crews", contentResult);
 		model.addAttribute("contents", contentInfo);
 		model.addAttribute("viewName", "contents/contentsPage");
 		return "template/layout";

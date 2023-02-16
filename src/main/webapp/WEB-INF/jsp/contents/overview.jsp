@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="nav_box">
 	<div>
-		<img src="/static/images/right-arrow.png" alt="">
+		<img src="/static/images/right-arrow.png" alt="" onclick="goBack();">
 		<h2>기본정보</h2>
 	</div>
 </div>
@@ -20,7 +20,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>{작품명}</td>
+				<td>${contents.title}</td>
 			</tr>
 			<tr>
 				<td>{year}</td>
@@ -29,7 +29,7 @@
 				<td>{country}</td>
 			</tr>
 			<tr>
-				<td>{genre}</td>
+				<td>${genre}</td>
 			</tr>
 			<tr>
 				<td>{runningTime}</td>
@@ -38,8 +38,14 @@
 				<td>{grade}</td>
 			</tr>
 			<tr>
-				<td>{info}</td>
+				<td>${contents.overview}</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
+
+<script type="text/javascript">
+	function goBack(){
+		window.history.back();
+	}
+</script>
