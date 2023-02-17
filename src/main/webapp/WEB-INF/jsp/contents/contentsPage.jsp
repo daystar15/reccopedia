@@ -67,18 +67,20 @@
 			<div class="contents_left">
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
 				<!-- c:if 내가 댓글을 남겼으면 -->
-				<div class="write_comment">
-					<div class="my_comment">
-						<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
-						</span>
-						<p>{내가 쓴 댓글 내용}</p>
+				<c:if test="${not empty userName}">
+					<div class="write_comment">
+						<div class="my_comment">
+							<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
+							</span>
+							<p>${myComment}</p>
+						</div>
+						<div>
+							<em class="delete"> <img src="/static/images/bin.png" alt=""> <span id="myCommentDeleteBtn">삭제</span>
+							</em> <em class="update"> <img src="/static/images/update.png" alt=""> <span id="myCommentUpdateBtn">수정</span>
+							</em>
+						</div>
 					</div>
-					<div>
-						<em class="delete"> <img src="/static/images/bin.png" alt=""> <span id="myCommentDeleteBtn">삭제</span>
-						</em> <em class="update"> <img src="/static/images/update.png" alt=""> <span id="myCommentUpdateBtn">수정</span>
-						</em>
-					</div>
-				</div>
+				</c:if>
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
 				<div class="basic_info contents_comm">
 					<div class="basic_info_top">
@@ -268,12 +270,13 @@
 		</div>
 	</div>
 </div>
-<!-- 모달배경 -->
+
+<c:if test="${not empty userName}">
+<%--모달배경 --%>
 <div class="modal_back none"></div>
-<!-- 코멘트창 클릭 시 시작 -->
-<!-- 회원가입 -->
+<%-- 코멘트창 클릭 시 시작 --%>
 <div class="comment_modal none">
-	<div class="modal_box">
+	<div class="modal_box" data-api-id="${contents.id}">
 		<div class="write_comment_top">
 			<h6>${contents.title}</h6>
 			<span class="comment_close"> <img src="/static/images/close.png" alt="">
@@ -291,12 +294,14 @@
 				</div>
 				<div class="write_comment_right">
 					<span class="comment_length">0/10000</span>
-					<input type="submit" value="저장">
+					<input type="submit" value="저장" id="submitComment">
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
+</c:if>
+<%-- 댓글창 끝 --%>
 <script>
     $(document).ready(function () {
         $('.my_comment_write').on('click', function() {
@@ -313,5 +318,43 @@
             $(".modal_back").addClass('none');
             $(".comment_modal").addClass('none');
         });
+        
+        $("#submitComment").on('click', function(e) {
+        	e.preventDefault();
+        	
+        	// 댓글을 작성할 작품 api 번호
+        	let apiId = $(".modal_box").data('api-id');
+        	
+        	// 작성한 댓글
+        	let comment = $("#write_comment_content").val();
+        	
+        	if (comment == '') {
+        		alert("댓글을 작성해주세요.")
+        		return;
+        	}
+        	
+        	$.ajax({
+        		type:'POST'
+        		, url:'/comment/create'
+        		, data: {"apiId":apiId, "content":comment}
+        		, success: function(data) {
+        			if (data.code == 1) {
+        				alert('댓글이 작성되었습니다!');
+        				location.reload();
+        			} else if (data.code == 500) {
+        				alert("로그인을 해주세요.");
+        				location.href = "/main";
+        			}
+        		}
+        		, error:function(jqXHR, textStatus, errorThrown) {
+        			var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus + "에러");
+        		}
+        		
+        		
+        	}); //---ajax 끝
+        	
+        	
+        }); //---댓글 작성
     });
 </script>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <div class="inner">
     <div>
         <h1 class="logo"><a href="/main"><img src="/static/images/logo.png" alt=""></a></h1>
@@ -17,27 +18,36 @@
                 </label>
             </div>
         </form>
-        <div class="before_login">
-            <div class="sign_in">
-                <span><jsp:include page="../user/signIn.jsp"/>로그인</span>
-            </div>
-            <div class="sign_up">
-                <span><jsp:include page="../user/signUp.jsp"/>회원가입</span>
-            </div>
+        <!-- 로그아웃 시작 -->
+        <c:if test="${empty userId}">
+        <div class="before_login_box">
+        	<div class="before_login">
+	            <div class="sign_in">
+	                <span><jsp:include page="../user/signIn.jsp"/>로그인</span>
+	            </div>
+	            <div class="sign_up">
+	                <span><jsp:include page="../user/signUp.jsp"/>회원가입</span>
+	            </div>
+	        </div>
         </div>
-        <!-- 로그인 된 후 시작 -->
-        <div class="after_login none">
-            <div class="my_account">
-                <a href="/user/evaluate_view" id="go_review">평가하기</a>
-                <a href="/user/sign_out" id="logoutBtn">로그아웃</a>
-                <a href="/user/user_view" id="go_userPage">
-                    <span class="comment_user_profile">
-                        <img src="/static/images/test.jpg" alt="">
-                    </span>
-                </a>
-            </div>
-        </div>
-        <!-- 로그인 된 후 끝 -->
+        </c:if>
+        <!-- 로그아웃 끝 -->
+        
+        <!-- 로그인 시작 -->
+        <c:if test="${not empty userId}">
+	        <div class="after_login">
+	            <div class="my_account">
+	                <a href="/user/evaluate_view" id="go_review">평가하기</a>
+	                <a href="/user/sign_out" id="logoutBtn">로그아웃</a>
+	                <a href="/user/user_view" id="go_userPage">
+	                    <span class="comment_user_profile">
+	                        <img src="/static/images/test.jpg" alt="">
+	                    </span>
+	                </a>
+	            </div>
+	        </div>
+        </c:if>
+        <!-- 로그인 끝 -->
     </div>
 </div>
 
@@ -84,5 +94,43 @@
             $(".sign_up_modal").addClass('none');
             $(".sign_in_modal").addClass('none');
         });
+        
+        $("#signInForm").submit(function(e) {
+			e.preventDefault();
+			
+			let email = $("#logInEmail").val().trim();
+			let password = $("#logInPassword").val().trim();
+		
+			if (email == "") {
+				alert("이메일을 입력해주세요");
+				return;
+			};
+			
+			if (password == "") {
+				alert("비밀번호를 입력해주세요");
+				return;
+			} 
+			
+			// ajax
+			$.ajax({
+				type: "post"
+				, url: "/user/sign_in"
+				, data: {"email":email, "password":password}
+			
+				, success:function(data) {
+					if (data.code == 1) {
+						alert("로그인에 성공하였습니다.");
+						$(".modal_back").addClass("none");
+						$(".modal_box").addClass("none");
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert("로그인에 실패");
+				}
+			}); //---ajax
+		
+		}); //---로그인 버튼
 	})
 </script>

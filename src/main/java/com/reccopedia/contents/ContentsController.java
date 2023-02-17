@@ -1,7 +1,6 @@
 package com.reccopedia.contents;
 
 import java.util.List;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.reccopedia.comment.bo.CommentBO;
+import com.reccopedia.comment.model.Comment;
 import com.reccopedia.contents.bo.ContentsBO;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ContentsController {
@@ -18,10 +21,15 @@ public class ContentsController {
 	@Autowired
 	private ContentsBO contentsBO;
 	
+	@Autowired
+	private CommentBO commentBO;
+	
 	// 메인 페이지
 	@GetMapping("/main")
-	public String main(Model model) throws JsonProcessingException {
+	public String main(Model model, HttpSession session) throws JsonProcessingException {
 		
+		
+		String userId = (String) session.getAttribute("userEmail");
 		List<Map<String, Object>> popularResult = contentsBO.generatePopularMap();
 		List<Map<String, Object>> nowResult = contentsBO.generateNowMap();
 		List<Map<String, Object>> netflixResult = contentsBO.generateNetflixMap();
@@ -55,7 +63,13 @@ public class ContentsController {
 	
 	// 컨텐츠페이지 - 컨텐츠 개별 페이지
 	@GetMapping("/contents/contents_view")
-	public String contentsView(Model model, int id) throws JsonProcessingException {
+	public String contentsView(Model model, int id,
+			HttpSession session) throws JsonProcessingException {
+		
+		String userId = (String) session.getAttribute("userEmail");
+		
+		
+		List<Comment> myComment = commentBO.getMyComment(id);
 		Map<String, Object> contentInfo = contentsBO.generateContent(id);
 		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
 		String GenreResult = contentsBO.generateGenre(id);
@@ -64,6 +78,7 @@ public class ContentsController {
 		List<String> images = contentsBO.generateImages(id);
 		String year = contentsBO.generateYear(id);
 		
+		model.addAttribute("comment", myComment);
 		model.addAttribute("countryResult", countryResult);
 		model.addAttribute("year", year);
 		model.addAttribute("yutube", yutube);

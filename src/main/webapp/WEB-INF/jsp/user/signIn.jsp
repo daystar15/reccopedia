@@ -35,45 +35,7 @@
 
 <script>
 	$(document).ready(function() {
-		$("#signInForm").submit(function(e) {
-			e.preventDefault();
-			
-			let email = $("#logInEmail").val().trim();
-			let password = $("#logInPassword").val().trim();
 		
-			if (email == "") {
-				alert("이메일을 입력해주세요");
-				return;
-			};
-			
-			if (password == "") {
-				alert("비밀번호를 입력해주세요");
-				return;
-			} 
-			
-			// ajax
-			$.ajax({
-				type: "post"
-				, url: "/user/sign_in"
-				, data: {"email":email, "password":password}
-			
-				, success:function(data) {
-					if (data.code == 1) {
-						alert("로그인에 성공하였습니다.");
-						$(".modal_back").remove();
-						$(".modal_box").remove();
-						$('.before_login').remove();
-						$('.after_login').removeClass('none');
-					} else {
-						alert(data.errorMessage);
-					}
-				}
-				, error:function(e) {
-					alert("로그인에 실패");
-				}
-			}); //---ajax
-		
-		}); //---로그인 버튼
 
 	});
 </script>

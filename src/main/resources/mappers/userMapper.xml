@@ -56,5 +56,22 @@
 			AND
 			`password`= #{password}
 	</select>
+	
+	<select id="selectUserByEmail" parameterType="String" resultType="com.reccopedia.user.model.User">
+		SELECT
+			`id`
+			, `name`
+			, `info`
+			, `email`
+			, `password`
+			, `backgroundImagePath`
+			, `profileImagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`email` = #{email}
+	</select>
 
 </mapper> 	

@@ -60,6 +60,7 @@ public class TestController {
 		session.removeAttribute("userEmail");
 		session.removeAttribute("userPassword");
 		session.removeAttribute("userName");
+		session.removeAttribute("userId");
 		
 		return "redirect:/main";
 	}
@@ -117,7 +118,7 @@ public class TestController {
 	// 댓글 페이지
 	@GetMapping("/comment_view")
 	public String commentView(Model model) {
-	model.addAttribute("viewName", "comment/comment");
+		model.addAttribute("viewName", "comment/comment");
 		return "template/layout";
 	}
 	

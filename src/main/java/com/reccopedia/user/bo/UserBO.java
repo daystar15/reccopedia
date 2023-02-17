@@ -23,4 +23,8 @@ public class UserBO {
 	public User getUserByLoginEmailPassword(String email, String password) {
 		return userDAO.getUserByLoginEmailPassword(email, password);
 	}
+	
+	public User getUserByEmail(String email) {
+		return userDAO.selectUserByEmail(email);
+	}
 }
