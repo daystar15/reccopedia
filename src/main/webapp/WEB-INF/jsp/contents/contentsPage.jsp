@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="contets_wrap">
 	<div class="contents_background">
 		<div>
-			<img src="https://image.tmdb.org/t/p/w500${contents.backdrop_path}" alt="">
+			<img src="https://image.tmdb.org/t/p/w1280${contents.backdrop_path}" alt="">
 		</div>
 	</div>
 	<div class="contets_top">
@@ -67,20 +68,26 @@
 			<div class="contents_left">
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
 				<!-- c:if 내가 댓글을 남겼으면 -->
-				<c:if test="${not empty userName}">
-					<div class="write_comment">
+				<div class="write_comment" >
+					<c:if test="${not empty comment}">
 						<div class="my_comment">
 							<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
 							</span>
-							<p>${myComment}</p>
+							<p>${comment}</p>
 						</div>
 						<div>
-							<em class="delete"> <img src="/static/images/bin.png" alt=""> <span id="myCommentDeleteBtn">삭제</span>
-							</em> <em class="update"> <img src="/static/images/update.png" alt=""> <span id="myCommentUpdateBtn">수정</span>
+							<em class="delete" id="deleteBtn"> 
+								<img src="/static/images/bin.png" alt=""> 
+								<span id="myCommentDeleteBtn">삭제</span>
+							</em> 
+							<em class="update" id="commentUpdateBtn"> 
+								<img src="/static/images/update.png" alt=""> 
+								<span id="myCommentUpdateBtn">수정</span>
 							</em>
 						</div>
-					</div>
-				</c:if>
+					</c:if>
+					<button>댓글을 남겨보세요</button>
+				</div>
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
 				<div class="basic_info contents_comm">
 					<div class="basic_info_top">
@@ -90,7 +97,15 @@
 					<div class="basic_info_bottom">
 						<p>${contents.title}</p>
 						<p>${year} &#183; ${countryResult} &#183; ${genre}</p>
-						<p>${contents.runtime} &#183; ${contents.adult}</p>
+						
+						<p>
+							<fmt:parseNumber value="${contents.runtime div 60}" integerOnly="true"/>시간
+							<c:out value="${contents.runtime mod 60}" />분
+						 	
+						 	<c:if test="${contents.adult ne false}">
+						 		&#183;  청소년관람불가
+						 	</c:if>
+						 </p>
 						<p class="summary">
 							${contents.overview}
 						</p>
@@ -100,20 +115,21 @@
 					<h5 class="contents_title">출연/제작</h5>
 					<ul class="contents_cast_box">
 					
-					<%-- <c:if ${crews.department} eq 'Directing'>
-						<li>
-							<p class="name">${crews.name}</p>
-							<p class="job">${crews.job}</p>
-						</li>
-					</c:if> --%>
-					<c:forEach var="crew" items="${crews}">	
-						<li>
-							<p class="name">${crew.name}</p>
-							<p class="job">${crew.character}</p>
-						</li>
-					</c:forEach>
+						<%-- <c:if test="${crews.department eq 'Directing'}">
+							<li>
+								<p class="name">${crews.name}</p>
+								<p class="job">${crews.department}</p>
+							</li>
+						</c:if> --%>
+						<c:forEach var="crew" items="${crews}">	
+							<li>
+								<p class="name">${crew.name}</p>
+								<p class="job">${crew.character}</p>
+							</li>
+						</c:forEach>
 						
 					</ul>
+					<button id="moreCrew">더보기</button>
 				</div>
 				<div class="contents_point_graph contents_comm">
 					<div>
@@ -253,15 +269,17 @@
 					<div class="similar">
 						<h5 class="contents_title">비슷한 작품</h5>
 						<ul>
+						<c:forEach var="similar" items="${similars}">
 							<li>
-								<a href="#">
+								<a href="/contents/contents_view?id=${similar.id}">
 									<div class="poster">
-										<img src="/static/images/test.jpg" alt="">
+										<img src="https://image.tmdb.org/t/p/w154/${similar.poster_path}" alt="">
 									</div>
-									<h3 class="content_subject">{비슷한작품이름}</h3>
+									<h3 class="content_subject">${similar.title}</h3>
 									<div class="point">평균 &starf; 4.2</div>
 								</a>
 							</li>
+						</c:forEach>
 						</ul>
 					</div>
 					<!-- 비슷한 작품 끝 -->
@@ -271,7 +289,7 @@
 	</div>
 </div>
 
-<c:if test="${not empty userName}">
+<c:if test="${not empty userId}">
 <%--모달배경 --%>
 <div class="modal_back none"></div>
 <%-- 코멘트창 클릭 시 시작 --%>
@@ -319,6 +337,7 @@
             $(".comment_modal").addClass('none');
         });
         
+        // 댓글 작성
         $("#submitComment").on('click', function(e) {
         	e.preventDefault();
         	
@@ -356,5 +375,17 @@
         	
         	
         }); //---댓글 작성
+        
+        // 댓글 삭제
+        $("#deleteBtn").on('click', function() {
+        	let commentId = $('.write_comment').data('comment-id');
+        	alert(commentId);
+        }); // --댓글 삭제 
+        
+        
+        $("#moreCrew").on('click', function() {
+        	$('.contents_cast_box').css("height", "auto");
+        });
+        
     });
 </script>

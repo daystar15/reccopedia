@@ -24,4 +24,6 @@ public interface UserDAO {
 	
 	public User selectUserByEmail(String email);
 	
+	public User selectUserById(int id);
+	
 }

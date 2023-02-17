@@ -1,7 +1,5 @@
 package com.reccopedia.comment.bo;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +20,14 @@ public class CommentBO {
 		commentDAO.createComment(userId, null, apiId, content);
 	}
 	
-	public List<Comment> getMyComment(int apiId) {
-		return commentDAO.selectMyComment(apiId);
+	public Comment getCommentByUserIdApiId(int userId, int apiId) {
+		return commentDAO.getCommentByUserIdApiId(userId, apiId);
 	}
+	
+	public void deleteCommentByUserIdApiId(int userId, int apiId) {
+		commentDAO.deleteCommentByUserIdApiId(userId, apiId);
+	}
+	
 	
 	
 	

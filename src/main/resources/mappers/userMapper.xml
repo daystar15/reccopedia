@@ -73,5 +73,24 @@
 		WHERE
 			`email` = #{email}
 	</select>
+	
+	<select id="selectUserById" parameterType="String" resultType="com.reccopedia.user.model.User">
+		SELECT
+			`id`
+			, `name`
+			, `info`
+			, `email`
+			, `password`
+			, `backgroundImagePath`
+			, `profileImagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`id` = #{id}
+	</select>
+	
+	
 
 </mapper> 	

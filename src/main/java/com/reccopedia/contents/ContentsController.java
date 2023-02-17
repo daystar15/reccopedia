@@ -40,7 +40,6 @@ public class ContentsController {
 		model.addAttribute("nowResult", nowResult);
 		model.addAttribute("netflixResult", netflixResult);
 		model.addAttribute("topratedResult", topratedResult);
-
 		model.addAttribute("viewName", "contents/main");
 		return "template/layout";
 	}
@@ -66,10 +65,10 @@ public class ContentsController {
 	public String contentsView(Model model, int id,
 			HttpSession session) throws JsonProcessingException {
 		
-		String userId = (String) session.getAttribute("userEmail");
+		Integer userId = (Integer) session.getAttribute("userId");
 		
 		
-		List<Comment> myComment = commentBO.getMyComment(id);
+		List<Map<String, Object>> similars = contentsBO.generateSimilars(id);
 		Map<String, Object> contentInfo = contentsBO.generateContent(id);
 		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
 		String GenreResult = contentsBO.generateGenre(id);
@@ -77,8 +76,10 @@ public class ContentsController {
 		List<String> yutube = contentsBO.generateVideo(id);
 		List<String> images = contentsBO.generateImages(id);
 		String year = contentsBO.generateYear(id);
+		//Comment comment = commentBO.getCommentByUserIdApiId(userId, id);
 		
-		model.addAttribute("comment", myComment);
+		model.addAttribute("similars", similars);
+		//model.addAttribute("comment", comment);
 		model.addAttribute("countryResult", countryResult);
 		model.addAttribute("year", year);
 		model.addAttribute("yutube", yutube);

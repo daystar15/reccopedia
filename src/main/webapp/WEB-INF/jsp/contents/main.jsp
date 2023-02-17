@@ -7,21 +7,21 @@
 			<h2 class="main_title">박스오피스 순위</h2>
 			<div class="contents">
 				<ul>
-					<c:forEach var="now" items="${nowResult}">
+					<c:forEach var="now" items="${nowResult}" varStatus="status">
 					<li>
 						<a href="/contents/contents_view?id=${now.id}">
 							<div>
 								<div class="poster">
-									<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${now.poster_path}" alt="">
+									<span class="rank">${status.count}</span> <img src="https://image.tmdb.org/t/p/w500/${now.poster_path}" alt="">
 								</div>
 							</div>
 							<h3 class="content_subject">${now.title}</h3>
 							<div class="content_info">
-								<span class="year">${year}</span> &middot; <span class="country">일본</span>
+								<span class="year">${year}</span> &middot; <span class="country">나라</span>
 							</div>
 							<div class="point">평균 &starf; 4.2</div>
 							<div class="reserve">
-								<span class="reservation_rate"> 예매율 17% </span> &middot; <span class="accumulate"> 199만명 </span>
+								<span class="reservation_rate"> 예매율 17% </span> &middot; <span class="accumulate"> ${now.popularity} </span>
 							</div>
 						</a>
 					</li>
@@ -40,14 +40,14 @@
 	</div>
 	<div class="section">
 		<div class="inner">
-			<h2 class="main_title">넷플릭스 작품</h2>
+			<h2 class="main_title">넷플릭스 화제작</h2>
 			<div class="contents">
 				<ul>
 					<c:forEach var="netflix" items="${netflixResult}">
 					<li>
 						<a href="/contents/contents_view?id=${netflix.id}">
 							<div class="poster">
-								<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${netflix.poster_path}" alt="">
+								<img src="https://image.tmdb.org/t/p/w500/${netflix.poster_path}" alt="">
 							</div>
 							<h3 class="content_subject">${netflix.title}</h3>
 							<div class="point">평균 &starf; 4.2</div>
@@ -67,14 +67,14 @@
 	</div>
 	<div class="section">
 		<div class="inner">
-			<h2 class="main_title">최고 순위 작품</h2>
+			<h2 class="main_title">디즈니 플러스 화제작</h2>
 			<div class="contents">
 				<ul>
 					<c:forEach var="toprated" items="${topratedResult}">
 					<li>
 						<a href="/contents/contents_view?id=${toprated.id}">
 							<div class="poster">
-								<span class="rank">1</span> <img src="https://image.tmdb.org/t/p/w500/${toprated.poster_path}" alt="">
+								 <img src="https://image.tmdb.org/t/p/w500/${toprated.poster_path}" alt="">
 							</div>
 							<h3 class="content_subject">${toprated.title}</h3>
 							<div class="point">평균 &starf; 4.2</div>

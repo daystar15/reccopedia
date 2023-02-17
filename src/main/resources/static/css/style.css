@@ -187,7 +187,9 @@ textarea {
     position: relative;
     width: 255px;
     border: 1px solid #e5e5e5;
-    border-radius: 3px;
+    border-radius: 6px;
+    height: 363px;
+    overflow: hidden;
 }
 .poster .rank {
     position: absolute;
@@ -1158,9 +1160,14 @@ textarea {
 .contents_background > div {
     width: 100%;
     margin: auto;
+    position: relative;
 }
 .contents_background img {
     width: 100%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-30%);
 }
 .contets_top {
     border-bottom: 1px solid #dbdbdb;
@@ -1174,14 +1181,16 @@ textarea {
     align-items: flex-end;
 }
 .contents_poster {
-    width: 220px;
-    box-shadow: rgb(0 0 0 / 30%) 0px 0px 2px;
-    border-radius: 6px;
+    /*width: 220px;
+    box-shadow: rgb(0 0 0 / 30%) 0px 0px 2px;*/
     overflow: hidden;
     margin: -4rem 2rem 0 0 ;
+    position: relative;
 }
 .contents_poster img {
     width: 100%;
+    border-radius: 6px;
+    border: 1px solid #e5e5e5;
 }
 .contents_info h2 {
     font-size: 33px;
@@ -1314,6 +1323,8 @@ textarea {
     display: flex;
     flex-wrap: wrap;
     margin-top: 2rem;
+    height:14rem;
+    overflow: hidden;
 }
 .contents_cast_box li {
     border-bottom: 1px solid #ececec;
@@ -1413,6 +1424,14 @@ textarea {
 .similar ul li .poster,
 .similar ul li {
     width: 125px;
+}
+.similar ul  {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.similar ul li {
+	margin-bottom: 1rem;
 }
 .contents_right .contents_title {
     margin: 2rem 0 1rem;
