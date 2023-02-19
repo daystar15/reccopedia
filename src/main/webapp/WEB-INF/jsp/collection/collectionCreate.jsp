@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="nav_box">
 	<div>
-		<img src="/static/images/right-arrow.png" alt="">
+		<img src="/static/images/right-arrow.png" alt="" onclick="goBack();">
 		<h2>새 컬렉션</h2>
 	</div>
 </div>
@@ -18,8 +18,17 @@
 				<h3>작품들</h3>
 				<div class="add_collection">
 					<div>
-						<img src="/static/images/plus.png" alt=""> <span>작품추가</span>
+						<a href="/collection/collection_find_view">
+							<img src="/static/images/plus.png" alt=""> <span>작품추가</span>
+						</a>
 					</div>
+					<%-- 추가한 목록들 --%>
+						<ul class="add_collection_list">
+							<li>
+								<img src="" alt="">
+							</li>
+						</ul>
+					<%-- 추가한 목록들 --%>
 				</div>
 			</div>
 			<div class="collection_btn">
@@ -33,8 +42,8 @@
         $('#collectionSubmitBtn').on('click', function(e) {
             e.preventDefault();
 
-            let collectionSubject = $('#collectionSubject').val().trim();
-            let collectionContent =  $('#collectionContent').val();
+            let subject = $('#collectionSubject').val().trim();
+            let content =  $('#collectionContent').val();
 
             if (collectionSubject == '') {
                 alert('제목을 입력해주세요');
@@ -44,7 +53,31 @@
                 alert('내용을 입력해주세요');
                 return false;
             }
+            
+            $.ajax({
+            	type: "post" 
+            	, url: "/collection/create"
+            	, data: {"subject":subject, "content":content}
+            	, success:function(data) {
+            		if (data.code == 1) {
+            			location.href="/collection/collection_list_view";
+            		} else {
+            			alert(data.errorMessage + "ajax 에러");
+            		}
+            	}
+            	, error:function(e) {
+            		alert("컬렉션 생성에 실패했습니다. 관리자에게 문의해주세요")
+            	}
+            	
+            	
+            }); //---ajax
+            
+            
         });
         
     });
+    
+    function goBack(){
+		window.history.back();
+	}
 </script>

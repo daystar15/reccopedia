@@ -2,17 +2,17 @@ package com.reccopedia.restAPI.model;
 
 import java.util.List;
 
-import com.reccopedia.contents.model.Contents;
+import com.reccopedia.contents.model.ContentsView;
 
 public class MainView {
 
-	private List<Contents> contents;
+	private List<ContentsView> contents;
 
-	public List<Contents> getContents() {
+	public List<ContentsView> getContents() {
 		return contents;
 	}
 
-	public void setContents(List<Contents> contents) {
+	public void setContents(List<ContentsView> contents) {
 		this.contents = contents;
 	}
 

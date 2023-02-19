@@ -23,6 +23,29 @@
 		<!-- 유저 정보 끝 -->
 		<!-- 분석 -->
 		<div class="analyze">
+			<h3 class="analyze_title">나의 list</h3>
+			<ul class="analyze_info">
+				<li>
+					<a href="#">
+						<h4>{5}</h4>
+						<span>평가</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<h4>{5}</h4>
+						<span>코멘트</span>
+					</a>
+				</li>
+				<li>
+					<a href="/collection/collection_list_view">
+						<h4>{5}</h4>
+						<span>컬렉션</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="analyze">
 			<h3 class="analyze_title">평가수</h3>
 			<ul class="analyze_info">
 				<li>
@@ -35,6 +58,7 @@
 				</li>
 			</ul>
 		</div>
+		
 		<div class="point_distribution analyze">
 			<h3 class="analyze_title">별점 분포</h3>
 			<div></div>
@@ -46,10 +70,6 @@
 				<li>
 					<h4>{5}</h4>
 					<span>별점 개수</span>
-				</li>
-				<li>
-					<h4>{5}</h4>
-					<span>별점 평균</span>
 				</li>
 			</ul>
 		</div>

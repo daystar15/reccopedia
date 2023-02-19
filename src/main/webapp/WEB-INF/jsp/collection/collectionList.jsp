@@ -1,14 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="nav_box">
 	<div>
-		<img src="/static/images/right-arrow.png" alt="">
-		<h2>컬렉션</h2>
+		<div>
+			<img src="/static/images/right-arrow.png" alt="" onclick="goBack();">
+			<h2>컬렉션</h2>
+		</div>
+		<a href="/collection/collection_create_view" class="createCollectionBtn">새 컬렉션</a>
 	</div>
 </div>
 <div class="collection_list_box">
+	
+	
+	<%-- 작성한 컬렉션이 없을 때 --%>
+	<div class="no_collection_box">
+		<img src="/static/images/no-comment.png" alt="">
+		<p>작성한 컬렉션이 없어요.</p>
+	</div>
+	<%-- 작성한 컬렉션이 없을 때 --%>
+	
 	<ul class="list_box">
 		<li>
-			<a href="#">
+			<a href="/collection/collection_view">
 				<div class="setting">
 					<img src="/static/images/setting.png" alt="">
 				</div>
@@ -36,7 +48,7 @@
 						<div class="user_profile_img">
 							<img src="/static/images/test.jpg" alt="">
 						</div>
-						<h2 class="user_name">{홍길동}</h2>
+						<h2 class="user_name">${userName}</h2>
 					</div>
 					<div class="collection_count">
 						<span>{9}</span>
@@ -50,3 +62,8 @@
 		</li>
 	</ul>
 </div>
+<script type="text/javascript">
+	function goBack(){
+		window.history.back();
+	}
+</script>

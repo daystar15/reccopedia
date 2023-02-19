@@ -2,7 +2,7 @@ package com.reccopedia.contents.model;
 
 import java.util.Date;
 
-public class Contents {
+public class ContentsView {
 	
 	private int id;
 	private String type;
@@ -17,6 +17,14 @@ public class Contents {
 	private String contentGallery;
 	private String contentVideo;
 	
+	private String keyword;
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public int getId() {
 		return id;
 	}
