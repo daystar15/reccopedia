@@ -25,7 +25,7 @@ public class RestTemplateService {
     private static final String nowUrl = "https://api.themoviedb.org/3/movie/now_playing";
     private static final String popularUrl = "https://api.themoviedb.org/3/movie/popular";
     private static final String netfilxUrl = "https://api.themoviedb.org/3/discover/movie";
-    private static final String contentUrl = "https://api.themoviedb.org/3/movie";
+    private static final String contentUrl = "https://api.themoviedb.org/3/movie/";
     private static final String searchUrl = "https://api.themoviedb.org/3/search/movie?";
     
     public String callNowAPI() throws JsonProcessingException {
@@ -206,7 +206,7 @@ public class RestTemplateService {
             HttpHeaders header = new HttpHeaders();
             HttpEntity<?> entity = new HttpEntity<>(header);
  
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl("/" + contentUrl + id + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&watch_region=KR&language=ko").build();
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + id + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&watch_region=KR&language=ko").build();
  
             //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
             ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
@@ -246,7 +246,7 @@ public class RestTemplateService {
             HttpHeaders header = new HttpHeaders();
             HttpEntity<?> entity = new HttpEntity<>(header);
  
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl("/" + contentUrl + id + "/credits" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl( contentUrl + id + "/credits" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
  
             //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
             ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
@@ -286,7 +286,7 @@ public class RestTemplateService {
             HttpHeaders header = new HttpHeaders();
             HttpEntity<?> entity = new HttpEntity<>(header);
  
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl("/" + contentUrl + id + "/videos" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + id + "/videos" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
  
             //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
             ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
@@ -326,7 +326,7 @@ public class RestTemplateService {
             HttpHeaders header = new HttpHeaders();
             HttpEntity<?> entity = new HttpEntity<>(header);
  
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl("/" + contentUrl + id + "/images" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + id + "/images" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
  
             //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
             ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
@@ -365,7 +365,7 @@ public class RestTemplateService {
             HttpHeaders header = new HttpHeaders();
             HttpEntity<?> entity = new HttpEntity<>(header);
  
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl("/" + contentUrl + id + "/recommendations" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl( contentUrl + id + "/recommendations" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
  
             //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
             ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);

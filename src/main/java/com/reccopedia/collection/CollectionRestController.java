@@ -54,15 +54,13 @@ public class CollectionRestController {
 		Map<String, Object> result = new HashMap<>();
 
 		List<Map<String, Object>> keywordList = collectionBO.findKeyword(title);
-		
-		
-		model.addAttribute("keywordList", keywordList);
 
 		if (keywordList.size() >= 1) {
 			result.put("code", 1);
 		} else {
 			result.put("errorMessage","검색어를 다시 입력해주세요");
 		}
+		model.addAttribute("keywordList", keywordList);
 		
 		return result;
 	}

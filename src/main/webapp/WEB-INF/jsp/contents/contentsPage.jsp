@@ -148,7 +148,7 @@
 							<h5 class="contents_title">코멘트</h5>
 							<span>{comment.id}</span>
 						</div>
-						<a href="/comment_view?id=${contents.id}">더보기</a>
+						<a href="/comment_view?id=${contents.id}">더보기</a> -->
 					</div>
 					<div class="comments">
 						<ul>

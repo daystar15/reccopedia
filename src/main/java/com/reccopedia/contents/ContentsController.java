@@ -76,7 +76,7 @@ public class ContentsController {
 		List<String> yutube = contentsBO.generateVideo(id);
 		List<String> images = contentsBO.generateImages(id);
 		String year = contentsBO.generateYear(id);
-		//Comment comment = commentBO.getCommentByUserIdApiId(userId, id);
+		Comment comment = commentBO.getCommentByUserIdApiId(userId, id);
 		
 		model.addAttribute("similars", similars);
 		//model.addAttribute("comment", comment);
