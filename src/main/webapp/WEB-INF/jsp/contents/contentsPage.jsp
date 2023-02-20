@@ -272,7 +272,7 @@
 						<c:forEach var="similar" items="${similars}">
 							<li>
 								<a href="/contents/contents_view?id=${similar.id}">
-									<div class="poster">
+									<div class="poster simi">
 										<img src="https://image.tmdb.org/t/p/w154/${similar.poster_path}" alt="">
 									</div>
 									<h3 class="content_subject">${similar.title}</h3>

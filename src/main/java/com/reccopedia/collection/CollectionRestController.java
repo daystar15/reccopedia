@@ -1,18 +1,14 @@
 package com.reccopedia.collection;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.collection.bo.CollectionBO;
 
 import jakarta.servlet.http.HttpSession;
@@ -45,25 +41,9 @@ public class CollectionRestController {
 		
 		return result;
 	}
+
 	
-	@GetMapping("/find")
-	public Map<String, Object> create(
-			@RequestParam("title") String title,
-			Model model) throws JsonProcessingException {
-
-		Map<String, Object> result = new HashMap<>();
-
-		List<Map<String, Object>> keywordList = collectionBO.findKeyword(title);
-
-		if (keywordList.size() >= 1) {
-			result.put("code", 1);
-		} else {
-			result.put("errorMessage","검색어를 다시 입력해주세요");
-		}
-		model.addAttribute("keywordList", keywordList);
-		
-		return result;
-	}
+	
 	
 	
 }

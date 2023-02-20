@@ -1464,6 +1464,10 @@ textarea {
 .similar ul li {
 	margin-bottom: 1rem;
 }
+.similar ul li .simi {
+	height: 181px;
+	overflow: hidden;
+}
 .contents_right .contents_title {
     margin: 2rem 0 1rem;
 }
