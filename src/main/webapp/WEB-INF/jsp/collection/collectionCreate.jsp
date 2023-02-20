@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="nav_box">
 	<div>
 		<img src="/static/images/right-arrow.png" alt="" onclick="goBack();">
@@ -23,11 +25,9 @@
 						</a>
 					</div>
 					<%-- 추가한 목록들 --%>
-						<ul class="add_collection_list">
-							<li>
-								<img src="" alt="">
-							</li>
-						</ul>
+					<div>
+					
+					</div>
 					<%-- 추가한 목록들 --%>
 				</div>
 			</div>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.collection.bo.CollectionBO;
+import com.reccopedia.contents.bo.ContentsBO;
 
 @Controller
 @RequestMapping("/collection")
@@ -21,6 +22,8 @@ public class CollectionController {
 	@Autowired
 	private CollectionBO collectionBO;
 
+	@Autowired
+	private ContentsBO contentsBO;
 
 	// 컬렉션 생성 페이지
 	@GetMapping("/collection_create_view")
@@ -52,6 +55,7 @@ public class CollectionController {
 		return "template/layout";
 	}
 		
+	// 컬렉션 검색 결과 페이지
 	@GetMapping("/collection_find_result_view")
 	public String findResult(
 			@RequestParam("title") String title,
@@ -69,6 +73,23 @@ public class CollectionController {
 		model.addAttribute("keywordList", keywordList);
 
 		return "collection/collectionFindResult";
+	}
+	
+	
+	// 컬렉션 추가 리스트 페이지
+	@GetMapping("/collection_add_list_view")
+	public String addList(
+			@RequestParam("id") int id,
+			Model model) throws JsonProcessingException {
+
+		Map<String, Object> result = new HashMap<>();
+
+		Map<String, Object> addList = contentsBO.generateContent(id);
+
+		
+		model.addAttribute("addList", addList);
+
+		return "collection/collectionAddList";
 	}
 		
 }
