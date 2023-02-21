@@ -49,7 +49,7 @@
 				, url: "/collection/collection_find_result_view"
 				, data: {"title":title}
 				, success:function(data) {
-					$("#content_list_box").html(data);
+					$("#content_list_box").html(data)
 				}
 				, error:function(e) {
 					alert("오류입니다.");

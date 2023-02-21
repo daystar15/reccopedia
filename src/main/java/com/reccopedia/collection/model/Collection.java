@@ -12,7 +12,7 @@ public class Collection {
 	private String subject;
 	private Date createdAt;
 	private Date updatedAt;
-	
+
 	private String keyword;
 
 	public int getId() {

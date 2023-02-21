@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reccopedia.collection.dao.CollectionDAO;
+import com.reccopedia.collection.model.Collection;
 import com.reccopedia.restAPI.dao.RestTemplateService;
 
 @Service
@@ -22,6 +23,7 @@ public class CollectionBO {
 	
 	@Autowired
 	private RestTemplateService resttemplateservice;
+	
 	
 	public void addCollection(Integer userId, String subject, String content) {
 		collectionDAO.addCollection(userId, null, null, subject, content);

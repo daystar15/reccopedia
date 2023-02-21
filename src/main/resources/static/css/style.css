@@ -1057,6 +1057,9 @@ textarea {
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.add_collection_list {
+	margin-top: 1rem;
+}
 .add_collection img {
     width: 40%;
     margin: auto;

@@ -76,20 +76,5 @@ public class CollectionController {
 	}
 	
 	
-	// 컬렉션 추가 리스트 페이지
-	@GetMapping("/collection_add_list_view")
-	public String addList(
-			@RequestParam("id") int id,
-			Model model) throws JsonProcessingException {
-
-		Map<String, Object> result = new HashMap<>();
-
-		Map<String, Object> addList = contentsBO.generateContent(id);
-
-		
-		model.addAttribute("addList", addList);
-
-		return "collection/collectionAddList";
-	}
 		
 }

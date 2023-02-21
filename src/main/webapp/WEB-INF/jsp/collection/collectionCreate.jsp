@@ -24,12 +24,17 @@
 							<img src="/static/images/plus.png" alt=""> <span>작품추가</span>
 						</a>
 					</div>
-					<%-- 추가한 목록들 --%>
-					<div>
 					
-					</div>
-					<%-- 추가한 목록들 --%>
 				</div>
+				<%-- 추가한 목록들 --%>
+				<div class="add_collection_list">
+					<ul>
+						<li>
+							<img src="">
+						</li>
+					</ul>
+				</div>
+				<%-- 추가한 목록들 --%>
 			</div>
 			<div class="collection_btn">
 				<input type="submit" value="제출하기" id="collectionSubmitBtn">
@@ -76,6 +81,22 @@
         });
         
     });
+    
+    
+    
+    
+    let cookieIdPosterPath = $.cookie('cookieIdPosterPath');
+    $(".add_collection_list ul li").append();
+    $(".add_collection_list ul li img").attr("src", "https://image.tmdb.org/t/p/w92/" + cookieIdPosterPath);
+    let cookie = document.cookie;
+    startIndex = cookie.indexOf('cookieIdPosterPath');
+    console.log(startIndex);
+
+    for(var i = startIndex; i < startIndex; i++) {
+    	$(".add_collection_list ul li").append();
+    }
+
+
     
     function goBack(){
 		window.history.back();

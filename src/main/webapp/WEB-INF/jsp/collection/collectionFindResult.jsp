@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="collection_plus">
-			<img src="/static/images/plus.png" alt="" data-api-id="${result.id}">
+			<img src="/static/images/plus.png" alt="" data-api-id="${result.poster_path}">
 		</div>
 	</div>
 </li>
@@ -32,20 +32,24 @@
 	$(document).ready(function() {
 		$(".collection_plus img").on('click', function() {
 			let id = $(this).data('api-id');
+
+			let cookieIdPosterPath = $.cookie('cookieIdPosterPath', $(this).data('api-id'), {expires: 7, path: '/'});
+			
 			
 			$.ajax({
 				type: "GET"
-				, url: "/collection/collection_add_list_view"
+				, url: "/collection/collection_create_view"
 				, data: {"id":id}
-				, async:false
 				, success:function(data) {
-					
+					location.href="/collection/collection_create_view";
 				}
 				, error:function(e) {
 					alert("오류입니다.");
 				}
 				
 			});//--- ajax
+			
+			
 		})
 	})
 </script>
