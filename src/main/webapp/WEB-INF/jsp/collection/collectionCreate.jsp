@@ -30,7 +30,7 @@
 				<div class="add_collection_list">
 					<ul>
 						<li>
-							<img src="">
+							<%-- 동적으로 생성 <img src=""> --%>
 						</li>
 					</ul>
 				</div>
@@ -47,6 +47,7 @@
         $('#collectionSubmitBtn').on('click', function(e) {
             e.preventDefault();
 
+            let cookieId = $.cookie('cookieId');
             let subject = $('#collectionSubject').val().trim();
             let content =  $('#collectionContent').val();
 
@@ -58,6 +59,10 @@
                 alert('내용을 입력해주세요');
                 return false;
             }
+            
+            if (cookieId == null) {
+        		alert("작품을 선택해주세요")
+        	}
             
             $.ajax({
             	type: "post" 
@@ -82,22 +87,49 @@
         
     });
     
+ 	// {cookieId: '/eLbVVIgIoqBxR0ZnxbCXao4ujFP.jpg'}
+    let cookieId = $.cookie();
     
+    // 쿠키 value 값 - poster path
+    let cookiePosterPath = $.cookie("cookieId");
     
-    
-    let cookieIdPosterPath = $.cookie('cookieIdPosterPath');
-    $(".add_collection_list ul li").append();
-    $(".add_collection_list ul li img").attr("src", "https://image.tmdb.org/t/p/w92/" + cookieIdPosterPath);
-    let cookie = document.cookie;
-    startIndex = cookie.indexOf('cookieIdPosterPath');
-    console.log(startIndex);
+	// 빈 배열 생성(쿠키 객체를 저장할 배열)
+	var arr = []; 
+	    
+	// localStorage에 저장할 객체
+	const cookies = $.cookie();
+	arr.push(cookies);
+	
+	for (var i = 0; i < arr.length - 1; i++) {
+ 		// 배열에 cookies 객체 저장
+    	arr.push(cookies);
+ 		
+    	// 배열을 JSON 문자열로 변환
+        const arrString = JSON.stringify(arr);
+    	
+     	// setItem
+ 		window.localStorage.setItem('nums', arrString);
+    	console.log(arrString);
+ 	}
 
-    for(var i = startIndex; i < startIndex; i++) {
-    	$(".add_collection_list ul li").append();
-    }
-
-
+    // getItem
+    const numsString = window.localStorage.getItem('nums');
+     
+    // JSON 문자열을 객체, 배열로 변환
+    const numsArr = JSON.parse(numsString);
+ 	
+ 	
+ 	$(".add_collection_list ul li").clone().appendTo(".add_collection_list ul");
+ 	$('<img>', {src: 'https://image.tmdb.org/t/p/w92/' + cookiePosterPath}).appendTo(".add_collection_list ul li");
+ 	
     
+     
+    // 결과 출력
+    document.write(numsString); // [1,2,3]
+    
+    
+ 
+   
     function goBack(){
 		window.history.back();
 	}

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.collection.bo.CollectionBO;
-import com.reccopedia.contents.bo.ContentsBO;
 
 @Controller
 @RequestMapping("/collection")
@@ -22,13 +21,13 @@ public class CollectionController {
 	@Autowired
 	private CollectionBO collectionBO;
 
-	@Autowired
-	private ContentsBO contentsBO;
 
 	// 컬렉션 생성 페이지
 	@GetMapping("/collection_create_view")
-	public String collectionCreateView(Model model) {
-	model.addAttribute("viewName", "collection/collectionCreate");
+	public String collectionCreateView(
+			Model model) {
+		
+		model.addAttribute("viewName", "collection/collectionCreate");
 		return "template/layout";
 	}
 	
@@ -72,6 +71,8 @@ public class CollectionController {
 		}
 		model.addAttribute("keywordList", keywordList);
 
+		
+		
 		return "collection/collectionFindResult";
 	}
 	

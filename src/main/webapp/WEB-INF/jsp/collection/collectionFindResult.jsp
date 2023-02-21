@@ -32,16 +32,16 @@
 	$(document).ready(function() {
 		$(".collection_plus img").on('click', function() {
 			let id = $(this).data('api-id');
+			let cookieId = $.cookie('cookieId', $(this).data('api-id'), {expires: 7, path: '/',  secure: false});
 
-			let cookieIdPosterPath = $.cookie('cookieIdPosterPath', $(this).data('api-id'), {expires: 7, path: '/'});
-			
-			
 			$.ajax({
 				type: "GET"
 				, url: "/collection/collection_create_view"
 				, data: {"id":id}
 				, success:function(data) {
+					$.cookie('cookieId', $(this).data('api-id'), {expires: 7, path: '/', domain: 'http://localhost:8080/collection/collection_create_view', secure: false});
 					location.href="/collection/collection_create_view";
+				
 				}
 				, error:function(e) {
 					alert("오류입니다.");
