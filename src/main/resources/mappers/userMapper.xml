@@ -74,7 +74,7 @@
 			`email` = #{email}
 	</select>
 	
-	<select id="selectUserById" parameterType="String" resultType="com.reccopedia.user.model.User">
+	<select id="selectUserById" parameterType="int" resultType="com.reccopedia.user.model.User">
 		SELECT
 			`id`
 			, `name`

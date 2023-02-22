@@ -62,7 +62,7 @@ public class CommentRestController {
 			return result;
 		}
 		
-		commentBO.deleteCommentByUserIdApiId(userId, apiId);
+		commentBO.deleteCommentByUserIdApiId(apiId);
 		result.put("code", 1);
 		
 		return result;

@@ -9,9 +9,11 @@ public class CommentView {
 	
 	private User user;
 	
-	private int likeCount;
+	private double pointCount;
 	
-	private boolean filledLike;
+	private boolean filledWish;
+	
+	private boolean filledWatching;
 
 	public Comment getComment() {
 		return comment;
@@ -29,21 +31,30 @@ public class CommentView {
 		this.user = user;
 	}
 
-	public int getLikeCount() {
-		return likeCount;
+	public double getPointCount() {
+		return pointCount;
 	}
 
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
+	public void setPointCount(double pointCount) {
+		this.pointCount = pointCount;
 	}
 
-	public boolean isFilledLike() {
-		return filledLike;
+	public boolean isFilledWish() {
+		return filledWish;
 	}
 
-	public void setFilledLike(boolean filledLike) {
-		this.filledLike = filledLike;
+	public void setFilledWish(boolean filledWish) {
+		this.filledWish = filledWish;
 	}
+
+	public boolean isFilledWatching() {
+		return filledWatching;
+	}
+
+	public void setFilledWatching(boolean filledWatching) {
+		this.filledWatching = filledWatching;
+	}
+
 	
 	
 }

@@ -1267,6 +1267,9 @@ textarea {
     margin-right: 3rem;
     cursor: pointer;
 }
+.contents_keeped span.on {
+	color: rgb(255, 47, 110);
+}
 .contents_keeped span {
     white-space: nowrap;
 }

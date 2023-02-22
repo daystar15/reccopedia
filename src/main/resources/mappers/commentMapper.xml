@@ -25,7 +25,7 @@
  		)
  	</insert>
  	
- 	<select id="getCommentByUserIdApiId" parameterType="map" resultType="com.reccopedia.comment.model.Comment">
+ 	<select id="selectCommentListByApiId" parameterType="map" resultType="com.reccopedia.comment.model.Comment">
  		SELECT
  			`id`
 			, `apiId`
@@ -38,8 +38,6 @@
 			`comment`
 		WHERE
 			`apiId` = #{apiId}
-			AND
-			`userId` = #{userId}
  	</select>
  	
  	<delete id="deleteCommentByUserIdApiId" parameterType="map">
@@ -48,8 +46,6 @@
  			`comment`
  		WHERE
  			`apiId` = #{apiId}
- 			AND
- 			`userId` = #{userId}
  	</delete>
  
  </mapper>

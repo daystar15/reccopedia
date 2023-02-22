@@ -11,7 +11,12 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.reccopedia.comment.bo.CommentBO;
+import com.reccopedia.comment.model.CommentView;
+import com.reccopedia.contents.model.ContentsView;
 import com.reccopedia.restAPI.dao.RestTemplateService;
+import com.reccopedia.watching.bo.WatchingBO;
+import com.reccopedia.wish.bo.WishBO;
 
 @Service
 public class ContentsBO {
@@ -19,7 +24,14 @@ public class ContentsBO {
 	@Autowired
 	private RestTemplateService resttemplateservice;
 	
+	@Autowired
+	private WishBO wishBO;
 	
+	@Autowired
+	private CommentBO commentBO;
+	
+	@Autowired
+	private WatchingBO watchingBO;
 	
 	public List<Map<String, Object>> generateNowMap() throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
@@ -270,6 +282,31 @@ public class ContentsBO {
 		return list;
 		
 	}
+	
+	
+	// 로그인 되지 않은 사람도 목록이 보여야함
+	public List<ContentsView> generateContentsList(int id, Integer userId) {
+		
+		List<ContentsView> contentsViewList = new ArrayList<>();
+
+		ContentsView content = new ContentsView();
+		
+		List<CommentView> commentList = commentBO.generateCommentViewListByApiId(id);
+		content.setCommentList(commentList);
+		
+		content.setFilledPoint(wishBO.existWish(id, userId));
+		
+		content.setFilledWatching(watchingBO.existwatching(id, userId));
+		
+		content.setFilledWish(wishBO.existWish(id, userId));
+		
+		contentsViewList.add(content);
+		
+		return contentsViewList;
+	}
+	
+	
+	
 
 	
 }

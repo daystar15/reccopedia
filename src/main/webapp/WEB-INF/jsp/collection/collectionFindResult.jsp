@@ -39,7 +39,6 @@
 				, url: "/collection/collection_create_view"
 				, data: {"id":id}
 				, success:function(data) {
-					//$.cookie('cookieId', $(this).data('api-id'), {expires: 7, path: '/', domain: 'http://localhost:8080/collection/collection_create_view', secure: false});
 					location.href="/collection/collection_create_view"
 				}
 				, error:function(e) {
@@ -49,6 +48,6 @@
 			});//--- ajax
 			
 			
-		})
-	})
+		});
+	});
 </script>

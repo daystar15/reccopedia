@@ -10,14 +10,15 @@
 	<div class="contets_top">
 		<div class="contents_short_box">
 			<div class="contents_poster">
-				<img src="https://image.tmdb.org/t/p/original${contents.poster_path}" alt="">
+				<img src="https://image.tmdb.org/t/p/w500${contents.poster_path}" alt="">
 			</div>
 			<div class="contents_info">
 				<h2>${contents.title}</h2>
 				<h3>${year} &#183; ${genre} &#183; ${countryResult}</h3>
 				<h4>평균 &#9733;{3.8} ({44만명})</h4>
 				<div>
-					<div class="star-rating">
+					
+					<div class="star-rating"  data-api-id="${contents.id}">
 						<input type="radio" id="5-stars" name="rating" value="5" />
 						<label for="5-stars" class="star">&#9733;</label>
 						<input type="radio" id="4-stars" name="rating" value="4" />
@@ -29,33 +30,65 @@
 						<input type="radio" id="1-star" name="rating" value="1" />
 						<label for="1-star" class="star">&#9733;</label>
 					</div>
-					<div class="contents_keeped">
+					
+					
+					<div class="contents_keeped" id="wish">
 						<div class="icon">
 							<img src="/static/images/plus.png" alt="">
 						</div>
+						<%-- 보고싶어요 안되어있을 때 --%>
+						<%-- <c:if test="${contentList.filledWish eq false}"> --%>
 						<span>보고싶어요</span>
+						<%-- </c:if>--%>
+						<%-- 보고싶어요 되어있을 때 --%>
+						<%--<c:if test="${contentList.filledWish eq true}"> --%>
+						<span class="on">보고싶어요</span>
+						<%-- </c:if>--%>
 					</div>
 					<div class="contents_keeped my_comment_write">
 						<div class="icon">
 							<img src="/static/images/pencil.png" alt="">
 						</div>
+						<%-- 코멘트 안되어있을 때 --%>
+						<%--<c:if test="${ .filledWish eq false}">  --%>
 						<span>코멘트</span>
+						<%--</c:if> --%>
+						<%-- 코멘트 되어있을 때 --%>
+						<%--<c:if test="${ .filledWish eq true}">  --%>
+						<span class="on">코멘트</span>
+						<%--</c:if> --%>
 					</div>
-					<div class="contents_keeped">
+					<div class="contents_keeped" id="watching">
 						<div class="icon">
 							<img src="/static/images/eye.png" alt="">
 						</div>
+						<%-- 보는중 안되어있을 때 --%>
+						<%--<c:if test="${contentList.filledWatching eq false}"> --%>
 						<span>보는중</span>
+						<%--</c:if> --%>
+						<%-- 보는중 되어있을 때 --%>
+						<%--<c:if test="${contentList.filledWatching eq true}"> --%>
+						<span class="on">보는중</span>
+						<%--</c:if> --%>
 					</div>
-					<div class="contents_keeped">
+					<div class="contents_keeped" id="notInterest">
 						<div class="icon">
 							<img src="/static/images/block.png" alt="">
 						</div>
+						<%-- 관심없어요 안되어있을 때 --%>
+						<%--<c:if test="${ .filledWish eq false}">  --%>
 						<span>관심없어요</span>
+						<%--</c:if> --%>
+						<%-- 관심없어요 되어있을 때 --%>
+						<%--<c:if test="${ .filledWish eq true}">  --%>
+						<span class="on">관심없어요</span>
+						<%--</c:if> --%>
 					</div>
 					<div class="contents_keeped">
 						<div class="icon">
-							<img src="/static/images/add_collection.png" alt="">
+							<a href="/collection/collection_list_view">
+								<img src="/static/images/add_collection.png" alt="">
+							</a>
 						</div>
 						<span>컬렉션 담기</span>
 					</div>
@@ -69,7 +102,7 @@
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
 				<!-- c:if 내가 댓글을 남겼으면 -->
 				<div class="write_comment" >
-					<c:if test="${not empty comment}">
+					<%-- <c:if test="${not empty comment}">
 						<div class="my_comment">
 							<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
 							</span>
@@ -85,7 +118,7 @@
 								<span id="myCommentUpdateBtn">수정</span>
 							</em>
 						</div>
-					</c:if>
+					</c:if> --%>
 					<button>댓글을 남겨보세요</button>
 				</div>
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
@@ -148,58 +181,30 @@
 							<h5 class="contents_title">코멘트</h5>
 							<span>{comment.id}</span>
 						</div>
-						<a href="/comment_view?id=${contents.id}">더보기</a> -->
+						<a href="/comment_view?id=${contents.id}">더보기</a>
 					</div>
 					<div class="comments">
 						<ul>
+						<c:forEach items="${contentList.commentList}" var="list">
 							<li>
 								<!-- 댓글 하나 -->
 								<div class="comment_user">
 									<a href="#" class="comment_left">
 										<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
-										</span> <span class="comment_user_name"> {테스트 이름} </span>
+										</span> <span class="comment_user_name"> ${list.user.name} </span>
 									</a>
-									<div class="comment_right">&#9733; {5.0}</div>
+									<div class="comment_right">&#9733; ${list.pointCount}</div>
 								</div>
-								<div class="comment_content">{그럼에도, 영화는 참으로 마법 같은 것이기에 사랑할 수밖에. 시대는 변해도 영화는 함께 했고, 하고 있고, 할 것이다.}</div>
+								<div class="comment_content">${list.comment.content}</div>
 								<div class="good_box">
-									<span class="comment_up"> <img src="/static/images/up.png" alt=""> <em>{318}</em>
+									<span class="comment_up"> <img src="/static/images/up.png" alt=""> <em>${list.comment.id}</em>
 									</span>
 								</div>
 								<!-- 댓글 하나 끝 -->
 							</li>
-							<li>
-								<!-- 댓글 하나 -->
-								<div class="comment_user">
-									<a href="#" class="comment_left">
-										<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
-										</span> <span class="comment_user_name"> {테스트 이름} </span>
-									</a>
-									<div class="comment_right">&#9733; {5.0}</div>
-								</div>
-								<div class="comment_content">{말도 안되는 미모 뽐내는 파릇파릇한 톰 크루즈가 비행/사랑/고뇌하는 와중에도 있는대로 반짝거리며 온 몸으로 사나이! 청춘! 애국!을 외쳐대는 본격 미군홍보영화}</div>
-								<div class="good_box">
-									<span class="comment_up"> <img src="/static/images/up.png" alt=""> <em>{318}</em>
-									</span>
-								</div>
-								<!-- 댓글 하나 끝 -->
-							</li>
-							<li>
-								<!-- 댓글 하나 -->
-								<div class="comment_user">
-									<a href="#" class="comment_left">
-										<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
-										</span> <span class="comment_user_name"> {테스트 이름} </span>
-									</a>
-									<div class="comment_right">&#9733; {5.0}</div>
-								</div>
-								<div class="comment_content">{말도 안되는 미모 뽐내는 파릇파릇한 톰 크루즈가 비행/사랑/고뇌하는 와중에도 있는대로 반짝거리며 온 몸으로 사나이! 청춘! 애국!을 외쳐대는 본격 미군홍보영화}</div>
-								<div class="good_box">
-									<span class="comment_up"> <img src="/static/images/up.png" alt=""> <em>{318}</em>
-									</span>
-								</div>
-								<!-- 댓글 하나 끝 -->
-							</li>
+						</c:forEach>
+							
+							
 						</ul>
 					</div>
 				</div>
@@ -382,10 +387,91 @@
         	alert(commentId);
         }); // --댓글 삭제 
         
-        
+        // 출연/제작 더보기 버튼
         $("#moreCrew").on('click', function() {
         	$('.contents_cast_box').css("height", "auto");
-        });
+        }); //-- 출연/제작 더보기 버튼
+        
+        // 별점 버튼
+        $("input[name=rating]").on('click', function() {
+        	
+        	let apiId = $(".star-rating").data('api-id');
+        	let point = $(this).val();
+        	
+        	$.ajax({
+        		type: "post"
+        		, url: "/point/insert"
+        		, data: {"point":point, "apiId":apiId}
+        		, success:function(data) {
+        			if (data.code == 1) {
+        				alert("성공")
+        			} else if (data.code == 500) {
+        				alert("로그인을 해주세요");
+        				location.reload();
+        			}
+        		} 
+        		, error:function(e) {
+        			alert("에러");
+        		}
+        	});//---ajax
+        })// ---별점 버튼
+        
+        
+        // 보고싶어요 버튼 토글
+        $("#wish").on('click', function() {
+        	let userId = $(this).data('user-id');
+        	let apiId = $('.star-rating').data('api-id');
+
+        	if (userId == '') {
+        		alert("로그인을 해주세요");
+        		return;
+        	}
+        	
+        	$.ajax({
+        		type: "post"
+        		, url: "/wish/" + apiId
+        		, success:function(data) {
+        			if (data.code == 1) {
+        				location.reload(true);
+        			} else {
+        				alert(data.errorMessage);
+        			}
+        		}
+        		, error: function(e) {
+        			alert("추가/해제에 실패했습니다.");
+        		}
+        	})//--ajax
+        	
+        });//--보고싶어요 버튼
+        
+
+        // 보는중 버튼 토글
+        $("#watching").on('click', function() {
+        	let userId = $(this).data('user-id');
+        	let apiId = $('.star-rating').data('api-id');
+
+        	if (userId == '') {
+        		alert("로그인을 해주세요");
+        		return;
+        	}
+        	
+        	$.ajax({
+  				type: "post"
+        		, url: "/watching/" + apiId
+        		, success:function(data) {
+        			if (data.code == 1) {
+        				location.reload(true);
+        			} else {
+        				alert(data.errorMessage);
+        			}
+        		}
+        		, error: function(e) {
+        			alert("추가/해제에 실패했습니다.");
+        		}
+        	})//--ajax
+        	
+        });//--보고싶어요 버튼
+        
         
     });
 </script>

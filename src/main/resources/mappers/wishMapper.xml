@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.reccopedia.wish.dao.WishDAO">
+
+	<select id="selectWishByApiIdOrUserId" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`wish`
+		WHERE
+			`apiId` = #{apiId}
+			<if test="userId != null">
+			AND `userId` = #{userId}
+			</if>
+	</select>
+
+	<insert id="insertWish" parameterType="map">
+		INSERT INTO `wish`
+ 		(
+ 			`apiId`
+			, `userId`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{apiId}
+ 			, #{userId}
+ 			, now()
+ 			, now()
+ 		)
+	</insert>
+	
+	<delete id="deleteWishByApiIdUserId" parameterType="map">
+		DELETE
+		FROM
+			`wish`
+		WHERE
+			`apiId` = #{apiId}
+			AND `userId` = #{userId}
+	</delete>
+	
+	<delete id="deleteWishByApiId" parameterType="int">
+		DELETE
+		FROM
+			`wish`
+		WHERE
+			`apiId` = #{apiId}
+	</delete>
+
+</mapper>

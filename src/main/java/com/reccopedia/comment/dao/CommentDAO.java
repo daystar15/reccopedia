@@ -16,12 +16,8 @@ public interface CommentDAO {
 			@Param("apiId") int apiId, 
 			@Param("content") String content);
 	
-	public Comment getCommentByUserIdApiId(
-			@Param("userId") int userId, 
-			@Param("apiId") int apiId);
+	public List<Comment> selectCommentListByApiId(int apiId);
 	
-	public void deleteCommentByUserIdApiId(
-			@Param("userId") int userId, 
-			@Param("apiId") int apiId);
+	public void deleteCommentByUserIdApiId(int apiId);
 	
 }

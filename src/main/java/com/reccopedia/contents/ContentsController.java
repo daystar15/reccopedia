@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.comment.bo.CommentBO;
-import com.reccopedia.comment.model.Comment;
 import com.reccopedia.contents.bo.ContentsBO;
+import com.reccopedia.contents.model.ContentsView;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -65,8 +65,7 @@ public class ContentsController {
 	public String contentsView(Model model, int id,
 			HttpSession session) throws JsonProcessingException {
 		
-		Integer userId = (Integer) session.getAttribute("userId");
-		
+		List<ContentsView> contentList = contentsBO.generateContentsList(id, (Integer)session.getAttribute("userId"));
 		
 		List<Map<String, Object>> similars = contentsBO.generateSimilars(id);
 		Map<String, Object> contentInfo = contentsBO.generateContent(id);
@@ -76,10 +75,9 @@ public class ContentsController {
 		List<String> yutube = contentsBO.generateVideo(id);
 		List<String> images = contentsBO.generateImages(id);
 		String year = contentsBO.generateYear(id);
-		Comment comment = commentBO.getCommentByUserIdApiId(userId, id);
 		
+		model.addAttribute("contentList", contentList);
 		model.addAttribute("similars", similars);
-		//model.addAttribute("comment", comment);
 		model.addAttribute("countryResult", countryResult);
 		model.addAttribute("year", year);
 		model.addAttribute("yutube", yutube);

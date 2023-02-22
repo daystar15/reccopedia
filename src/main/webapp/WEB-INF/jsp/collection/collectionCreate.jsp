@@ -86,42 +86,48 @@
         });
         
     });
-    
- 	// {cookieId: '/eLbVVIgIoqBxR0ZnxbCXao4ujFP.jpg'}
-    let cookieId = $.cookie();
-    
+
+ 	
+ 	// 전체 쿠키
+    let cookies = $.cookie();
+ 	
     // 쿠키 value 값 - poster path
     let cookiePosterPath = $.cookie("cookieId");
+
+    /* function cookieList() { */
+    	// 빈 배열 생성
+        let movieList = [];
+     	
+    	// 배열에 추가
+    	movieList.push(cookiePosterPath);
+        
+        // JSON 문자열로 변환
+        var movieListString = JSON.stringify(movieList);
+        
+     	// setItem
+        window.localStorage.setItem('cookie', movieListString);
+    	
+     	
+     	
+     	
+        let length = window.localStorage.length;
+        for (let i = 0; i < length - 1; i++) {
+        	movieList[i];
+
+        	// getItem
+            let temp_movie = window.localStorage.getItem('cookie');
+            
+         	// JSON 문자열을 배열로 변환
+            var moviesArr = JSON.parse(temp_movie);
+        }
+     	
+    	console.log(length);
+    /* } */
     
-	// 빈 배열 생성(쿠키 객체를 저장할 배열)
-	var arr = []; 
-	    
-	// localStorage에 저장할 객체
-	const cookies = $.cookie();
-	arr.push(cookies);
-
-
-	const arrString = JSON.stringify(arr);
-	window.localStorage.setItem('nums', arrString);
-	for (var i = 0; i < 10 - 1; i++) {
-		
-	 }
-	
-	
-	const numsString = window.localStorage.getItem('nums');
-	const numsArr = JSON.parse(numsString);
-
-	
-	
-    // 배열을 JSON 문자열로 변환
- 		
-	
-	console.log(arr);
+    
 	const tagArea = document.getElementsByClassName('add_collection_lists');
-	
-	
-	
-	
+
+
  	$('<img>', {src: 'https://image.tmdb.org/t/p/w92/' + cookiePosterPath}).appendTo(".add_collection_lists");
 	
 	let count = 0;
