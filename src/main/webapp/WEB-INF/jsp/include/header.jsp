@@ -120,8 +120,7 @@
 				, success:function(data) {
 					if (data.code == 1) {
 						alert("로그인에 성공하였습니다.");
-						$(".modal_back").addClass("none");
-						$(".modal_box").addClass("none");
+						window.location.reload();
 					} else {
 						alert(data.errorMessage);
 					}

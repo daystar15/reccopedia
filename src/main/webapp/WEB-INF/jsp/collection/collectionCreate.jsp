@@ -29,8 +29,8 @@
 				<%-- 추가한 목록들 --%>
 				<div class="add_collection_list">
 					<ul>
-						<li>
-							<%-- 동적으로 생성 <img src=""> --%>
+						<li class="add_collection_lists">
+							<img src="">
 						</li>
 					</ul>
 				</div>
@@ -99,34 +99,37 @@
 	// localStorage에 저장할 객체
 	const cookies = $.cookie();
 	arr.push(cookies);
-	
-	for (var i = 0; i < arr.length - 1; i++) {
- 		// 배열에 cookies 객체 저장
-    	arr.push(cookies);
- 		
-    	// 배열을 JSON 문자열로 변환
-        const arrString = JSON.stringify(arr);
-    	
-     	// setItem
- 		window.localStorage.setItem('nums', arrString);
-    	console.log(arrString);
- 	}
 
-    // getItem
-    const numsString = window.localStorage.getItem('nums');
-     
-    // JSON 문자열을 객체, 배열로 변환
-    const numsArr = JSON.parse(numsString);
- 	
- 	
- 	$(".add_collection_list ul li").clone().appendTo(".add_collection_list ul");
- 	$('<img>', {src: 'https://image.tmdb.org/t/p/w92/' + cookiePosterPath}).appendTo(".add_collection_list ul li");
- 	
-    
-     
-    // 결과 출력
-    document.write(numsString); // [1,2,3]
-    
+
+	const arrString = JSON.stringify(arr);
+	window.localStorage.setItem('nums', arrString);
+	for (var i = 0; i < 10 - 1; i++) {
+		
+	 }
+	
+	
+	const numsString = window.localStorage.getItem('nums');
+	const numsArr = JSON.parse(numsString);
+
+	
+	
+    // 배열을 JSON 문자열로 변환
+ 		
+	
+	console.log(arr);
+	const tagArea = document.getElementsByClassName('add_collection_lists');
+	
+	
+	
+	
+ 	$('<img>', {src: 'https://image.tmdb.org/t/p/w92/' + cookiePosterPath}).appendTo(".add_collection_lists");
+	
+	let count = 0;
+    if (tagArea > 1) {
+    	const newNode = tagArea.cloneNode(true);
+    	count++;
+    	tagArea.after(newNode);
+    }
     
  
    
