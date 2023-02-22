@@ -13,11 +13,11 @@ public interface CommentDAO {
 	public void createComment(
 			@Param("userId") int userId, 
 			@Param("pointId") Integer pointId, 
-			@Param("apiId") int apiId, 
+			@Param("id") int id, 
 			@Param("content") String content);
 	
-	public List<Comment> selectCommentListByApiId(int apiId);
+	public List<Comment> selectCommentListByApiId(int id);
 	
-	public void deleteCommentByUserIdApiId(int apiId);
+	public void deleteCommentByUserIdApiId(int id);
 	
 }

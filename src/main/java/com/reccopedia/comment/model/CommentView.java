@@ -11,10 +11,6 @@ public class CommentView {
 	
 	private double pointCount;
 	
-	private boolean filledWish;
-	
-	private boolean filledWatching;
-
 	public Comment getComment() {
 		return comment;
 	}
@@ -37,22 +33,6 @@ public class CommentView {
 
 	public void setPointCount(double pointCount) {
 		this.pointCount = pointCount;
-	}
-
-	public boolean isFilledWish() {
-		return filledWish;
-	}
-
-	public void setFilledWish(boolean filledWish) {
-		this.filledWish = filledWish;
-	}
-
-	public boolean isFilledWatching() {
-		return filledWatching;
-	}
-
-	public void setFilledWatching(boolean filledWatching) {
-		this.filledWatching = filledWatching;
 	}
 
 	

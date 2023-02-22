@@ -23,7 +23,7 @@ public class CommentRestController {
 	
 	@PostMapping("/create")
 	public Map<String, Object> createComment(
-			@RequestParam("apiId") int apiId,
+			@RequestParam("id") int id,
 			@RequestParam("content") String content,
 			HttpSession session) {
 		
@@ -38,7 +38,7 @@ public class CommentRestController {
 			return result;
 		}
 		
-		commentBO.createComment(userId, null, apiId, content);
+		commentBO.createComment(userId, null, id, content);
 		result.put("code", 1);
 		result.put("result", "success");
 		

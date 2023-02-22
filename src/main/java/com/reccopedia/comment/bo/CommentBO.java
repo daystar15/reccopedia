@@ -21,23 +21,23 @@ public class CommentBO {
 	@Autowired
 	private CommentDAO commentDAO;
 	
-	public void createComment(int userId, Integer pointId, int apiId, String content) {
-		commentDAO.createComment(userId, null, apiId, content);
+	public void createComment(int userId, Integer pointId, int id, String content) {
+		commentDAO.createComment(userId, null, id, content);
 	}
 	
-	public List<Comment> getCommentListByApiId(int apiId) {
-		return commentDAO.selectCommentListByApiId(apiId);
+	public List<Comment> getCommentListByApiId(int id) {
+		return commentDAO.selectCommentListByApiId(id);
 	}
 	
-	public void deleteCommentByUserIdApiId(int apiId) {
-		commentDAO.deleteCommentByUserIdApiId(apiId);
+	public void deleteCommentByUserIdApiId(int id) {
+		commentDAO.deleteCommentByUserIdApiId(id);
 	}
 	
-	public List<CommentView> generateCommentViewListByApiId(int apiId) {
+	public List<CommentView> generateCommentViewListByApiId(int id) {
 		
 		List<CommentView> commentViewList = new ArrayList<>();
 		
-		List<Comment> commentList = getCommentListByApiId(apiId);
+		List<Comment> commentList = getCommentListByApiId(id);
 		
 		for (Comment comment : commentList) {
 			CommentView commentView = new CommentView();

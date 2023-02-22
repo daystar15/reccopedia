@@ -6,8 +6,6 @@ import com.reccopedia.comment.model.CommentView;
 
 public class ContentsView {
 	
-	//private List<Map<String, Object>> contents;
-	
 	private boolean filledPoint;
 	
 	private boolean filledWish;
@@ -16,14 +14,6 @@ public class ContentsView {
 	
 	private List<CommentView> commentList;
 	
-
-	//public List<Map<String, Object>> getContents() {
-	//	return contents;
-	//}
-
-	//public void setContents(List<Map<String, Object>> contents) {
-	//	this.contents = contents;
-	//}
 
 	public boolean isFilledPoint() {
 		return filledPoint;

@@ -16,7 +16,7 @@
  		)
  		VALUES
  		(
- 			#{apiId}
+ 			#{id}
  			, #{pointId}
  			, #{userId}
  			, #{content}
@@ -25,7 +25,7 @@
  		)
  	</insert>
  	
- 	<select id="selectCommentListByApiId" parameterType="map" resultType="com.reccopedia.comment.model.Comment">
+ 	<select id="selectCommentListByApiId" parameterType="int" resultType="com.reccopedia.comment.model.Comment">
  		SELECT
  			`id`
 			, `apiId`
@@ -37,15 +37,15 @@
 		FROM
 			`comment`
 		WHERE
-			`apiId` = #{apiId}
+			`apiId` = #{id}
  	</select>
  	
- 	<delete id="deleteCommentByUserIdApiId" parameterType="map">
+ 	<delete id="deleteCommentByUserIdApiId" parameterType="int">
  		DELETE
  		FROM
  			`comment`
  		WHERE
- 			`apiId` = #{apiId}
+ 			`apiId` = #{id}
  	</delete>
  
  </mapper>

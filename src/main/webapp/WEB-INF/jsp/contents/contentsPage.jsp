@@ -185,17 +185,17 @@
 					</div>
 					<div class="comments">
 						<ul>
-						<c:forEach items="${contentList.commentList}" var="list">
+						<c:forEach items="${contentList}" var="list">
 							<li>
 								<!-- 댓글 하나 -->
 								<div class="comment_user">
 									<a href="#" class="comment_left">
 										<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
-										</span> <span class="comment_user_name"> ${list.user.name} </span>
+										</span> <span class="comment_user_name"> ${list.commentList} </span>
 									</a>
-									<div class="comment_right">&#9733; ${list.pointCount}</div>
+									<div class="comment_right">&#9733; ${list.commentList}</div>
 								</div>
-								<div class="comment_content">${list.comment.content}</div>
+								<div class="comment_content">${list.commentList}</div>
 								<div class="good_box">
 									<span class="comment_up"> <img src="/static/images/up.png" alt=""> <em>${list.comment.id}</em>
 									</span>
@@ -347,7 +347,7 @@
         	e.preventDefault();
         	
         	// 댓글을 작성할 작품 api 번호
-        	let apiId = $(".modal_box").data('api-id');
+        	let id = $(".modal_box").data('api-id');
         	
         	// 작성한 댓글
         	let comment = $("#write_comment_content").val();
@@ -360,7 +360,7 @@
         	$.ajax({
         		type:'POST'
         		, url:'/comment/create'
-        		, data: {"apiId":apiId, "content":comment}
+        		, data: {"id":id, "content":comment}
         		, success: function(data) {
         			if (data.code == 1) {
         				alert('댓글이 작성되었습니다!');
@@ -395,13 +395,13 @@
         // 별점 버튼
         $("input[name=rating]").on('click', function() {
         	
-        	let apiId = $(".star-rating").data('api-id');
+        	let id = $(".star-rating").data('api-id');
         	let point = $(this).val();
         	
         	$.ajax({
         		type: "post"
         		, url: "/point/insert"
-        		, data: {"point":point, "apiId":apiId}
+        		, data: {"point":point, "id":id}
         		, success:function(data) {
         			if (data.code == 1) {
         				alert("성공")
@@ -420,7 +420,7 @@
         // 보고싶어요 버튼 토글
         $("#wish").on('click', function() {
         	let userId = $(this).data('user-id');
-        	let apiId = $('.star-rating').data('api-id');
+        	let id = $('.star-rating').data('api-id');
 
         	if (userId == '') {
         		alert("로그인을 해주세요");
@@ -429,7 +429,7 @@
         	
         	$.ajax({
         		type: "post"
-        		, url: "/wish/" + apiId
+        		, url: "/wish/" + id
         		, success:function(data) {
         			if (data.code == 1) {
         				location.reload(true);
@@ -448,7 +448,7 @@
         // 보는중 버튼 토글
         $("#watching").on('click', function() {
         	let userId = $(this).data('user-id');
-        	let apiId = $('.star-rating').data('api-id');
+        	let id = $('.star-rating').data('api-id');
 
         	if (userId == '') {
         		alert("로그인을 해주세요");
@@ -457,7 +457,7 @@
         	
         	$.ajax({
   				type: "post"
-        		, url: "/watching/" + apiId
+        		, url: "/watching/" + id
         		, success:function(data) {
         			if (data.code == 1) {
         				location.reload(true);
