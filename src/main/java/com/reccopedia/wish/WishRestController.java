@@ -18,9 +18,9 @@ public class WishRestController {
 	@Autowired
 	private WishBO wishBO;
 
-	@PostMapping("/wish/{apiId}")
+	@PostMapping("/wish/{id}")
 	public Map<String, Object> wish(
-			@PathVariable int apiId,
+			@PathVariable int id,
 			HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<>();
@@ -34,7 +34,7 @@ public class WishRestController {
 			return result;
 		}
 		
-		wishBO.wishToggle(apiId, userId);
+		wishBO.wishToggle(id, userId);
 		
 		result.put("code", 1);
 		result.put("result", "성공");

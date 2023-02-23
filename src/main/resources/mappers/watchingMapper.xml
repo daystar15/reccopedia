@@ -8,7 +8,7 @@
 		SELECT
 			COUNT(1)
 		FROM
-			`wish`
+			`watching`
 		WHERE
 			`apiId` = #{apiId}
 			<if test="userId != null">
@@ -20,7 +20,7 @@
 		INSERT INTO `watching`
  		(
  			`apiId`
-			, `userId`
+ 			, `userId`
 			, `createdAt`
 			, `updatedAt`
  		)

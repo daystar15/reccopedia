@@ -5,7 +5,7 @@ import java.util.Date;
 public class Point {
 
 	private int id;
-	private int count;
+	private int point;
 	private int apiId;
 	private int userId;
 	private Date createdAt;
@@ -17,11 +17,11 @@ public class Point {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getCount() {
-		return count;
+	public int getPoint() {
+		return point;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setPoint(int point) {
+		this.point = point;
 	}
 	public int getApiId() {
 		return apiId;

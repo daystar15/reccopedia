@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.reccopedia.point.dao.PointDAO">
- 	<insert id="insertPoint" parameterType="com.reccopedia.point.model.Point">
+ 	<insert id="insertPoint" parameterType="map">
  		INSERT INTO `point`
  		(
  			point
@@ -21,5 +21,52 @@
 	 		, NOW()
  		)
  	</insert>
+ 	
+ 	<select id="selectPointByApiIdOrUserId" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`point`
+		WHERE
+			`apiId` = #{apiId}
+			<if test="userId != null">
+			AND `userId` = #{userId}
+			</if>
+	</select>
+	
+	<select id="selectPointByApiId" parameterType="int" resultType="com.reccopedia.point.model.Point">
+		SELECT
+			`id`
+			, `apiId`
+			, `userId`
+			, `point`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`point`
+		WHERE
+			`apiId` = #{apiId}
+			<if test="userId != null">
+			AND `userId` = #{userId}
+			</if>
+	</select>
+	
+	<delete id="deletePointByApiIdUserId" parameterType="map">
+		DELETE
+		FROM
+			`point`
+		WHERE
+			`apiId` = #{apiId}
+			AND `userId` = #{userId}
+	</delete>
+	
+	<delete id="deletePointByApiId" parameterType="int">
+		DELETE
+		FROM
+			`point`
+		WHERE
+			`apiId` = #{apiId}
+	</delete>
+ 	
  	
  </mapper>

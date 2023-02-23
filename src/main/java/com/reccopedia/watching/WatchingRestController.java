@@ -18,9 +18,9 @@ public class WatchingRestController {
 	@Autowired
 	private WatchingBO watchingBO;
 	
-	@PostMapping("/watching/{apiId}")
+	@PostMapping("/watching/{id}")
 	public Map<String, Object> watching(
-			@PathVariable int apiId,
+			@PathVariable int id,
 			HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<>();
@@ -34,7 +34,7 @@ public class WatchingRestController {
 			return result;
 		}
 		
-		watchingBO.watchingToggle(apiId, userId);
+		watchingBO.watchingToggle(id, userId);
 		
 		result.put("code", 1);
 		result.put("result", "성공");

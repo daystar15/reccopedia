@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="contets_wrap">
 	<div class="contents_background">
 		<div>
@@ -17,7 +18,6 @@
 				<h3>${year} &#183; ${genre} &#183; ${countryResult}</h3>
 				<h4>평균 &#9733;{3.8} ({44만명})</h4>
 				<div>
-					
 					<div class="star-rating"  data-api-id="${contents.id}">
 						<input type="radio" id="5-stars" name="rating" value="5" />
 						<label for="5-stars" class="star">&#9733;</label>
@@ -31,19 +31,36 @@
 						<label for="1-star" class="star">&#9733;</label>
 					</div>
 					
-					
+					<%-- 별점 눌려있을 때 --%>
+					<c:if test="${fillPoint eq false}">
+					${pointvalue.setCount}
+						<div class="star-rating" >
+							<input type="radio" id="5-stars" name="rating" value="5" />
+							<label for="5-stars" class="star">&#9733;</label>
+							<input type="radio" id="4-stars" name="rating" value="4" />
+							<label for="4-stars" class="star">&#9733;</label>
+							<input type="radio" id="3-stars" name="rating" value="3" />
+							<label for="3-stars" class="star">&#9733;</label>
+							<input type="radio" id="2-stars" name="rating" value="2" />
+							<label for="2-stars" class="star">&#9733;</label>
+							<input type="radio" id="1-star" name="rating" value="1" />
+							<label for="1-star" class="star">&#9733;</label>
+						</div>
+					</c:if>
+					<%-- 별점 눌려있을 때 --%>
+
 					<div class="contents_keeped" id="wish">
 						<div class="icon">
 							<img src="/static/images/plus.png" alt="">
 						</div>
 						<%-- 보고싶어요 안되어있을 때 --%>
-						<%-- <c:if test="${contentList.filledWish eq false}"> --%>
-						<span>보고싶어요</span>
-						<%-- </c:if>--%>
+						<c:if test="${fillWish eq false}">
+							<span>보고싶어요</span>
+						</c:if>
 						<%-- 보고싶어요 되어있을 때 --%>
-						<%--<c:if test="${contentList.filledWish eq true}"> --%>
-						<span class="on">보고싶어요</span>
-						<%-- </c:if>--%>
+						<c:if test="${fillWish eq true}">
+							<span class="on">보고싶어요</span>
+						</c:if>
 					</div>
 					<div class="contents_keeped my_comment_write">
 						<div class="icon">
@@ -55,7 +72,7 @@
 						<%--</c:if> --%>
 						<%-- 코멘트 되어있을 때 --%>
 						<%--<c:if test="${ .filledWish eq true}">  --%>
-						<span class="on">코멘트</span>
+						<%-- <span class="on">코멘트</span>--%>
 						<%--</c:if> --%>
 					</div>
 					<div class="contents_keeped" id="watching">
@@ -63,13 +80,13 @@
 							<img src="/static/images/eye.png" alt="">
 						</div>
 						<%-- 보는중 안되어있을 때 --%>
-						<%--<c:if test="${contentList.filledWatching eq false}"> --%>
-						<span>보는중</span>
-						<%--</c:if> --%>
+						<c:if test="${fillWatching eq false}">
+							<span>보는중</span>
+						</c:if>
 						<%-- 보는중 되어있을 때 --%>
-						<%--<c:if test="${contentList.filledWatching eq true}"> --%>
-						<span class="on">보는중</span>
-						<%--</c:if> --%>
+						<c:if test="${fillWatching eq true}">
+							<span class="on">보는중</span>
+						</c:if>
 					</div>
 					<div class="contents_keeped" id="notInterest">
 						<div class="icon">
@@ -81,16 +98,14 @@
 						<%--</c:if> --%>
 						<%-- 관심없어요 되어있을 때 --%>
 						<%--<c:if test="${ .filledWish eq true}">  --%>
-						<span class="on">관심없어요</span>
+						<%--<span class="on">관심없어요</span> --%>
 						<%--</c:if> --%>
 					</div>
-					<div class="contents_keeped">
+					<div class="contents_keeped" id="getCollection">
 						<div class="icon">
-							<a href="/collection/collection_list_view">
-								<img src="/static/images/add_collection.png" alt="">
-							</a>
+							<img src="/static/images/add_collection.png" alt="">
 						</div>
-						<span>컬렉션 담기</span>
+						<span>컬렉션 담기</span></a>
 					</div>
 				</div>
 			</div>
@@ -179,23 +194,23 @@
 					<div class="contents_comment_top">
 						<div>
 							<h5 class="contents_title">코멘트</h5>
-							<span>{comment.id}</span>
+							<span>${fn:length(commentList) }</span>
 						</div>
 						<a href="/comment_view?id=${contents.id}">더보기</a>
 					</div>
 					<div class="comments">
 						<ul>
-						<c:forEach items="${contentList}" var="list">
+						<c:forEach items="${commentList}" var="list">
 							<li>
 								<!-- 댓글 하나 -->
 								<div class="comment_user">
 									<a href="#" class="comment_left">
 										<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
-										</span> <span class="comment_user_name"> ${list.commentList} </span>
+										</span> <span class="comment_user_name"> ${list.user.name} </span>
 									</a>
-									<div class="comment_right">&#9733; ${list.commentList}</div>
+									<div class="comment_right">&#9733; ${list.pointCount}</div>
 								</div>
-								<div class="comment_content">${list.commentList}</div>
+								<div class="comment_content">${list.comment.content}</div>
 								<div class="good_box">
 									<span class="comment_up"> <img src="/static/images/up.png" alt=""> <em>${list.comment.id}</em>
 									</span>
@@ -327,6 +342,11 @@
 <%-- 댓글창 끝 --%>
 <script>
     $(document).ready(function () {
+    	
+    	$("#getCollection").on('click', function() {
+    		location.href="/collection/collection_list_view";
+    	});
+    	
         $('.my_comment_write').on('click', function() {
             $(".comment_modal").removeClass('none');
             $(".modal_back").removeClass('none');
@@ -397,7 +417,7 @@
         	
         	let id = $(".star-rating").data('api-id');
         	let point = $(this).val();
-        	
+
         	$.ajax({
         		type: "post"
         		, url: "/point/insert"
@@ -470,7 +490,7 @@
         		}
         	})//--ajax
         	
-        });//--보고싶어요 버튼
+        });//-- 보는중 버튼
         
         
     });

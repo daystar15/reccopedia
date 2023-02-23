@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +24,7 @@ public class PointRestController {
 	@PostMapping("/insert")
 	public Map<String, Object> point(
 			@RequestParam("point") int point,
-			@RequestParam("apiId") int apiId,
+			@RequestParam("id") int id,
 			HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<>();
@@ -35,11 +36,12 @@ public class PointRestController {
 			return result;
 		}
 		
-		pointBO.insertPoint(userId, point, apiId);
+		pointBO.pointToggle(id, point, id);
 		result.put("code", 1);
 		result.put("result", "success");
 		
 		return result;
 	}
+	
 	
 }
