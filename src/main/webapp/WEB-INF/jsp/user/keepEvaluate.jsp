@@ -2,7 +2,7 @@
 <div class="nav_box">
 	<div>
 		<img src="/static/images/right-arrow.png" alt="">
-		<h2>{type}</h2>
+		<h2>영화</h2>
 	</div>
 </div>
 <div class="keep_box">
@@ -132,13 +132,13 @@
 		</div>
 	</div>
 	<div class="go_wish go">
-		<a href="#">
+		<a href="/user/wish_view">
 			<h4>보고싶어요</h4>
 			<span>{80}</span>
 		</a>
 	</div>
 	<div class="go_watching go">
-		<a href="#">
+		<a href="/user/watching_view">
 			<h4>보는중</h4>
 			<span>{10}</span>
 		</a>

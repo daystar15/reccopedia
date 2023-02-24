@@ -2,6 +2,7 @@ package com.reccopedia.point.bo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,10 @@ public class PointBO {
 	
 	public void deletePointByApiId(int id) {
 		pointDAO.deletePointByApiId(id);
+	}
+	
+	public List<Map<String, Object>> getPointList(int userId) {
+		return pointDAO.selectPointListByApiIdOrUserId(userId);
 	}
 	
 

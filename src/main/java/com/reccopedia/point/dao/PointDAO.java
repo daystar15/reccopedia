@@ -1,6 +1,7 @@
 package com.reccopedia.point.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -24,6 +25,8 @@ public interface PointDAO {
 			@Param("apiId") int id,
 			@Param("point") int point,
 			@Param("userId") int userId);
+	
+	public List<Map<String, Object>> selectPointListByApiIdOrUserId(int userId);
 	
 	public void deletePointByApiId(int id);
 	

@@ -1,5 +1,8 @@
 package com.reccopedia.wish.bo;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,10 @@ public class WishBO {
 	
 	public void deleteWishByApiId(int id) {
 		wishDAO.deleteWishByApiId(id);
+	}
+	
+	public List<Map<String, Object>> getWishList(int userId) {
+		return wishDAO.selectWishListByApiIdOrUserId(userId);
 	}
 	
 }

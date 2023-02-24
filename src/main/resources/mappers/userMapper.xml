@@ -91,6 +91,17 @@
 			`id` = #{id}
 	</select>
 	
-	
+	<update id="updateUser" parameterType="map">
+ 		UPDATE `user`
+ 		SET
+ 			`id` = #{userId}
+			, `name`= #{name}
+			, `info`= #{info}
+			, `backgroundImagePath`= #{backgroundImagePath}
+			, `profileImagePath`= #{profileImagePath}
+ 			, `updatedAt` = NOW()
+ 		WHERE
+			`id` = #{userId}
+ 	</update>
 
 </mapper> 	

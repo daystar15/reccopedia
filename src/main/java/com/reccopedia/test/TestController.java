@@ -71,40 +71,7 @@ public class TestController {
 		return "admin/upload";
 	}
 	
-	// 유저페이지
-	@GetMapping("/user/user_view")
-	public String userView(Model model) {
-		model.addAttribute("viewName", "user/userPage");
-		return "template/layout";
-	}
 	
-	// 유저페이지
-	@GetMapping("/user/user_update_view")
-	public String userUpdateView(Model model) {
-		model.addAttribute("viewName", "user/userPageUpdate");
-		return "template/layout";
-	}
-
-	// 유저페이지 - 평가페이지
-	@GetMapping("/user/evaluate_view")
-	public String evaluateView(Model model) {
-		model.addAttribute("viewName", "user/keepEvaluate");
-		return "template/layout";
-	}
-	
-	// 유저페이지 - 보는중
-	@GetMapping("/user/watching_view")
-	public String watchingView(Model model) {
-		model.addAttribute("viewName", "user/keepWatching");
-		return "template/layout";
-	}
-	
-	// 유저페이지 - 보고싶어요
-	@GetMapping("/user/wish_view")
-	public String wishView(Model model) {
-	model.addAttribute("viewName", "user/keepWish");
-		return "template/layout";
-	}
 	
 	
 	

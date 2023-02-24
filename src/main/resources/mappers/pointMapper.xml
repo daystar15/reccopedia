@@ -34,6 +34,20 @@
 			</if>
 	</select>
 	
+	<select id="selectPointListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.point.model.Point">
+		SELECT
+			`id`
+			, `apiId`
+			, `userId`
+			, `point`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`point`
+		WHERE
+			`userId` = #{id}
+	</select>
+	
 	<select id="selectPointByApiId" parameterType="int" resultType="com.reccopedia.point.model.Point">
 		SELECT
 			`id`

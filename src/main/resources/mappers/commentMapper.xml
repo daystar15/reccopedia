@@ -40,6 +40,21 @@
 			`apiId` = #{id}
  	</select>
  	
+ 	<select id="selectCommentListByUserId" parameterType="int" resultType="com.reccopedia.comment.model.Comment">
+ 		SELECT
+ 			`id`
+			, `apiId`
+			, `pointId`
+			, `userId`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`userId` = #{id}
+ 	</select>
+ 	
  	<select id="selectCommentListByApiIdAndUserId" parameterType="map" resultType="com.reccopedia.comment.model.Comment">
  		SELECT
  			`id`
@@ -64,7 +79,19 @@
  		FROM
  			`comment`
  		WHERE
- 			`apiId` = #{id}
+ 			`id` = #{id}
  	</delete>
+ 	
+ 	<update id="updateComment" parameterType="map">
+ 		UPDATE `comment`
+ 		SET
+ 			`id` = #{id}
+ 			, `userId` = #{userId}
+ 			, `content` = #{content}
+ 			, `updatedAt` = NOW()
+ 		WHERE
+ 			`id` = #{id}
+ 			AND `userId` = #{userId}
+ 	</update>
  
  </mapper>

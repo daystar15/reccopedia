@@ -1,13 +1,17 @@
 package com.reccopedia.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.reccopedia.user.bo.UserBO;
 import com.reccopedia.user.model.User;
@@ -86,5 +90,40 @@ public class UserRestController {
 		
 		return result;
 	}
+	
+	@PutMapping("/user_update")
+	public Map<String, Object> userUpdate(Model model,
+			@RequestParam("name") String name,
+			@RequestParam(value="email", required=false) String email, 
+			@RequestParam("info") String info,
+			@RequestParam("backgroundFile") MultipartFile backgroundfile,
+			@RequestParam("profileFile") MultipartFile profilefile,
+			HttpSession session) {
+		
+		Integer userId  = (Integer)session.getAttribute("userId");
+		String userName = (String)session.getAttribute("userName");
+		
+		Map<String, Object> result = new HashMap<>();
+		if (userName == null) {
+			result.put("code", 500); // 비로그인 상태
+			result.put("result", "error");
+			result.put("errorMessage", "로그인을 해주세요.");
+		}
+		
+		int updateUserRow = userBO.updateUser(userId, email, name, info, backgroundfile, profilefile);
+		
+		if (updateUserRow == 1) {
+			result.put("code", 1);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("errorMessage", "수정에 실패했습니다.");
+		}
+		
+		return result;
+	}
+	
+	
+	
 	
 }

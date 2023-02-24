@@ -1,8 +1,13 @@
 package com.reccopedia.user.bo;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.reccopedia.common.FileManagerService;
 import com.reccopedia.user.dao.UserDAO;
 import com.reccopedia.user.model.User;
 
@@ -11,6 +16,10 @@ public class UserBO {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private FileManagerService fileManager;
+	
 	
 	public int existEmail(String email) {
 		return userDAO.existEmail(email);
@@ -31,4 +40,30 @@ public class UserBO {
 	public User getUserById(int id) {
 		return userDAO.selectUserById(id);
 	}
+	
+	public Map<String, Object> getUserByObj(int id) {
+		User user = getUserById(id);
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<String, Object> map = objectMapper.convertValue(user, Map.class);
+		
+		return map;
+	}
+	
+	public int updateUser(int userId, String email, String name, String info, MultipartFile backgroundfile, MultipartFile profilefile) {
+		User user = getUserById(userId);
+		
+		String backgroundimagePath = null;
+		String profileimagePath = null;
+		
+		if (backgroundfile != null) {
+			backgroundimagePath = fileManager.saveBackgroundFile(email, backgroundfile);
+		}
+		
+		if (profilefile != null) {
+			backgroundimagePath = fileManager.saveProfileFile(email, profilefile);
+		}
+		
+		return userDAO.updateUser(userId, name, info, backgroundimagePath, profileimagePath);
+	};
 }

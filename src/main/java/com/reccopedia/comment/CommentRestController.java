@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,7 +51,7 @@ public class CommentRestController {
 	
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(
-			@RequestParam("apiId") int apiId,
+			@RequestParam("commentId") int id,
 			HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<>();
@@ -62,7 +63,7 @@ public class CommentRestController {
 			return result;
 		}
 		
-		commentBO.deleteCommentByUserIdApiId(apiId);
+		commentBO.deleteCommentByUserIdApiId(id);
 		result.put("code", 1);
 		
 		return result;
@@ -70,7 +71,23 @@ public class CommentRestController {
 	}
 	
 	
-	
+	@PutMapping("/update")
+	public Map<String, Object> update(
+			@RequestParam("commentId") int id,
+			@RequestParam("comment") String content,
+			HttpSession session) {
+		
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		// update db
+		commentBO.updateComment(userId, id, content);
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 1);
+		result.put("result", "성공");
+		
+		return result;
+	}
 	
 	
 	

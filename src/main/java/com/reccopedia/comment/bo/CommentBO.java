@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import com.reccopedia.user.model.User;
 
 @Service
 public class CommentBO {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private UserBO userBO;
@@ -40,10 +44,15 @@ public class CommentBO {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		Comment comment = new Comment();
+		comment = getCommentListByApiIdAndUserId(id, userId);
 		
 		Map<String, Object> map = objectMapper.convertValue(comment, Map.class);
 		
 		return map;
+	}
+	
+	public List<Map<String, Object>> getCommentList(int userId) {
+		return commentDAO.selectCommentListByUserId(userId);
 	}
 	
 	
@@ -71,6 +80,18 @@ public class CommentBO {
 		
 		return commentViewList;
 	}
+	
+	
+	public void updateComment(int userId, int id, String content) {
+		Comment comment = getCommentListByApiIdAndUserId(id, userId);
+		
+		if (comment == null) {
+			logger.warn("[update post] 수정할 메모가 존재하지 않습니다. postId:{}, userId:{}", id, userId); // 와일드카드 문법, 단서가 될 만한 파라미터들을 넣어둔다.
+			return;
+		}
+		
+		commentDAO.updateComment(userId, id, content);
+	};
 	
 	
 }

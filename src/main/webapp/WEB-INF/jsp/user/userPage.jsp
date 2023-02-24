@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <div class="user_wrap">
 	<div class="user_box">
 		<!-- 설정 버튼 -->
-		<div class="setting">
+		<div class="setting" data-user-id="${userInfo.id}">
 			<img src="/static/images/setting.png" alt="">
 		</div>
 		<!-- 설정 버튼 끝-->
@@ -17,8 +18,8 @@
 			<div class="user_profile_img">
 				<img src="/static/images/test.jpg" alt="">
 			</div>
-			<h2 class="user_name">{홍길동}</h2>
-			<p class="user_introduce">{프로필이 없습니다.}</p>
+			<h2 class="user_name">${userInfo.name}</h2>
+			<p class="user_introduce">${userInfo.info}</p>
 		</div>
 		<!-- 유저 정보 끝 -->
 		<!-- 분석 -->
@@ -27,13 +28,13 @@
 			<ul class="analyze_info">
 				<li>
 					<a href="#">
-						<h4>{5}</h4>
+						<h4>${fn:length(pointList)}</h4>
 						<span>평가</span>
 					</a>
 				</li>
 				<li>
 					<a href="#">
-						<h4>{5}</h4>
+						<h4>${fn:length(commentList)}</h4>
 						<span>코멘트</span>
 					</a>
 				</li>
@@ -49,7 +50,7 @@
 			<h3 class="analyze_title">평가수</h3>
 			<ul class="analyze_info">
 				<li>
-					<h4>{5}</h4>
+					<h4>${fn:length(pointList)}</h4>
 					<span>영화</span>
 				</li>
 				<li>
@@ -68,7 +69,7 @@
 					<span>별점 평균</span>
 				</li>
 				<li>
-					<h4>{5}</h4>
+					<h4>${fn:length(pointList)}</h4>
 					<span>별점 개수</span>
 				</li>
 			</ul>
@@ -76,13 +77,13 @@
 		<!-- 분석 끝-->
 		<ul class="keep_list">
 			<li class="keep_movie_box">
-				<a href="#">
+				<a href="/user/evaluate_view">
 					<div class="keep_type">
 						<h5>영화</h5>
-						<h5 class="keep_list_point">&#9733; {8}</h5>
+						<h5 class="keep_list_point">&#9733; ${fn:length(pointList)}</h5>
 					</div>
 					<div class="keep_bottom_box">
-						<span>보고싶어요 102</span>
+						<span>보고싶어요 ${fn:length(wishList)}</span>
 					</div>
 				</a>
 			</li>
@@ -104,7 +105,9 @@
 <script>
 	$(document).ready(function() {
 		$('.setting').on('click',function() {
-			alert(111);
-		})
+			let id = $(this).data('user-id');
+			location.href = "/user/user_update_view?id=" + id;
+		});
+		
 	});
 </script>

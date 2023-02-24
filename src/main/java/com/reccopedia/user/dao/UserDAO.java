@@ -26,4 +26,11 @@ public interface UserDAO {
 	
 	public User selectUserById(int id);
 	
+	public int updateUser(
+			@Param("userId") int userId, 
+			@Param("name") String name, 
+			@Param("info") String info, 
+			@Param("backgroundImagePath") String backgroundImagePath, 
+			@Param("profileImagePath") String profileImagePath);
+	
 }

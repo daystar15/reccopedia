@@ -1,5 +1,8 @@
 spring:
   mvc:
+    hidden-method:
+      filter:
+        enabled: true
     static-path-pattern: /static/**
     view:
       prefix: /WEB-INF/jsp/

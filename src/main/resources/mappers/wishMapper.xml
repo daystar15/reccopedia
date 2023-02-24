@@ -15,6 +15,21 @@
 			AND `userId` = #{userId}
 			</if>
 	</select>
+	
+	
+	<select id="selectWishListByApiIdOrUserId" parameterType="map" resultType="com.reccopedia.wish.model.Wish">
+		SELECT
+			`id`
+			, `apiId`
+			, `userId`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`wish`
+		WHERE
+			`userId` = #{id}
+	</select>
+	
 
 	<insert id="insertWish" parameterType="map">
 		INSERT INTO `wish`

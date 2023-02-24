@@ -118,7 +118,7 @@
 				<!-- c:if 내가 댓글을 남겼으면 -->
 				<div class="write_comment" >
 					<c:if test="${not empty myComment}">
-						<div class="my_comment">
+						<div class="my_comment" data-comment-id="${myComment.id}">
 							<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
 							</span>
 							<p>${myComment.content}</p>
@@ -323,7 +323,7 @@
 			</span>
 		</div>
 		<form action="" method="post">
-			<textarea name="write_comment_content" id="write_comment_content" maxlength="10000" rows="10" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요."></textarea>
+			<textarea name="write_comment_content" id="write_comment_content" maxlength="10000" rows="10" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요.">${myComment.content}</textarea>
 			<div>
 				<div class="write_comment_left">
 					<!-- sns 공유
@@ -405,9 +405,61 @@
         
         // 댓글 삭제
         $("#deleteBtn").on('click', function() {
-        	let commentId = $('.write_comment').data('comment-id');
-        	alert(commentId);
+        	let commentId = $('.my_comment').data('comment-id');
+        	
+        	// ajax 글 삭제
+			$.ajax ({
+				// request
+				type: "DELETE"
+				, url: "/comment/delete"
+				, data: {"commentId":commentId}
+				
+				// response
+				, success:function(data) {
+					if (data.code == 1) {
+						alert("삭제 되었습니다.");
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert("댓글을 삭제하는데 실패했습니다.");
+				}
+			}); // --- ajax
+        	
         }); // --댓글 삭제 
+        
+        // 댓글 수정
+        $("#commentUpdateBtn").on('click', function() {
+        	let commentId = $('.my_comment').data('comment-id');
+        	let comment = $("#write_comment_content").val();
+        	$(".comment_modal").removeClass('none');
+        	$(".modal_back").removeClass('none');
+        	
+        	// ajax 댓글 수정
+			$.ajax ({
+				// request
+				type: "put"
+				, url: "/comment/update"
+				, data: {"commentId":commentId, "content":comment}
+				
+				// response
+				, success:function(data) {
+					if (data.code == 1) {
+						alert("수정 되었습니다.");
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert("댓글을 수정하는데 실패했습니다.");
+				}
+			}); // --- ajax
+        	
+        }); // --댓글 수정 
+        
         
         // 출연/제작 더보기 버튼
         $("#moreCrew").on('click', function() {
