@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "spring.active",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.active'"
+  },
+  {
+    "name": "custom.title",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.title'"
+  },
+  {
+    "name": "custom.mvc.static-path-pattern",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.mvc.static-path-pattern'"
+  }
+]}

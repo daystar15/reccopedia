@@ -40,6 +40,25 @@
 			`apiId` = #{id}
  	</select>
  	
+ 	<select id="selectCommentListByApiIdAndUserId" parameterType="map" resultType="com.reccopedia.comment.model.Comment">
+ 		SELECT
+ 			`id`
+			, `apiId`
+			, `pointId`
+			, `userId`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`apiId` = #{id}
+			AND
+			`userId` = #{userId}
+		ORDER BY `updatedAt` DESC
+		LIMIT 1;
+ 	</select>
+ 	
  	<delete id="deleteCommentByUserIdApiId" parameterType="int">
  		DELETE
  		FROM

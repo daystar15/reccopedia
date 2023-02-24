@@ -117,11 +117,11 @@
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
 				<!-- c:if 내가 댓글을 남겼으면 -->
 				<div class="write_comment" >
-					<%-- <c:if test="${not empty comment}">
+					<c:if test="${not empty myComment}">
 						<div class="my_comment">
 							<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
 							</span>
-							<p>${comment}</p>
+							<p>${myComment.content}</p>
 						</div>
 						<div>
 							<em class="delete" id="deleteBtn"> 
@@ -133,8 +133,10 @@
 								<span id="myCommentUpdateBtn">수정</span>
 							</em>
 						</div>
-					</c:if> --%>
+					</c:if>
+					<c:if test="${empty userId}">
 					<button>댓글을 남겨보세요</button>
+					</c:if>
 				</div>
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
 				<div class="basic_info contents_comm">

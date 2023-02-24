@@ -13,7 +13,6 @@ import com.reccopedia.comment.bo.CommentBO;
 import com.reccopedia.comment.model.CommentView;
 import com.reccopedia.contents.bo.ContentsBO;
 import com.reccopedia.point.bo.PointBO;
-import com.reccopedia.point.model.Point;
 import com.reccopedia.watching.bo.WatchingBO;
 import com.reccopedia.wish.bo.WishBO;
 
@@ -86,6 +85,8 @@ public class ContentsController {
 		boolean fillWatching = watchingBO.existwatching(id, (Integer)session.getAttribute("userId"));
 		boolean fillWish = wishBO.existWish(id, (Integer)session.getAttribute("userId"));
 		List<CommentView> commentList = commentBO.generateCommentViewListByApiId(id);
+		Map<String, Object> myComment = commentBO.getCommentByObj(id, (Integer)session.getAttribute("userId"));
+		
 		List<Map<String, Object>> similars = contentsBO.generateSimilars(id);
 		Map<String, Object> contentInfo = contentsBO.generateContent(id);
 		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
@@ -99,6 +100,7 @@ public class ContentsController {
 		model.addAttribute("fillWatching", fillWatching);
 		model.addAttribute("fillWish", fillWish);
 		model.addAttribute("commentList", commentList);
+		model.addAttribute("myComment", myComment);
 		model.addAttribute("similars", similars);
 		model.addAttribute("countryResult", countryResult);
 		model.addAttribute("year", year);
