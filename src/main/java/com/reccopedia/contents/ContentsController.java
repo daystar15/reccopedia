@@ -13,6 +13,7 @@ import com.reccopedia.comment.bo.CommentBO;
 import com.reccopedia.comment.model.CommentView;
 import com.reccopedia.contents.bo.ContentsBO;
 import com.reccopedia.point.bo.PointBO;
+import com.reccopedia.point.model.Point;
 import com.reccopedia.watching.bo.WatchingBO;
 import com.reccopedia.wish.bo.WishBO;
 
@@ -79,9 +80,9 @@ public class ContentsController {
 	public String contentsView(Model model, int id, Integer point,
 			HttpSession session) throws JsonProcessingException {
 		
-		
+
+		List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(id, (Integer)session.getAttribute("userId"));
 		boolean fillPoint = pointBO.existPoint(id, point, (Integer)session.getAttribute("userId"));
-		//int pointValue = pointBO.getPointCountByApiId(id, (Integer)session.getAttribute("userId"));
 		boolean fillWatching = watchingBO.existwatching(id, (Integer)session.getAttribute("userId"));
 		boolean fillWish = wishBO.existWish(id, (Integer)session.getAttribute("userId"));
 		List<CommentView> commentList = commentBO.generateCommentViewListByApiId(id);
@@ -96,7 +97,7 @@ public class ContentsController {
 		List<String> images = contentsBO.generateImages(id);
 		String year = contentsBO.generateYear(id);
 		
-		//model.addAttribute("pointValue", pointValue);
+		model.addAttribute("pointList", pointList);
 		model.addAttribute("fillWatching", fillWatching);
 		model.addAttribute("fillWish", fillWish);
 		model.addAttribute("commentList", commentList);
@@ -112,4 +113,7 @@ public class ContentsController {
 		model.addAttribute("viewName", "contents/contentsPage");
 		return "template/layout";
 	}
+	
+	
+	
 }

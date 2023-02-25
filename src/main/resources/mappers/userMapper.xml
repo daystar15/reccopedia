@@ -96,9 +96,11 @@
  		SET
 			`name`= #{name}
 			, `info`= #{info}
-			, `backgroundImagePath`= #{backgroundImagePath}
-			, `profileImagePath`= #{profileImagePath}
  			, `updatedAt` = NOW()
+ 			<if test="backgroundfileimagePath != null and profilefileimagePath != null">
+ 			, `profileImagePath`= #{profilefileimagePath}
+			, `backgroundImagePath`= #{backgroundfileimagePath}
+ 			</if>
  		WHERE
 			`id` = #{userId}
  	</update>

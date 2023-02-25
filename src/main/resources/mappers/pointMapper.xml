@@ -45,8 +45,9 @@
 		FROM
 			`point`
 		WHERE
-			`userId` = #{id}
+			`userId` = #{userId}
 	</select>
+	
 	
 	<select id="selectPointByApiId" parameterType="int" resultType="com.reccopedia.point.model.Point">
 		SELECT
@@ -63,6 +64,28 @@
 			<if test="userId != null">
 			AND `userId` = #{userId}
 			</if>
+	</select>
+	
+	<select id="selectPointByApiIdAndUserId" parameterType="map" resultType="com.reccopedia.point.model.Point">
+		SELECT
+			 `point`
+		FROM
+			`point`
+		WHERE
+			`apiId` = #{apiId}
+			AND `userId` = #{userId}
+	</select>
+	
+	<select id="selectPointCountListByApiIdAndUserId" parameterType="map" resultType="com.reccopedia.point.model.Point">
+		SELECT
+			 `point`
+		FROM
+			`point`
+		WHERE
+			`apiId` = #{apiId}
+			AND `userId` = #{userId}
+		ORDER BY `updatedAt`
+		LIMIT 1
 	</select>
 	
 	<delete id="deletePointByApiIdUserId" parameterType="map">

@@ -412,6 +412,7 @@ textarea {
 .star-rating label:hover ~ label {
     color:#fc0;
 }
+
 .review_more {
     position: relative;
 }

@@ -50,20 +50,32 @@ public class UserBO {
 		return map;
 	}
 	
-	public int updateUser(int userId, String email, String name, String info, MultipartFile backgroundfile, MultipartFile profilefile) {
+	public void updateUser(int userId, String email, String name, String info, MultipartFile backgroundfile, MultipartFile profilefile) {
 		User user = getUserById(userId);
+		if (user == null) {
+			// logger
+			return;
+		}
 		
-		String backgroundImagePath = null;
-		String profileImagePath = null;
+		String backgroundfileimagePath = null;
 		
 		if (backgroundfile != null) {
-			backgroundImagePath = fileManager.saveBackgroundFile(email, backgroundfile);
+			backgroundfileimagePath = fileManager.saveBackgroundFile(email, backgroundfile);
+			if (backgroundfileimagePath != null && user.getBackgroundImagePath() != null) {
+				// 이미지 제거
+				fileManager.deleteBackgroundFile(user.getBackgroundImagePath());  // 무엇을 삭제하려고 하는지 알아야한다. imagePath를 삭제하면 안된다.
+			}
 		}
 		
+		String profilefileimagePath = null;
 		if (profilefile != null) {
-			profileImagePath = fileManager.saveProfileFile(email, profilefile);
+			profilefileimagePath = fileManager.saveProfileFile(email, profilefile);
+			if (profilefileimagePath != null && user.getProfileImagePath() != null) {
+				// 이미지 제거
+				fileManager.deleteProfileFile(user.getProfileImagePath());  // 무엇을 삭제하려고 하는지 알아야한다. imagePath를 삭제하면 안된다.
+			}
 		}
 		
-		return userDAO.updateUser(userId, email, name, info, backgroundImagePath, profileImagePath);
+		userDAO.updateUser(userId, email, name, info, backgroundfileimagePath, profilefileimagePath);
 	};
 }

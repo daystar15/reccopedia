@@ -12,18 +12,30 @@ import com.reccopedia.point.model.Point;
 public interface PointDAO {
 
 	public void insertPoint(
-			@Param("userId") Integer userId, 
+			@Param("userId") int userId, 
 			@Param("point") int point, 
-			@Param("apiId") int id);
+			@Param("apiId") int apiId);
 	
 	public int selectPointByApiIdOrUserId(
 			@Param("apiId") int id,  
 			@Param("point") int point, 
-			@Param("userId") Integer userId);
+			@Param("userId") int userId);
+	
+	public int selectPointByApiIdAndUserId(
+			@Param("apiId") int apiId, 
+			@Param("userId") int userId);
 	
 	public List<Point> selectPointByApiId(
-			@Param("apiId") int id,
+			@Param("apiId") int apiId,
 			@Param("point") int point,
+			@Param("userId") int userId);
+	
+	public List<Point> selectPointCountListByApiIdAndUserId(
+			@Param("apiId") int apiId,
+			@Param("userId") int userId);
+	
+	public Map<String, Object> selectPointMapByApiIdAndUserId(
+			@Param("apiId") int apiId, 
 			@Param("userId") int userId);
 	
 	public List<Map<String, Object>> selectPointListByApiIdOrUserId(int userId);

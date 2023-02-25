@@ -13,12 +13,12 @@
 			<div class="contents_poster">
 				<img src="https://image.tmdb.org/t/p/w500${contents.poster_path}" alt="">
 			</div>
-			<div class="contents_info">
+			<div class="contents_info"  data-api-id="${contents.id}">
 				<h2>${contents.title}</h2>
 				<h3>${year} &#183; ${genre} &#183; ${countryResult}</h3>
 				<h4>평균 &#9733;{3.8} ({44만명})</h4>
 				<div>
-					<div class="star-rating"  data-api-id="${contents.id}">
+					<div class="star-rating" data-point-id="${pointList[0].point}">
 						<input type="radio" id="5-stars" name="rating" value="5" />
 						<label for="5-stars" class="star">&#9733;</label>
 						<input type="radio" id="4-stars" name="rating" value="4" />
@@ -32,21 +32,9 @@
 					</div>
 					
 					<%-- 별점 눌려있을 때 --%>
-					<c:if test="${fillPoint eq false}">
-					${pointvalue.setCount}
-						<div class="star-rating" >
-							<input type="radio" id="5-stars" name="rating" value="5" />
-							<label for="5-stars" class="star">&#9733;</label>
-							<input type="radio" id="4-stars" name="rating" value="4" />
-							<label for="4-stars" class="star">&#9733;</label>
-							<input type="radio" id="3-stars" name="rating" value="3" />
-							<label for="3-stars" class="star">&#9733;</label>
-							<input type="radio" id="2-stars" name="rating" value="2" />
-							<label for="2-stars" class="star">&#9733;</label>
-							<input type="radio" id="1-star" name="rating" value="1" />
-							<label for="1-star" class="star">&#9733;</label>
-						</div>
-					</c:if>
+					<div id="filledPoint" >
+					
+					</div>
 					<%-- 별점 눌려있을 때 --%>
 
 					<div class="contents_keeped" id="wish">
@@ -134,7 +122,7 @@
 							</em>
 						</div>
 					</c:if>
-					<c:if test="${empty userId}">
+					<c:if test="${empty myComment}">
 					<button>댓글을 남겨보세요</button>
 					</c:if>
 				</div>
@@ -466,29 +454,50 @@
         	$('.contents_cast_box').css("height", "auto");
         }); //-- 출연/제작 더보기 버튼
         
+        // 별점 나타내기 버튼
+        let mypoint = $(".star-rating").data('point-id');
+        if (mypoint <= 1) {
+        	$('#1-star').prop('checked', true);
+        } else if (mypoint <= 2) {
+        	$('#1-star').prop('checked', true);
+        	$('#2-stars').prop('checked', true);
+        } else if (mypoint <= 3) {
+        	$('#1-star').prop('checked', true);
+        	$('#2-stars').prop('checked', true);
+        	$('#3-stars').prop('checked', true);
+        } else if (mypoint <= 4) {
+        	$('#1-star').prop('checked', true);
+        	$('#2-stars').prop('checked', true);
+        	$('#3-stars').prop('checked', true);
+        	$('#4-stars').prop('checked', true);
+        } else {
+        	$('#1-star').prop('checked', true);
+        	$('#2-stars').prop('checked', true);
+        	$('#3-stars').prop('checked', true);
+        	$('#4-stars').prop('checked', true);
+        	$('#5-stars').prop('checked', true);
+        }
+        
         // 별점 버튼
         $("input[name=rating]").on('click', function() {
-        	
-        	let id = $(".star-rating").data('api-id');
+        	let apiId = $(".contents_info").data('api-id');
         	let point = $(this).val();
-
+			
         	$.ajax({
         		type: "post"
-        		, url: "/point/insert"
-        		, data: {"point":point, "id":id}
+        		, url: "/point/contents_point_view"
+        		, data: {"point":point, "apiId":apiId}
         		, success:function(data) {
-        			if (data.code == 1) {
-        				alert("성공")
-        			} else if (data.code == 500) {
-        				alert("로그인을 해주세요");
-        				location.reload();
-        			}
+       				$("#filledPoint").html(data);
         		} 
         		, error:function(e) {
         			alert("에러");
         		}
         	});//---ajax
         })// ---별점 버튼
+        
+
+
         
         
         // 보고싶어요 버튼 토글

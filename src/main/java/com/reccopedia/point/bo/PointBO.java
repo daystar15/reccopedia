@@ -16,25 +16,25 @@ public class PointBO {
 	@Autowired
 	private PointDAO pointDAO;
 
-	public void pointToggle(int id, int userId, int point) {
+	public void pointToggle(int apiId, int userId, int point) {
 		// 위시 리스트에 있는지 확인
-		if (pointDAO.selectPointByApiIdOrUserId(id, userId, point) > 0) {
+		if (pointDAO.selectPointByApiIdOrUserId(apiId, userId, point) > 0) {
 			// 있으면 제거
-			pointDAO.deletePointByApiIdUserId(id, userId, point);
+			pointDAO.deletePointByApiIdUserId(apiId, userId, point);
 		} else {
 			// 없으면 추가
-			pointDAO.insertPoint(id, userId, point);
+			pointDAO.insertPoint(point, userId, apiId);
 		}
 	};
 	
-	public boolean existPoint(int id, Integer point, Integer userId) {
+	public boolean existPoint(int apiId, Integer point, Integer userId) {
 		if(userId == null) {
 			return false;
 		}
 		if (point == null) {
 			return true;
 		}
-		return pointDAO.selectPointByApiIdOrUserId(id, point, userId) > 0 ? true:false;
+		return pointDAO.selectPointByApiIdOrUserId(apiId, point, userId) > 0 ? true:false;
 	}
 	
 	public List<Point> getPointCountByApiId(int id, int point, int userId) {
@@ -50,6 +50,14 @@ public class PointBO {
 		return pointViewList;
 	}
 	
+	public List<Point> getPointCountListByApiIdAndUserId(int apiId, int userId) {
+		return pointDAO.selectPointCountListByApiIdAndUserId(apiId, userId);
+	}
+	
+	public int getPointCountByApiIdAndUserId(int id, int userId) {
+		return pointDAO.selectPointByApiIdAndUserId(id, userId);
+	}
+	
 	
 	public void deletePointByApiId(int id) {
 		pointDAO.deletePointByApiId(id);
@@ -58,6 +66,7 @@ public class PointBO {
 	public List<Map<String, Object>> getPointList(int userId) {
 		return pointDAO.selectPointListByApiIdOrUserId(userId);
 	}
-	
+
+
 
 }

@@ -79,4 +79,58 @@ public class FileManagerService {
 		// http://localhost:8080/images/aaaa_162090932/sun.png WebMvcConfig에서 웹이미지와 매핑함
 		return "/images/" + directoryName + profilefile.getOriginalFilename(); // 한글로 바뀌면 오리지널네임도 바뀐다.
 	}
+	
+	
+	public void deleteBackgroundFile(String imagePath) { // imagePath: /images/aaaa_162090932/sun.png WebMvcConfig
+		//   \\images/    imagePath에 있는 겹치는  /images/ 구문 제거
+		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
+		
+		if (Files.exists(path)) {
+			// 이미지 삭제
+			// Files.delete(path);   try-catch로 예외처리
+			try {
+				Files.delete(path); 
+			} catch (IOException e) {
+				logger.error("[이미지 삭제] 이미지 삭제 실패. imagePath:{}", imagePath);
+			}
+			
+			// 디렉토리(폴더) 삭제
+			path = path.getParent();
+			if (Files.exists(path)) {
+				// Files.delete(path);  try-catch로 감싸기
+				try {
+					Files.delete(path);
+				} catch (IOException e) {
+					logger.error("[이미지 삭제] 디렉토리 삭제 실패. imagePath:{}", imagePath);
+				}
+			}
+		}
+	}
+	
+	public void deleteProfileFile(String imagePath) { // imagePath: /images/aaaa_162090932/sun.png WebMvcConfig
+		//   \\images/    imagePath에 있는 겹치는  /images/ 구문 제거
+		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
+		if (Files.exists(path)) {
+			// 이미지 삭제
+			// Files.delete(path);   try-catch로 예외처리
+			try {
+				Files.delete(path); 
+			} catch (IOException e) {
+				logger.error("[이미지 삭제] 이미지 삭제 실패. imagePath:{}", imagePath);
+			}
+			
+			// 디렉토리(폴더) 삭제
+			path = path.getParent();
+			if (Files.exists(path)) {
+				// Files.delete(path);  try-catch로 감싸기
+				try {
+					Files.delete(path);
+				} catch (IOException e) {
+					logger.error("[이미지 삭제] 디렉토리 삭제 실패. imagePath:{}", imagePath);
+				}
+			}
+		}
+	}
+	
+	
 }

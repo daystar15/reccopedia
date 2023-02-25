@@ -287,27 +287,6 @@ public class ContentsBO {
 	}
 	
 	
-	
-	public List<ContentsView> generateContentsList(int id, Integer userId, int point) {
-		
-		List<ContentsView> contentsViewList = new ArrayList<>();
-
-		ContentsView content = new ContentsView();
-		
-		
-		
-		
-		
-		
-		
-		contentsViewList.add(content);
-		
-		return contentsViewList;
-	}
-	
-	
-	
-	
 
 	
 }

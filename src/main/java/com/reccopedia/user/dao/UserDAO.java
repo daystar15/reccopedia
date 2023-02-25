@@ -26,12 +26,12 @@ public interface UserDAO {
 	
 	public User selectUserById(int id);
 	
-	public int updateUser(
+	public void updateUser(
 			@Param("userId") int userId, 
 			@Param("email") String email, 
 			@Param("name") String name, 
 			@Param("info") String info, 
-			@Param("backgroundImagePath") String backgroundImagePath, 
-			@Param("profileImagePath") String profileImagePath);
+			@Param("backgroundfileimagePath") String backgroundfileimagePath, 
+			@Param("profilefileimagePath") String profilefileimagePath);
 	
 }
