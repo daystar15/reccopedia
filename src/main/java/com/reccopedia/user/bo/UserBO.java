@@ -53,17 +53,17 @@ public class UserBO {
 	public int updateUser(int userId, String email, String name, String info, MultipartFile backgroundfile, MultipartFile profilefile) {
 		User user = getUserById(userId);
 		
-		String backgroundimagePath = null;
-		String profileimagePath = null;
+		String backgroundImagePath = null;
+		String profileImagePath = null;
 		
 		if (backgroundfile != null) {
-			backgroundimagePath = fileManager.saveBackgroundFile(email, backgroundfile);
+			backgroundImagePath = fileManager.saveBackgroundFile(email, backgroundfile);
 		}
 		
 		if (profilefile != null) {
-			backgroundimagePath = fileManager.saveProfileFile(email, profilefile);
+			profileImagePath = fileManager.saveProfileFile(email, profilefile);
 		}
 		
-		return userDAO.updateUser(userId, name, info, backgroundimagePath, profileimagePath);
+		return userDAO.updateUser(userId, email, name, info, backgroundImagePath, profileImagePath);
 	};
 }

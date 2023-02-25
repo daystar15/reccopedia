@@ -93,33 +93,24 @@ public class UserRestController {
 	
 	@PutMapping("/user_update")
 	public Map<String, Object> userUpdate(Model model,
-			@RequestParam("name") String name,
+			@RequestParam(value="name", required=false) String name,
 			@RequestParam(value="email", required=false) String email, 
-			@RequestParam("info") String info,
-			@RequestParam("backgroundFile") MultipartFile backgroundfile,
-			@RequestParam("profileFile") MultipartFile profilefile,
+			@RequestParam(value="info", required=false) String info,
+			@RequestParam(value="backgroundFile", required=false) MultipartFile backgroundfile,
+			@RequestParam(value="profileFile", required=false) MultipartFile profilefile,
 			HttpSession session) {
 		
-		Integer userId  = (Integer)session.getAttribute("userId");
-		String userName = (String)session.getAttribute("userName");
+		
+		int userId  = (int)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();
-		if (userName == null) {
-			result.put("code", 500); // 비로그인 상태
-			result.put("result", "error");
-			result.put("errorMessage", "로그인을 해주세요.");
-		}
 		
-		int updateUserRow = userBO.updateUser(userId, email, name, info, backgroundfile, profilefile);
+		userBO.updateUser(userId, email, name, info, backgroundfile, profilefile);
 		
-		if (updateUserRow == 1) {
-			result.put("code", 1);
-			result.put("result", "성공");
-		} else {
-			result.put("code", 500);
-			result.put("errorMessage", "수정에 실패했습니다.");
-		}
 		
+		result.put("code", 1);
+		result.put("result", "성공");
+			
 		return result;
 	}
 	

@@ -3,34 +3,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <div class="user_wrap">
 	<div class="user_box">
-		<!-- 설정 버튼 -->
-		<div class="setting">
-			<img src="/static/images/setting.png" alt="">
-		</div>
-		<form action="/user/user_update"  method="post">
+		
+		<form action="/user/user_update" id="uploadForm" method="post">
 			<input type="hidden" name="_method" value="put"/>
-			<!-- 설정 버튼 끝-->
+
 			<!-- 백그라운드이미지 -->
 			<%-- 기본 이미지, 유저가 업로드 하면 이미지 변경됨 --%>
-			<input type="file" id="user_background_file" class="none" accept=".gif, .jpg, .png, .jpeg"  value="put">
+			<input type="file" id="user_background_file" class="none" accept=".gif, .jpg, .png, .jpeg">
 			<div class="user_background">
 				<img src="/static/images/user_page_background.jpg" alt="">
 			</div>
 			<!-- 백그라운드이미지 끝-->
 			<!-- 유저 정보 -->
 			<div class="user_info">
-				<input type="file" id="user_profile_file" class="none" accept=".gif, .jpg, .png, .jpeg"  value="put">
+				<input type="file" id="user_profile_file" class="none" accept=".gif, .jpg, .png, .jpeg">
 				<div class="user_profile_img">
 					<img src="/static/images/test.jpg" alt="">
 				</div>
 				<div class="user_update_name">
-					<input type="text" name="user_name" id="user_name" value="${userInfo.name}">
+					<input type="text" name="name" id="user_name" value="${userInfo.name}">
 					<div id="resetNameBtn">
 						<img src="/static/images/close.png">
 					</div>
 				</div>
 				<div class="user_update_info">
-					<textarea rows="1" name="user_introduce" id="user_introduce" value="put">${userInfo.info}</textarea>
+					<textarea rows="1" name="textInfo" id="user_introduce">${userInfo.info}</textarea>
 					<div id="resetInfoBtn">
 						<img src="/static/images/close.png">
 					</div>
@@ -143,9 +140,7 @@
 		});
 		
 		$('#user_background_file').on('change', function(e) {
-			alert("파일 선택");
 			let fileName = e.target.files[0].name; // 07_30_01.png
-			//alert(fileName);
 			
 			// 확장자 유효성 확인
 			let ext = fileName.split(".").pop().toLowerCase();
@@ -157,7 +152,6 @@
 		});
 		
 		$('#user_profile_file').on('change', function(e) {
-			alert("파일 선택");
 			let fileName = e.target.files[0].name; // 07_30_01.png
 			//alert(fileName);
 			
@@ -171,9 +165,12 @@
 		});
 		
 		$("#updateBtn").on('click', function(e) {
-			e.preventDefault();
-			let name = $("#user_name").val().trim();
+			e.preventDefault(e);
+			
+			let name = $("input[name=name]").val().trim();
 			let info = $("#user_introduce").val();
+			let backgroundFile = $("#user_background_file").val();
+			let profileFile = $("#user_profile_file").val();
 			
 			if (name.length < 1) {
 				alert("이름을 입력해주세요");
@@ -181,27 +178,43 @@
 			}
 			
 			if (info.length < 1) {
-				alert("프로필 정보를 입력해주세요");
+				alert("프로필을 입력해주세요");
 				return;
 			}
 			
-			let backgroundFile = $('#user_background_file').val();
-			let profileFile = $('#user_profile_file').val();
-
 			// 파일이 업로드 된 경우 확장자 체크
-			let backgroundFileExt = backgroundFile.split('.').pop().toLowerCase(); // 파일 경로를 .으로 나누고 확장자가 있는 마지막 문자열을 가져온 후 모두 소문자로 변경
-			let profileFileExt = profileFile.split('.').pop().toLowerCase(); // 파일 경로를 .으로 나누고 확장자가 있는 마지막 문자열을 가져온 후 모두 소문자로 변경
-			if ($.inArray(backgroundFileExt, ['gif', 'png', 'jpg', 'jpeg']) == -1 && $.inArray(profileFileExt, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
-				alert("gif, png, jpg, jpeg 파일만 업로드 할 수 있습니다.");
-				$('#file').val(''); // 파일을 비운다.
-				return;
+			if (backgroundFile != '') {
+				let backgroundFileext = backgroundFile.split(".").pop().toLowerCase();
+				if ($.inArray(backgroundFileext, ['jpg', 'jpeg', 'png', 'gif']) == -1) { // 배열안에 포함되지 않았을 때
+					alert("이미지 파일만 업로드 할 수 있습니다.");
+					$('#user_background_file').val(""); // 파일을 비운다.
+					return;
+				}
 			}
+			
+			// 파일이 업로드 된 경우 확장자 체크
+			if (profileFile != '') {
+				let profileFileext = profileFile.split(".").pop().toLowerCase();
+				if ($.inArray(profileFileext, ['jpg', 'jpeg', 'png', 'gif']) == -1) { // 배열안에 포함되지 않았을 때
+					alert("이미지 파일만 업로드 할 수 있습니다.");
+					$('#user_profile_file').val(""); // 파일을 비운다.
+					return;
+				}
+			}
+
+			let form = $("#uploadForm");
+			let formData = new FormData(form[0]);
+			formData.append("info", info); 
+			formData.append("backgroundFile", $("#user_background_file")[0].files[0]); 
+			formData.append("profileFile", $("#user_profile_file")[0].files[0]); 
+			
 			
 			// AJAX form 데이터 전송
 			$.ajax({
 				type: "put"
 				, url: "/user/user_update"
-				, data: {"name":name, "info":info, "backgroundFile":backgroundFile, "profileFile":profileFile}  // 파일 업로드를 위한 필수 설정
+				, data: formData
+			    , enctype : "multipart/form-data"
 				, processData: false
 				, contentType: false
 				, success: function(data) {

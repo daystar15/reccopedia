@@ -28,6 +28,7 @@ public interface UserDAO {
 	
 	public int updateUser(
 			@Param("userId") int userId, 
+			@Param("email") String email, 
 			@Param("name") String name, 
 			@Param("info") String info, 
 			@Param("backgroundImagePath") String backgroundImagePath, 

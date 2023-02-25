@@ -20,7 +20,7 @@ public class FileManagerService {
 	// static final 같이 있으면 상수가 되고 대문자로 쓴다. 주소 마지막에 꼭 슬래시를 넣는다★★
 	public static final String FILE_UPLOAD_PATH = "C:\\Users\\lg\\Desktop\\6_spring_project\\notebook\\notebook_reccopedia\\workspace\\images/";
 	
-	// input: MultipartFile, userLoginId
+	// input: MultipartFile, email
 	// output: image path
 	public String saveBackgroundFile(String email, MultipartFile backgroundfile) {
 		// 파일 디렉토리 - 사람마다 폴더를 저장함(userLoginId를 받아온 이유)

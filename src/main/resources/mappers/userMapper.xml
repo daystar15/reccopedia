@@ -94,8 +94,7 @@
 	<update id="updateUser" parameterType="map">
  		UPDATE `user`
  		SET
- 			`id` = #{userId}
-			, `name`= #{name}
+			`name`= #{name}
 			, `info`= #{info}
 			, `backgroundImagePath`= #{backgroundImagePath}
 			, `profileImagePath`= #{profileImagePath}
