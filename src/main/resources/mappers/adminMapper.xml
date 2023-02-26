@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.reccopedia.admin.dao.AdminDAO">
+
+	<select id="existLoginId" parameterType="String" resultType="boolean">
+ 		SELECT
+ 			COUNT(1)
+ 		FROM
+ 		 	`admin`
+ 		 WHERE
+ 		 	`loginId` = #{loginId}
+ 	</select>
+ 	
+ 	<insert id="insertAdmin" parameterType="Map">
+ 		INSERT INTO `admin`
+ 		(
+ 			`loginId`
+			, `password`
+			, `name`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{loginId}
+ 			, #{password}
+ 			, #{name}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectAdminByLoginIdPassword" parameterType="map" resultType="com.reccopedia.admin.model.Admin">
+ 		SELECT
+ 			`id`
+			, `loginId`
+			, `password`
+			, `name`
+			, `createdAt`
+			, `updatedAt`
+ 		FROM
+ 			`admin`
+ 		WHERE
+ 			`loginId` = #{loginId}
+ 			AND
+ 			`password` = #{password}
+ 	</select>
+ 	
+ 	<select id="selectAdminById" parameterType="int" resultType="com.reccopedia.admin.model.Admin">
+ 		SELECT
+ 			`id`
+			, `loginId`
+			, `password`
+			, `name`
+			, `createdAt`
+			, `updatedAt`
+ 		FROM
+ 			`admin`
+ 		WHERE
+ 			`loginId` = #{loginId}
+ 			AND
+ 			`password` = #{password}
+ 	</select>
+	
+</mapper>

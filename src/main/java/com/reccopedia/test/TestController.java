@@ -65,15 +65,6 @@ public class TestController {
 		return "redirect:/main";
 	}
 	
-	// 어드민 업로드 페이지
-	@GetMapping("/admin/upload_view")
-	public String uploadView() {
-		return "admin/upload";
-	}
-	
-	
-	
-	
 	
 	// 평가하기 페이지
 	@GetMapping("/review_view")
