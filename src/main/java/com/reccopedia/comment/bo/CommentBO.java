@@ -35,23 +35,22 @@ public class CommentBO {
 		return commentDAO.selectCommentListByApiId(id);
 	}
 	
-	public Comment getCommentListByApiIdAndUserId(int id, int userId) {
+	public Comment getCommentListByApiIdAndUserId(int id, Integer userId) {
 		return commentDAO.selectCommentListByApiIdAndUserId(id, userId);
 	}
 	
 	
-	public Map<String, Object> getCommentByObj(int id, int userId) {
+	public Map<String, Object> getCommentByObj(int id, Integer userId) {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		Comment comment = new Comment();
 		comment = getCommentListByApiIdAndUserId(id, userId);
-		
 		Map<String, Object> map = objectMapper.convertValue(comment, Map.class);
 		
 		return map;
 	}
 	
-	public List<Map<String, Object>> getCommentList(int userId) {
+	public List<Map<String, Object>> getCommentList(Integer userId) {
 		return commentDAO.selectCommentListByUserId(userId);
 	}
 	

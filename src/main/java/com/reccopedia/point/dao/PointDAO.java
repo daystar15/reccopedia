@@ -28,11 +28,11 @@ public interface PointDAO {
 	public List<Point> selectPointByApiId(
 			@Param("apiId") int apiId,
 			@Param("point") int point,
-			@Param("userId") int userId);
+			@Param("userId") Integer userId);
 	
 	public List<Point> selectPointCountListByApiIdAndUserId(
 			@Param("apiId") int apiId,
-			@Param("userId") int userId);
+			@Param("userId") Integer userId);
 	
 	public Map<String, Object> selectPointMapByApiIdAndUserId(
 			@Param("apiId") int apiId, 

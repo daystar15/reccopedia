@@ -12,8 +12,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.comment.bo.CommentBO;
 import com.reccopedia.comment.model.CommentView;
 import com.reccopedia.contents.bo.ContentsBO;
+import com.reccopedia.notinterest.bo.NotinterestBO;
 import com.reccopedia.point.bo.PointBO;
 import com.reccopedia.point.model.Point;
+import com.reccopedia.user.bo.UserBO;
+import com.reccopedia.user.model.User;
 import com.reccopedia.watching.bo.WatchingBO;
 import com.reccopedia.wish.bo.WishBO;
 
@@ -36,6 +39,13 @@ public class ContentsController {
 	
 	@Autowired
 	private PointBO pointBO;
+	
+	@Autowired
+	private NotinterestBO notinterestBO;
+	
+	@Autowired
+	private UserBO userBO;
+	
 	
 	// 메인 페이지
 	@GetMapping("/main")
@@ -80,10 +90,10 @@ public class ContentsController {
 	public String contentsView(Model model, int id, Integer point,
 			HttpSession session) throws JsonProcessingException {
 		
-
+		User userinfo = userBO.getUserByIntegerId((Integer)session.getAttribute("userId"));
 		List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(id, (Integer)session.getAttribute("userId"));
-		boolean fillPoint = pointBO.existPoint(id, point, (Integer)session.getAttribute("userId"));
 		boolean fillWatching = watchingBO.existwatching(id, (Integer)session.getAttribute("userId"));
+		boolean fillNotinterest = notinterestBO.existNotinterest(id, (Integer)session.getAttribute("userId"));
 		boolean fillWish = wishBO.existWish(id, (Integer)session.getAttribute("userId"));
 		List<CommentView> commentList = commentBO.generateCommentViewListByApiId(id);
 		Map<String, Object> myComment = commentBO.getCommentByObj(id, (Integer)session.getAttribute("userId"));
@@ -97,7 +107,9 @@ public class ContentsController {
 		List<String> images = contentsBO.generateImages(id);
 		String year = contentsBO.generateYear(id);
 		
+		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("pointList", pointList);
+		model.addAttribute("fillNotinterest", fillNotinterest);
 		model.addAttribute("fillWatching", fillWatching);
 		model.addAttribute("fillWish", fillWish);
 		model.addAttribute("commentList", commentList);

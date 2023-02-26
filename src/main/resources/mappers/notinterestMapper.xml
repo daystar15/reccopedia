@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.reccopedia.notinterest.dao.NotinterestDAO">
+
+	<select id="selectNotinterestByApiIdOrUserId" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`not_interest`
+		WHERE
+			`apiId` = #{apiId}
+			<if test="userId != null">
+			AND `userId` = #{userId}
+			</if>
+	</select>
+	
+	
+	<select id="selectNotinterestListByApiIdOrUserId" parameterType="map" resultType="com.reccopedia.notinterest.model.Notinterest">
+		SELECT
+			`id`
+			, `apiId`
+			, `userId`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`not_interest`
+		WHERE
+			`userId` = #{id}
+	</select>
+	
+
+	<insert id="insertNotinterest" parameterType="map">
+		INSERT INTO `not_interest`
+ 		(
+ 			`apiId`
+			, `userId`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{apiId}
+ 			, #{userId}
+ 			, now()
+ 			, now()
+ 		)
+	</insert>
+	
+	<delete id="deleteNotinterestByApiIdUserId" parameterType="map">
+		DELETE
+		FROM
+			`not_interest`
+		WHERE
+			`apiId` = #{apiId}
+			AND `userId` = #{userId}
+	</delete>
+	
+	<delete id="deleteNotinterestByApiId" parameterType="int">
+		DELETE
+		FROM
+			`not_interest`
+		WHERE
+			`apiId` = #{apiId}
+	</delete>
+
+</mapper>

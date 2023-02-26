@@ -19,11 +19,11 @@ public interface CommentDAO {
 	
 	public List<Comment> selectCommentListByApiId(int id);
 	
-	public List<Map<String, Object>> selectCommentListByUserId(int userId);
+	public List<Map<String, Object>> selectCommentListByUserId(Integer userId);
 	
 	public Comment selectCommentListByApiIdAndUserId(
 			@Param("id") int id, 
-			@Param("userId") int userId);
+			@Param("userId") Integer userId);
 	
 	public void deleteCommentByUserIdApiId(int id);
 	

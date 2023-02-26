@@ -21,10 +21,10 @@ public class CommentController {
 	// 댓글 페이지
 	@GetMapping("/comment_view")
 	public String commentView(Model model, int id, HttpSession session) {
-		Integer userId = (Integer) session.getAttribute("userId");
+		//Integer userId = (Integer) session.getAttribute("userId");
 			
 		List<CommentView> commentList = commentBO.generateCommentViewListByApiId(id);
-		model.addAttribute("commentList", "commentList");
+		model.addAttribute("commentList", commentList);
 		model.addAttribute("viewName", "comment/comment");
 		return "template/layout";
 	}

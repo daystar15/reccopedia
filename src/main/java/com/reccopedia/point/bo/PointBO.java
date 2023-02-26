@@ -37,7 +37,7 @@ public class PointBO {
 		return pointDAO.selectPointByApiIdOrUserId(apiId, point, userId) > 0 ? true:false;
 	}
 	
-	public List<Point> getPointCountByApiId(int id, int point, int userId) {
+	public List<Point> getPointCountByApiId(int id, int point, Integer userId) {
 
 		List<Point> pointViewList = new ArrayList<>();
 		
@@ -50,7 +50,7 @@ public class PointBO {
 		return pointViewList;
 	}
 	
-	public List<Point> getPointCountListByApiIdAndUserId(int apiId, int userId) {
+	public List<Point> getPointCountListByApiIdAndUserId(int apiId, Integer userId) {
 		return pointDAO.selectPointCountListByApiIdAndUserId(apiId, userId);
 	}
 	

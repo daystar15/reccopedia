@@ -91,6 +91,23 @@
 			`id` = #{id}
 	</select>
 	
+	<select id="selectUserByIntegerId" parameterType="int" resultType="com.reccopedia.user.model.User">
+		SELECT
+			`id`
+			, `name`
+			, `info`
+			, `email`
+			, `password`
+			, `backgroundImagePath`
+			, `profileImagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`id` = #{id}
+	</select>
+	
 	<update id="updateUser" parameterType="map">
  		UPDATE `user`
  		SET

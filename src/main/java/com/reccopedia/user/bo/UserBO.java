@@ -41,6 +41,10 @@ public class UserBO {
 		return userDAO.selectUserById(id);
 	}
 	
+	public User getUserByIntegerId(Integer id) {
+		return userDAO.selectUserByIntegerId(id);
+	}
+	
 	public Map<String, Object> getUserByObj(int id) {
 		User user = getUserById(id);
 		

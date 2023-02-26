@@ -18,7 +18,7 @@
 				<h3>${year} &#183; ${genre} &#183; ${countryResult}</h3>
 				<h4>평균 &#9733;{3.8} ({44만명})</h4>
 				<div>
-					<div class="star-rating" data-point-id="${pointList[0].point}">
+					<div class="star-rating" data-point-id="${pointList[0].point}" data-user-id="${userinfo.id}">
 						<input type="radio" id="5-stars" name="rating" value="5" />
 						<label for="5-stars" class="star">&#9733;</label>
 						<input type="radio" id="4-stars" name="rating" value="4" />
@@ -37,7 +37,7 @@
 					</div>
 					<%-- 별점 눌려있을 때 --%>
 
-					<div class="contents_keeped" id="wish">
+					<div class="contents_keeped" id="wish" data-user-id="${userinfo.id}">
 						<div class="icon">
 							<img src="/static/images/plus.png" alt="">
 						</div>
@@ -50,7 +50,7 @@
 							<span class="on">보고싶어요</span>
 						</c:if>
 					</div>
-					<div class="contents_keeped my_comment_write">
+					<div class="contents_keeped my_comment_write" data-user-id="${userinfo.id}">
 						<div class="icon">
 							<img src="/static/images/pencil.png" alt="">
 						</div>
@@ -63,7 +63,7 @@
 						<%-- <span class="on">코멘트</span>--%>
 						<%--</c:if> --%>
 					</div>
-					<div class="contents_keeped" id="watching">
+					<div class="contents_keeped" id="watching" data-user-id="${userinfo.id}">
 						<div class="icon">
 							<img src="/static/images/eye.png" alt="">
 						</div>
@@ -76,18 +76,18 @@
 							<span class="on">보는중</span>
 						</c:if>
 					</div>
-					<div class="contents_keeped" id="notInterest">
+					<div class="contents_keeped" id="notInterest" data-user-id="${userinfo.id}">
 						<div class="icon">
 							<img src="/static/images/block.png" alt="">
 						</div>
 						<%-- 관심없어요 안되어있을 때 --%>
-						<%--<c:if test="${ .filledWish eq false}">  --%>
+						<c:if test="${fillNotinterest eq false}">
 						<span>관심없어요</span>
-						<%--</c:if> --%>
+						</c:if>
 						<%-- 관심없어요 되어있을 때 --%>
-						<%--<c:if test="${ .filledWish eq true}">  --%>
-						<%--<span class="on">관심없어요</span> --%>
-						<%--</c:if> --%>
+						<c:if test="${fillNotinterest eq true}">
+						<span class="on">관심없어요</span>
+						</c:if>
 					</div>
 					<div class="contents_keeped" id="getCollection">
 						<div class="icon">
@@ -104,7 +104,7 @@
 			<div class="contents_left">
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
 				<!-- c:if 내가 댓글을 남겼으면 -->
-				<div class="write_comment" >
+				<div class="write_comment">
 					<c:if test="${not empty myComment}">
 						<div class="my_comment" data-comment-id="${myComment.id}">
 							<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
@@ -184,7 +184,7 @@
 					<div class="contents_comment_top">
 						<div>
 							<h5 class="contents_title">코멘트</h5>
-							<span>${fn:length(commentList) }</span>
+							<span>${fn:length(commentList)}</span>
 						</div>
 						<a href="/comment_view?id=${contents.id}">더보기</a>
 					</div>
@@ -456,21 +456,21 @@
         
         // 별점 나타내기 버튼
         let mypoint = $(".star-rating").data('point-id');
-        if (mypoint <= 1) {
+        if (mypoint == 1) {
         	$('#1-star').prop('checked', true);
-        } else if (mypoint <= 2) {
+        } else if (mypoint == 2) {
         	$('#1-star').prop('checked', true);
         	$('#2-stars').prop('checked', true);
-        } else if (mypoint <= 3) {
+        } else if (mypoint == 3) {
         	$('#1-star').prop('checked', true);
         	$('#2-stars').prop('checked', true);
         	$('#3-stars').prop('checked', true);
-        } else if (mypoint <= 4) {
+        } else if (mypoint == 4) {
         	$('#1-star').prop('checked', true);
         	$('#2-stars').prop('checked', true);
         	$('#3-stars').prop('checked', true);
         	$('#4-stars').prop('checked', true);
-        } else {
+        } else if (mypoint == 5) {
         	$('#1-star').prop('checked', true);
         	$('#2-stars').prop('checked', true);
         	$('#3-stars').prop('checked', true);
@@ -482,6 +482,12 @@
         $("input[name=rating]").on('click', function() {
         	let apiId = $(".contents_info").data('api-id');
         	let point = $(this).val();
+        	let userId = $(".contents_info").data('user-id');
+
+        	if (userId == 0) {
+        		alert("로그인을 해주세요");
+        		return;
+        	}
 			
         	$.ajax({
         		type: "post"
@@ -495,20 +501,13 @@
         		}
         	});//---ajax
         })// ---별점 버튼
-        
-
-
-        
+      
         
         // 보고싶어요 버튼 토글
         $("#wish").on('click', function() {
         	let userId = $(this).data('user-id');
-        	let id = $('.star-rating').data('api-id');
+        	let id = $('.contents_info').data('api-id');
 
-        	if (userId == '') {
-        		alert("로그인을 해주세요");
-        		return;
-        	}
         	
         	$.ajax({
         		type: "post"
@@ -531,12 +530,7 @@
         // 보는중 버튼 토글
         $("#watching").on('click', function() {
         	let userId = $(this).data('user-id');
-        	let id = $('.star-rating').data('api-id');
-
-        	if (userId == '') {
-        		alert("로그인을 해주세요");
-        		return;
-        	}
+        	let id = $('.contents_info').data('api-id');
         	
         	$.ajax({
   				type: "post"
@@ -554,6 +548,29 @@
         	})//--ajax
         	
         });//-- 보는중 버튼
+        
+        
+       // 관심없어요 버튼 토글
+       $("#notInterest").on('click', function() {
+	       	let userId = $(this).data('user-id');
+	       	let id = $('.contents_info').data('api-id');
+	
+	       	$.ajax({
+	 			type: "post"
+	       		, url: "/notinterest/" + id
+	       		, success:function(data) {
+	       			if (data.code == 1) {
+	       				location.reload(true);
+	       			} else {
+	       				alert(data.errorMessage);
+	       			}
+	       		}
+	       		, error: function(e) {
+	       			alert("추가/해제에 실패했습니다.");
+	       		}
+	       	})//--ajax
+       	
+       });//-- 보는중 버튼
         
         
     });

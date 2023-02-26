@@ -10,17 +10,17 @@
 </div>
 <div class="comment_wrap">
 	<!-- 댓글 박스 하나 -->
-	<c:forEach items="${commentList}">
+	<c:forEach items="${commentList}" var="list">
 	<div class="comment_box">
 		<div class="comment_user">
 			<a class="comment_left">
 				<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
-				</span> <span class="comment_user_name">${commentList.user.name}</span>
+				</span> <span class="comment_user_name">${list.user.name} </span>
 			</a>
-			<div class="comment_right">&#9733; ${commentList.pointCount}</div>
+			<div class="comment_right">&#9733; ${list.pointCount}</div>
 		</div>
 		<div class="comment_content">
-			${commentList.comment.content}
+			${list.comment.content}
 		</div>
 		<div class="good_box">
 			<span class="comment_up"> 
@@ -30,6 +30,16 @@
 	</div>
 	</c:forEach>
 	<!-- 댓글 박스 하나 끝 -->
+	
+	<c:if test="${fn:length(commentList) == 0}">
+	<div class="no_comment_box">
+		<img src="/static/images/no-comment.png" alt="">
+		<p>
+			작성된 댓글이 없습니다 <br>
+			댓글을 작성해보세요!
+		</p>
+	</div>
+	</c:if>
 </div>
 
 <script type="text/javascript">

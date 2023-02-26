@@ -26,6 +26,8 @@ public interface UserDAO {
 	
 	public User selectUserById(int id);
 	
+	public User selectUserByIntegerId(Integer id);
+	
 	public void updateUser(
 			@Param("userId") int userId, 
 			@Param("email") String email, 

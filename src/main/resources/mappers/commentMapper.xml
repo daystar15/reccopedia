@@ -68,8 +68,10 @@
 			`comment`
 		WHERE
 			`apiId` = #{id}
+			<if test="userId != null">
 			AND
 			`userId` = #{userId}
+			</if>
 		ORDER BY `updatedAt` DESC
 		LIMIT 1;
  	</select>
