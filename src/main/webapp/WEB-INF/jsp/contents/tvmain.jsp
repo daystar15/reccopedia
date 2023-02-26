@@ -4,30 +4,23 @@
 <div class="main_wrap">
 	<div class="section">
 		<div class="inner">
-			<h2 class="main_title">박스오피스 순위</h2>
+			<h2 class="main_title">TV프로그램 인기 순위</h2>
 			<div class="contents">
 				<ul>
-					<c:forEach var="now" items="${nowResult}" varStatus="status">
+					<c:forEach var="now" items="${popularResult}" varStatus="status">
 					<li>
-						<a href="/contents/contents_view?id=${now.id}">
+						<a href="/contents/tv_contents_view?id=${now.id}">
 							<div>
 								<div class="poster">
 									<span class="rank">${status.count}</span> <img src="https://image.tmdb.org/t/p/w500/${now.poster_path}" alt="">
 								</div>
 							</div>
-							<h3 class="content_subject">${now.title}</h3>
-							<div class="content_info">
-								<span class="year">${year}</span> &middot; <span class="country">나라</span>
-							</div>
+							<h3 class="content_subject">${now.name}</h3>
 							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 예매율 17% </span> &middot; <span class="accumulate"> ${now.popularity} </span>
-							</div>
 						</a>
 					</li>
 					</c:forEach>
 					
-				
 				</ul>
 			</div>
 		</div>
@@ -38,18 +31,47 @@
 			<img src="/static/images/arrow.png" alt="">
 		</div>
 	</div>
+	
 	<div class="section">
 		<div class="inner">
-			<h2 class="main_title">넷플릭스 화제작</h2>
+			<h2 class="main_title">TV프로그램 화제작</h2>
+			<div class="contents">
+				<ul>
+					<c:forEach var="top" items="${topratedResult}">
+					<li>
+						<a href="/contents/tv_contents_view?id=${top.id}">
+							<div class="poster">
+								<img src="https://image.tmdb.org/t/p/w500/${top.poster_path}" alt="">
+							</div>
+							<h3 class="content_subject">${top.name}</h3>
+							<div class="point">평균 &starf; 4.2</div>
+						</a>
+					</li>
+					</c:forEach>
+					
+				</ul>
+			</div>
+		</div>
+		<div class="left">
+			<img src="/static/images/arrow.png" alt="">
+		</div>
+		<div class="right">
+			<img src="/static/images/arrow.png" alt="">
+		</div>
+	</div>
+	
+	<div class="section">
+		<div class="inner">
+			<h2 class="main_title">넷플릭스 TV프로그램</h2>
 			<div class="contents">
 				<ul>
 					<c:forEach var="netflix" items="${netflixResult}">
 					<li>
-						<a href="/contents/contents_view?id=${netflix.id}">
+						<a href="/contents/tv_contents_view?id=${netflix.id}">
 							<div class="poster">
 								<img src="https://image.tmdb.org/t/p/w500/${netflix.poster_path}" alt="">
 							</div>
-							<h3 class="content_subject">${netflix.title}</h3>
+							<h3 class="content_subject">${netflix.name}</h3>
 							<div class="point">평균 &starf; 4.2</div>
 						</a>
 					</li>
@@ -65,18 +87,19 @@
 			<img src="/static/images/arrow.png" alt="">
 		</div>
 	</div>
+	
 	<div class="section">
 		<div class="inner">
 			<h2 class="main_title">디즈니 플러스 화제작</h2>
 			<div class="contents">
 				<ul>
-					<c:forEach var="disneyResult" items="${disney}">
+					<c:forEach var="toprated" items="${topratedResult}">
 					<li>
-						<a href="/contents/contents_view?id=${disneyResult.id}">
+						<a href="/contents/contents_view?id=${toprated.id}">
 							<div class="poster">
-								 <img src="https://image.tmdb.org/t/p/w500/${disneyResult.poster_path}" alt="">
+								 <img src="https://image.tmdb.org/t/p/w500/${toprated.poster_path}" alt="">
 							</div>
-							<h3 class="content_subject">${disneyResult.title}</h3>
+							<h3 class="content_subject">${toprated.title}</h3>
 							<div class="point">평균 &starf; 4.2</div>
 						</a>
 					</li>
@@ -98,13 +121,13 @@
 			<h2 class="main_title">오늘의 트렌딩</h2>
 			<div class="contents">
 				<ul>
-					<c:forEach var="movieTrending" items="${movieTrending}">
+					<c:forEach var="tvTrending" items="${tvTrending}">
 					<li>
-						<a href="/contents/contents_view?id=${movieTrending.id}">
+						<a href="/contents/tv_contents_view?id=${tvTrending.id}">
 							<div class="poster">
-								 <img src="https://image.tmdb.org/t/p/w500/${movieTrending.poster_path}" alt="">
+								 <img src="https://image.tmdb.org/t/p/w500/${tvTrending.poster_path}" alt="">
 							</div>
-							<h3 class="content_subject">${movieTrending.title}</h3>
+							<h3 class="content_subject">${tvTrending.name}</h3>
 							<div class="point">평균 &starf; 4.2</div>
 						</a>
 					</li>
@@ -126,13 +149,13 @@
 			<h2 class="main_title">금주의 Hot</h2>
 			<div class="contents">
 				<ul>
-					<c:forEach var="movieTrendingWeek" items="${movieTrendingWeek}">
+					<c:forEach var="tvTrendingWeek" items="${tvTrendingWeek}">
 					<li>
-						<a href="/contents/contents_view?id=${movieTrendingWeek.id}">
+						<a href="/contents/tv_contents_view?id=${tvTrendingWeek.id}">
 							<div class="poster">
-								 <img src="https://image.tmdb.org/t/p/w500/${movieTrendingWeek.poster_path}" alt="">
+								 <img src="https://image.tmdb.org/t/p/w500/${tvTrendingWeek.poster_path}" alt="">
 							</div>
-							<h3 class="content_subject">${movieTrendingWeek.title}</h3>
+							<h3 class="content_subject">${tvTrendingWeek.name}</h3>
 						</a>
 					</li>
 					</c:forEach>
@@ -148,32 +171,6 @@
 		</div>
 	</div>
 	
-	<div class="section">
-		<div class="inner">
-			<h2 class="main_title">오늘의 배우</h2>
-			<div class="contents">
-				<ul>
-					<c:forEach var="personTrending" items="${personTrending}">
-					<li class="">
-						<a href="/contents/person_view?id=${personTrending.id}">
-							<div class="poster">
-								 <img src="https://image.tmdb.org/t/p/w500/${personTrending.profile_path}" alt="">
-							</div>
-							<h3 class="content_subject">${personTrending.name}</h3>
-						</a>
-					</li>
-					</c:forEach>
-					
-				</ul>
-			</div>
-		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-	</div>
 	
 	<div class="section user_collection">
 		<div class="inner">
@@ -587,30 +584,11 @@
 </div>
 
 <script>
-
-(function() {  
-    const itemWrapperEl = document.querySelector('.contents ul'),  
-          leftBtnEl = document.querySelector('.left'),  
-          rightBtnEl = document.querySelector('.right');  
-
-    function moveSlides(direction) { 
-      const item = itemWrapperEl.querySelector('.contents ul li'),  
-            itemMargin = parseFloat(getComputedStyle(item).marginRight);
-            itemWidth = itemMargin + item.offsetWidth + 2; 
-
-      let itemCount = Math.round(itemWrapperEl.scrollLeft / itemWidth); 
-
-      if (direction === 'left') {
-        itemCount = itemCount - 1;
-      } else {
-        itemCount = itemCount + 1;
-      }
-      itemWrapperEl.scrollLeft = itemWidth * itemCount; 
-    }
-
-    leftBtnEl.addEventListener("click", e => moveSlides("left")); 
-    rightBtnEl.addEventListener("click", e => moveSlides("right"));
-  })();
+	$(document).ready(function() {
+		$(".contents ul li a").on('click', function() {
+			
+		}); // -- 컨텐츠 클릭 시 
+	})
 </script>
 
 

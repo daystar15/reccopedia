@@ -5,8 +5,8 @@
     <div>
         <h1 class="logo"><a href="/main"><img src="/static/images/logo.png" alt=""></a></h1>
         <div class="menu">
-            <a href="#">영화</a>
-            <a href="#">TV</a>
+            <a href="/main">영화</a>
+            <a href="/main/tv">TV</a>
         </div>
     </div>
     <div>

@@ -1,6 +1,7 @@
 package com.reccopedia.contents.bo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,21 +85,6 @@ public class ContentsBO {
 		
 	}
 	
-	public List<Map<String, Object>> generateTopRatedMap() throws JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper();
-		String json = resttemplateservice.callTopRatedAPI();
-		
-		// 맵으로 만들기
-		Map<String, Object> result = new HashMap<String, Object>();
-		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
-		
-		List<Map<String, Object>> list = new ArrayList<>();
-		list = (List<Map<String, Object>>) result.get("results");
-		
-		 
-		return list;
-		
-	}
 	
 	public Map<String, Object> generateContent(int id) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
@@ -152,7 +138,6 @@ public class ContentsBO {
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
 				if(entry.getKey().equals("name")) {
 					genreList.add((String) entry.getValue());
-					
 				}
 			}
 
@@ -280,13 +265,194 @@ public class ContentsBO {
 		List<Map<String, Object>> list = new ArrayList<>();
 		list = (List<Map<String, Object>>) result.get("results");
 		
+		return list;
 		
+	}
+
+	public Map<String, Object> generateTvContents(int id) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.callTvContentAPI(id);
+
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+
 		
+		return result;
+		
+	}
+
+	
+	public List<Map<String, Object>> generateMovieTrendingMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.movieTrendingAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+		
+		 
+		return list;
+		
+	}
+	
+	public List<Map<String, Object>> generatePersonTrendingMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.personTrendingAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+
 		return list;
 		
 	}
 	
 	
-
+	public List<Map<String, Object>> generatePersonKnownForMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.personTrendingAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+		
+		List<Map<String, Object>> personList = new ArrayList<>();
+		
+		for (Map<String, Object> map : list) {
+			for (Map.Entry<String, Object> entry : map.entrySet()) {
+				if(entry.getKey().equals("known_for")) {
+					personList.addAll((Collection<? extends Map<String, Object>>) entry.getValue());
+				}
+			}
+		}
+		
+		return personList;
+		
+	}
+	
+	
+	public List<Map<String, Object>> generateMovieTrendingWeekMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.movieTrendingWeekAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+		
+		 
+		return list;
+		
+	}
+	
+	public List<Map<String, Object>> generateTvPopularMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.callTvPopuLarAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+		
+		 
+		return list;
+		
+	}
+	
+	
+	public List<Map<String, Object>> generateDisneyMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.callDisneyAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+		
+		 
+		return list;
+		
+	}
+	
+	public List<Map<String, Object>> generateTvTopratedMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.callTopratedTvAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+		
+		 
+		return list;
+		
+	}
+	
+	public List<Map<String, Object>> generateTvNetfilixMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.callNetflixTvAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+		
+		 
+		return list;
+		
+	}
+	
+	public List<Map<String, Object>> generateTvTrendingMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.tvTrendingAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+		
+		 
+		return list;
+		
+	}
+	
+	public List<Map<String, Object>> generateTvTrendingWeekMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.tvTrendingWeekAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+		
+		 
+		return list;
+		
+	}
+	
 	
 }

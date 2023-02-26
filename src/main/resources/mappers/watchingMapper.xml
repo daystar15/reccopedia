@@ -15,6 +15,32 @@
 			AND `userId` = #{userId}
 			</if>
 	</select>
+	
+	<select id="selectWatchingListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.watching.model.Watching">
+		SELECT
+			`id`
+			, `apiId`
+			, `userId`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`watching`
+		WHERE
+			`userId` = #{userId}
+	</select>
+	
+	<select id="selectWatchingObjListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.watching.model.Watching">
+		SELECT
+			`id`
+			, `apiId`
+			, `userId`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`watching`
+		WHERE
+			`userId` = #{userId}
+	</select>
 
 	<insert id="insertWatching" parameterType="map">
 		INSERT INTO `watching`

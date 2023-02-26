@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.comment.bo.CommentBO;
@@ -47,7 +48,7 @@ public class ContentsController {
 	private UserBO userBO;
 	
 	
-	// 메인 페이지
+	// 메인 페이지(영화)
 	@GetMapping("/main")
 	public String main(Model model, HttpSession session) throws JsonProcessingException {
 		
@@ -56,14 +57,45 @@ public class ContentsController {
 		List<Map<String, Object>> popularResult = contentsBO.generatePopularMap();
 		List<Map<String, Object>> nowResult = contentsBO.generateNowMap();
 		List<Map<String, Object>> netflixResult = contentsBO.generateNetflixMap();
-		List<Map<String, Object>> topratedResult = contentsBO.generateTopRatedMap();
+		List<Map<String, Object>> movieTrending = contentsBO.generateMovieTrendingMap();
+		List<Map<String, Object>> movieTrendingWeek = contentsBO.generateMovieTrendingWeekMap();
+		List<Map<String, Object>> personTrending = contentsBO.generatePersonTrendingMap();
+		List<Map<String, Object>> disney = contentsBO.generateDisneyMap();
 		
 		
+		model.addAttribute("disney", disney);
+		model.addAttribute("movieTrending", movieTrending);
+		model.addAttribute("movieTrendingWeek", movieTrendingWeek);
+		model.addAttribute("personTrending", personTrending);
+		model.addAttribute("popularResult", popularResult);
+		model.addAttribute("nowResult", nowResult);
+		model.addAttribute("netflixResult", netflixResult);
+		model.addAttribute("viewName", "contents/main");
+		return "template/layout";
+	}
+	
+	// 메인 페이지(tv)
+	@GetMapping("/main/tv")
+	public String tvMain(Model model, HttpSession session) throws JsonProcessingException {
+		
+		
+		String userId = (String) session.getAttribute("userEmail");
+		
+		List<Map<String, Object>> popularResult = contentsBO.generateTvPopularMap();
+		List<Map<String, Object>> nowResult = contentsBO.generateNowMap();
+		List<Map<String, Object>> netflixResult = contentsBO.generateTvNetfilixMap();
+		List<Map<String, Object>> topratedResult = contentsBO.generateTvTopratedMap();
+		List<Map<String, Object>> tvTrending = contentsBO.generateTvTrendingMap();
+		List<Map<String, Object>> tvTrendingWeek = contentsBO.generateTvTrendingWeekMap();
+		
+		
+		model.addAttribute("tvTrending", tvTrending);
+		model.addAttribute("tvTrendingWeek", tvTrendingWeek);
 		model.addAttribute("popularResult", popularResult);
 		model.addAttribute("nowResult", nowResult);
 		model.addAttribute("netflixResult", netflixResult);
 		model.addAttribute("topratedResult", topratedResult);
-		model.addAttribute("viewName", "contents/main");
+		model.addAttribute("viewName", "contents/tvmain");
 		return "template/layout";
 	}
 	
@@ -82,6 +114,27 @@ public class ContentsController {
 		model.addAttribute("viewName", "contents/overview");
 		model.addAttribute("crews", contentResult);
 		model.addAttribute("contents", contentInfo);
+		return "template/layout";
+	}
+	
+	// 컨텐츠페이지 - 배우 기본정보
+	@GetMapping("/contents/person_view")
+	public String personView(Model model, int id) throws JsonProcessingException {
+		
+		Map<String, Object> contentInfo = contentsBO.generateContent(id);
+		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
+		String GenreResult = contentsBO.generateGenre(id);
+		String countryResult = contentsBO.generateCountry(id);
+		List<Map<String, Object>> personTrending = contentsBO.generatePersonTrendingMap();
+		List<Map<String, Object>> personList = contentsBO.generatePersonKnownForMap();
+		
+		model.addAttribute("personTrending", personTrending);
+		model.addAttribute("personList", personList);
+		model.addAttribute("countryResult", countryResult);
+		model.addAttribute("genre", GenreResult);
+		model.addAttribute("crews", contentResult);
+		model.addAttribute("contents", contentInfo);
+		model.addAttribute("viewName", "contents/person");
 		return "template/layout";
 	}
 	
@@ -123,6 +176,42 @@ public class ContentsController {
 		model.addAttribute("crews", contentResult);
 		model.addAttribute("contents", contentInfo);
 		model.addAttribute("viewName", "contents/contentsPage");
+		return "template/layout";
+	}
+	
+	
+	// 컨텐츠페이지 - tv컨텐츠 개별 페이지
+	@GetMapping("/contents/tv_contents_view")
+	public String contentsTvView(Model model, int id, Integer point,
+			HttpSession session) throws JsonProcessingException {
+		
+		User userinfo = userBO.getUserByIntegerId((Integer)session.getAttribute("userId"));
+		List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(id, (Integer)session.getAttribute("userId"));
+		boolean fillWatching = watchingBO.existwatching(id, (Integer)session.getAttribute("userId"));
+		boolean fillNotinterest = notinterestBO.existNotinterest(id, (Integer)session.getAttribute("userId"));
+		boolean fillWish = wishBO.existWish(id, (Integer)session.getAttribute("userId"));
+		List<CommentView> commentList = commentBO.generateCommentViewListByApiId(id);
+		Map<String, Object> myComment = commentBO.getCommentByObj(id, (Integer)session.getAttribute("userId"));
+		
+		
+		Map<String, Object> contentInfo = contentsBO.generateTvContents(id);
+		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
+		String GenreResult = contentsBO.generateGenre(id);
+		String countryResult = contentsBO.generateCountry(id);
+		List<String> yutube = contentsBO.generateVideo(id);
+		List<String> images = contentsBO.generateImages(id);
+		String year = contentsBO.generateYear(id);
+		
+		model.addAttribute("userinfo", userinfo);
+		model.addAttribute("pointList", pointList);
+		model.addAttribute("fillNotinterest", fillNotinterest);
+		model.addAttribute("fillWatching", fillWatching);
+		model.addAttribute("fillWish", fillWish);
+		model.addAttribute("commentList", commentList);
+		model.addAttribute("myComment", myComment);
+
+		model.addAttribute("contents", contentInfo);
+		model.addAttribute("viewName", "contents/tvcontentsPage");
 		return "template/layout";
 	}
 	

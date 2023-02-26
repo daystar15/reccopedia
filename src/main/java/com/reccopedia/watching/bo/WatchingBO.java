@@ -1,9 +1,13 @@
 package com.reccopedia.watching.bo;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.reccopedia.watching.dao.WatchingDAO;
+import com.reccopedia.watching.model.Watching;
 
 @Service
 public class WatchingBO {
@@ -33,4 +37,15 @@ public class WatchingBO {
 	public void deleteWatchingByApiId(int id) {
 		watchingDAO.deleteWatchingByApiId(id);
 	}
+	
+
+	public List<Map<String, Object>> getWatchingList(int userId) {
+		return watchingDAO.selectWatchingListByApiIdOrUserId(userId);
+	}
+	
+	public List<Watching> getWatchingObjList(int userId) {
+		return watchingDAO.selectWatchingObjListByApiIdOrUserId(userId);
+	}
+	
+	
 }
