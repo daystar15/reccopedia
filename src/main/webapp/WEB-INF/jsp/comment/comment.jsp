@@ -11,22 +11,34 @@
 <div class="comment_wrap">
 	<!-- 댓글 박스 하나 -->
 	<c:forEach items="${commentList}" var="list">
-	<div class="comment_box">
+	<div class="comment_box" data-comment-id="${list.comment.id}" data-mycomment-id="${myComment.id}" data-user-id="${userInfo.id}" data-api-id="${list.comment.apiId}">
 		<div class="comment_user">
 			<a class="comment_left">
 				<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
 				</span> <span class="comment_user_name">${list.user.name} </span>
 			</a>
-			<div class="comment_right">&#9733; ${list.pointCount}</div>
+			<div class="comment_right_box">
+				<c:if test="${not empty userId}">
+				<div class="report_box">
+					<c:if test="${list.user.email ne userInfo.email}">
+					<span id="reportBtn">신고</span>
+					</c:if>
+					<c:if test="${list.user.email eq userInfo.email}">
+					<span id="deleteBtn">삭제</span>
+					</c:if>
+				</div>
+				</c:if>
+				<div class="comment_right">&#9733; ${list.pointCount}</div>
+			</div>
 		</div>
-		<div class="comment_content">
+		<div class="comment_content" data-comment-content="${list.comment.content}">
 			${list.comment.content}
 		</div>
-		<div class="good_box">
+		<!-- <div class="good_box">
 			<span class="comment_up"> 
 				<img src="/static/images/up.png" alt=""> <em>{318}</em>
 			</span>
-		</div>
+		</div> -->
 	</div>
 	</c:forEach>
 	<!-- 댓글 박스 하나 끝 -->
@@ -41,6 +53,75 @@
 	</div>
 	</c:if>
 </div>
+
+<script>
+	$(document).ready(function() {
+		// 댓글 삭제
+        $("#deleteBtn").on('click', function() {
+        	let id = $('.comment_box').data('mycomment-id');
+        	
+        	// ajax 글 삭제
+			$.ajax ({
+				// request
+				type: "DELETE"
+				, url: "/comment/delete"
+				, data: {"id":id}
+				
+				// response
+				, success:function(data) {
+					if (data.code == 1) {
+						alert("삭제 되었습니다.");
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert("댓글을 삭제하는데 실패했습니다.");
+				}
+			}); // --- ajax
+        	
+        }); // --댓글 삭제 
+        
+        
+       // 댓글 신고
+       $("#reportBtn").on('click', function() {
+       	    let apiId = $('.comment_box').data('api-id');
+       		let userId = $('.comment_box').data('user-id');
+          	let commentId = $('.comment_box').data('comment-id');
+          	let content = $(".comment_content").data('comment-content');
+          	let reportConfirm = confirm("정말 신고하시겠습니까?");
+
+	       	// ajax 댓글 신고
+			$.ajax ({
+				// request
+				type: "post"
+				, url: "/report/create"
+				, data: {"apiId":apiId, "userId":userId, "commentId":commentId, "content":content}
+				
+				// response
+				, success:function(data) {
+					if (data.code == 1) {
+					 	if (reportConfirm == true) {
+						 	alert("신고되었습니다.");
+							location.reload();
+				        } else if (reportConfirm == false) {
+				            alert("신고가 취소되었습니다.");
+							location.reload();
+				        }
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert("댓글을 신고하는데 실패했습니다.");
+				}
+			}); // --- ajax
+       	
+       }); // --댓글 신고 
+        
+	})
+</script>
 
 <script type="text/javascript">
 	function goBack(){

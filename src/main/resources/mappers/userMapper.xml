@@ -108,6 +108,23 @@
 			`id` = #{id}
 	</select>
 	
+	<select id="selectuserListById" parameterType="int" resultType="com.reccopedia.user.model.User">
+		SELECT
+			`id`
+			, `name`
+			, `info`
+			, `email`
+			, `password`
+			, `backgroundImagePath`
+			, `profileImagePath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		ORDER BY `id` desc
+		LIMIT 10
+	</select>
+	
 	<update id="updateUser" parameterType="map">
  		UPDATE `user`
  		SET

@@ -51,7 +51,7 @@ public class CommentRestController {
 	
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(
-			@RequestParam("commentId") int id,
+			@RequestParam("id") int id,
 			HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<>();

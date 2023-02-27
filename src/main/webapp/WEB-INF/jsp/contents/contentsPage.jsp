@@ -203,10 +203,10 @@
 									<div class="comment_right">&#9733; ${list.pointCount}</div>
 								</div>
 								<div class="comment_content">${list.comment.content}</div>
-								<div class="good_box">
+								<%-- <div class="good_box">
 									<span class="comment_up"> <img src="/static/images/up.png" alt=""> <em>${list.comment.id}</em>
 									</span>
-								</div>
+								</div> --%>
 								<!-- 댓글 하나 끝 -->
 							</li>
 						</c:forEach>
@@ -395,14 +395,14 @@
         
         // 댓글 삭제
         $("#deleteBtn").on('click', function() {
-        	let commentId = $('.my_comment').data('comment-id');
+        	let id = $('.my_comment').data('comment-id');
         	
         	// ajax 글 삭제
 			$.ajax ({
 				// request
 				type: "DELETE"
 				, url: "/comment/delete"
-				, data: {"commentId":commentId}
+				, data: {"id":id}
 				
 				// response
 				, success:function(data) {

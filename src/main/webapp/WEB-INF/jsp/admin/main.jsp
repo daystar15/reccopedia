@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +28,8 @@
                     <ul class="list-unstyled">
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">대시보드</a>
+                            <a class="nav-link text-white" href="#">회원관리</a>
+                            <a class="nav-link text-white" href="#">신고댓글목록</a>
                         </li>
                     </ul>
                 </nav>
@@ -34,17 +39,69 @@
             		<h2>대시보드</h2>
             		<div class="w-90 mt-4">
             			<div class="d-flex justify-content-between mb-5">
-            				<div class="bg-light col-5" style="height: 400px">
-            					<div class="d-flex justify-content-between mb-5 py-3">
+            				<div class="bg-light col-4 py-3">
+            					<div class="d-flex justify-content-between mb-2">
             						<h5>회원관리</h5>
             						<h5>+</h5>
             					</div>
+            					<table class="table">
+									 <thead class="text-center">
+									   <tr>
+									      <th>번호</th>
+									      <th>이름</th>
+									      <th>소개</th>
+									      <th>이메일</th>
+									   </tr>
+									 </thead>
+									 <tbody class="text-center">
+									   <c:forEach items="${userList}" var="list" varStatus="status">
+									   <tr>
+									      <td style="vertical-align: middle">${fn:length(userList) - status.index}</td>
+									      <td style="vertical-align: middle">${list.name}</td>
+									      <td style="vertical-align: middle">${list.info}</td>
+									      <td style="vertical-align: middle">${list.email}</td>
+									   </tr>
+									   </c:forEach>
+									 </tbody> 
+								</table>
             				</div>
-            				<div class="bg-light col-6" style="height: 400px">
-            					<div class="d-flex justify-content-between mb-5 py-3">
+            				<div class="bg-light col-7 py-3">
+            					<div class="d-flex justify-content-between mb-2">
             						<h5>댓글 신고 목록</h5>
             						<h5>+</h5>
             					</div>
+            					<table class="table">
+									 <thead class="text-center">
+									   <tr>
+									      <th>번호</th>
+									      <th>api번호</th>
+									      <th>사용자번호</th>
+									      <th>댓글번호</th>
+									      <th>내용</th>
+									      <th>신고이유</th>
+									      <th>삭제여부</th>
+									      <th>삭제</th>
+									   </tr>
+									 </thead>
+									 <tbody class="text-center">
+									   <c:forEach items="${reportList}" var="list" varStatus="status">
+									   <tr>
+									      <td style="vertical-align: middle">${fn:length(reportList) - status.index}</td>
+									      <td style="vertical-align: middle">${list.apiId}</td>
+									      <td style="vertical-align: middle">${list.userId}</td>
+									      <td class="commentId" data-comment-id="${list.commentId}" style="vertical-align: middle">${list.commentId}</td>
+									      <td style="vertical-align: middle">${list.content}</td>
+									      <td style="vertical-align: middle">${list.reason}</td>
+									      <td style="vertical-align: middle">
+									      	<c:if test="${empty list.commentId}">
+									      		삭제완료
+									      	</c:if>
+									      </td>
+									      <td><button type="button" class="deleteBtn btn btn-danger">삭제</button></td>
+									   </tr>
+									   </c:forEach>
+									 </tbody> 
+								</table>
             				</div>
             			</div>
             			<div class="w-100">
@@ -60,6 +117,37 @@
             </div>
         </div>
     </div>
+    
+    <script>
+    	$(document).ready(function(){
+    		$(".deleteBtn").on('click', function() {
+    			let id = $(".commentId").data("comment-id");
+    			
+    			// ajax 글 삭제
+    			$.ajax ({
+    				// request
+    				type: "DELETE"
+    				, url: "/comment/delete"
+    				, data: {"id":id}
+    				
+    				// response
+    				, success:function(data) {
+    					if (data.code == 1) {
+    						alert("삭제 되었습니다.");
+    						location.reload();
+    					} else {
+    						alert(data.errorMessage);
+    					}
+    				}
+    				, error:function(e) {
+    					alert("댓글을 삭제하는데 실패했습니다.");
+    				}
+    			}); // --- ajax
+    		})
+    	})
+    </script>
+    
+    
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
 		google.charts.load('current', {'packages':['line']});

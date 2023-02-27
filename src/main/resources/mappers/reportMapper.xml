@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.reccopedia.report.dao.ReportDAO">
+ 
+ 	<insert id="reportComment" parameterType="map">
+ 		INSERT INTO `report`
+ 		(
+ 			`apiId`
+			, `userId`
+			, `commentId`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{apiId}
+ 			, #{userId}
+ 			, #{commentId}
+ 			, #{content}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectreportCommentListById" parameterType="int" resultType="com.reccopedia.report.model.Report">
+ 		SELECT
+ 			`id`
+			, `apiId`
+			, `userId`
+			, `commentId`
+			, `content`
+			, `reason`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`report`
+ 	</select>
+ 	
+</mapper>

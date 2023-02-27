@@ -1,5 +1,7 @@
 package com.reccopedia.user.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -35,5 +37,7 @@ public interface UserDAO {
 			@Param("info") String info, 
 			@Param("backgroundfileimagePath") String backgroundfileimagePath, 
 			@Param("profilefileimagePath") String profilefileimagePath);
+	
+	public List<User> selectuserListById(int id);
 	
 }

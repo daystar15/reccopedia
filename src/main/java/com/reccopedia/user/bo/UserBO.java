@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reccopedia.common.FileManagerService;
 import com.reccopedia.contents.bo.ContentsBO;
+import com.reccopedia.report.model.Report;
 import com.reccopedia.restAPI.dao.RestTemplateService;
 import com.reccopedia.user.dao.UserDAO;
 import com.reccopedia.user.model.User;
@@ -93,6 +94,8 @@ public class UserBO {
 		userDAO.updateUser(userId, email, name, info, backgroundfileimagePath, profilefileimagePath);
 	};
 	
-	
+	public List<User> getuserListById(int id){
+		return userDAO.selectuserListById(id);
+	}
 	
 }
