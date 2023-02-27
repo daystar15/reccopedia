@@ -11,10 +11,10 @@
 	<div class="contets_top">
 		<div class="contents_short_box">
 			<div class="contents_poster">
-				<img src="https://image.tmdb.org/t/p/w500${contents.poster_path}" alt="">
+				<img data-api-img="${contents.poster_path}" src="https://image.tmdb.org/t/p/w500${contents.poster_path}" alt="">
 			</div>
 			<div class="contents_info"  data-api-id="${contents.id}">
-				<h2>${contents.title}</h2>
+				<h2 class="title" data-api-title="${contents.title}">${contents.title}</h2>
 				<h3>${year} &#183; ${genre} &#183; ${countryResult}</h3>
 				<h4>평균 &#9733;{3.8} ({44만명})</h4>
 				<div>
@@ -105,22 +105,24 @@
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
 				<!-- c:if 내가 댓글을 남겼으면 -->
 				<div class="write_comment">
-					<c:if test="${not empty myComment}">
-						<div class="my_comment" data-comment-id="${myComment.id}">
-							<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
-							</span>
-							<p>${myComment.content}</p>
-						</div>
-						<div>
-							<em class="delete" id="deleteBtn"> 
-								<img src="/static/images/bin.png" alt=""> 
-								<span id="myCommentDeleteBtn">삭제</span>
-							</em> 
-							<em class="update" id="commentUpdateBtn"> 
-								<img src="/static/images/update.png" alt=""> 
-								<span id="myCommentUpdateBtn">수정</span>
-							</em>
-						</div>
+					<c:if test="${not empty userId}">
+						<c:if test="${not empty myComment}">
+							<div class="my_comment" data-comment-id="${myComment.id}">
+								<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
+								</span>
+								<p>${myComment.content}</p>
+							</div>
+							<div>
+								<em class="delete" id="deleteBtn"> 
+									<img src="/static/images/bin.png" alt=""> 
+									<span id="myCommentDeleteBtn">삭제</span>
+								</em> 
+								<em class="update" id="commentUpdateBtn"> 
+									<img src="/static/images/update.png" alt=""> 
+									<span id="myCommentUpdateBtn">수정</span>
+								</em>
+							</div>
+						</c:if>
 					</c:if>
 					<c:if test="${empty myComment}">
 					<button>댓글을 남겨보세요</button>
@@ -483,16 +485,18 @@
         	let apiId = $(".contents_info").data('api-id');
         	let point = $(this).val();
         	let userId = $(".contents_info").data('user-id');
+        	let title = $(".contents_info .title").data('api-title');
+        	let posterPath = $(".contents_poster img").data('api-img');
 
         	if (userId == 0) {
         		alert("로그인을 해주세요");
         		return;
         	}
-			
+
         	$.ajax({
         		type: "post"
         		, url: "/point/contents_point_view"
-        		, data: {"point":point, "apiId":apiId}
+        		, data: {"point":point, "apiId":apiId, "title":title, "posterPath":posterPath, "userId":userId}
         		, success:function(data) {
        				$("#filledPoint").html(data);
         		} 
@@ -507,11 +511,13 @@
         $("#wish").on('click', function() {
         	let userId = $(this).data('user-id');
         	let id = $('.contents_info').data('api-id');
-
+        	let title = $(".contents_info .title").data('api-title');
+        	let posterPath = $(".contents_poster img").data('api-img');
         	
         	$.ajax({
         		type: "post"
         		, url: "/wish/" + id
+        		, data: {"title":title, "posterPath":posterPath}
         		, success:function(data) {
         			if (data.code == 1) {
         				location.reload(true);
@@ -531,10 +537,13 @@
         $("#watching").on('click', function() {
         	let userId = $(this).data('user-id');
         	let id = $('.contents_info').data('api-id');
+        	let title = $(".contents_info .title").data('api-title');
+        	let posterPath = $(".contents_poster img").data('api-img');
         	
         	$.ajax({
-  				type: "post"
-        		, url: "/watching/" + id
+        		type: "post"
+            	, url: "/watching/" + id
+        		, data: {"title":title, "posterPath":posterPath}
         		, success:function(data) {
         			if (data.code == 1) {
         				location.reload(true);

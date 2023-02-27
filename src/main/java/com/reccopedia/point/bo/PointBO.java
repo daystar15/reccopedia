@@ -16,14 +16,14 @@ public class PointBO {
 	@Autowired
 	private PointDAO pointDAO;
 
-	public void pointToggle(int apiId, int userId, int point) {
+	public void pointToggle(int apiId, int userId, int point, String title, String posterPath) {
 		// 위시 리스트에 있는지 확인
 		if (pointDAO.selectPointByApiIdOrUserId(apiId, userId, point) > 0) {
 			// 있으면 제거
 			pointDAO.deletePointByApiIdUserId(apiId, userId, point);
 		} else {
 			// 없으면 추가
-			pointDAO.insertPoint(point, userId, apiId);
+			pointDAO.insertPoint(point, userId, apiId, title, posterPath);
 		}
 	};
 	

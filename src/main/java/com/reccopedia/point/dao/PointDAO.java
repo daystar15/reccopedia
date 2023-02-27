@@ -14,7 +14,9 @@ public interface PointDAO {
 	public void insertPoint(
 			@Param("userId") int userId, 
 			@Param("point") int point, 
-			@Param("apiId") int apiId);
+			@Param("apiId") int apiId,
+			@Param("title") String title, 
+			@Param("posterPath") String posterPath);
 	
 	public int selectPointByApiIdOrUserId(
 			@Param("apiId") int id,  

@@ -148,7 +148,7 @@
 		</div>
 	</div>
 	
-	<div class="section">
+	<%-- <div class="section">
 		<div class="inner">
 			<h2 class="main_title">오늘의 배우</h2>
 			<div class="contents">
@@ -173,9 +173,9 @@
 		<div class="right">
 			<img src="/static/images/arrow.png" alt="">
 		</div>
-	</div>
+	</div> --%>
 	
-	<div class="section user_collection">
+	<!-- <div class="section user_collection">
 		<div class="inner">
 			<div class="main_title">
 				<a href="#">
@@ -288,7 +288,7 @@
 		<div class="right">
 			<img src="/static/images/arrow.png" alt="">
 		</div>
-	</div>
+	</div> -->
 	<div class="section">
 		<div class="inner">
 			<h2 class="main_title">왓챠피디아 컬렉션</h2>

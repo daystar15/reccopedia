@@ -1,13 +1,20 @@
 package com.reccopedia.user.bo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reccopedia.common.FileManagerService;
+import com.reccopedia.contents.bo.ContentsBO;
+import com.reccopedia.restAPI.dao.RestTemplateService;
 import com.reccopedia.user.dao.UserDAO;
 import com.reccopedia.user.model.User;
 
@@ -19,6 +26,9 @@ public class UserBO {
 	
 	@Autowired
 	private FileManagerService fileManager;
+	
+	@Autowired
+	private RestTemplateService resttemplateservice;
 	
 	
 	public int existEmail(String email) {
@@ -82,4 +92,7 @@ public class UserBO {
 		
 		userDAO.updateUser(userId, email, name, info, backgroundfileimagePath, profilefileimagePath);
 	};
+	
+	
+	
 }

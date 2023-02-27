@@ -30,7 +30,7 @@
 				<div class="add_collection_list">
 					<ul>
 						<li class="add_collection_lists">
-							<img src="">
+							
 						</li>
 					</ul>
 				</div>
@@ -42,6 +42,15 @@
 		</form>
 	</div>
 </div>
+
+
+<form action="#">
+        <input type="text" name="txtName" id="txtName">
+        <input type="button" name="btnSubmit" id="btnSubmit" value="로그인">
+        <hr>
+        <span id="lstCookies"></span>
+    </form>
+
 <script>
     $('document').ready(function() {
         $('#collectionSubmitBtn').on('click', function(e) {
@@ -93,51 +102,94 @@
  	
     // 쿠키 value 값 - poster path
     let cookiePosterPath = $.cookie("cookieId");
-
-    /* function cookieList() { */
-    	// 빈 배열 생성
-        let movieList = [];
-     	
-    	// 배열에 추가
-    	movieList.push(cookiePosterPath);
-        
-        // JSON 문자열로 변환
-        var movieListString = JSON.stringify(movieList);
-        
-     	// setItem
-        window.localStorage.setItem('cookie', movieListString);
-    	
-     	
-     	
-     	
-        let length = window.localStorage.length;
-        for (let i = 0; i < length - 1; i++) {
-        	movieList[i];
-
-        	// getItem
-            let temp_movie = window.localStorage.getItem('cookie');
-            
-         	// JSON 문자열을 배열로 변환
-            var moviesArr = JSON.parse(temp_movie);
-        }
-     	
-    	console.log(length);
-    /* } */
     
-    
-	const tagArea = document.getElementsByClassName('add_collection_lists');
-
-
  	$('<img>', {src: 'https://image.tmdb.org/t/p/w92/' + cookiePosterPath}).appendTo(".add_collection_lists");
-	
-	let count = 0;
-    if (tagArea > 1) {
-    	const newNode = tagArea.cloneNode(true);
-    	count++;
-    	tagArea.after(newNode);
+
+    
+
+    
+ 	// 페이지 로드 이벤트 잡기
+    window.onload = Page_Load;
+     
+    function Page_Load() {
+        // 저장된 쿠키 읽어오기
+        displayCookie();
+ 
+        // 여러개의 쿠키 리스트를 <span> 태그에 출력
+        displayCookieList();
+ 
+    }   
+ 
+    // 쿠키 읽어오는 함수
+    function displayCookie() {
+        var txtName = "";
+        // 쿠키 여부 확인
+        if (document.cookie != "") {
+            // 여러개의 쿠키 읽어오기
+            var cookies = document.cookie.split("; ");
+            // 쿠키 개수만큼 반복
+            for (var i=0; i<cookies.length; i++) {
+                if (cookies[i].split("=")[0] == "txtName")  {
+                    //alert(document.cookie);  // txtName=red;
+                    txtName = cookies[i].split("=")[1];             
+                }
+            }
+        }
+        document.getElementById("txtName").value = txtName;
+    }
+ 
+    function btnSubmit_Click() {
+        // txtName에 저장된 값을 쿠키에 저장
+        setCookie();
+        setCookies("txtemail", "test@a.com", 1); //테스트 쿠키 저장
+    }
+ 
+    // 쿠키 저장 함수
+    function setCookie() {
+        // 쿠키 소멸시기
+        var expireDate = new Date();
+        expireDate.setMonth(expireDate.getMonth() + 1);
+        var txtName = document.getElementById("txtName").value;
+        // 쿠키 저장
+        document.cookie = "txtName=" + txtName + "; path=/; expires=" + expireDate.toGMTString();
+        alert("쿠키 저장");
+    }
+ 
+    // 쿠키 저장 함수
+    function setCookies(cookieName, cookieValue, expireDays) {
+        var expireDate = new Date();
+        expireDate.setDate(expireDate.getDate() + expireDays);  // 넘겨온 일자 값: 1
+        document.cookie = name + "=" + cookiePosterPath + "; path=/; expires=" + expireDate.toGMTString();     
+    }
+ 
+    // 쿠키 리스트 출력 함수
+    function displayCookieList() {
+        var str = "";
+        if (document.cookie == "") {
+            str = "입력된 쿠키가 없습니다!";
+        }
+        else {
+            // 여러개의 쿠키를 읽어온다. 
+            var cookies = document.cookie.split("; ");
+            for (var i=0; i<cookies.length; i++) {
+            	const tagArea = document.getElementsByClassName('add_collection_lists');
+            	
+            	let count = 0;
+                if (tagArea > 1) {
+                	const newNode = tagArea.cloneNode(true);
+                	count++;
+                	tagArea.after(newNode);
+                }
+                str += "name : " + cookies[i].split("=")[0] + 
+                    ", cookiePosterPath: " + cookies[i].split("=")[1] + "<br />";              
+            }
+        }
+         
+        document.getElementById("lstCookies").innerHTML = str;
     }
     
- 
+    
+    
    
     function goBack(){
 		window.history.back();

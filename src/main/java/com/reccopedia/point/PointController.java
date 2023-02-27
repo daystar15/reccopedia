@@ -26,12 +26,14 @@ public class PointController {
 	public String contentsPointView(Model model,
 		@RequestParam("point") int point,
 		@RequestParam("apiId") int apiId,
+		@RequestParam("title") String title,
+		@RequestParam("posterPath") String posterPath,
 		HttpSession session) {
 	
 		Integer userId = (Integer) session.getAttribute("userId");
 		
 		
-		pointBO.pointToggle(apiId, point, userId);
+		pointBO.pointToggle(apiId, point, userId, title, posterPath);
 		
 		return "contents/contentsPointResult";
 	}

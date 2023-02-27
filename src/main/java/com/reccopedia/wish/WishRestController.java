@@ -20,7 +20,7 @@ public class WishRestController {
 
 	@PostMapping("/wish/{id}")
 	public Map<String, Object> wish(
-			@PathVariable int id,
+			@PathVariable int id, String title, String posterPath,
 			HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<>();
@@ -34,7 +34,7 @@ public class WishRestController {
 			return result;
 		}
 		
-		wishBO.wishToggle(id, userId);
+		wishBO.wishToggle(id, userId, title, posterPath);
 		
 		result.put("code", 1);
 		result.put("result", "성공");

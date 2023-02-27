@@ -84,6 +84,7 @@ public class ContentsBO {
 		return list;
 		
 	}
+
 	
 	
 	public Map<String, Object> generateContent(int id) throws JsonProcessingException {
@@ -93,11 +94,10 @@ public class ContentsBO {
 		// 맵으로 만들기
 		Map<String, Object> result = new HashMap<String, Object>();
 		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
-
 		
 		return result;
-		
 	}
+	
 	
 	
 	

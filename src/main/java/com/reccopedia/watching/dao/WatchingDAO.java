@@ -13,7 +13,9 @@ public interface WatchingDAO {
 
 	public void insertWatching(
 			@Param("apiId") int id, 
-			@Param("userId") int userId);
+			@Param("userId") int userId, 
+			@Param("title") String title, 
+			@Param("posterPath") String posterPath);
 
 	public int selectWatchingByApiIdOrUserId(
 			@Param("apiId") int id, 

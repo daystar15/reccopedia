@@ -11,7 +11,9 @@ public interface WishDAO {
 	
 	public void insertWish(
 			@Param("apiId") int id, 
-			@Param("userId") int userId);
+			@Param("userId") int userId,
+			@Param("title") String title, 
+			@Param("posterPath") String posterPath);
 
 	public int selectWishByApiIdOrUserId(
 			@Param("apiId") int id, 

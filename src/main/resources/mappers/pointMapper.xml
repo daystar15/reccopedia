@@ -9,6 +9,8 @@
  			point
 			, apiId
 			, userId
+			, title
+			, poster_path
 			, createdAt
 			, updatedAt
  		)
@@ -17,6 +19,8 @@
 	 		#{point}
 	 		, #{apiId}
 	 		, #{userId} 
+	 		, #{title}
+	 		, #{posterPath}
 	 		, NOW()
 	 		, NOW()
  		)
@@ -40,6 +44,8 @@
 			, `apiId`
 			, `userId`
 			, `point`
+			, `title`
+			, `poster_path` AS `posterPath`
 			, `createdAt`
 			, `updatedAt`
 		FROM

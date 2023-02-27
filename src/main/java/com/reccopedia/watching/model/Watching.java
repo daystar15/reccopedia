@@ -7,6 +7,8 @@ public class Watching {
 	private int id;
 	private int apiId;
 	private int userId;
+	private String title;
+	private String posterPath;
 	private boolean noInterest;
 	private Date createdAt;
 	private Date updatedAt;
@@ -29,6 +31,18 @@ public class Watching {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getPosterPath() {
+		return posterPath;
+	}
+	public void setPosterPath(String posterPath) {
+		this.posterPath = posterPath;
+	}
 	public boolean isNoInterest() {
 		return noInterest;
 	}
@@ -47,6 +61,7 @@ public class Watching {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
 	
 	
 }

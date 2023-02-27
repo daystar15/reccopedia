@@ -27,16 +27,12 @@
 			<h3 class="analyze_title">나의 list</h3>
 			<ul class="analyze_info">
 				<li>
-					<a href="#">
-						<h4>${fn:length(pointList)}</h4>
-						<span>평가</span>
-					</a>
+					<h4>${fn:length(pointList)}</h4>
+					<span>평가</span>
 				</li>
 				<li>
-					<a href="#">
-						<h4>${fn:length(commentList)}</h4>
-						<span>코멘트</span>
-					</a>
+					<h4>${fn:length(commentList)}</h4>
+					<span>코멘트</span>
 				</li>
 				<li>
 					<a href="/collection/collection_list_view">

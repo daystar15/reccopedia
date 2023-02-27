@@ -22,6 +22,8 @@
 			`id`
 			, `apiId`
 			, `userId`
+			, `title`
+			, `poster_path` AS `posterPath`
 			, `createdAt`
 			, `updatedAt`
 		FROM
@@ -36,6 +38,8 @@
  		(
  			`apiId`
 			, `userId`
+			, `title`
+			, `poster_path`
 			, `createdAt`
 			, `updatedAt`
  		)
@@ -43,6 +47,8 @@
  		(
  			#{apiId}
  			, #{userId}
+ 			, #{title}
+ 			, #{posterPath}
  			, now()
  			, now()
  		)

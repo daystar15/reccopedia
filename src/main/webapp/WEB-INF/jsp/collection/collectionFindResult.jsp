@@ -32,8 +32,9 @@
 	$(document).ready(function() {
 		$(".collection_plus img").on('click', function() {
 			let id = $(this).data('api-id');
-			let cookieId = $.cookie('cookieId', $(this).data('api-id'), {expires: 7, path: '/',  secure: false});
+			$.cookie('cookieId', $(this).data('api-id'), {expires: 7, path: '/',  secure: false});
 
+			
 			$.ajax({
 				type: "GET"
 				, url: "/collection/collection_create_view"

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.comment.bo.CommentBO;
 import com.reccopedia.point.bo.PointBO;
 import com.reccopedia.user.bo.UserBO;
@@ -74,7 +75,6 @@ public class UserController {
 		Integer userId  = (Integer)session.getAttribute("userId");
 		String userName = (String)session.getAttribute("userName");
 		
-		
 		Map<String, Object> userInfo = userBO.getUserByObj(userId);
 		List<Map<String, Object>> wishList = wishBO.getWishList(userId);
 		List<Map<String, Object>> pointList = pointBO.getPointList(userId);
@@ -100,6 +100,7 @@ public class UserController {
 		List<Map<String, Object>> watchingtList = watchingBO.getWatchingList(userId);
 		List<Map<String, Object>> wishList = wishBO.getWishList(userId);
 
+		
 		model.addAttribute("wishList", wishList);
 		model.addAttribute("watchingtList", watchingtList);
 		model.addAttribute("pointList", pointList);
@@ -115,10 +116,8 @@ public class UserController {
 		Integer userId  = (Integer)session.getAttribute("userId");
 		
 		List<Map<String, Object>> watchingtList = watchingBO.getWatchingList(userId);
-		List<Watching> watchingObj =  watchingBO.getWatchingObjList(userId);
 		
 		model.addAttribute("watchingtList", watchingtList);
-		model.addAttribute("watchingObj", watchingObj);
 		model.addAttribute("viewName", "user/keepWatching");
 		return "template/layout";
 	}

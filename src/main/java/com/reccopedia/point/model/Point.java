@@ -6,6 +6,8 @@ public class Point {
 
 	private int id;
 	private int point;
+	private String title;
+	private String posterPath;
 	private int apiId;
 	private int userId;
 	private Date createdAt;
@@ -22,6 +24,18 @@ public class Point {
 	}
 	public void setPoint(int point) {
 		this.point = point;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getPosterPath() {
+		return posterPath;
+	}
+	public void setPosterPath(String posterPath) {
+		this.posterPath = posterPath;
 	}
 	public int getApiId() {
 		return apiId;
@@ -47,6 +61,8 @@ public class Point {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
+	
 	
 	
 }

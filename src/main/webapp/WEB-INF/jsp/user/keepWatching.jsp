@@ -18,12 +18,11 @@
 		
 			<c:forEach items="${watchingtList}" var="list">
 				<!-- 컨텐츠 하나 -->
-				<a href="#">
+				<a href="/contents/contents_view?id=${list.apiId}">
 					<div class="contents_box_poster">
-						<img src="/static/images/test.jpg" alt="">
+						<img src="https://image.tmdb.org/t/p/w500${list.posterPath}" alt="">
 					</div>
-					<h4>${list}</h4>
-					<span>{평가함 &#9733; 4.3}</span>
+					<h4>${list.title}</h4>
 				</a>
 				<!-- 컨텐츠 하나 끝 -->
 			</c:forEach>

@@ -7,8 +7,11 @@ public class Wish {
 	private int id;
 	private int apiId;
 	private int userId;
+	private String title;
+	private String posterPath;
 	private Date createdAt;
 	private Date updatedAt;
+	
 	public int getId() {
 		return id;
 	}
@@ -27,6 +30,18 @@ public class Wish {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getPosterPath() {
+		return posterPath;
+	}
+	public void setPosterPath(String posterPath) {
+		this.posterPath = posterPath;
+	}
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -39,6 +54,7 @@ public class Wish {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
 	
 	
 }

@@ -15,14 +15,14 @@ public class WatchingBO {
 	@Autowired
 	private WatchingDAO watchingDAO;
 	
-	public void watchingToggle(int id, int userId) {
+	public void watchingToggle(int id, int userId, String title, String posterPath) {
 		// 위시 리스트에 있는지 확인
 		if (watchingDAO.selectWatchingByApiIdOrUserId(id, userId) > 0) {
 			// 있으면 제거
 			watchingDAO.deleteWatchingByApiIdUserId(id, userId);
 		} else {
 			// 없으면 추가
-			watchingDAO.insertWatching(id, userId);
+			watchingDAO.insertWatching(id, userId, title, posterPath);
 		}
 	};
 	
