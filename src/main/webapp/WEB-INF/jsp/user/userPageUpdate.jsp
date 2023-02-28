@@ -1,24 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="user_wrap">
 	<div class="user_box">
 		
-		<form action="/user/user_update" id="uploadForm" method="post">
+		<form action="" id="uploadForm" method="post">
 			<input type="hidden" name="_method" value="put"/>
 
 			<!-- 백그라운드이미지 -->
 			<%-- 기본 이미지, 유저가 업로드 하면 이미지 변경됨 --%>
 			<input type="file" id="user_background_file" class="none" accept=".gif, .jpg, .png, .jpeg">
 			<div class="user_background">
+				<c:if test="${empty userInfo.backgroundImagePath}">
 				<img src="/static/images/user_page_background.jpg" alt="">
+				</c:if>
+				<div>
+					<img src="${userInfo.backgroundImagePath}" alt="">
+				</div>
 			</div>
 			<!-- 백그라운드이미지 끝-->
 			<!-- 유저 정보 -->
 			<div class="user_info">
 				<input type="file" id="user_profile_file" class="none" accept=".gif, .jpg, .png, .jpeg">
-				<div class="user_profile_img">
-					<img src="/static/images/test.jpg" alt="">
+				<div class="user_profile_img">	
+					<c:if test="${empty userInfo.profileImagePath}">
+					<img src="${userInfo.profileImagePath}" alt="">
+					</c:if>
+					<div class="profile_box">
+						<img src="${userInfo.profileImagePath}" alt="">
+					</div>
 				</div>
 				<div class="user_update_name">
 					<input type="text" name="name" id="user_name" value="${userInfo.name}">
@@ -169,8 +181,10 @@
 			
 			let name = $("input[name=name]").val().trim();
 			let info = $("#user_introduce").val();
-			let backgroundFile = $("#user_background_file").val();
-			let profileFile = $("#user_profile_file").val();
+			let backgroundFile = $("#user_background_file").val().split("/").pop().split('\\').pop().toLowerCase();
+			let profileFile = $("#user_profile_file").val().split("/").pop().split('\\').pop().toLowerCase();
+			
+			//alert(backgroundFile + profileFile);
 			
 			if (name.length < 1) {
 				alert("이름을 입력해주세요");
@@ -184,7 +198,7 @@
 			
 			// 파일이 업로드 된 경우 확장자 체크
 			if (backgroundFile != '') {
-				let backgroundFileext = backgroundFile.split(".").pop().toLowerCase();
+				let backgroundFileext = backgroundFile.split(".").pop();
 				if ($.inArray(backgroundFileext, ['jpg', 'jpeg', 'png', 'gif']) == -1) { // 배열안에 포함되지 않았을 때
 					alert("이미지 파일만 업로드 할 수 있습니다.");
 					$('#user_background_file').val(""); // 파일을 비운다.
@@ -194,7 +208,7 @@
 			
 			// 파일이 업로드 된 경우 확장자 체크
 			if (profileFile != '') {
-				let profileFileext = profileFile.split(".").pop().toLowerCase();
+				let profileFileext = profileFile.split(".").pop();
 				if ($.inArray(profileFileext, ['jpg', 'jpeg', 'png', 'gif']) == -1) { // 배열안에 포함되지 않았을 때
 					alert("이미지 파일만 업로드 할 수 있습니다.");
 					$('#user_profile_file').val(""); // 파일을 비운다.
@@ -207,6 +221,7 @@
 			formData.append("info", info); 
 			formData.append("backgroundFile", $("#user_background_file")[0].files[0]); 
 			formData.append("profileFile", $("#user_profile_file")[0].files[0]); 
+			
 			
 			
 			// AJAX form 데이터 전송

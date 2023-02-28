@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="user_wrap">
 	<div class="user_box">
 		<!-- 설정 버튼 -->
@@ -10,13 +12,23 @@
 		<!-- 백그라운드이미지 -->
 		<%-- 기본 이미지, 유저가 업로드 하면 이미지 변경됨 --%>
 		<div class="user_background">
+			<c:if test="${empty userInfo.backgroundImagePath}">
 			<img src="/static/images/user_page_background.jpg" alt="">
+			</c:if>
+			<div>
+				<img src="${userInfo.backgroundImagePath}" alt="">
+			</div>
 		</div>
 		<!-- 백그라운드이미지 끝-->
 		<!-- 유저 정보 -->
 		<div class="user_info">
-			<div class="user_profile_img">
-				<img src="/static/images/test.jpg" alt="">
+			<div class="user_profile_img">	
+				<c:if test="${empty userInfo.profileImagePath}">
+				<img src="${userInfo.profileImagePath}" alt="">
+				</c:if>
+				<div class="profile_box">
+					<img src="${userInfo.profileImagePath}" alt="">
+				</div>
 			</div>
 			<h2 class="user_name">${userInfo.name}</h2>
 			<p class="user_introduce">${userInfo.info}</p>

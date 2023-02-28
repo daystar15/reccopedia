@@ -22,14 +22,14 @@ public class FileManagerService {
 	
 	// input: MultipartFile, email
 	// output: image path
-	public String saveBackgroundFile(String email, MultipartFile backgroundfile) {
+	public String saveBackgroundFile(String userEmail, MultipartFile backgroundfile) {
 		// 파일 디렉토리 - 사람마다 폴더를 저장함(userLoginId를 받아온 이유)
 		// 예) aaaa_162090932/sun.png(시간을 유일한 폴더값으로 만든다)
-		String directoryName = email + "_" + System.currentTimeMillis() + "/";  // aaaa_162090932/
+		String directoryName = userEmail + "_background_" + System.currentTimeMillis() + "/";  // aaaa_162090932/
 		String filePath = FILE_UPLOAD_PATH + directoryName; //C:\Users\lg\Desktop\6_spring_project\notebook\notebook_reccopedia\workspace\images/aaaa_162090932/
 		
 		File directory = new File(filePath); // 폴더 만들어낼 준비
-		if (directory.mkdir() == false) {  // 폴더가 만들어짐 boolean
+		if (directory.mkdirs() == false) {  // 폴더가 만들어짐 boolean
 			return null;  // 폴더 만드는데 실패 시 이미지패스 null
 		}
 		
@@ -54,7 +54,7 @@ public class FileManagerService {
 	public String saveProfileFile(String email, MultipartFile profilefile) {
 		// 파일 디렉토리 - 사람마다 폴더를 저장함(userLoginId를 받아온 이유)
 		// 예) aaaa_162090932/sun.png(시간을 유일한 폴더값으로 만든다)
-		String directoryName = email + "_" + System.currentTimeMillis() + "/";  // aaaa_162090932/
+		String directoryName = email + "_profile_" + System.currentTimeMillis() + "/";  // aaaa_162090932/
 		String filePath = FILE_UPLOAD_PATH + directoryName; //D:\kimnamhui\6_spring_project\sns\workspace\images/aaaa_162090932/
 		
 		File directory = new File(filePath); // 폴더 만들어낼 준비

@@ -10,12 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.comment.bo.CommentBO;
 import com.reccopedia.point.bo.PointBO;
 import com.reccopedia.user.bo.UserBO;
+import com.reccopedia.user.model.User;
 import com.reccopedia.watching.bo.WatchingBO;
-import com.reccopedia.watching.model.Watching;
 import com.reccopedia.wish.bo.WishBO;
 
 import jakarta.servlet.http.HttpSession;
@@ -38,6 +37,8 @@ public class UserController {
 	
 	@Autowired
 	private WatchingBO watchingBO;
+	
+	
 	
 	// 유저페이지
 	@GetMapping("/user_view")
@@ -73,7 +74,6 @@ public class UserController {
 			HttpSession session) {
 		
 		Integer userId  = (Integer)session.getAttribute("userId");
-		String userName = (String)session.getAttribute("userName");
 		
 		Map<String, Object> userInfo = userBO.getUserByObj(userId);
 		List<Map<String, Object>> wishList = wishBO.getWishList(userId);

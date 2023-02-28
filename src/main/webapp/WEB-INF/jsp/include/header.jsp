@@ -40,9 +40,14 @@
 	                <a href="/user/evaluate_view" id="go_review">평가하기</a>
 	                <a href="/user/sign_out" id="logoutBtn">로그아웃</a>
 	                <a href="/user/user_view" id="go_userPage">
-	                    <span class="comment_user_profile">
-	                        <img src="/static/images/test.jpg" alt="">
-	                    </span>
+	                <div class="comment_user_profile">
+						<c:if test="${empty userinfo.profileImagePath}">
+							<img src="" alt="">
+						</c:if>
+						<div class="profile_box">
+							<img src="${userinfo.userProfileImagePath}" alt="">
+						</div>
+					</div>
 	                </a>
 	            </div>
 	        </div>

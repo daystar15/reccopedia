@@ -625,8 +625,15 @@ textarea {
     overflow: hidden;
     margin-right: 1.2rem;
 }
+.profile_box {
+	width: 180px;
+    position: relative;
+}
 .user_profile_img img {
     width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .user_update_name {
 	margin: 2rem 0;

@@ -68,6 +68,7 @@ public class UserRestController {
 	public Map<String, Object> signIn(
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
+			Model model,
 			HttpSession session) {
 		
 		// username은 user / 비번 cbb42cef-6deb-47ef-9fcb-c278a4d242e8
@@ -75,6 +76,7 @@ public class UserRestController {
 		// String 암호화된Password = 
 		
 		User user = userBO.getUserByLoginEmailPassword(email, password);
+
 		Map<String, Object> result = new HashMap<>();
 				
 		if (user != null) {
@@ -93,8 +95,7 @@ public class UserRestController {
 	
 	@PutMapping("/user_update")
 	public Map<String, Object> userUpdate(Model model,
-			@RequestParam(value="name", required=false) String name,
-			@RequestParam(value="email", required=false) String email, 
+			@RequestParam(value="name", required=false) String name, 
 			@RequestParam(value="info", required=false) String info,
 			@RequestParam(value="backgroundFile", required=false) MultipartFile backgroundfile,
 			@RequestParam(value="profileFile", required=false) MultipartFile profilefile,
@@ -102,10 +103,11 @@ public class UserRestController {
 		
 		
 		int userId  = (int)session.getAttribute("userId");
+		String userEmail  = (String)session.getAttribute("userEmail");
 		
 		Map<String, Object> result = new HashMap<>();
 		
-		userBO.updateUser(userId, email, name, info, backgroundfile, profilefile);
+		userBO.updateUser(userId, userEmail, name, info, backgroundfile, profilefile);
 		
 		
 		result.put("code", 1);

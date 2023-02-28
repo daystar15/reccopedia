@@ -131,9 +131,9 @@
 			`name`= #{name}
 			, `info`= #{info}
  			, `updatedAt` = NOW()
- 			<if test="backgroundfileimagePath != null and profilefileimagePath != null">
- 			, `profileImagePath`= #{profilefileimagePath}
-			, `backgroundImagePath`= #{backgroundfileimagePath}
+ 			<if test="backgroundImagePath != null or profileImagePath != null">
+ 			, `profileImagePath`= #{profileImagePath}
+			, `backgroundImagePath`= #{backgroundImagePath}
  			</if>
  		WHERE
 			`id` = #{userId}

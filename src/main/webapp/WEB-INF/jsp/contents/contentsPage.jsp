@@ -108,7 +108,10 @@
 					<c:if test="${not empty userId}">
 						<c:if test="${not empty myComment}">
 							<div class="my_comment" data-comment-id="${myComment.id}">
-								<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
+								<span class="comment_user_profile"> 
+									<div class="profile_box">
+										<img src="${userinfo.profileImagePath}" alt="">
+									</div>
 								</span>
 								<p>${myComment.content}</p>
 							</div>
@@ -197,7 +200,10 @@
 								<!-- 댓글 하나 -->
 								<div class="comment_user">
 									<a href="#" class="comment_left">
-										<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
+										<span class="comment_user_profile">
+											<div class="profile_box">
+												<img src="${userinfo.profileImagePath}" alt="">
+											</div>
 										</span> <span class="comment_user_name"> ${list.user.name} </span>
 									</a>
 									<div class="comment_right">&#9733; ${list.pointCount}</div>

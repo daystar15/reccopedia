@@ -32,11 +32,11 @@ public interface UserDAO {
 	
 	public void updateUser(
 			@Param("userId") int userId, 
-			@Param("email") String email, 
+			@Param("userEmail") String userEmail, 
 			@Param("name") String name, 
 			@Param("info") String info, 
-			@Param("backgroundfileimagePath") String backgroundfileimagePath, 
-			@Param("profilefileimagePath") String profilefileimagePath);
+			@Param("backgroundImagePath") String backgroundImagePath, 
+			@Param("profileImagePath") String profileImagePath);
 	
 	public List<User> selectuserListById(int id);
 	

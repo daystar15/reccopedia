@@ -14,8 +14,12 @@
 	<div class="comment_box" data-comment-id="${list.comment.id}" data-mycomment-id="${myComment.id}" data-user-id="${userInfo.id}" data-api-id="${list.comment.apiId}">
 		<div class="comment_user">
 			<a class="comment_left">
-				<span class="comment_user_profile"> <img src="/static/images/test.jpg" alt="">
-				</span> <span class="comment_user_name">${list.user.name} </span>
+				<span class="comment_user_profile"> 
+					<div class="profile_box">
+						<img src="${userInfo.profileImagePath}" alt="">
+					</div>
+				</span> 
+				<span class="comment_user_name">${list.user.name} </span>
 			</a>
 			<div class="comment_right_box">
 				<c:if test="${not empty userId}">
