@@ -41,14 +41,14 @@
 	                <a href="/user/sign_out" id="logoutBtn">로그아웃</a>
 	                <a href="/user/user_view" id="go_userPage">
 	                <div class="comment_user_profile">
-						<c:if test="${empty userProfile}">
+	                	<c:if test="${empty userProfile}">
+	                	<div class="fake_box">
 							<img src="/static/images/pngegg.png" alt="">
+						</div>
 						</c:if>
-						${userName}
 						<div class="profile_box">
 							<img src="${userProfile}" alt="">
 						</div>
-						
 					</div>
 	                </a>
 	            </div>

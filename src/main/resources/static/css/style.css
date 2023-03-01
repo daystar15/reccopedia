@@ -420,10 +420,13 @@ textarea {
     color:rgb(238, 238, 238);
     cursor:pointer;
 }
-.star-rating :checked ~ label,
+.star-rating:checked ~ label,
 .star-rating label:hover,
 .star-rating label:hover ~ label {
     color:#fc0;
+}
+input:checked + label.star {
+  color:#fc0;
 }
 
 .review_more {
@@ -629,6 +632,10 @@ textarea {
     margin-right: 1.2rem;
 }
 .profile_box {
+	width: 180px;
+    position: relative;
+}
+.fake_box {
 	width: 180px;
     position: relative;
 }
@@ -838,6 +845,9 @@ textarea {
 }
 .comment_user_profile img {
     width: 100%;
+}
+.fake_box img {
+	width: 100%;
 }
 .comment_user_name {
     color: rgb(31, 31, 31);
@@ -1619,6 +1629,13 @@ textarea {
 .overview table tr td {
     padding: 1rem 0;
     border-bottom: 1px solid #e5e5e5;
+}
+.overview table tr th:last-child,
+.overview table tr:last-child td {
+    height: 200px;
+}
+.overview table tr:last-child td {
+	line-height: 1.6
 }
 /* 컬렉션 페이지 */
 .collection_page_box {

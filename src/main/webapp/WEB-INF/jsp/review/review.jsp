@@ -27,24 +27,24 @@
 				<c:forEach var="movieTrending" items="${movieTrending}" >
 				<li>
 					<!-- 영화 목록 하나 -->
-					<div class="border_box" data-api-id="${movieTrending.id}">
+					<div class="border_box" data-api-id="${movieTrending.id}" id="movieList">
 						<div class="review_left">
-							<div class="review_poster" data-img-path="${movieTrending.poster_path}">
+							<div class="review_poster">
 								<img src="https://image.tmdb.org/t/p/w500/${movieTrending.poster_path}" alt="">
 							</div>
 							<div class="review_info">
 								<div>
-									<h4 class="review_subject" data-movie-title="${movieTrending.title}">${movieTrending.title}</h4>
+									<h4 class="review_subject" data-title="${movieTrending.title}">${movieTrending.title}</h4>
 									<div class="content_info">
 										<span class="year">${fn:substring(movieTrending.release_date,0,4)}</span> &middot; <span class="country">${movieTrending.original_language}</span>
 									</div>
 								</div>
-								<div class="star-rating">
-									<label class="star">&#9733;<input type="radio" name="rating" value="1" /></label>
-									<label class="star">&#9733;<input type="radio" name="rating" value="2" /></label>
-									<label class="star">&#9733;<input type="radio" name="rating" value="3" /></label>
-									<label class="star">&#9733;<input type="radio" name="rating" value="4" /></label>
-									<label class="star">&#9733;<input type="radio" name="rating" value="5" /></label>
+								<div class="star-rating" data-img="${movieTrending.poster_path}" data-api="${movieTrending.id}" data-title="${movieTrending.title}">
+									<label class="star"><input type="radio" name="rating" value="5" onclick="button5_click();"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="4" onclick="button4_click();"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="3" onclick="button3_click();" />&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="2" onclick="button2_click();"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="1" onclick="button1_click();"/>&#9733;</label>
 								</div>
 								
 								<%-- 별점 눌려있을 때 --%>
@@ -102,14 +102,40 @@
 	</div>
 </div>
 
-<script>
+<script> 
+	function button1_click(e) {
+		let target = event.target;
+		let parent = target.parentElement;
+	    console.log(parent);
+	    parent.style.color="#fc0";
+	}
+	function button2_click() {
+		let target = event.target;
+		let parent = target.parentElement;
+	    console.log(parent);
+	    parent.style.color="#fc0";
+	}
+	function button3_click() {
+		let target = event.target;
+		let parent = target.parentElement;
+	    console.log(parent);
+	    parent.style.color="#fc0";
+	}
+	function button4_click() {
+		let target = event.target;
+		let parent = target.parentElement;
+	    console.log(parent);
+	    parent.style.color="#fc0";
+	}
+	function button5_click() {
+		let target = event.target;
+		let parent = target.parentElement;
+	    console.log(parent);
+	    parent.style.color="#fc0";
+	}
 	$(document).ready(function() {
 		
-		// 클릭한 영화 제목
-		let title = $('.review_more > div').data('api-title');
-		
-		$(".write_comment_top h6").text(title);
-		
+
 		// 별점 나타내기 버튼
         let mypoint = $(".star-rating").data('point-id');
         if (mypoint == 1) {
@@ -134,8 +160,10 @@
         	$('#5-stars').prop('checked', true);
         }
         
-       	$('.review_more > div').on('click', function() {
+       	$('.review_more > div').on('click', function(e) {
            	let apiId = $('.review_more').data('api-id');
+			let title = e.target.attributes[0].value;
+			$(".write_comment_top h6").text(title);
            	$(".comment_modal").removeClass('none');
             $(".modal_back").removeClass('none');
         });
@@ -188,22 +216,22 @@
         	
         	
         }); //---댓글 작성
-        
+
+
         
         // 별점 버튼
-        $("input[name=rating]").on('click', function() {
-        	let apiId = $(".border_box").data('api-id');
+        $("input[name=rating]").on('click', function(e) {
+        	let apiId = e.target.parentElement.parentElement.dataset.api;
         	let point = $(this).val();
         	let userId = $(".content_list").data('user-id');
-        	let title = $(".review_subject").data('movie-title');
-        	let posterPath = $(".review_poster").data('img-path');
-
+			let title = e.target.parentElement.parentElement.dataset.title;
+			let posterPath = e.target.parentElement.parentElement.dataset.img;
+        	//console.log(apiId + title + img);
+		
         	if (userId == 0) {
         		alert("로그인을 해주세요");
         		return;
         	}
-
-			alert(title);
         	
         	$.ajax({
         		type: "post"
@@ -216,6 +244,7 @@
         			alert("에러");
         		}
         	});//---ajax
+        	
         })// ---별점 버튼
 		
 		$(".review_more").on('click', function() {

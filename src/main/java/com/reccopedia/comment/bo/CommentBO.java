@@ -35,6 +35,10 @@ public class CommentBO {
 		return commentDAO.selectCommentListByApiId(id);
 	}
 	
+	public List<Comment> getCommentListById(int id) {
+		return commentDAO.selectCommentListById(id);
+	}
+	
 	public Comment getCommentListByApiIdAndUserId(int id, Integer userId) {
 		return commentDAO.selectCommentListByApiIdAndUserId(id, userId);
 	}

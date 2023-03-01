@@ -25,10 +25,10 @@
 				<c:if test="${not empty userId}">
 				<div class="report_box">
 					<c:if test="${list.user.email ne userInfo.email}">
-					<span id="reportBtn">신고</span>
+					<span class="reportBtn">신고</span>
 					</c:if>
 					<c:if test="${list.user.email eq userInfo.email}">
-					<span id="deleteBtn">삭제</span>
+					<span class="deleteBtn">삭제</span>
 					</c:if>
 				</div>
 				</c:if>
@@ -61,7 +61,7 @@
 <script>
 	$(document).ready(function() {
 		// 댓글 삭제
-        $("#deleteBtn").on('click', function() {
+        $(".deleteBtn").on('click', function() {
         	let id = $('.comment_box').data('mycomment-id');
         	
         	// ajax 글 삭제
@@ -89,7 +89,7 @@
         
         
        // 댓글 신고
-       $("#reportBtn").on('click', function() {
+       $(".reportBtn").on('click', function() {
        	    let apiId = $('.comment_box').data('api-id');
        		let userId = $('.comment_box').data('user-id');
           	let commentId = $('.comment_box').data('comment-id');

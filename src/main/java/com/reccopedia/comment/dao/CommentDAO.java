@@ -19,6 +19,8 @@ public interface CommentDAO {
 	
 	public List<Comment> selectCommentListByApiId(int id);
 	
+	public List<Comment> selectCommentListById(int id);
+	
 	public List<Map<String, Object>> selectCommentListByUserId(Integer userId);
 	
 	public Comment selectCommentListByApiIdAndUserId(

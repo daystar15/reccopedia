@@ -89,13 +89,15 @@
 									      <td style="vertical-align: middle">${fn:length(reportList) - status.index}</td>
 									      <td style="vertical-align: middle">${list.apiId}</td>
 									      <td style="vertical-align: middle">${list.userId}</td>
-									      <td class="commentId" data-comment-id="${list.commentId}" style="vertical-align: middle">${list.commentId}</td>
+									      <td class="commentId" data-comment="${list.commentId}" style="vertical-align: middle">${list.commentId}</td>
 									      <td style="vertical-align: middle">${list.content}</td>
 									      <td style="vertical-align: middle">${list.reason}</td>
 									      <td style="vertical-align: middle">
-									      	<c:if test="${empty list.commentId}">
+								      	  <c:forEach items="${commentList}" var="comment">
+									      	 <c:if test="${comment.id ne list.commentId}">
 									      		삭제완료
-									      	</c:if>
+									      	 </c:if>
+									      </c:forEach>
 									      </td>
 									      <td><button type="button" class="deleteBtn btn btn-danger">삭제</button></td>
 									   </tr>
@@ -120,9 +122,9 @@
     
     <script>
     	$(document).ready(function(){
-    		$(".deleteBtn").on('click', function() {
-    			let id = $(".commentId").data("comment-id");
-    			
+    		$(".deleteBtn").on('click', function(e) {
+    			let id = event.target.parentElement.parentElement.querySelector(".commentId").dataset.comment;
+    			console.log(id);
     			// ajax 글 삭제
     			$.ajax ({
     				// request

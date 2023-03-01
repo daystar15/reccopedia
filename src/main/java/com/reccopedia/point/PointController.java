@@ -41,6 +41,9 @@ public class PointController {
 		List<Map<String, Object>> movieTrending = pointBO.generateMovieTrendingMap();
 		
 		
+			//List<Point> pointList = pointBO.getPointCountByApiId(id, point, (Integer) session.getAttribute("userId"));
+			//model.addAttribute("pointList", pointList);
+		
 		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("movieTrending", movieTrending);
 		model.addAttribute("viewName", "review/review");

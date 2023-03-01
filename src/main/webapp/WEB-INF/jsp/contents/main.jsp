@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="main_wrap">
 	<div class="section">
 		<div class="inner">
@@ -17,12 +18,9 @@
 							</div>
 							<h3 class="content_subject">${now.title}</h3>
 							<div class="content_info">
-								<span class="year">${year}</span> &middot; <span class="country">나라</span>
+								<span class="year">${fn:substring(now.release_date,0,4)}</span> &middot; <span class="country">${now.original_language}</span>
 							</div>
 							<div class="point">평균 &starf; 4.2</div>
-							<div class="reserve">
-								<span class="reservation_rate"> 예매율 17% </span> &middot; <span class="accumulate"> ${now.popularity} </span>
-							</div>
 						</a>
 					</li>
 					</c:forEach>

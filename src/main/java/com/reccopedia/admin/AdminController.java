@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.reccopedia.admin.bo.AdminBO;
+import com.reccopedia.comment.bo.CommentBO;
+import com.reccopedia.comment.model.Comment;
 import com.reccopedia.report.bo.ReportBO;
 import com.reccopedia.report.model.Report;
 import com.reccopedia.user.bo.UserBO;
@@ -28,6 +30,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserBO userBO;
+	
+	@Autowired
+	private CommentBO commentBO;
 
 	// 어드민 로그인 페이지
 	@GetMapping("/login")
@@ -48,7 +53,9 @@ public class AdminController {
 		
 		List<User> userList = userBO.getuserListById(id);
 		List<Report> reportList = reportBO.getreportCommentListById(id);
+		List<Comment> commentList = commentBO.getCommentListById(id);
 		
+		model.addAttribute("commentList", commentList);
 		model.addAttribute("userList", userList);
 		model.addAttribute("reportList", reportList);
 		

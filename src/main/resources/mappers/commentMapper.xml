@@ -40,6 +40,19 @@
 			`apiId` = #{id}
  	</select>
  	
+ 	<select id="selectCommentListById" parameterType="int" resultType="com.reccopedia.comment.model.Comment">
+ 		SELECT
+ 			`id`
+			, `apiId`
+			, `pointId`
+			, `userId`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comment`
+ 	</select>
+ 	
  	<select id="selectCommentListByUserId" parameterType="int" resultType="com.reccopedia.comment.model.Comment">
  		SELECT
  			`id`
