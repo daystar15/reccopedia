@@ -1,20 +1,28 @@
 package com.reccopedia.point.bo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reccopedia.point.dao.PointDAO;
 import com.reccopedia.point.model.Point;
+import com.reccopedia.restAPI.dao.RestTemplateService;
 
 @Service
 public class PointBO {
 	
 	@Autowired
 	private PointDAO pointDAO;
+	
+	@Autowired
+	private RestTemplateService resttemplateservice;
 
 	public void pointToggle(int apiId, int userId, int point, String title, String posterPath) {
 		// 위시 리스트에 있는지 확인
@@ -65,6 +73,23 @@ public class PointBO {
 	
 	public List<Map<String, Object>> getPointList(int userId) {
 		return pointDAO.selectPointListByApiIdOrUserId(userId);
+	}
+
+	
+	public List<Map<String, Object>> generateMovieTrendingMap() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = resttemplateservice.movieTrendingAPI();
+		
+		// 맵으로 만들기
+		Map<String, Object> result = new HashMap<String, Object>();
+		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+		
+		List<Map<String, Object>> list = new ArrayList<>();
+		list = (List<Map<String, Object>>) result.get("results");
+		
+		 
+		return list;
+		
 	}
 
 

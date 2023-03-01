@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="review_wrap">
 	<div class="review_box">
 		<h3 class="review_count">92</h3>
@@ -19,154 +22,205 @@
 		</div>
 		<!-- 랜덤영화 선택 탭 끝 -->
 		<!-- 영화 목록 박스 -->
-		<div class="content_list">
+		<div class="content_list" data-user-id="${userinfo.id}">
 			<ul>
+				<c:forEach var="movieTrending" items="${movieTrending}" >
 				<li>
 					<!-- 영화 목록 하나 -->
-					<div class="border_box">
+					<div class="border_box" data-api-id="${movieTrending.id}">
 						<div class="review_left">
-							<div class="review_poster">
-								<img src="/static/images/test.jpg" alt="">
+							<div class="review_poster" data-img-path="${movieTrending.poster_path}">
+								<img src="https://image.tmdb.org/t/p/w500/${movieTrending.poster_path}" alt="">
 							</div>
 							<div class="review_info">
 								<div>
-									<h4 class="review_subject">돼룩돼룩</h4>
+									<h4 class="review_subject" data-movie-title="${movieTrending.title}">${movieTrending.title}</h4>
 									<div class="content_info">
-										<span class="year">2022</span> &middot; <span class="country">한국</span>
+										<span class="year">${fn:substring(movieTrending.release_date,0,4)}</span> &middot; <span class="country">${movieTrending.original_language}</span>
 									</div>
 								</div>
 								<div class="star-rating">
-									<input type="radio" id="5-stars" name="rating" value="5" />
-									<label for="5-stars" class="star">&#9733;</label>
-									<input type="radio" id="4-stars" name="rating" value="4" />
-									<label for="4-stars" class="star">&#9733;</label>
-									<input type="radio" id="3-stars" name="rating" value="3" />
-									<label for="3-stars" class="star">&#9733;</label>
-									<input type="radio" id="2-stars" name="rating" value="2" />
-									<label for="2-stars" class="star">&#9733;</label>
-									<input type="radio" id="1-star" name="rating" value="1" />
-									<label for="1-star" class="star">&#9733;</label>
+									<label class="star">&#9733;<input type="radio" name="rating" value="1" /></label>
+									<label class="star">&#9733;<input type="radio" name="rating" value="2" /></label>
+									<label class="star">&#9733;<input type="radio" name="rating" value="3" /></label>
+									<label class="star">&#9733;<input type="radio" name="rating" value="4" /></label>
+									<label class="star">&#9733;<input type="radio" name="rating" value="5" /></label>
 								</div>
+								
+								<%-- 별점 눌려있을 때 --%>
+								<div class="filledPoint" >
+								
+								</div>
+								<%-- 별점 눌려있을 때 --%>
 							</div>
 						</div>
 					</div>
-					<div class="review_more">
-						<div>
-							<span class="more_circle"></span> <span class="more_circle"></span> <span class="more_circle"></span>
+					<div class="review_more" data-api-id="${movieTrending.id}">
+						<div data-api-title="${movieTrending.title}">
+							<span class="more_circle"></span> 
+							<span class="more_circle"></span> 
+							<span class="more_circle"></span>
 						</div>
 					</div>
 					<!-- 영화 목록 하나 끝 -->
 				</li>
-				<li>
-					<!-- 영화 목록 하나 -->
-					<div class="border_box">
-						<div class="review_left">
-							<div class="review_poster">
-								<img src="/static/images/test.jpg" alt="">
-							</div>
-							<div class="review_info">
-								<div>
-									<h4 class="review_subject">돼룩돼룩</h4>
-									<div class="content_info">
-										<span class="year">2022</span> &middot; <span class="country">한국</span>
-									</div>
-								</div>
-								<div class="star-rating">
-									<input type="radio" id="5-stars" name="rating" value="5" />
-									<label for="5-stars" class="star">&#9733;</label>
-									<input type="radio" id="4-stars" name="rating" value="4" />
-									<label for="4-stars" class="star">&#9733;</label>
-									<input type="radio" id="3-stars" name="rating" value="3" />
-									<label for="3-stars" class="star">&#9733;</label>
-									<input type="radio" id="2-stars" name="rating" value="2" />
-									<label for="2-stars" class="star">&#9733;</label>
-									<input type="radio" id="1-star" name="rating" value="1" />
-									<label for="1-star" class="star">&#9733;</label>
-								</div>
-							</div>
-						</div>
-						<div class="review_more">
-							<div>
-								<span class="more_circle"></span> <span class="more_circle"></span> <span class="more_circle"></span>
-							</div>
-						</div>
-					</div>
-					<!-- 영화 목록 하나 끝 -->
-				</li>
-				<li>
-					<!-- 영화 목록 하나 -->
-					<div class="border_box">
-						<div class="review_left">
-							<div class="review_poster">
-								<img src="/static/images/test.jpg" alt="">
-							</div>
-							<div class="review_info">
-								<div>
-									<h4 class="review_subject">돼룩돼룩</h4>
-									<div class="content_info">
-										<span class="year">2022</span> &middot; <span class="country">한국</span>
-									</div>
-								</div>
-								<div class="star-rating">
-									<input type="radio" id="5-stars" name="rating" value="5" />
-									<label for="5-stars" class="star">&#9733;</label>
-									<input type="radio" id="4-stars" name="rating" value="4" />
-									<label for="4-stars" class="star">&#9733;</label>
-									<input type="radio" id="3-stars" name="rating" value="3" />
-									<label for="3-stars" class="star">&#9733;</label>
-									<input type="radio" id="2-stars" name="rating" value="2" />
-									<label for="2-stars" class="star">&#9733;</label>
-									<input type="radio" id="1-star" name="rating" value="1" />
-									<label for="1-star" class="star">&#9733;</label>
-								</div>
-							</div>
-						</div>
-						<div class="review_more">
-							<div>
-								<span class="more_circle"></span> <span class="more_circle"></span> <span class="more_circle"></span>
-							</div>
-						</div>
-					</div>
-					<!-- 영화 목록 하나 끝 -->
-				</li>
-				<li>
-					<!-- 영화 목록 하나 -->
-					<div class="border_box">
-						<div class="review_left">
-							<div class="review_poster">
-								<img src="/static/images/test.jpg" alt="">
-							</div>
-							<div class="review_info">
-								<div>
-									<h4 class="review_subject">돼룩돼룩</h4>
-									<div class="content_info">
-										<span class="year">2022</span> &middot; <span class="country">한국</span>
-									</div>
-								</div>
-								<div class="star-rating">
-									<input type="radio" id="5-stars" name="rating" value="5" />
-									<label for="5-stars" class="star">&#9733;</label>
-									<input type="radio" id="4-stars" name="rating" value="4" />
-									<label for="4-stars" class="star">&#9733;</label>
-									<input type="radio" id="3-stars" name="rating" value="3" />
-									<label for="3-stars" class="star">&#9733;</label>
-									<input type="radio" id="2-stars" name="rating" value="2" />
-									<label for="2-stars" class="star">&#9733;</label>
-									<input type="radio" id="1-star" name="rating" value="1" />
-									<label for="1-star" class="star">&#9733;</label>
-								</div>
-							</div>
-						</div>
-						<div class="review_more">
-							<div>
-								<span class="more_circle"></span> <span class="more_circle"></span> <span class="more_circle"></span>
-							</div>
-						</div>
-					</div>
-					<!-- 영화 목록 하나 끝 -->
-				</li>
+				</c:forEach>
+				
 			</ul>
 		</div>
 		<!-- 영화 목록 박스 끝 -->
 	</div>
 </div>
+
+
+<%--모달배경 --%>
+<div class="modal_back none"></div>
+<%-- 코멘트창 클릭 시 시작 --%>
+<div class="comment_modal none">
+	<div class="modal_box">
+		<div class="write_comment_top">
+			<h6></h6>
+			<span class="comment_close"> <img src="/static/images/close.png" alt="">
+			</span>
+		</div>
+		<form action="" method="post">
+			<textarea name="write_comment_content" id="write_comment_content" maxlength="10000" rows="10" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요.">${myComment.content}</textarea>
+			<div>
+				<div class="write_comment_left">
+					<!-- sns 공유
+                                <span></span> 
+                            -->
+					<span class="no_spoiler"> <img src="/static/images/hide.png" alt="">
+					</span>
+				</div>
+				<div class="write_comment_right">
+					<span class="comment_length">0/10000</span>
+					<input type="submit" value="저장" id="submitComment">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		
+		// 클릭한 영화 제목
+		let title = $('.review_more > div').data('api-title');
+		
+		$(".write_comment_top h6").text(title);
+		
+		// 별점 나타내기 버튼
+        let mypoint = $(".star-rating").data('point-id');
+        if (mypoint == 1) {
+        	$('#1-star').prop('checked', true);
+        } else if (mypoint == 2) {
+        	$('#1-star').prop('checked', true);
+        	$('#2-stars').prop('checked', true);
+        } else if (mypoint == 3) {
+        	$('#1-star').prop('checked', true);
+        	$('#2-stars').prop('checked', true);
+        	$('#3-stars').prop('checked', true);
+        } else if (mypoint == 4) {
+        	$('#1-star').prop('checked', true);
+        	$('#2-stars').prop('checked', true);
+        	$('#3-stars').prop('checked', true);
+        	$('#4-stars').prop('checked', true);
+        } else if (mypoint == 5) {
+        	$('#1-star').prop('checked', true);
+        	$('#2-stars').prop('checked', true);
+        	$('#3-stars').prop('checked', true);
+        	$('#4-stars').prop('checked', true);
+        	$('#5-stars').prop('checked', true);
+        }
+        
+       	$('.review_more > div').on('click', function() {
+           	let apiId = $('.review_more').data('api-id');
+           	$(".comment_modal").removeClass('none');
+            $(".modal_back").removeClass('none');
+        });
+
+        $('.modal_back').on('click', function() {
+            $(".modal_back").addClass('none');
+            $(".comment_modal").addClass('none');
+        });
+
+        $('.comment_close').on('click', function() {
+            $(".modal_back").addClass('none');
+            $(".comment_modal").addClass('none');
+        });
+        
+     	// 댓글 작성
+        $("#submitComment").on('click', function(e) {
+        	e.preventDefault();
+        	
+        	// 댓글을 작성할 작품 api 번호
+        	let id = $(".modal_box").data('api-id');
+        	
+        	// 작성한 댓글
+        	let comment = $("#write_comment_content").val();
+        	
+        	if (comment == '') {
+        		alert("댓글을 작성해주세요.")
+        		return;
+        	}
+        	
+        	$.ajax({
+        		type:'POST'
+        		, url:'/comment/create'
+        		, data: {"id":id, "content":comment}
+        		, success: function(data) {
+        			if (data.code == 1) {
+        				alert('댓글이 작성되었습니다!');
+        				location.reload();
+        			} else if (data.code == 500) {
+        				alert("로그인을 해주세요.");
+        				location.href = "/main";
+        			}
+        		}
+        		, error:function(jqXHR, textStatus, errorThrown) {
+        			var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus + "에러");
+        		}
+        		
+        		
+        	}); //---ajax 끝
+        	
+        	
+        }); //---댓글 작성
+        
+        
+        // 별점 버튼
+        $("input[name=rating]").on('click', function() {
+        	let apiId = $(".border_box").data('api-id');
+        	let point = $(this).val();
+        	let userId = $(".content_list").data('user-id');
+        	let title = $(".review_subject").data('movie-title');
+        	let posterPath = $(".review_poster").data('img-path');
+
+        	if (userId == 0) {
+        		alert("로그인을 해주세요");
+        		return;
+        	}
+
+			alert(title);
+        	
+        	$.ajax({
+        		type: "post"
+        		, url: "/point/contents_point_view"
+        		, data: {"point":point, "apiId":apiId, "title":title, "posterPath":posterPath, "userId":userId}
+        		, success:function(data) {
+        			$(".filledPoint").html(data);
+        		} 
+        		, error:function(e) {
+        			alert("에러");
+        		}
+        	});//---ajax
+        })// ---별점 버튼
+		
+		$(".review_more").on('click', function() {
+			
+			
+		})
+	})
+</script>

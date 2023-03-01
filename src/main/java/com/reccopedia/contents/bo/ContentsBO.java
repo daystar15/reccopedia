@@ -283,22 +283,6 @@ public class ContentsBO {
 	}
 
 	
-	public List<Map<String, Object>> generateMovieTrendingMap() throws JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper();
-		String json = resttemplateservice.movieTrendingAPI();
-		
-		// 맵으로 만들기
-		Map<String, Object> result = new HashMap<String, Object>();
-		result = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
-		
-		List<Map<String, Object>> list = new ArrayList<>();
-		list = (List<Map<String, Object>>) result.get("results");
-		
-		 
-		return list;
-		
-	}
-	
 	public List<Map<String, Object>> generatePersonTrendingMap() throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		String json = resttemplateservice.personTrendingAPI();

@@ -195,7 +195,7 @@
 					</div>
 					<div class="comments">
 						<ul>
-						<c:forEach items="${commentList}" var="list">
+						<c:forEach items="${commentList}" var="list" begin="0" end="2">
 							<li>
 								<!-- 댓글 하나 -->
 								<div class="comment_user">

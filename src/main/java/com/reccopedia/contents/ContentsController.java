@@ -57,14 +57,12 @@ public class ContentsController {
 		List<Map<String, Object>> popularResult = contentsBO.generatePopularMap();
 		List<Map<String, Object>> nowResult = contentsBO.generateNowMap();
 		List<Map<String, Object>> netflixResult = contentsBO.generateNetflixMap();
-		List<Map<String, Object>> movieTrending = contentsBO.generateMovieTrendingMap();
 		List<Map<String, Object>> movieTrendingWeek = contentsBO.generateMovieTrendingWeekMap();
 		List<Map<String, Object>> personTrending = contentsBO.generatePersonTrendingMap();
 		List<Map<String, Object>> disney = contentsBO.generateDisneyMap();
 		
 		
 		model.addAttribute("disney", disney);
-		model.addAttribute("movieTrending", movieTrending);
 		model.addAttribute("movieTrendingWeek", movieTrendingWeek);
 		model.addAttribute("personTrending", personTrending);
 		model.addAttribute("popularResult", popularResult);

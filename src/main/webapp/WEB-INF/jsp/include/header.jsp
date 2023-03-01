@@ -37,16 +37,18 @@
         <c:if test="${not empty userId}">
 	        <div class="after_login">
 	            <div class="my_account">
-	                <a href="/user/evaluate_view" id="go_review">평가하기</a>
+	                <a href="/point/review_view" id="go_review">평가하기</a>
 	                <a href="/user/sign_out" id="logoutBtn">로그아웃</a>
 	                <a href="/user/user_view" id="go_userPage">
 	                <div class="comment_user_profile">
-						<c:if test="${empty userinfo.profileImagePath}">
-							<img src="" alt="">
+						<c:if test="${empty userProfile}">
+							<img src="/static/images/pngegg.png" alt="">
 						</c:if>
+						${userName}
 						<div class="profile_box">
-							<img src="${userinfo.userProfileImagePath}" alt="">
+							<img src="${userProfile}" alt="">
 						</div>
+						
 					</div>
 	                </a>
 	            </div>

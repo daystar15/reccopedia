@@ -38,7 +38,23 @@ public class UserController {
 	@Autowired
 	private WatchingBO watchingBO;
 	
+	// 로그인	
+	@GetMapping("/user/sign_in_view")
+	public String signInView() {
+		return "test/login";
+	}
 	
+	// 로그아웃
+	@GetMapping("/user/sign_out")
+	public String signOut(HttpSession session) {
+		// 로그아웃 - 세션에 있는 것을 모두 비운다.
+		session.removeAttribute("userEmail");
+		session.removeAttribute("userPassword");
+		session.removeAttribute("userName");
+		session.removeAttribute("userId");
+		
+		return "redirect:/main";
+	}
 	
 	// 유저페이지
 	@GetMapping("/user_view")

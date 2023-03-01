@@ -93,7 +93,7 @@
 		</div>
 	</div>
 	
-	<div class="section">
+	<%-- <div class="section">
 		<div class="inner">
 			<h2 class="main_title">오늘의 트렌딩</h2>
 			<div class="contents">
@@ -119,7 +119,7 @@
 		<div class="right">
 			<img src="/static/images/arrow.png" alt="">
 		</div>
-	</div>
+	</div> --%>
 	
 	<div class="section">
 		<div class="inner">

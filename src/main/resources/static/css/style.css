@@ -12,6 +12,9 @@ button {
 a {
     text-decoration: none;
 }
+ul {
+	list-style: none;
+}
 input {
     outline: none;
     border: none;
@@ -1203,9 +1206,10 @@ textarea {
     font-size: 1.1rem;
 }
 .content_list ul li {
-    border-bottom: 1px solid #d9d9d9;
-    margin-bottom: 1rem;
     padding-bottom: 1rem;
+}
+.content_list ul li:first-child {
+	padding-top: 1rem;
 }
 .content_list .border_box {
     display: flex;

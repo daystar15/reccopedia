@@ -47,31 +47,8 @@ public class TestController {
 		return testDAO.selectPostListTEST();
 	}
 	
-	// 로그인	
-	@GetMapping("/user/sign_in_view")
-	public String signInView() {
-		return "test/login";
-	}
-	
-	// 로그아웃
-	@GetMapping("/user/sign_out")
-	public String signOut(HttpSession session) {
-		// 로그아웃 - 세션에 있는 것을 모두 비운다.
-		session.removeAttribute("userEmail");
-		session.removeAttribute("userPassword");
-		session.removeAttribute("userName");
-		session.removeAttribute("userId");
-		
-		return "redirect:/main";
-	}
 	
 	
-	// 평가하기 페이지
-	@GetMapping("/review_view")
-	public String reviewView(Model model) {
-	model.addAttribute("viewName", "review/review");
-		return "template/layout";
-	}
 	
 	
 

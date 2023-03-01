@@ -86,6 +86,7 @@ public class UserRestController {
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("userPassword", user.getPassword());
 			session.setAttribute("userId", user.getId());
+			session.setAttribute("userProfile", user.getProfileImagePath());
 		} else {
 			result.put("code", "로그인 실패");
 		}
