@@ -176,6 +176,7 @@ public class ContentsController {
 		
 		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("pointList", pointList);
+		model.addAttribute("fillMyComment", fillMyComment);
 		model.addAttribute("fillNotinterest", fillNotinterest);
 		model.addAttribute("fillWatching", fillWatching);
 		model.addAttribute("fillWish", fillWish);

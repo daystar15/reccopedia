@@ -2,7 +2,7 @@
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<div class="contets_wrap">
+<div class="contets_wrap" data-api-id="${contents.id}">
 	<div class="contents_background">
 		<div>
 			<img src="https://image.tmdb.org/t/p/w1280${contents.backdrop_path}" alt="">
@@ -56,11 +56,11 @@
 						</div>
 						<%-- 코멘트 안되어있을 때 --%>
 						<c:if test="${fillMyComment eq false}">
-						<span>코멘트</span>
+							<span>코멘트</span>
 						</c:if>
 						<%-- 코멘트 되어있을 때 --%>
 						<c:if test="${fillMyComment eq true}">
-						<span class="on">코멘트</span>
+							<span class="on">코멘트</span>
 						</c:if>
 					</div>
 					<div class="contents_keeped" id="watching" data-user-id="${userinfo.id}">
@@ -128,7 +128,7 @@
 						</c:if>
 					</c:if>
 					<c:if test="${empty myComment}">
-					<button>댓글을 남겨보세요</button>
+					<button id="writeYourComment">댓글을 남겨보세요</button>
 					</c:if>
 				</div>
 				<!-- 내가 쓴 댓글은 여기서 바로 확인할 수 있음 -->
@@ -311,7 +311,7 @@
 <%--모달배경 --%>
 <div class="modal_back none"></div>
 <%-- 코멘트창 클릭 시 시작 --%>
-<div class="comment_modal none">
+<div class="comment_modal none" data-api-id="${contents.id}">
 	<div class="modal_box" data-api-id="${contents.id}">
 		<div class="write_comment_top">
 			<h6>${contents.title}</h6>
@@ -325,7 +325,9 @@
 					<!-- sns 공유
                                 <span></span> 
                             -->
-					<span class="no_spoiler"> <img src="/static/images/hide.png" alt="">
+					<span class="no_spoiler" id="noSpoil"> 
+						<img id="usualEye" src="/static/images/hide.png" alt="">
+						<img class="none" id="specialEye" src="/static/images/hideColor.png" alt="">
 					</span>
 				</div>
 				<div class="write_comment_right">
@@ -349,6 +351,11 @@
             $(".comment_modal").removeClass('none');
             $(".modal_back").removeClass('none');
         });
+        
+        $("#writeYourComment").on('click', function() {
+            $(".comment_modal").removeClass('none');
+            $(".modal_back").removeClass('none');
+        });
 
         $('.modal_back').on('click', function() {
             $(".modal_back").addClass('none');
@@ -359,6 +366,44 @@
             $(".modal_back").addClass('none');
             $(".comment_modal").addClass('none');
         });
+        
+        // 스포일러 가리기 버튼
+        $("#noSpoil").on('click', function(e) {
+            $("#usualEye").addClass('none');
+            $("#specialEye").removeClass('none');
+            
+			e.preventDefault();
+			
+        	// 작성한 댓글
+			let spoiler = $(event.target).parent().parent().parent().parent().parent().find('textarea').val();
+        	
+        	// 댓글을 작성할 작품 api 번호
+        	let apiId = $(".modal_box").data('api-id');
+        	
+        	if (spoiler == '') {
+        		alert("댓글이 없습니다.")
+        		return;
+        	}
+        	
+        	$.ajax({
+        		type:'POST'
+        		, url:'/spoiler/create'
+        		, data: {"apiId":apiId, "spoiler":spoiler}
+        		, success: function(data) {
+        			if (data.code == 1) {
+        				alert('댓글 스포일러가 적용되었습니다.');
+        			} else if (data.code == 500) {
+        				alert("로그인을 해주세요.");
+        				location.href = "/main";
+        			}
+        		}
+        		, error:function(jqXHR, textStatus, errorThrown) {
+        			var errorMsg = jqXHR.responseJSON.status;
+					alert(errorMsg + ":" + textStatus + "에러");
+        		}
+        	}); //---ajax 끝
+        });
+        
         
         // 댓글 작성
         $("#submitComment").on('click', function(e) {

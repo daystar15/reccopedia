@@ -7,13 +7,15 @@
 		<div class="inner">
 			<h2 class="main_title">박스오피스 순위</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="now" items="${nowResult}" varStatus="status">
 					<li>
 						<a href="/contents/contents_view?id=${now.id}">
 							<div>
 								<div class="poster">
-									<span class="rank">${status.count}</span> <img src="https://image.tmdb.org/t/p/w500/${now.poster_path}" alt="">
+									<span class="rank">${status.count}</span> 
+									<img src="https://image.tmdb.org/t/p/w500/${now.poster_path}" draggable="false" alt="">
 								</div>
 							</div>
 							<h3 class="content_subject">${now.title}</h3>
@@ -24,23 +26,18 @@
 						</a>
 					</li>
 					</c:forEach>
-					
-				
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
 		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
+
 	</div>
 	<div class="section">
 		<div class="inner">
 			<h2 class="main_title">넷플릭스 화제작</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="netflix" items="${netflixResult}">
 					<li>
 						<a href="/contents/contents_view?id=${netflix.id}">
@@ -52,22 +49,17 @@
 						</a>
 					</li>
 					</c:forEach>
-					
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
-		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
 		</div>
 	</div>
 	<div class="section">
 		<div class="inner">
 			<h2 class="main_title">디즈니 플러스 화제작</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="disneyResult" items="${disney}">
 					<li>
 						<a href="/contents/contents_view?id=${disneyResult.id}">
@@ -79,15 +71,9 @@
 						</a>
 					</li>
 					</c:forEach>
-					
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
-		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
 		</div>
 	</div>
 	
@@ -123,7 +109,8 @@
 		<div class="inner">
 			<h2 class="main_title">금주의 Hot</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="movieTrendingWeek" items="${movieTrendingWeek}">
 					<li>
 						<a href="/contents/contents_view?id=${movieTrendingWeek.id}">
@@ -131,18 +118,13 @@
 								 <img src="https://image.tmdb.org/t/p/w500/${movieTrendingWeek.poster_path}" alt="">
 							</div>
 							<h3 class="content_subject">${movieTrendingWeek.title}</h3>
+							<div class="point">평균 &starf; 4.2</div>
 						</a>
 					</li>
 					</c:forEach>
-					
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
-		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
 		</div>
 	</div>
 	
@@ -584,131 +566,74 @@
 	</div>
 </div>
 
+
 <script>
-
-(function() {  
-    const itemWrapperEl = document.querySelector('.contents ul'),  
-          leftBtnEl = document.querySelector('.left'),  
-          rightBtnEl = document.querySelector('.right');  
-
-    function moveSlides(direction) { 
-      const item = itemWrapperEl.querySelector('.contents ul li'),  
-            itemMargin = parseFloat(getComputedStyle(item).marginRight);
-            itemWidth = itemMargin + item.offsetWidth + 2; 
-
-      let itemCount = Math.round(itemWrapperEl.scrollLeft / itemWidth); 
-
-      if (direction === 'left') {
-        itemCount = itemCount - 1;
-      } else {
-        itemCount = itemCount + 1;
-      }
-      itemWrapperEl.scrollLeft = itemWidth * itemCount; 
-    }
-
-    leftBtnEl.addEventListener("click", e => moveSlides("left")); 
-    rightBtnEl.addEventListener("click", e => moveSlides("right"));
-  })();
+	const carousel = document.querySelector(".carousel"),
+	firstImg = carousel.querySelectorAll("li")[0],
+	arrowIcons = document.querySelectorAll(".contents i");
+	let isDragStart = false, isDragging = false, prevPageX, prevScrollLeft, positionDiff;
+	
+	const showHideIcons = () => {
+	    // showing and hiding prev/next icon according to carousel scroll left value
+	    let scrollWidth = carousel.scrollWidth - carousel.clientWidth; // getting max scrollable width
+	    arrowIcons[0].style.display = carousel.scrollLeft == 0 ? "none" : "block";
+	    arrowIcons[1].style.display = carousel.scrollLeft == scrollWidth ? "none" : "block";
+	}
+	
+	arrowIcons.forEach(icon => {
+	    icon.addEventListener("click", () => {
+	        let firstImgWidth = firstImg.clientWidth + 14; // getting first img width & adding 14 margin value
+	        // if clicked icon is left, reduce width value from the carousel scroll left else add to it
+	        carousel.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+	        setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+	        console.log(arrowIcons.index);
+	    });
+	});
+	
+	const autoSlide = () => {
+	    // if there is no image left to scroll then return from here
+	    if(carousel.scrollLeft - (carousel.scrollWidth - carousel.clientWidth) > -1 || carousel.scrollLeft <= 0) return;
+	    positionDiff = Math.abs(positionDiff); // making positionDiff value to positive
+	    let firstImgWidth = firstImg.clientWidth + 14;
+	    // getting difference value that needs to add or reduce from carousel left to take middle img center
+	    let valDifference = firstImgWidth - positionDiff;
+	    if(carousel.scrollLeft > prevScrollLeft) { // if user is scrolling to the right
+	        return carousel.scrollLeft += positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+	    }
+	    // if user is scrolling to the left
+	    carousel.scrollLeft -= positionDiff > firstImgWidth / 3 ? valDifference : -positionDiff;
+	}
+	
+	const dragStart = (e) => {
+	    // updatating global variables value on mouse down event
+	    isDragStart = true;
+	    prevPageX = e.pageX || e.touches[0].pageX;
+	    prevScrollLeft = carousel.scrollLeft;
+	}
+	
+	const dragging = (e) => {
+	    // scrolling images/carousel to left according to mouse pointer
+	    if(!isDragStart) return;
+	    e.preventDefault();
+	    isDragging = true;
+	    carousel.classList.add("dragging");
+	    positionDiff = (e.pageX || e.touches[0].pageX) - prevPageX;
+	    carousel.scrollLeft = prevScrollLeft - positionDiff;
+	    showHideIcons();
+	}
+	
+	const dragStop = () => {
+	    isDragStart = false;
+	    carousel.classList.remove("dragging");
+	    if(!isDragging) return;
+	    isDragging = false;
+	    autoSlide();
+	}
+	
+	carousel.addEventListener("mousedown", dragStart);
+	carousel.addEventListener("touchstart", dragStart);
+	document.addEventListener("mousemove", dragging);
+	carousel.addEventListener("touchmove", dragging);
+	document.addEventListener("mouseup", dragStop);
+	carousel.addEventListener("touchend", dragStop);
 </script>
-
-
-<!-- 모달배경 -->
-<!-- <div class="modal_back none"></div> -->
-
-<!-- 회원가입 -->
-<!-- <div class="sign_up_modal none">
-	<div class="modal_box">
-		<div class="modal_top">
-			<h1 class="modal_logo">
-				<img src="/static/images/logo.png" alt="">
-			</h1>
-			<p>회원가입</p>
-		</div>
-		<form action="" method="post">
-			<div>
-				<input type="text" name="name" id="name" placeholder="이름">
-			</div>
-			<div>
-				<input type="text" name="email" id="email" placeholder="이메일">
-			</div>
-			<div>
-				<input type="password" name="password" id="password" placeholder="비밀번호">
-			</div>
-			<div class="sign_up_submit">
-				<input type="submit" value="회원가입">
-			</div>
-		</form>
-		<div class="go_sign_in">
-			<p>
-				이미 가입하셨나요?
-				<a href="#" class="link">로그인</a>
-			</p>
-		</div>
-	</div>
-</div> -->
-
-<!-- 로그인 -->
-<!--<div class="sign_in_modal none">
-	<div class="modal_box">
-		<div class="modal_top">
-			<h1 class="modal_logo">
-				<img src="/static/images/logo.png" alt="">
-			</h1>
-			<p>로그인</p>
-		</div>
-		<form action="" method="post">
-			<div>
-				<input type="text" name="email" id="email" placeholder="이메일">
-			</div>
-			<div>
-				<input type="password" name="password" id="password" placeholder="비밀번호">
-			</div>
-			<div class="sign_up_submit">
-				<input type="submit" value="로그인">
-			</div>
-		</form>
-		<!-- 비밀번호 찾기 나중에 처리
-                <div class="forget_password">
-                    <a href="#">비밀번호를 잊어버리셨나요?</a>
-                </div> 
-                
-		<div class="go_sign_up">
-			<p>
-				계정이 없으신가요?
-				<a href="#" class="link">회원가입</a>
-			</p>
-		</div>
-	</div>
-</div> -->
-
-<!-- <script>
-    $(document).ready(function () {
-        $('.sign_up').on('click', function() {
-            $(".sign_up_modal").removeClass('none');
-            $(".modal_back").removeClass('none');
-            $(".go_sign_up").removeClass('none');
-        });
-
-        $('.sign_up_modal .go_sign_in p a').on('click', function() {
-            $(".sign_in_modal").removeClass('none');
-            $(".sign_up_modal").addClass('none');
-        });
-
-        $('.sign_in').on('click', function() {
-            $(".sign_in_modal").removeClass('none');
-            $(".modal_back").removeClass('none');
-            $(".go_sign_in").removeClass('none');
-        });
-
-        $('.sign_in_modal .go_sign_up p a').on('click', function() {
-            $(".sign_up_modal").removeClass('none');
-            $(".sign_in_modal").addClass('none');
-        });
-
-        $('.modal_back').on('click', function() {
-            $(".modal_back").addClass('none');
-            $(".sign_up_modal").addClass('none');
-            $(".sign_in_modal").addClass('none');
-        });
-    });
-</script> -->
