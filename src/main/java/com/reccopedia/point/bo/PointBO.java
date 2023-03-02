@@ -71,11 +71,12 @@ public class PointBO {
 		pointDAO.deletePointByApiId(id);
 	}
 	
+	// 별점목록 가져오는 함수
 	public List<Map<String, Object>> getPointList(int userId) {
 		return pointDAO.selectPointListByApiIdOrUserId(userId);
 	}
 
-	
+	// 1일 랜덤 영화 API
 	public List<Map<String, Object>> generateMovieTrendingMap() throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		String json = resttemplateservice.movieTrendingAPI();
