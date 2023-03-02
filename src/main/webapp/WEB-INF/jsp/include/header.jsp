@@ -65,26 +65,18 @@
 <script>
 	$(document).ready(function() {
 		
-		
 		$('.sign_up').on('click', function() {
             $(".sign_up_modal").removeClass('none');
             $(".modal_back").removeClass('none');
             $(".go_sign_up").removeClass('none');
         });
 
-        $('.sign_up_modal .go_sign_in p a').on('click', function() {
-        	$(".sign_in_modal").removeClass('none');
-            $(".sign_up_modal").addClass('none');
-        });
-        
         $('.modal_back').on('click', function() {
             $(".modal_back").addClass('none');
             $(".sign_up_modal").addClass('none');
             $(".sign_in_modal").addClass('none');
         });
         
-        
-		
 		 $('.sign_in').on('click', function() {
             $(".sign_in_modal").removeClass('none');
             $(".modal_back").removeClass('none');
@@ -96,11 +88,12 @@
             $(".sign_in_modal").addClass('none');
         });
         
-        $('.modal_back').on('click', function() {
-            $(".modal_back").addClass('none');
+        $('.sign_up_modal .go_sign_in p a').on('click', function() {
+        	$(".sign_in_modal").removeClass('none');
             $(".sign_up_modal").addClass('none');
-            $(".sign_in_modal").addClass('none');
         });
+        
+        
         
         $("#signInForm").submit(function(e) {
 			e.preventDefault();

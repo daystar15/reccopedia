@@ -76,6 +76,7 @@ public class UserRestController {
 		// String 암호화된Password = 
 		
 		User user = userBO.getUserByLoginEmailPassword(email, password);
+		
 
 		Map<String, Object> result = new HashMap<>();
 				
@@ -90,7 +91,7 @@ public class UserRestController {
 		} else {
 			result.put("code", "로그인 실패");
 		}
-		
+
 		return result;
 	}
 	

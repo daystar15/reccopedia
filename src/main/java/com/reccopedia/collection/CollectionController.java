@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.collection.bo.CollectionBO;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/collection")
 public class CollectionController {
@@ -58,7 +62,15 @@ public class CollectionController {
 	@GetMapping("/collection_find_result_view")
 	public String findResult(
 			@RequestParam("title") String title,
+			//HttpServletResponse response,
 			Model model) throws JsonProcessingException {
+		
+		
+		//Cookie cookie = new Cookie("cookie", "name");
+		//cookie.setMaxAge(24 * 30 * 60 * 60 * 1000);  // 30일동안 유효
+		//cookie.setDomain("/path");
+		//response.addCookie(cookie);
+		
 
 		Map<String, Object> result = new HashMap<>();
 
@@ -70,8 +82,6 @@ public class CollectionController {
 			result.put("errorMessage","검색어를 다시 입력해주세요");
 		}
 		model.addAttribute("keywordList", keywordList);
-
-		
 		
 		return "collection/collectionFindResult";
 	}

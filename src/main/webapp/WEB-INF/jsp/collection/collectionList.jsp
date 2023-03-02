@@ -46,7 +46,9 @@
 				<div class="collection_user user_info">
 					<div>
 						<div class="user_profile_img">
-							<img src="/static/images/test.jpg" alt="">
+							<div class="profile_box">
+								<img src="${userProfile}" alt="">
+							</div>
 						</div>
 						<h2 class="user_name">${userName}</h2>
 					</div>

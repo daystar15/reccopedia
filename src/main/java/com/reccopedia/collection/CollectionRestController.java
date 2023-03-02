@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.reccopedia.collection.bo.CollectionBO;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -26,7 +29,15 @@ public class CollectionRestController {
 	public Map<String, Object> create(
 			@RequestParam("subject") String subject,
 			@RequestParam("content") String content,
+			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
+		
+		Cookie[] cookies = request.getCookies();
+		for(Cookie cookie : cookies) {
+		    cookie.getName(); // 쿠키의 이름 ex) JSESSION
+		    cookie.getValue(); // 쿠키의 값 ex) EH3EQWE2135ED8D7D54434GHJGS...
+		}
+		
 		
 		Integer userId = (Integer) session.getAttribute("userId");
 		Map<String, Object> result = new HashMap<>();

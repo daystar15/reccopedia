@@ -43,14 +43,6 @@
 	</div>
 </div>
 
-
-<form action="#">
-        <input type="text" name="txtName" id="txtName">
-        <input type="button" name="btnSubmit" id="btnSubmit" value="로그인">
-        <hr>
-        <span id="lstCookies"></span>
-    </form>
-
 <script>
     $('document').ready(function() {
         $('#collectionSubmitBtn').on('click', function(e) {
@@ -94,101 +86,78 @@
             
         });
         
+        
+        
+     	// 전체 쿠키
+        let cookies = $.cookie();
+     	
+        // 쿠키 value 값 - poster path
+        let cookiePosterPath = $.cookie("cookieId");
+        
+     	//$('<img>', {src: 'https://ixmage.tmdb.org/t/p/w92/' + cookiePosterPath}).appendTo(".add_collection_lists");
+        
+
+
+     	
+
+     	
+        
+     	/* var cookieList = function(cookieId) {
+     		//When the cookie is saved the items will be a comma seperated string
+     		//So we will split the cookie by comma to get the original array
+     		let cookie = $.cookie("cookieId");
+     		//Load the items or a new array if null.
+     		var items = cookie ? cookie.split(/,/) : new Array();
+
+     		//Return a object that we can use to access the array.
+     		//while hiding direct access to the declared items array
+     		//this is called closures see http://www.jibbering.com/faq/faq_notes/closures.html
+     		return {
+     		    "add": function(val) {
+     		        //Add to the items.
+     		        items.push(val);
+     		        //Save the items to a cookie.
+     		        //EDIT: Modified from linked answer by Nick see
+     		        //      http://stackoverflow.com/questions/3387251/how-to-store-array-in-jquery-cookie
+     		        $.cookie("cookieId", items.join(','));
+     		    },
+     		    "clear": function() {
+     		        items = null;
+     		        //clear the cookie.
+     		        $.cookie("cookieId", null);
+     		    },
+     		    "items": function() {
+     		        //Get all the items.
+     		        return items;
+     		    }
+     		  }
+     		}  */ 
+     		 
+			
+     		//let list = new cookieList("MyItems"); 
+
+     		//list.add(cookies);
+     		//list.clear();
+     		//console.log(list.items());
+        
+        
     });
 
  	
- 	// 전체 쿠키
-    let cookies = $.cookie();
  	
-    // 쿠키 value 값 - poster path
-    let cookiePosterPath = $.cookie("cookieId");
-    
- 	$('<img>', {src: 'https://image.tmdb.org/t/p/w92/' + cookiePosterPath}).appendTo(".add_collection_lists");
+ 		//So on any page you can get the items like this.
 
-    
+ 		//Adding items to the cookieList
 
-    
- 	// 페이지 로드 이벤트 잡기
-    window.onload = Page_Load;
-     
-    function Page_Load() {
-        // 저장된 쿠키 읽어오기
-        displayCookie();
- 
-        // 여러개의 쿠키 리스트를 <span> 태그에 출력
-        displayCookieList();
- 
-    }   
- 
-    // 쿠키 읽어오는 함수
-    function displayCookie() {
-        var txtName = "";
-        // 쿠키 여부 확인
-        if (document.cookie != "") {
-            // 여러개의 쿠키 읽어오기
-            var cookies = document.cookie.split("; ");
-            // 쿠키 개수만큼 반복
-            for (var i=0; i<cookies.length; i++) {
-                if (cookies[i].split("=")[0] == "txtName")  {
-                    //alert(document.cookie);  // txtName=red;
-                    txtName = cookies[i].split("=")[1];             
-                }
-            }
-        }
-        document.getElementById("txtName").value = txtName;
-    }
- 
-    function btnSubmit_Click() {
-        // txtName에 저장된 값을 쿠키에 저장
-        setCookie();
-        setCookies("txtemail", "test@a.com", 1); //테스트 쿠키 저장
-    }
- 
-    // 쿠키 저장 함수
-    function setCookie() {
-        // 쿠키 소멸시기
-        var expireDate = new Date();
-        expireDate.setMonth(expireDate.getMonth() + 1);
-        var txtName = document.getElementById("txtName").value;
-        // 쿠키 저장
-        document.cookie = "txtName=" + txtName + "; path=/; expires=" + expireDate.toGMTString();
-        alert("쿠키 저장");
-    }
- 
-    // 쿠키 저장 함수
-    function setCookies(cookieName, cookieValue, expireDays) {
-        var expireDate = new Date();
-        expireDate.setDate(expireDate.getDate() + expireDays);  // 넘겨온 일자 값: 1
-        document.cookie = name + "=" + cookiePosterPath + "; path=/; expires=" + expireDate.toGMTString();     
-    }
- 
-    // 쿠키 리스트 출력 함수
-    function displayCookieList() {
-        var str = "";
-        if (document.cookie == "") {
-            str = "입력된 쿠키가 없습니다!";
-        }
-        else {
-            // 여러개의 쿠키를 읽어온다. 
-            var cookies = document.cookie.split("; ");
-            for (var i=0; i<cookies.length; i++) {
-            	const tagArea = document.getElementsByClassName('add_collection_lists');
-            	
-            	let count = 0;
-                if (tagArea > 1) {
-                	const newNode = tagArea.cloneNode(true);
-                	count++;
-                	tagArea.after(newNode);
-                }
-                str += "name : " + cookies[i].split("=")[0] + 
-                    ", cookiePosterPath: " + cookies[i].split("=")[1] + "<br />";              
-            }
-        }
-         
-        document.getElementById("lstCookies").innerHTML = str;
-    }
-    
-    
+ 		//list.add("ex");
+ 		//Note this value cannot have a comma "," as this will spilt into
+ 		//two seperate values when you declare the cookieList.
+ 		//Getting all the items as an array
+
+ 		//list.clear();
+
+ 		//list.clear();
+   
     
    
     function goBack(){
