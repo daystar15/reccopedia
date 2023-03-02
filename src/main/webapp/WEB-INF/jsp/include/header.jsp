@@ -10,14 +10,16 @@
         </div>
     </div>
     <div>
-        <form action="/search" method="get">
-            <div>
-                <img src="/static/images/search.png" alt="">
-                <label>
-                    <input type="text" name="keyword" id="keyword" placeholder="콘텐츠, 인물, 컬렉션, 유저를 검색해보세요.">
-                </label>
-            </div>
-        </form>
+    	<div class="multi_search_box">
+	        <form action="" method="get">
+	            <div>
+	                <button type="submit" id="searchBtn"><img src="/static/images/search.png" alt=""></button>
+	                <label>
+	                    <input type="text" name="title" id="contentsTitle" placeholder="콘텐츠를 입력해보세요.">
+	                </label>
+	            </div>
+	        </form>
+        </div>
         <!-- 로그아웃 시작 -->
         <c:if test="${empty userId}">
         <div class="before_login_box">
@@ -131,5 +133,28 @@
 			}); //---ajax
 		
 		}); //---로그인 버튼
+		
+		
+		$("#searchBtn").on('click', function(e) {
+			e.preventDefault();
+			
+			let title = $("#contentsTitle").val().trim();
+			
+			// ajax
+			$.ajax({
+				type: "get"
+				, url: "/contents/search_view"
+				, data: {"title":title}
+			
+				, success:function(data) {
+					alert("검색결과 조회에 성공하였습니다.");
+				}
+				, error:function(e) {
+					alert("검색 결과 조회에 실패하였습니다");
+				}
+			}); //---ajax
+			
+			
+		})			
 	})
 </script>

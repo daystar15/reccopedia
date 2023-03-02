@@ -94,15 +94,9 @@
         // 쿠키 value 값 - poster path
         let cookiePosterPath = $.cookie("cookieId");
         
-     	//$('<img>', {src: 'https://ixmage.tmdb.org/t/p/w92/' + cookiePosterPath}).appendTo(".add_collection_lists");
-        
+     	$('<img>', {src: 'https://ixmage.tmdb.org/t/p/w92/' + cookiePosterPath}).appendTo(".add_collection_lists");
 
-
-     	
-
-     	
-        
-     	/* var cookieList = function(cookieId) {
+     	var cookieList = function(cookieId) {
      		//When the cookie is saved the items will be a comma seperated string
      		//So we will split the cookie by comma to get the original array
      		let cookie = $.cookie("cookieId");
@@ -131,14 +125,14 @@
      		        return items;
      		    }
      		  }
-     		}  */ 
+     		}
      		 
 			
-     		//let list = new cookieList("MyItems"); 
+     		let list = new cookieList("MyItems"); 
 
-     		//list.add(cookies);
-     		//list.clear();
-     		//console.log(list.items());
+     		list.add(cookies);
+     		list.clear();
+     		console.log(list.items());
         
         
     });

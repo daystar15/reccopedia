@@ -31,6 +31,13 @@ public class CommentBO {
 		commentDAO.createComment(userId, null, id, content);
 	}
 	
+	public boolean existMyComment(int id, Integer userId) {
+		if(userId == null) {
+			return false;
+		}
+		return commentDAO.selectCommentByApiIdOrUserId(id, userId) > 0 ? true:false;
+	}
+	
 	public List<Comment> getCommentListByApiId(int id) {
 		return commentDAO.selectCommentListByApiId(id);
 	}

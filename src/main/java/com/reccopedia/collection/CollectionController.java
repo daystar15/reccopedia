@@ -62,14 +62,7 @@ public class CollectionController {
 	@GetMapping("/collection_find_result_view")
 	public String findResult(
 			@RequestParam("title") String title,
-			//HttpServletResponse response,
 			Model model) throws JsonProcessingException {
-		
-		
-		//Cookie cookie = new Cookie("cookie", "name");
-		//cookie.setMaxAge(24 * 30 * 60 * 60 * 1000);  // 30일동안 유효
-		//cookie.setDomain("/path");
-		//response.addCookie(cookie);
 		
 
 		Map<String, Object> result = new HashMap<>();

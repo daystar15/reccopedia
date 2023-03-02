@@ -32,12 +32,6 @@ public class CollectionRestController {
 			HttpServletRequest request, HttpServletResponse response,
 			HttpSession session) {
 		
-		Cookie[] cookies = request.getCookies();
-		for(Cookie cookie : cookies) {
-		    cookie.getName(); // 쿠키의 이름 ex) JSESSION
-		    cookie.getValue(); // 쿠키의 값 ex) EH3EQWE2135ED8D7D54434GHJGS...
-		}
-		
 		
 		Integer userId = (Integer) session.getAttribute("userId");
 		Map<String, Object> result = new HashMap<>();

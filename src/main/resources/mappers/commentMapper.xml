@@ -4,6 +4,18 @@
  
  <mapper namespace="com.reccopedia.comment.dao.CommentDAO">
  
+ 	<select id="selectCommentByApiIdOrUserId" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`comment`
+		WHERE
+			`apiId` = #{apiId}
+			<if test="userId != null">
+			AND `userId` = #{userId}
+			</if>
+	</select>
+ 
  	<insert id="createComment" parameterType="map">
  		INSERT INTO `comment`
  		(

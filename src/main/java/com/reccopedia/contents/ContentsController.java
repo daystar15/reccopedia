@@ -1,5 +1,6 @@
 package com.reccopedia.contents;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.comment.bo.CommentBO;
@@ -136,6 +137,20 @@ public class ContentsController {
 		return "template/layout";
 	}
 	
+	// 컨텐츠페이지 - 검색 결과
+	@GetMapping("/contents/search_view")
+	public String personView(Model model, 
+			@RequestParam("title") String title) throws JsonProcessingException {
+	
+		Map<String, Object> result = new HashMap<>();
+		
+		List<Map<String, Object>> contentResult = contentsBO.generateMultiMap(title);
+		
+		model.addAttribute("contentResult", contentResult);
+		model.addAttribute("viewName", "contents/searchResult");
+		return "template/layout";
+	}
+	
 	// 컨텐츠페이지 - 컨텐츠 개별 페이지
 	@GetMapping("/contents/contents_view")
 	public String contentsView(Model model, int id, Integer point,
@@ -143,6 +158,7 @@ public class ContentsController {
 		
 		User userinfo = userBO.getUserByIntegerId((Integer)session.getAttribute("userId"));
 		List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(id, (Integer)session.getAttribute("userId"));
+		boolean fillMyComment = commentBO.existMyComment(id, (Integer)session.getAttribute("userId"));
 		boolean fillWatching = watchingBO.existwatching(id, (Integer)session.getAttribute("userId"));
 		boolean fillNotinterest = notinterestBO.existNotinterest(id, (Integer)session.getAttribute("userId"));
 		boolean fillWish = wishBO.existWish(id, (Integer)session.getAttribute("userId"));

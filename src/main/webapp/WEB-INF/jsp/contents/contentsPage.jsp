@@ -55,13 +55,13 @@
 							<img src="/static/images/pencil.png" alt="">
 						</div>
 						<%-- 코멘트 안되어있을 때 --%>
-						<%--<c:if test="${ .filledWish eq false}">  --%>
+						<c:if test="${fillMyComment eq false}">
 						<span>코멘트</span>
-						<%--</c:if> --%>
+						</c:if>
 						<%-- 코멘트 되어있을 때 --%>
-						<%--<c:if test="${ .filledWish eq true}">  --%>
-						<%-- <span class="on">코멘트</span>--%>
-						<%--</c:if> --%>
+						<c:if test="${fillMyComment eq true}">
+						<span class="on">코멘트</span>
+						</c:if>
 					</div>
 					<div class="contents_keeped" id="watching" data-user-id="${userinfo.id}">
 						<div class="icon">

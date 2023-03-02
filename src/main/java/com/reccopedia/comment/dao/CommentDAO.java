@@ -17,6 +17,10 @@ public interface CommentDAO {
 			@Param("id") int id, 
 			@Param("content") String content);
 	
+	public int selectCommentByApiIdOrUserId(
+			@Param("apiId") int id, 
+			@Param("userId") Integer userId);
+	
 	public List<Comment> selectCommentListByApiId(int id);
 	
 	public List<Comment> selectCommentListById(int id);
