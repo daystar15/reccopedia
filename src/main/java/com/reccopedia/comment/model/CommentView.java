@@ -4,7 +4,6 @@ import com.reccopedia.user.model.User;
 
 public class CommentView {
 
-	
 	private Comment comment;
 	
 	private User user;

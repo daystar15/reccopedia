@@ -141,13 +141,12 @@ public class ContentsController {
 	@GetMapping("/contents/search_view")
 	public String personView(Model model, 
 			@RequestParam("title") String title) throws JsonProcessingException {
-	
-		Map<String, Object> result = new HashMap<>();
 		
 		List<Map<String, Object>> contentResult = contentsBO.generateMultiMap(title);
 		
 		model.addAttribute("contentResult", contentResult);
 		model.addAttribute("viewName", "contents/searchResult");
+		
 		return "template/layout";
 	}
 	

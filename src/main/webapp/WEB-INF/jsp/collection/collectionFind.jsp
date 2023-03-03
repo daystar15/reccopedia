@@ -38,7 +38,7 @@
 			
 			let title = $('#findCollection input[name=title]').val().trim();
 
-			if (keyword == '') {
+			if (title == '') {
 				alert('검색어를 입력해주세요');
 				return;
 			};

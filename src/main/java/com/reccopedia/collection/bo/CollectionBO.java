@@ -12,11 +12,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reccopedia.collection.dao.CollectionDAO;
+import com.reccopedia.collection.model.Collection;
 import com.reccopedia.restAPI.dao.RestTemplateService;
-
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class CollectionBO {
@@ -28,8 +25,8 @@ public class CollectionBO {
 	private RestTemplateService resttemplateservice;
 	
 	
-	public void addCollection(Integer userId, String subject, String content) {
-		collectionDAO.addCollection(userId, null, null, subject, content);
+	public void addCollection(Integer userId, String subject, String content, String movieList) {
+		collectionDAO.addCollection(userId, subject, content, movieList);
 	};
 	
 	
@@ -49,8 +46,16 @@ public class CollectionBO {
 		return list;
 	}
 	
+	public List<Collection> getCollectionList(int userId) {
+		return collectionDAO.selectCollectionListByUserId(userId);
+	}
 	
+	public Collection getCollectionByIdAndUserId(int id, int userId) {
+		return collectionDAO.selectCollectionByIdAndUserId(id, userId);
+	}
 
-
+	public Map<String, Object> getCollectionMapByUserId(int userId) {
+		return collectionDAO.selectCollectionMapByUserId(userId);
+	}
 
 }

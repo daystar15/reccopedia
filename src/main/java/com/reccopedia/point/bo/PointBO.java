@@ -13,13 +13,19 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reccopedia.point.dao.PointDAO;
 import com.reccopedia.point.model.Point;
+import com.reccopedia.point.model.PointView;
 import com.reccopedia.restAPI.dao.RestTemplateService;
+import com.reccopedia.user.bo.UserBO;
+import com.reccopedia.user.model.User;
 
 @Service
 public class PointBO {
 	
 	@Autowired
 	private PointDAO pointDAO;
+	
+	@Autowired
+	private UserBO userBO;
 	
 	@Autowired
 	private RestTemplateService resttemplateservice;
@@ -76,6 +82,7 @@ public class PointBO {
 		return pointDAO.selectPointListByApiIdOrUserId(userId);
 	}
 
+	
 	// 1일 랜덤 영화 API
 	public List<Map<String, Object>> generateMovieTrendingMap() throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
@@ -92,7 +99,6 @@ public class PointBO {
 		return list;
 		
 	}
-
 
 
 }

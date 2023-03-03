@@ -7,24 +7,69 @@
  	<insert id="addCollection" parameterType="map">
  		INSERT INTO `collection`
  		(
- 			`apiId`
-			, `pointId`
+			`userId`
+			, `content`
+			, `subject`
+			, `createdAt`
+			, `updatedAt`
+			, `movie_list`
+ 		)
+		VALUES
+		(	
+			#{userId}
+			, #{content}
+			, #{subject}
+			, NOW()
+			, NOW()
+			, #{movieList}
+		)
+ 	</insert>
+ 	
+ 	<select id="selectCollectionListByUserId" parameterType="int" resultType="com.reccopedia.collection.model.Collection">
+ 		SELECT 
+ 			`id`
 			, `userId`
 			, `content`
 			, `subject`
 			, `createdAt`
 			, `updatedAt`
- 		)
-		VALUES
-		(
-			#{apiId}
-			, #{pointId}
-			, #{userId}
-			, #{content}
-			, #{subject}
-			, NOW()
-			, NOW()
-		)
- 	</insert>
+			, `movie_list` AS `movieList`
+		FROM
+			`collection`
+		WHERE
+			`userId` = #{userId}
+ 	</select>
+ 	
+ 	<select id="selectCollectionMapByUserId" parameterType="int" resultType="map">
+ 		SELECT 
+ 			`id`
+			, `userId`
+			, `content`
+			, `subject`
+			, `createdAt`
+			, `updatedAt`
+			, `movie_list` AS `movieList`
+		FROM
+			`collection`
+		WHERE
+			`userId` = #{userId}
+ 	</select>
+ 	
+ 	<select id="selectCollectionByIdAndUserId" parameterType="map" resultType="com.reccopedia.collection.model.Collection">
+ 		SELECT 
+ 			`id`
+			, `userId`
+			, `content`
+			, `subject`
+			, `createdAt`
+			, `updatedAt`
+			, `movie_list` AS `movieList`
+		FROM
+			`collection`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`id = #{id}
+ 	</select>
  
  </mapper>

@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.reccopedia.collection.bo.CollectionBO;
 
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -24,12 +21,11 @@ public class CollectionRestController {
 	private CollectionBO collectionBO;
 	
 	
-
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			@RequestParam("subject") String subject,
 			@RequestParam("content") String content,
-			HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("movieList") String movieList,
 			HttpSession session) {
 		
 		
@@ -41,14 +37,12 @@ public class CollectionRestController {
 			result.put("errorMessage", "로그인을 해주세요");
 		}
 		
-		collectionBO.addCollection(userId, subject, content); 
+		collectionBO.addCollection(userId, subject, content, movieList); 
 		result.put("code", 1);
 		
 		return result;
 	}
 
-	
-	
 	
 	
 }

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="nav_box">
 	<div>
 		<div>
@@ -12,13 +15,16 @@
 	
 	
 	<%-- 작성한 컬렉션이 없을 때 --%>
+	<c:if test="${empty collectionList}">
 	<div class="no_collection_box">
 		<img src="/static/images/no-comment.png" alt="">
 		<p>작성한 컬렉션이 없어요.</p>
 	</div>
+	</c:if>
 	<%-- 작성한 컬렉션이 없을 때 --%>
 	
 	<ul class="list_box">
+		<c:forEach var="list" items="${collectionList}">
 		<li>
 			<a href="/collection/collection_view">
 				<div class="setting">
@@ -27,19 +33,7 @@
 				<!-- 컬렉션 포스터들 시작 -->
 				<div class="collection_list_poster">
 					<div>
-						<img src="/static/images/test.jpg" alt="">
-					</div>
-					<div>
-						<img src="/static/images/test.jpg" alt="">
-					</div>
-					<div>
-						<img src="/static/images/test.jpg" alt="">
-					</div>
-					<div>
-						<img src="/static/images/test.jpg" alt="">
-					</div>
-					<div>
-						<img src="/static/images/test.jpg" alt="">
+						<img src="${list.movieList}" alt="">
 					</div>
 				</div>
 				<!-- 컬렉션 포스터들 끝 -->
@@ -57,11 +51,12 @@
 					</div>
 				</div>
 				<div class="collection_info">
-					<h3>{컬렉션 제목}</h3>
-					<p>{컬렉션 설명}</p>
+					<h3>${list.subject}</h3>
+					<p>${list.content}</p>
 				</div>
 			</a>
 		</li>
+		</c:forEach>
 	</ul>
 </div>
 <script type="text/javascript">

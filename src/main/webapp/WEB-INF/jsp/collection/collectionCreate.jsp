@@ -11,10 +11,10 @@
 	<div class="create_box">
 		<form action="" method="post">
 			<div class="subject">
-				<input type="text" name="collectionSubject" id="collectionSubject" placeholder="컬렉션 제목">
+				<input type="text" name="subject" id="subject" placeholder="컬렉션 제목">
 			</div>
 			<div class="content">
-				<textarea name="collectionContent" id="collectionContent" rows="8" placeholder="설명 입력하기.."></textarea>
+				<textarea name="content" id="content" rows="8" placeholder="설명 입력하기.."></textarea>
 			</div>
 			<div>
 				<h3>작품들</h3>
@@ -28,11 +28,9 @@
 				</div>
 				<%-- 추가한 목록들 --%>
 				<div class="add_collection_list">
-					<ul>
-						<li class="add_collection_lists">
-							
-						</li>
-					</ul>
+					<div class="add_collection_lists">
+					
+					</div>
 				</div>
 				<%-- 추가한 목록들 --%>
 			</div>
@@ -47,28 +45,30 @@
     $('document').ready(function() {
         $('#collectionSubmitBtn').on('click', function(e) {
             e.preventDefault();
+            
+            let subject = $('#subject').val().trim();
+            let content =  $('#content').val();
+            let movieList =  $(".add_collection_lists img").attr("src");
+            let title =  $(".add_collection_lists img").attr("alt");
+            alert(movieList);
 
-            let cookieId = $.cookie('cookieId');
-            let subject = $('#collectionSubject').val().trim();
-            let content =  $('#collectionContent').val();
-
-            if (collectionSubject == '') {
+            if (subject == '') {
                 alert('제목을 입력해주세요');
                 return false;
             }
-            if (collectionContent == '') {
+            if (content == '') {
                 alert('내용을 입력해주세요');
                 return false;
             }
             
-            if (cookieId == null) {
+            if (movieList == null) {
         		alert("작품을 선택해주세요")
         	}
             
             $.ajax({
             	type: "post" 
             	, url: "/collection/create"
-            	, data: {"subject":subject, "content":content}
+            	, data: {"subject":subject, "content":content, "movieList":movieList}
             	, success:function(data) {
             		if (data.code == 1) {
             			location.href="/collection/collection_list_view";
@@ -83,77 +83,68 @@
             	
             }); //---ajax
             
-            
-        });
+        
+        }); //--- 생성버튼
+        
+        
+        //$.cookie('cookie'); // => "value"
+        let cookiePosterPath = $.cookie("cookie");
+        let title = $.cookie('title');
+        //console.log($.cookie('cookie'));
+        
+      	//This is not production quality, its just demo code.
+        let cookieList = function(cookie) {
+        //When the cookie is saved the items will be a comma seperated string
+        //So we will split the cookie by comma to get the original array
+        let cookies = $.cookie(cookie);
+        //Load the items or a new array if null.
+        let items = cookies ? cookies.split(/,/) : new Array();
+
+        //Return a object that we can use to access the array.
+        //while hiding direct access to the declared items array
+        //this is called closures see http://www.jibbering.com/faq/faq_notes/closures.html
+        return {
+            "add": function(val) {
+                //Add to the items.
+                items.push(val);
+                //Save the items to a cookie.
+                //EDIT: Modified from linked answer by Nick see
+                //      http://stackoverflow.com/questions/3387251/how-to-store-array-in-jquery-cookie
+                $.cookie('cookie', items.join(','));
+            },
+            "clear": function() {
+                items = null;
+                //clear the cookie.
+                $.cookie('cookie', null);
+            },
+            "items": function() {
+                //Get all the items.
+                return items;
+            }
+          }
+        }  
+         
+
+        //So on any page you can get the items like this.
+
+        let list = new cookieList("MyItems"); // all items in the array.
+        //Adding items to the cookieList
+
+        list.add(cookiePosterPath);
+        //Note this value cannot have a comma "," as this will spilt into
+        //two seperate values when you declare the cookieList.
+        //Getting all the items as an array
+
+        console.log(list.items());
+        
+        
+        $('<img>', {src: 'https://image.tmdb.org/t/p/w500' + cookiePosterPath, alt= "title"}).appendTo(".add_collection_lists");
         
         
         
-     	// 전체 쿠키
-        let cookies = $.cookie();
+    }); //---제이쿼리
      	
-        // 쿠키 value 값 - poster path
-        let cookiePosterPath = $.cookie("cookieId");
-        
-     	$('<img>', {src: 'https://ixmage.tmdb.org/t/p/w92/' + cookiePosterPath}).appendTo(".add_collection_lists");
 
-     	var cookieList = function(cookieId) {
-     		//When the cookie is saved the items will be a comma seperated string
-     		//So we will split the cookie by comma to get the original array
-     		let cookie = $.cookie("cookieId");
-     		//Load the items or a new array if null.
-     		var items = cookie ? cookie.split(/,/) : new Array();
-
-     		//Return a object that we can use to access the array.
-     		//while hiding direct access to the declared items array
-     		//this is called closures see http://www.jibbering.com/faq/faq_notes/closures.html
-     		return {
-     		    "add": function(val) {
-     		        //Add to the items.
-     		        items.push(val);
-     		        //Save the items to a cookie.
-     		        //EDIT: Modified from linked answer by Nick see
-     		        //      http://stackoverflow.com/questions/3387251/how-to-store-array-in-jquery-cookie
-     		        $.cookie("cookieId", items.join(','));
-     		    },
-     		    "clear": function() {
-     		        items = null;
-     		        //clear the cookie.
-     		        $.cookie("cookieId", null);
-     		    },
-     		    "items": function() {
-     		        //Get all the items.
-     		        return items;
-     		    }
-     		  }
-     		}
-     		 
-			
-     		let list = new cookieList("MyItems"); 
-
-     		list.add(cookies);
-     		list.clear();
-     		console.log(list.items());
-        
-        
-    });
-
- 	
- 	
- 		//So on any page you can get the items like this.
-
- 		//Adding items to the cookieList
-
- 		//list.add("ex");
- 		//Note this value cannot have a comma "," as this will spilt into
- 		//two seperate values when you declare the cookieList.
- 		//Getting all the items as an array
-
- 		//list.clear();
-
- 		//list.clear();
-   
-    
-   
     function goBack(){
 		window.history.back();
 	}

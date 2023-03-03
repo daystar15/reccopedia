@@ -11,7 +11,7 @@
     </div>
     <div>
     	<div class="multi_search_box">
-	        <form action="" method="get">
+	        <form action="/contents/search_view" method="get" id="findCotents">
 	            <div>
 	                <button type="submit" id="searchBtn"><img src="/static/images/search.png" alt=""></button>
 	                <label>
@@ -135,7 +135,7 @@
 		}); //---로그인 버튼
 		
 		
-		$("#searchBtn").on('click', function(e) {
+		$("#findCotents #searchBtn").on('click', function(e) {
 			e.preventDefault();
 			
 			let title = $("#contentsTitle").val().trim();

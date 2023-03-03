@@ -325,14 +325,17 @@ public class ContentsBO {
 		List<Map<String, Object>> list = new ArrayList<>();
 		list = (List<Map<String, Object>>) result.get("results");
 		
+		Map<String, Object> exmap = new HashMap<>();
+		
 		List<Map<String, Object>> personList = new ArrayList<>();
 		
 		for (Map<String, Object> map : list) {
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
 				if(entry.getKey().equals("known_for")) {
-					personList.addAll((Collection<? extends Map<String, Object>>) entry.getValue());
+					exmap.put(entry.getKey(), entry.getValue());
 				}
 			}
+			personList.add(exmap);
 		}
 		
 		return personList;

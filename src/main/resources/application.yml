@@ -11,3 +11,8 @@ spring:
     password: root    
   main: 
     allow-bean-definition-overriding: true
+
+server:
+  error:
+    include-exception: true
+    include-stacktrace: always

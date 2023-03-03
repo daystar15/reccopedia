@@ -205,6 +205,9 @@ textarea {
 .section .inner .contents ul li:first-child {
 	margin-left: 0;
 }
+.section .inner .contents.person ul li:nth-child(n+5) {
+	margin-left: 0;
+}
 .section .inner .contents.person ul li {
 	width: auto;
 	margin-bottom: 1.5rem;
@@ -1742,7 +1745,7 @@ input:checked + label.star {
     border-radius: 50%;
     transform: translateY(-50%);
     transition: transform 0.1s linear;
-    z-index: 999;
+    z-index: 500;
 }
 .contents i:active{
   transform: translateY(-50%) scale(0.9);

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="main_wrap">
 	<div class="section">
 		<div class="inner">
@@ -12,7 +13,7 @@
 						<a href="/contents/contents_view?id=${list.id}">
 							<div>
 								<div class="poster">
-									<img src="https://image.tmdb.org/t/p/w500/${list.poster_path}" alt="">
+									<img src="https://image.tmdb.org/t/p/w500${list.poster_path}" alt="">
 								</div>
 							</div>
 							<h3 class="content_subject">${list.title}</h3>
@@ -20,8 +21,6 @@
 						</a>
 					</li>
 					</c:forEach>
-					
-				
 				</ul>
 			</div>
 		</div>

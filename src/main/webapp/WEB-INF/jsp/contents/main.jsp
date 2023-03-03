@@ -128,13 +128,14 @@
 		</div>
 	</div>
 	
-	<%-- <div class="section">
+	<div class="section">
 		<div class="inner">
 			<h2 class="main_title">오늘의 배우</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="personTrending" items="${personTrending}">
-					<li class="">
+					<li>
 						<a href="/contents/person_view?id=${personTrending.id}">
 							<div class="poster">
 								 <img src="https://image.tmdb.org/t/p/w500/${personTrending.profile_path}" alt="">
@@ -143,17 +144,11 @@
 						</a>
 					</li>
 					</c:forEach>
-					
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
 		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-	</div> --%>
+	</div>
 	
 	<!-- <div class="section user_collection">
 		<div class="inner">
@@ -268,7 +263,7 @@
 		<div class="right">
 			<img src="/static/images/arrow.png" alt="">
 		</div>
-	</div> -->
+	</div>
 	<div class="section">
 		<div class="inner">
 			<h2 class="main_title">왓챠피디아 컬렉션</h2>
@@ -563,7 +558,7 @@
 		<div class="right">
 			<img src="/static/images/arrow.png" alt="">
 		</div>
-	</div>
+	</div> -->
 </div>
 
 
@@ -572,11 +567,13 @@
 	const carousel_2 = document.querySelectorAll(".carousel")[1] //두번째 슬라이드 영역
 	const carousel_3 = document.querySelectorAll(".carousel")[2] //세번쨰 슬라이드 영역
 	const carousel_4 = document.querySelectorAll(".carousel")[3] //네번째 슬라이드 영역
+	const carousel_5 = document.querySelectorAll(".carousel")[4] //다섯번째 슬라이드 영역
 	
 	firstImg1 = carousel_1.querySelectorAll("li")[0]; //첫번째 슬라이드 첫번째 이미지
 	firstImg2 = carousel_2.querySelectorAll("li")[0]; //두번째 슬라이드 첫번째 이미지
 	firstImg3 = carousel_3.querySelectorAll("li")[0]; //세번째 슬라이드 첫번째 이미지
 	firstImg4 = carousel_4.querySelectorAll("li")[0]; //네번째 슬라이드 첫번째 이미지
+	firstImg5 = carousel_5.querySelectorAll("li")[0]; //네번째 슬라이드 첫번째 이미지
 	
 	//arrowIcons = document.querySelectorAll(".contents i");
 	contents_slide = document.querySelectorAll(".contents i"),
@@ -584,6 +581,7 @@
 	arrowIcons_2 = [contents_slide[2],contents_slide[3]],
 	arrowIcons_3 = [contents_slide[4],contents_slide[5]],
 	arrowIcons_4 = [contents_slide[6],contents_slide[7]];
+	arrowIcons_5 = [contents_slide[8],contents_slide[9]];
 	
 	
 	let isDragStart = false, isDragging= false, prevPageX, prevScrollLeft, positionDiff;
@@ -593,7 +591,20 @@
 	    let scrollWidth = carousel_1.scrollWidth - carousel_1.clientWidth; // getting max scrollable width
 		arrowIcons_1[0].style.display = carousel_1.scrollLeft == 0 ? "none" : "block";
 		arrowIcons_1[1].style.display = carousel_1.scrollLeft == scrollWidth ? "none" : "block";
+		
+		arrowIcons_2[0].style.display = carousel_2.scrollLeft == 0 ? "none" : "block";
+		arrowIcons_2[1].style.display = carousel_2.scrollLeft == scrollWidth ? "none" : "block";
+		
+		arrowIcons_3[0].style.display = carousel_3.scrollLeft == 0 ? "none" : "block";
+		arrowIcons_3[1].style.display = carousel_3.scrollLeft == scrollWidth ? "none" : "block";
+		
+		arrowIcons_4[0].style.display = carousel_4.scrollLeft == 0 ? "none" : "block";
+		arrowIcons_4[1].style.display = carousel_4.scrollLeft == scrollWidth ? "none" : "block";
+		
+		arrowIcons_5[0].style.display = carousel_5.scrollLeft == 0 ? "none" : "block";
+		arrowIcons_5[1].style.display = carousel_5.scrollLeft == scrollWidth ? "none" : "block";
 	}
+	
 	arrowIcons_1.forEach((icon =>{
 		icon.addEventListener("click", () => {
 			let firstImgWidth = firstImg1.clientWidth + 14;
@@ -625,6 +636,14 @@
 		icon.addEventListener("click", () => {
 			let firstImgWidth = firstImg4.clientWidth + 14;
 			carousel_4.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+			setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+		});
+	}));
+	
+	arrowIcons_5.forEach((icon =>{
+		icon.addEventListener("click", () => {
+			let firstImgWidth = firstImg5.clientWidth + 14;
+			carousel_5.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
 			setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
 		});
 	}));

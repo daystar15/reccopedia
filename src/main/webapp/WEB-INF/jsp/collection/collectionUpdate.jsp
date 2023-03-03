@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="nav_box">
 	<div>
 		<img src="/static/images/right-arrow.png" alt="">
@@ -9,10 +10,10 @@
 	<div class="create_box">
 		<form action="" method="post">
 			<div class="subject">
-				<input type="text" name="collectionSubject" id="collectionSubject" placeholder="컬렉션 제목">
+				<input type="text" name="collectionSubject" id="collectionSubject" placeholder="컬렉션 제목" value="${collectionMap.subject}">
 			</div>
 			<div class="content">
-				<textarea name="collectionContent" id="collectionContent" rows="8" placeholder="설명 입력하기.."></textarea>
+				<textarea name="collectionContent" id="collectionContent" rows="8" placeholder="설명 입력하기..">${collectionMap.content}</textarea>
 			</div>
 			<div>
 				<div>

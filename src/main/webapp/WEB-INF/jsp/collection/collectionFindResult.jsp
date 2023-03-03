@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="collection_plus">
-			<img src="/static/images/plus.png" alt="" data-api-id="${result.poster_path}">
+			<img src="/static/images/plus.png" alt="" data-api-id="${result.poster_path}" data-api-title="${result.title}">
 		</div>
 	</div>
 </li>
@@ -32,7 +32,9 @@
 	$(document).ready(function() {
 		$(".collection_plus img").on('click', function() {
 			let id = $(this).data('api-id');
-			$.cookie('cookieId', $(this).data('api-id'), {expires: 7, path: '/',  secure: false});
+			let title = $(this).data('api-title');
+			$.cookie('cookie', $(this).data('api-id'), {expires: 7, path: '/',  secure: false});
+			$.cookie('title', $(this).data('api-title'), {expires: 7, path: '/',  secure: false});
 
 			
 			$.ajax({

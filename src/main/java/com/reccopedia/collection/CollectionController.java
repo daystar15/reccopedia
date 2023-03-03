@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.collection.bo.CollectionBO;
+import com.reccopedia.collection.model.Collection;
 
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/collection")
@@ -28,8 +27,7 @@ public class CollectionController {
 
 	// 컬렉션 생성 페이지
 	@GetMapping("/collection_create_view")
-	public String collectionCreateView(
-			Model model) {
+	public String collectionCreateView(Model model) {
 		
 		model.addAttribute("viewName", "collection/collectionCreate");
 		return "template/layout";
@@ -37,7 +35,19 @@ public class CollectionController {
 	
 	// 컬렉션 수정 페이지
 	@GetMapping("/update_view")
-	public String collectionUpdateView(Model model) {
+	public String collectionUpdateView(Model model, HttpSession session) {
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+
+		if (userId == null) {
+			return "redirect:/main";
+		}
+		
+		//Collection collection = collectionBO.getCollectionByIdAndUserId(id, userId);
+		Map<String, Object> collectionMap = collectionBO.getCollectionMapByUserId(userId);
+	
+		//model.addAttribute("collection", collection);
+		model.addAttribute("collectionMap", collectionMap);
 		model.addAttribute("viewName", "collection/collectionUpdate");
 		return "template/layout";
 	}
@@ -45,8 +55,30 @@ public class CollectionController {
 		
 	// 컬렉션 목록 페이지
 	@GetMapping("/collection_list_view")
-	public String collectionListView(Model model) {
+	public String collectionListView(Model model, HttpSession session) {
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		List<Collection> collectionList = collectionBO.getCollectionList(userId);
+		
+		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("viewName", "collection/collectionList");
+		return "template/layout";
+	}
+	
+	
+	// 컬렉션 페이지
+	@GetMapping("/collection_view")
+	public String collectionView(Model model, HttpSession session) {
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		Map<String, Object> collectionMap = collectionBO.getCollectionMapByUserId(userId);
+		List<Collection> collectionList = collectionBO.getCollectionList(userId);
+		
+		model.addAttribute("collectionList", collectionList);
+		model.addAttribute("collectionMap", collectionMap);
+		model.addAttribute("viewName", "collection/collectionPage");
 		return "template/layout";
 	}
 		
