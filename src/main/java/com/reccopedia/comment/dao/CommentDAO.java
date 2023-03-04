@@ -15,7 +15,8 @@ public interface CommentDAO {
 			@Param("userId") int userId, 
 			@Param("pointId") Integer pointId, 
 			@Param("id") int id, 
-			@Param("content") String content);
+			@Param("content") String content,
+			@Param("spoiler") boolean spoiler);
 	
 	public int selectCommentByApiIdOrUserId(
 			@Param("apiId") int id, 

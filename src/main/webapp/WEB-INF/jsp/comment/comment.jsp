@@ -35,9 +35,12 @@
 				<div class="comment_right">&#9733; ${list.pointCount}</div>
 			</div>
 		</div>
-		<div class="comment_content" data-comment-content="${list.comment.content}">
-			${list.comment.content}
-		</div>
+		<c:if test="${list.comment.spoiler == true}">
+			<div class="comment_content" data-spoiler="${list.comment.spoiler}">
+					${list.comment.content}
+			</div>
+			<p class="spoilerHTML"></p>
+		</c:if>
 		<!-- <div class="good_box">
 			<span class="comment_up"> 
 				<img src="/static/images/up.png" alt=""> <em>{318}</em>
@@ -60,6 +63,22 @@
 
 <script>
 	$(document).ready(function() {
+		
+		let status = $(".comment_content").data("spoiler");
+    	
+    	if (status == true) {
+    		let comment = $(".comment_content").text();
+    		
+    		$(".comment_content").addClass("disappear");
+    		$(".spoilerHTML").html("스포일러 댓글입니다.")
+    		
+    		$(".spoilerHTML").on('click', function(e) {
+    			$(this).prev().removeClass("disappear");
+    		})
+    	}
+		
+		
+		
 		// 댓글 삭제
         $(".deleteBtn").on('click', function() {
         	let id = $('.comment_box').data('mycomment-id');

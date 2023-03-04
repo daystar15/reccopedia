@@ -1810,3 +1810,12 @@ input[id="cb1"]:checked + label {
     height: 40px;
     background-size: 100%;
 }
+.disappear {
+	display: none;
+}
+.spoilerHTML {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+	font-style: italic;
+}

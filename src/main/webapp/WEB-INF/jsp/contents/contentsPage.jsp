@@ -208,9 +208,16 @@
 									</a>
 									<div class="comment_right">&#9733; ${list.pointCount}</div>
 								</div>
-								<div class="comment_content">${list.comment.content}</div>
+								<c:if test="${list.comment.spoiler == true}">
+									<div class="comment_content" data-spoiler="${list.comment.spoiler}" data-comment-id="${list.comment.id}">
+											${list.comment.content}
+									</div>
+									<p class="spoilerHTML"></p>
+								</c:if>
 								<%-- <div class="good_box">
-									<span class="comment_up"> <img src="/static/images/up.png" alt=""> <em>${list.comment.id}</em>
+									<span class="comment_up"> 
+										<img src="/static/images/up.png" alt=""> 
+										<em><c:if test="${list.comment.spoiler == true}">보여줘</c:if></em>
 									</span>
 								</div> --%>
 								<!-- 댓글 하나 끝 -->
@@ -342,8 +349,28 @@
 <script>
     $(document).ready(function () {
     	
+    	let status = $(".comment_content").data("spoiler");
+    	
+    	if (status == true) {
+    		let comment = $(".comment_content").text();
+    		
+    		$(".comment_content").addClass("disappear");
+    		$(".spoilerHTML").html("스포일러 댓글입니다.")
+    		
+    		$(".spoilerHTML").on('click', function(e) {
+    			$(this).prev().removeClass("disappear");
+    		})
+    	}
+    	
     	$("#getCollection").on('click', function() {
-    		location.href="/collection/collection_list_view";
+    		let userId = $("#wish").data('user-id');
+    		
+    		if (userId == null) {
+    			alert("로그인을 해주세요");
+    		} else {
+    			location.href="/collection/collection_list_view";
+    		}
+    		
     	});
     	
         $('.my_comment_write').on('click', function() {
@@ -374,52 +401,15 @@
             $(".comment_modal").addClass('none');
         });
         
-        // 스포일러 가리기 버튼
-        $("#cb1").on('change', function(e) {
-           let imChecked = $(this).is(":checked");
-           console.log(imChecked);
-            
-			
-        	// 작성한 댓글
-			let spoiler = $(event.target).parent().parent().parent().parent().parent().find('textarea').val();
-        	
-        	// 댓글을 작성할 작품 api 번호
-        	let apiId = $(".modal_box").data('api-id');
-        	
-        	if (spoiler == '') {
-        		alert("댓글이 없습니다.")
-        		return;
-        	}
-        	
-        	/* $.ajax({
-        		type:'POST'
-        		, url:'/spoiler/create'
-        		, data: {"apiId":apiId, "spoiler":spoiler}
-        		, success: function(data) {
-        			if (data.code == 1) {
-        				alert('댓글 스포일러가 적용되었습니다.');
-        			} else if (data.code == 500) {
-        				alert("로그인을 해주세요.");
-        				location.href = "/main";
-        			}
-        		}
-        		, error:function(jqXHR, textStatus, errorThrown) {
-        			var errorMsg = jqXHR.responseJSON.status;
-					alert(errorMsg + ":" + textStatus + "에러");
-        		}
-        	}); */ //---ajax 끝
-        }); //---스포일러 버튼
-        
         
         // 댓글 작성
         $("#submitComment").on('click', function(e) {
         	e.preventDefault();
         	
         	// 스포일러 됐는지
-        	let check = $("#cb1").is(":checked");
-        	let nocheck = $("#cb1").attr("checked", false); /* 해제 */
+        	let spoiler = $("#cb1").is(":checked");
         	
-        	
+        	//console.log(check);
         	
         	// 댓글을 작성할 작품 api 번호
         	let id = $(".modal_box").data('api-id');
@@ -435,37 +425,26 @@
         	$.ajax({
         		type:'POST'
         		, url:'/comment/create'
-        		, data: {"id":id, "content":comment}
+        		, data: {"id":id, "content":comment, "spoiler":spoiler}
         		, success: function(data) {
-        			if (check == true) {
-        				if (data.code == 1) {
-            				alert('댓글이 작성되었습니다!');
-            				location.reload();
-            			} else if (data.code == 500) {
-            				alert("로그인을 해주세요.");
-            				location.href = "/main";
-            			}
-        			} else {
-        				if (data.code == 1) {
-            				alert('댓글이 작성되었습니다!');
-            				location.reload();
-            			} else if (data.code == 500) {
-            				alert("로그인을 해주세요.");
-            				location.href = "/main";
-            			}
-        			}
+       				if (data.code == 1) {
+           				alert('댓글이 작성되었습니다!');
+           				location.reload();
+           			} else if (data.code == 500) {
+           				alert("로그인을 해주세요.");
+           				location.href = "/main";
+           			}
         			
         		}
         		, error:function(jqXHR, textStatus, errorThrown) {
         			var errorMsg = jqXHR.responseJSON.status;
 					alert(errorMsg + ":" + textStatus + "에러");
         		}
-        		
-        		
+
         	}); //---ajax 끝
         	
-        	
         }); //---댓글 작성
+        
         
         // 댓글 삭제
         $("#deleteBtn").on('click', function() {
@@ -530,28 +509,122 @@
         	$('.contents_cast_box').css("height", "auto");
         }); //-- 출연/제작 더보기 버튼
         
-        // 별점 나타내기 버튼
+        
+        // 별점 나타내기(누른 직후)
+        $("input[name=rating]:radio").change(function () {
+            //라디오 버튼 값을 가져온다.
+            let mypoint = this.value;
+                            
+            //alert(mypoint);  
+            
+            if (mypoint == 1) {
+            	$('#1-star').prop('checked', true);
+            	$("label[for=1-star]").css("color", "#fc0");
+            } 
+            if (mypoint == 2) {
+            	$('#1-star').prop('checked', true);
+            	$("label[for=1-star]").css("color", "#fc0");
+            	
+            	$('#2-stars').prop('checked', true);
+            	$("label[for=2-stars]").css("color", "#fc0");
+            } 
+    		if (mypoint == 3) {
+            	$('#1-star').prop('checked', true);
+            	$("label[for=1-star]").css("color", "#fc0");
+            	
+            	$('#2-stars').prop('checked', true);
+            	$("label[for=2-stars]").css("color", "#fc0");
+            	
+            	$('#3-stars').prop('checked', true);
+            	$("label[for=3-stars]").css("color", "#fc0");
+            } 
+    		if (mypoint == 4) {
+            	$('#1-star').prop('checked', true);
+            	$("label[for=1-star]").css("color", "#fc0");
+            	
+            	$('#2-stars').prop('checked', true);
+            	$("label[for=2-stars]").css("color", "#fc0");
+            	
+            	$('#3-stars').prop('checked', true);
+            	$("label[for=3-stars]").css("color", "#fc0");
+            	
+            	$('#4-stars').prop('checked', true);
+            	$("label[for=4-stars]").css("color", "#fc0");
+            } 
+    		 if (mypoint == 5) {
+            	$('#1-star').prop('checked', true);
+            	$("label[for=1-star]").css("color", "#fc0");
+            	
+            	$('#2-stars').prop('checked', true);
+            	$("label[for=2-stars]").css("color", "#fc0");
+            	
+            	$('#3-stars').prop('checked', true);
+            	$("label[for=3-stars]").css("color", "#fc0");
+            	
+            	$('#4-stars').prop('checked', true);
+            	$("label[for=4-stars]").css("color", "#fc0");
+            	
+            	$('#5-stars').prop('checked', true);
+            	$("label[for=5-stars]").css("color", "#fc0");
+            }
+    	});
+        
+        
+        
+        // 별점 나타내기 버튼(누르고 나서 다시 들어왔을 때)
         let mypoint = $(".star-rating").data('point-id');
+        
+        //console.log(mypoint);
+        
         if (mypoint == 1) {
         	$('#1-star').prop('checked', true);
-        } else if (mypoint == 2) {
+        	$("label[for=1-star]").css("color", "#fc0");
+        } 
+        if (mypoint == 2) {
         	$('#1-star').prop('checked', true);
+        	$("label[for=1-star]").css("color", "#fc0");
+        	
         	$('#2-stars').prop('checked', true);
-        } else if (mypoint == 3) {
+        	$("label[for=2-stars]").css("color", "#fc0");
+        } 
+		if (mypoint == 3) {
         	$('#1-star').prop('checked', true);
+        	$("label[for=1-star]").css("color", "#fc0");
+        	
         	$('#2-stars').prop('checked', true);
+        	$("label[for=2-stars]").css("color", "#fc0");
+        	
         	$('#3-stars').prop('checked', true);
-        } else if (mypoint == 4) {
+        	$("label[for=3-stars]").css("color", "#fc0");
+        } 
+		if (mypoint == 4) {
         	$('#1-star').prop('checked', true);
+        	$("label[for=1-star]").css("color", "#fc0");
+        	
         	$('#2-stars').prop('checked', true);
+        	$("label[for=2-stars]").css("color", "#fc0");
+        	
         	$('#3-stars').prop('checked', true);
+        	$("label[for=3-stars]").css("color", "#fc0");
+        	
         	$('#4-stars').prop('checked', true);
-        } else if (mypoint == 5) {
+        	$("label[for=4-stars]").css("color", "#fc0");
+        } 
+		 if (mypoint == 5) {
         	$('#1-star').prop('checked', true);
+        	$("label[for=1-star]").css("color", "#fc0");
+        	
         	$('#2-stars').prop('checked', true);
+        	$("label[for=2-stars]").css("color", "#fc0");
+        	
         	$('#3-stars').prop('checked', true);
+        	$("label[for=3-stars]").css("color", "#fc0");
+        	
         	$('#4-stars').prop('checked', true);
+        	$("label[for=4-stars]").css("color", "#fc0");
+        	
         	$('#5-stars').prop('checked', true);
+        	$("label[for=5-stars]").css("color", "#fc0");
         }
         
         // 별점 버튼
@@ -597,7 +670,7 @@
         	let title = $(".contents_info .title").data('api-title');
         	let posterPath = $(".contents_poster img").data('api-img');
         	
-        	console.log(userId);
+        	//alert(userId);
         	if (userId == null) {
         		alert('로그인을 해주세요!');
         	}
@@ -609,8 +682,6 @@
         		, success:function(data) {
         			if (data.code == 1) {
 						alert("생성 페이지로 넘어갑니다");
-        			} else {
-        				alert("로그인을 해주세요.");
         			}
         		}
         		, error: function(e) {

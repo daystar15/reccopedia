@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:if test="${fillPoint eq false}">
-	<div class="star-rating"">
+	<div class="star-ratings" data-point-id="${pointList[0].point}">
 		<input type="radio" id="5-stars" name="rating" value="5" />
 		<label for="5-stars" class="star">&#9733;</label>
 		<input type="radio" id="4-stars" name="rating" value="4" />
@@ -20,6 +20,7 @@
 
 <script>
 	$(document).ready(function() {
+		
 		$('input[name="rating"]').on('change', function() {
 			let value = $(this).val();  
 	        let checked = $(this).prop('checked');

@@ -26,6 +26,7 @@ public class CommentRestController {
 	public Map<String, Object> createComment(
 			@RequestParam("id") int id,
 			@RequestParam("content") String content,
+			@RequestParam("spoiler") boolean spoiler,
 			HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<>();
@@ -39,7 +40,7 @@ public class CommentRestController {
 			return result;
 		}
 		
-		commentBO.createComment(userId, null, id, content);
+		commentBO.createComment(userId, null, id, content, spoiler);
 		result.put("code", 1);
 		result.put("result", "success");
 		

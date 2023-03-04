@@ -76,7 +76,6 @@ public class CollectionController {
 		if (userId == null) {
 			result.put("code", 500);
 			result.put("errorMessage", "로그인을 해주세요");
-			return "redirect:/main";
 		}
 		
 		List<Collection> collectionList = collectionBO.getCollectionList(userId);

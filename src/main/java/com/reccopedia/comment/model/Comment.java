@@ -9,6 +9,7 @@ public class Comment {
 	private int pointId;
 	private int userId;
 	private String content;
+	private boolean spoiler;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -41,6 +42,12 @@ public class Comment {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public boolean isSpoiler() {
+		return spoiler;
+	}
+	public void setSpoiler(boolean spoiler) {
+		this.spoiler = spoiler;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
