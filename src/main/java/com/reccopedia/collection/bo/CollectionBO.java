@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reccopedia.collection.dao.CollectionDAO;
 import com.reccopedia.collection.model.Collection;
@@ -26,8 +27,8 @@ public class CollectionBO {
 	private RestTemplateService resttemplateservice;
 	
 	
-	public void addCollection(Integer userId, String subject, String content, String movieList) {
-		collectionDAO.addCollection(userId, subject, content, movieList);
+	public void addCollection(Integer userId, String subject, String content, String arr2) {
+		collectionDAO.addCollection(userId, subject, content, arr2);
 	};
 	
 	public void addCollectionContent(int apiId, Integer pointId, int userId, String title, String posterPath) {
@@ -69,6 +70,10 @@ public class CollectionBO {
 	
 	public void deleteCollectionContentByIdUserId(int id) {
 		collectionDAO.deleteCollectionContentByIdUserId(id);
+	}
+	
+	public String getCollectionPosterPath(int userId) {
+		return collectionDAO.selectCollectionPosterPath(userId); 
 	}
 
 }

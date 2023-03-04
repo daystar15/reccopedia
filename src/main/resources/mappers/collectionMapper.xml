@@ -21,7 +21,7 @@
 			, #{subject}
 			, NOW()
 			, NOW()
-			, #{movieList}
+			, #{arr2}
 		)
  	</insert>
  	
@@ -61,6 +61,17 @@
 			`collection`
 		WHERE
 			`userId` = #{userId}
+ 	</select>
+ 	
+ 	<select id="selectCollectionPosterPath" resultType="com.reccopedia.collection.model.Collection">
+ 		SELECT 
+ 			`movie_list`
+		FROM
+			`collection`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`id` = #{id}
  	</select>
  	
  	<select id="selectCollectionContentList" resultType="com.reccopedia.collection.model.CollectionContent">
@@ -116,5 +127,11 @@
  		WHERE
  			`id` = #{id}
  	</delete>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
  
  </mapper>

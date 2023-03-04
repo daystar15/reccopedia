@@ -17,7 +17,7 @@ public interface CollectionDAO {
 			@Param("userId") Integer userId,
 			@Param("subject") String subject, 
 			@Param("content") String content, 
-			@Param("movieList") String movieList);
+			@Param("arr2") String arr2);
 			
 	public void addCollectionContent(
 			@Param("apiId") int apiId,
@@ -39,4 +39,7 @@ public interface CollectionDAO {
 	public Map<String, Object> selectCollectionMapByUserId(int userId);
 	
 	public void deleteCollectionContentByIdUserId(int id);
+	
+	public String selectCollectionPosterPath(int userId);
+	
 }

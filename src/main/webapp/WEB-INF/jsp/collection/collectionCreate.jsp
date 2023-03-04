@@ -28,7 +28,16 @@
 				</div>
 				<%-- 추가한 목록들 --%>
 				<div class="add_collection_list">
-					<jsp:include page="./collectionSelect.jsp"></jsp:include>
+					<c:forEach var="list" items="${collectionContent}">
+						<div class="collection_select_list">
+							<div class="collection_select_list_poster" data-content-id="${list.id}">
+								<img src="https://image.tmdb.org/t/p/w500/${list.posterPath}" alt="">
+							</div>
+							<div class="closeBtn" data-select-id="${list.id}">
+								<img src="/static/images/close.png" alt="">
+							</div>
+						</div>
+					</c:forEach>	
 				</div>
 				<%-- 추가한 목록들 --%>
 			</div>
@@ -42,17 +51,52 @@
 <script>
     $('document').ready(function() {
     	
-    	$(".add_collection_list").html();
+    	let arr1 = new Array();
+    	<c:forEach items="${collectionContent}" var="list">
+    		arr1.push({
+    			id: "${list.id}"
+    			, title: "${list.title}"
+    			, posterPath: "${list.posterPath}"
+    		});
+    	</c:forEach>
+		let arr2 = JSON.stringify(arr1);
+    	console.log(arr2);
     	
+    	// 삭제버튼
+		$(".closeBtn img").on('click', function() {
+			let id = $(".closeBtn").data('select-id');
+			//alert(id);
+			
+			// ajax 컨텐츠 삭제
+			$.ajax({
+				contentType: "application/json"
+				, type: "DELETE"
+				, url: "/collection/collection_content_delete"
+				, data: {"id":id}
+				, dataType: "json"
+				, success:function(data) {
+					if (data.code == 1) {
+						alert("삭제 되었습니다.");
+						location.reload();
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert('오류입니다');
+				}
+			}); //---ajax
+			
+		}); //--- 삭제버튼 끝
+    	
+		
         $('#collectionSubmitBtn').on('click', function(e) {
             e.preventDefault();
             
             let subject = $('#subject').val().trim();
             let content =  $('#content').val();
-            let movieList =  $(".add_collection_lists img").attr("src");
-            let title =  $(".add_collection_lists img").attr("alt");
-            alert(movieList);
 
+            
             if (subject == '') {
                 alert('제목을 입력해주세요');
                 return false;
@@ -61,18 +105,18 @@
                 alert('내용을 입력해주세요');
                 return false;
             }
-            
-            if (movieList == null) {
-        		alert("작품을 선택해주세요")
-        	}
+            if (arr2.length == 0) {
+            	alert('컨텐츠를 선택해주세요');
+            }
             
             $.ajax({
-            	type: "get" 
+            	type: "post" 
             	, url: "/collection/create"
-            	, data: {"subject":subject, "content":content, "movieList":movieList}
+            	, data: {"subject":subject, "content":content, "arr2[]":arr2}
             	, success:function(data) {
             		if (data.code == 1) {
-            			
+            			alert("컬렉션 생성에 성공했습니다");
+            			location.href="/collection/collection_list_view"
             		} else {
             			alert(data.errorMessage + "ajax 에러");
             		}

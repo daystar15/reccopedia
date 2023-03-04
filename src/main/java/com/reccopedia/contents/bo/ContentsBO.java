@@ -1,7 +1,6 @@
 package com.reccopedia.contents.bo;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reccopedia.comment.bo.CommentBO;
-import com.reccopedia.contents.model.ContentsView;
 import com.reccopedia.point.bo.PointBO;
 import com.reccopedia.restAPI.dao.RestTemplateService;
 import com.reccopedia.watching.bo.WatchingBO;

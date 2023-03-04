@@ -1163,8 +1163,9 @@ input:checked + label.star {
 /* 수정하기 */
 .create_box form > div > div {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
 }
 .create_box form > div > div a {
     color: #ff2f6e;
@@ -1824,13 +1825,13 @@ input[id="cb1"]:checked + label {
 }
 .collection_select_list {
 	position: relative;
-    width: 212px;
-}
-.collection_select_list_poster {
-	width: 212px;
+    width: 170px;
 	margin-left: 14px;
 }
-.collection_select_list_poster:first-child {
+.collection_select_list_poster {
+	width: 170px;
+}
+.collection_select_list:first-child {
 	margin-left: 0;
 }
 .collection_select_list_poster img,

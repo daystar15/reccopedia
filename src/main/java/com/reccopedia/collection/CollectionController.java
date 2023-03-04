@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.reccopedia.collection.bo.CollectionBO;
 import com.reccopedia.collection.model.Collection;
 import com.reccopedia.collection.model.CollectionContent;
@@ -41,6 +42,9 @@ public class CollectionController {
 			result.put("code", 1);
 		}
 		
+		List<CollectionContent> collectionContent = collectionBO.getCollectionContentList(userId);
+		
+		model.addAttribute("collectionContent", collectionContent);
 		model.addAttribute("viewName", "collection/collectionCreate");
 		return "template/layout";
 	}
@@ -55,7 +59,8 @@ public class CollectionController {
 		List<CollectionContent> collectionContent = collectionBO.getCollectionContentList(userId);
 		 
 		model.addAttribute("collectionContent", collectionContent);
-		return "collection/collectionSelect";
+		model.addAttribute("viewName", "collection/collectionSelect");
+		return "template/layout";
 	}
 	
 	// 컬렉션 수정 페이지
@@ -80,7 +85,7 @@ public class CollectionController {
 		
 	// 컬렉션 목록 페이지
 	@GetMapping("/collection_list_view")
-	public String collectionListView(Model model, HttpSession session) {
+	public String collectionListView(Model model, HttpSession session) throws JsonMappingException, JsonProcessingException {
 		
 		Integer userId = (Integer) session.getAttribute("userId");
 		
@@ -89,9 +94,10 @@ public class CollectionController {
 			result.put("code", 500);
 			result.put("errorMessage", "로그인을 해주세요");
 		}
-		
+		collectionBO.getCollectionPosterPath(userId);
 		List<Collection> collectionList = collectionBO.getCollectionList(userId);
 		
+		//model.addAttribute("list", list);
 		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("viewName", "collection/collectionList");
 		return "template/layout";

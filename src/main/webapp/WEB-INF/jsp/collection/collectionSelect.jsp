@@ -15,35 +15,11 @@
 		</div>
 	</c:forEach>			
 </div>
-테스트용
 
 <script>
 	$(document).ready(function() {
 	
-		// 삭제버튼
-		$(".closeBtn").on('click', function() {
-			let id = $(this).data('select-id');
-			alert(id);
-			
-			// ajax 컨텐츠 삭제
-			$.ajax({
-				type: "DELETE"
-				, url: "/collection/collection_content_delete"
-				, data: {"id":id}
-			
-				, success:function(data) {
-					if (data.code == 1) {
-						alert("삭제 되었습니다.");
-						location.reload();
-					} else {
-						alert(data.errorMessage);
-					}
-				, error:function(e) {
-					alert('오류입니다');
-					}
-				});
-			}); //---ajax
-		}); //--- 삭제버튼 끝
+		
 		
 		
 		
