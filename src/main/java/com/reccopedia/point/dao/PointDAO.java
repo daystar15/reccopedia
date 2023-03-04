@@ -49,4 +49,6 @@ public interface PointDAO {
 			@Param("point") int point, 
 			@Param("userId") int userId);
 	
+	public int selectPointCount();
+	
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,8 +27,20 @@ public class CollectionController {
 
 
 	// 컬렉션 생성 페이지
-	@GetMapping("/collection_create_view")
-	public String collectionCreateView(Model model) {
+	@PostMapping("/collection_create_view")
+	public String collectionCreateView(Model model, HttpSession session) {
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		if (userId == null) {
+			result.put("code", 500);
+			result.put("errorMessage", "로그인을 해주세요!");
+		} else if (userId != null) {
+			result.put("code", 1);
+		}
+		
 		
 		model.addAttribute("viewName", "collection/collectionCreate");
 		return "template/layout";
@@ -58,6 +71,13 @@ public class CollectionController {
 	public String collectionListView(Model model, HttpSession session) {
 		
 		Integer userId = (Integer) session.getAttribute("userId");
+		
+		Map<String, Object> result = new HashMap<>();
+		if (userId == null) {
+			result.put("code", 500);
+			result.put("errorMessage", "로그인을 해주세요");
+			return "redirect:/main";
+		}
 		
 		List<Collection> collectionList = collectionBO.getCollectionList(userId);
 		

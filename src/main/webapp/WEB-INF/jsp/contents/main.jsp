@@ -614,7 +614,7 @@
 	}));
 	
 	arrowIcons_2.forEach((icon =>{
-		console.log(icon);
+		//console.log(icon);
 		icon.addEventListener("click", () => {
 			let firstImgWidth = firstImg2.clientWidth + 14;
 			carousel_2.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;

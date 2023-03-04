@@ -72,6 +72,10 @@ public class PointBO {
 		return pointDAO.selectPointByApiIdAndUserId(id, userId);
 	}
 	
+	public int getPointCountByUserId() {
+		return pointDAO.selectPointCount();
+	}
+	
 	
 	public void deletePointByApiId(int id) {
 		pointDAO.deletePointByApiId(id);

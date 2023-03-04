@@ -89,7 +89,7 @@
 						<span class="on">관심없어요</span>
 						</c:if>
 					</div>
-					<div class="contents_keeped" id="getCollection">
+					<div class="contents_keeped" id="getCollection" data-user-id="${userinfo.id}">
 						<div class="icon">
 							<img src="/static/images/add_collection.png" alt="">
 						</div>
@@ -322,17 +322,16 @@
 			<textarea name="write_comment_content" id="write_comment_content" maxlength="10000" rows="10" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요.">${myComment.content}</textarea>
 			<div>
 				<div class="write_comment_left">
-					<!-- sns 공유
-                                <span></span> 
-                            -->
-					<span class="no_spoiler" id="noSpoil"> 
-						<img id="usualEye" src="/static/images/hide.png" alt="">
-						<img class="none" id="specialEye" src="/static/images/hideColor.png" alt="">
-					</span>
+					<div>
+						<input type="checkbox" id="cb1">
+   						<label for="cb1"></label>
+					</div>
 				</div>
 				<div class="write_comment_right">
-					<span class="comment_length">0/10000</span>
-					<input type="submit" value="저장" id="submitComment">
+					<div>
+						<span class="comment_length">0/10000</span>
+						<input type="submit" value="저장" id="submitComment">
+					</div>
 				</div>
 			</div>
 		</form>
@@ -348,8 +347,16 @@
     	});
     	
         $('.my_comment_write').on('click', function() {
-            $(".comment_modal").removeClass('none');
-            $(".modal_back").removeClass('none');
+        	let userId = $(this).data('user-id');
+        	
+        	if (userId == '') {
+        		alert("로그인을 해주세요.")
+        		$(".modal_back").addClass('none');
+        	} else if (userId != null) {
+        		$(".comment_modal").removeClass('none');
+                $(".modal_back").removeClass('none');
+        	}
+            
         });
         
         $("#writeYourComment").on('click', function() {
@@ -368,11 +375,10 @@
         });
         
         // 스포일러 가리기 버튼
-        $("#noSpoil").on('click', function(e) {
-            $("#usualEye").addClass('none');
-            $("#specialEye").removeClass('none');
+        $("#cb1").on('change', function(e) {
+           let imChecked = $(this).is(":checked");
+           console.log(imChecked);
             
-			e.preventDefault();
 			
         	// 작성한 댓글
 			let spoiler = $(event.target).parent().parent().parent().parent().parent().find('textarea').val();
@@ -385,7 +391,7 @@
         		return;
         	}
         	
-        	$.ajax({
+        	/* $.ajax({
         		type:'POST'
         		, url:'/spoiler/create'
         		, data: {"apiId":apiId, "spoiler":spoiler}
@@ -401,13 +407,19 @@
         			var errorMsg = jqXHR.responseJSON.status;
 					alert(errorMsg + ":" + textStatus + "에러");
         		}
-        	}); //---ajax 끝
-        });
+        	}); */ //---ajax 끝
+        }); //---스포일러 버튼
         
         
         // 댓글 작성
         $("#submitComment").on('click', function(e) {
         	e.preventDefault();
+        	
+        	// 스포일러 됐는지
+        	let check = $("#cb1").is(":checked");
+        	let nocheck = $("#cb1").attr("checked", false); /* 해제 */
+        	
+        	
         	
         	// 댓글을 작성할 작품 api 번호
         	let id = $(".modal_box").data('api-id');
@@ -425,13 +437,24 @@
         		, url:'/comment/create'
         		, data: {"id":id, "content":comment}
         		, success: function(data) {
-        			if (data.code == 1) {
-        				alert('댓글이 작성되었습니다!');
-        				location.reload();
-        			} else if (data.code == 500) {
-        				alert("로그인을 해주세요.");
-        				location.href = "/main";
+        			if (check == true) {
+        				if (data.code == 1) {
+            				alert('댓글이 작성되었습니다!');
+            				location.reload();
+            			} else if (data.code == 500) {
+            				alert("로그인을 해주세요.");
+            				location.href = "/main";
+            			}
+        			} else {
+        				if (data.code == 1) {
+            				alert('댓글이 작성되었습니다!');
+            				location.reload();
+            			} else if (data.code == 500) {
+            				alert("로그인을 해주세요.");
+            				location.href = "/main";
+            			}
         			}
+        			
         		}
         		, error:function(jqXHR, textStatus, errorThrown) {
         			var errorMsg = jqXHR.responseJSON.status;
@@ -549,13 +572,53 @@
         		, url: "/point/contents_point_view"
         		, data: {"point":point, "apiId":apiId, "title":title, "posterPath":posterPath, "userId":userId}
         		, success:function(data) {
-       				$("#filledPoint").html(data);
+        			if (data.code == 500) {
+        				alert(data.errorMessage)
+        			} else {
+       					$("#filledPoint").html(data);
+        			}
         		} 
         		, error:function(e) {
-        			alert("에러");
+        			alert("로그인을 해주세요!");
+        			$('#1-star').prop('checked', false);
+                	$('#2-stars').prop('checked', false);
+                	$('#3-stars').prop('checked', false);
+                	$('#4-stars').prop('checked', false);
+                	$('#5-stars').prop('checked', false);
         		}
         	});//---ajax
         })// ---별점 버튼
+        
+        
+     	// 컬렉션 버튼 토글
+        $("#getCollection").on('click', function() {
+        	let userId = $(this).data('user-id');
+        	let id = $('.contents_info').data('api-id');
+        	let title = $(".contents_info .title").data('api-title');
+        	let posterPath = $(".contents_poster img").data('api-img');
+        	
+        	console.log(userId);
+        	if (userId == null) {
+        		alert('로그인을 해주세요!');
+        	}
+        	
+        	$.ajax({
+        		type: "post"
+        		, url: "/collection/collection_create_view"
+        		, data: {"title":title, "posterPath":posterPath, "id":id, "userId":userId}
+        		, success:function(data) {
+        			if (data.code == 1) {
+						alert("생성 페이지로 넘어갑니다");
+        			} else {
+        				alert("로그인을 해주세요.");
+        			}
+        		}
+        		, error: function(e) {
+        			alert("추가/해제에 실패했습니다.");
+        		}
+        	})//--ajax
+        	
+        });//-- 컬렉션 버튼
       
         
         // 보고싶어요 버튼 토글
@@ -630,7 +693,7 @@
 	       		}
 	       	})//--ajax
        	
-       });//-- 보는중 버튼
+       });//-- 관심없어요 버튼
         
         
     });

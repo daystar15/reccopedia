@@ -24,6 +24,7 @@
 			<jsp:include page="../${viewName}.jsp" />
 		</div>
 		<footer class="footer">
+			
 			<jsp:include page="../include/footer.jsp" />
 		</footer>
 	</div>

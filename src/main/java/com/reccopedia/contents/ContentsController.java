@@ -1,6 +1,5 @@
 package com.reccopedia.contents;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -61,8 +61,10 @@ public class ContentsController {
 		List<Map<String, Object>> movieTrendingWeek = contentsBO.generateMovieTrendingWeekMap();
 		List<Map<String, Object>> personTrending = contentsBO.generatePersonTrendingMap();
 		List<Map<String, Object>> disney = contentsBO.generateDisneyMap();
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
-		
+		model.addAttribute("num", num);
 		model.addAttribute("disney", disney);
 		model.addAttribute("movieTrendingWeek", movieTrendingWeek);
 		model.addAttribute("personTrending", personTrending);
@@ -72,6 +74,8 @@ public class ContentsController {
 		model.addAttribute("viewName", "contents/main");
 		return "template/layout";
 	}
+	
+	
 	
 	// 메인 페이지(tv)
 	@GetMapping("/main/tv")
@@ -106,7 +110,10 @@ public class ContentsController {
 		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
 		String GenreResult = contentsBO.generateGenre(id);
 		String countryResult = contentsBO.generateCountry(id);
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		
 		model.addAttribute("countryResult", countryResult);
 		model.addAttribute("genre", GenreResult);
@@ -126,7 +133,10 @@ public class ContentsController {
 		String countryResult = contentsBO.generateCountry(id);
 		List<Map<String, Object>> personTrending = contentsBO.generatePersonTrendingMap();
 		List<Map<String, Object>> personList = contentsBO.generatePersonKnownForMap();
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		model.addAttribute("personTrending", personTrending);
 		model.addAttribute("personList", personList);
 		model.addAttribute("countryResult", countryResult);
@@ -143,7 +153,10 @@ public class ContentsController {
 			@RequestParam("title") String title) throws JsonProcessingException {
 		
 		List<Map<String, Object>> contentResult = contentsBO.generateMultiMap(title);
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		model.addAttribute("contentResult", contentResult);
 		model.addAttribute("viewName", "contents/searchResult");
 		
@@ -172,7 +185,10 @@ public class ContentsController {
 		List<String> yutube = contentsBO.generateVideo(id);
 		List<String> images = contentsBO.generateImages(id);
 		String year = contentsBO.generateYear(id);
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("pointList", pointList);
 		model.addAttribute("fillMyComment", fillMyComment);

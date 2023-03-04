@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="all_count">
     <div class="inner">
-        <p>지금까지 <em class="emphasize">&starf; 682,470,194 개의 평가가</em> 쌓였어요.</p>
+        <p>지금까지 <em class="emphasize">&starf; ${num}개의 평가가</em> 쌓였어요.</p>
     </div>
 </div>
 <div class="footer_info">

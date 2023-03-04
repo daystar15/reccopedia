@@ -38,6 +38,13 @@
 			</if>
 	</select>
 	
+	<select id="selectPointCount" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`point`
+	</select>
+	
 	<select id="selectPointListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.point.model.Point">
 		SELECT
 			`id`

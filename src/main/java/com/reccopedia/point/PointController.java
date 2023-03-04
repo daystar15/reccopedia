@@ -1,5 +1,6 @@
 package com.reccopedia.point;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -87,8 +88,14 @@ public class PointController {
 		@RequestParam("title") String title,
 		@RequestParam("posterPath") String posterPath,
 		HttpSession session) {
-	
+		
 		Integer userId = (Integer) session.getAttribute("userId");
+	
+		Map<String, Object> result = new HashMap<>();
+		if (userId == null) {
+			result.put("code", 500);
+			result.put("errorMessage", "로그인을 해주세요");
+		}
 		
 		pointBO.pointToggle(apiId, point, userId, title, posterPath);
 		//List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(apiId, (Integer)session.getAttribute("userId"));
