@@ -63,7 +63,7 @@
 			`userId` = #{userId}
  	</select>
  	
- 	<select id="selectCollectionContentList" resultType="com.reccopedia.collection.model.Collection">
+ 	<select id="selectCollectionContentList" resultType="com.reccopedia.collection.model.CollectionContent">
  		SELECT 
  			`id`
 			, `apiId`
@@ -108,5 +108,13 @@
 			AND
 			`id = #{id}
  	</select>
+ 	
+ 	<delete id="deleteCollectionContentByIdUserId" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`collection_content`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
  
  </mapper>

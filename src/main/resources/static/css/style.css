@@ -1819,3 +1819,30 @@ input[id="cb1"]:checked + label {
 	cursor: pointer;
 	font-style: italic;
 }
+.add_collection_lists {
+	display: flex;
+}
+.collection_select_list {
+	position: relative;
+    width: 212px;
+}
+.collection_select_list_poster {
+	width: 212px;
+	margin-left: 14px;
+}
+.collection_select_list_poster:first-child {
+	margin-left: 0;
+}
+.collection_select_list_poster img,
+.closeBtn img {
+	width: 100%
+}
+.closeBtn {
+	width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}

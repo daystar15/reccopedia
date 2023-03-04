@@ -66,5 +66,9 @@ public class CollectionBO {
 	public Map<String, Object> getCollectionMapByUserId(int userId) {
 		return collectionDAO.selectCollectionMapByUserId(userId);
 	}
+	
+	public void deleteCollectionContentByIdUserId(int id) {
+		collectionDAO.deleteCollectionContentByIdUserId(id);
+	}
 
 }

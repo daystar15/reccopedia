@@ -28,7 +28,7 @@
 				</div>
 				<%-- 추가한 목록들 --%>
 				<div class="add_collection_list">
-					
+					<jsp:include page="./collectionSelect.jsp"></jsp:include>
 				</div>
 				<%-- 추가한 목록들 --%>
 			</div>
@@ -41,6 +41,9 @@
 
 <script>
     $('document').ready(function() {
+    	
+    	$(".add_collection_list").html();
+    	
         $('#collectionSubmitBtn').on('click', function(e) {
             e.preventDefault();
             
@@ -70,7 +73,6 @@
             	, success:function(data) {
             		if (data.code == 1) {
             			
-            			$(".add_collection_list").html(data);
             		} else {
             			alert(data.errorMessage + "ajax 에러");
             		}

@@ -38,4 +38,5 @@ public interface CollectionDAO {
 	
 	public Map<String, Object> selectCollectionMapByUserId(int userId);
 	
+	public void deleteCollectionContentByIdUserId(int id);
 }

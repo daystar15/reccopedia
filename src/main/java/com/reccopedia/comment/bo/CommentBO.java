@@ -27,8 +27,8 @@ public class CommentBO {
 	@Autowired
 	private CommentDAO commentDAO;
 	
-	public void createComment(int userId, Integer pointId, int id, String content, boolean spoiler) {
-		commentDAO.createComment(userId, null, id, content, spoiler);
+	public void createComment(int userId, Integer pointId, int id, String content, boolean check) {
+		commentDAO.createComment(userId, null, id, content, check);
 	}
 	
 	public boolean existMyComment(int id, Integer userId) {
