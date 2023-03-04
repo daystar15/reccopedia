@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.reccopedia.collection.model.Collection;
+import com.reccopedia.collection.model.CollectionContent;
 import com.reccopedia.contents.model.ContentsView;
 
 @Repository
@@ -17,6 +18,13 @@ public interface CollectionDAO {
 			@Param("subject") String subject, 
 			@Param("content") String content, 
 			@Param("movieList") String movieList);
+			
+	public void addCollectionContent(
+			@Param("apiId") int apiId,
+			@Param("pointId") Integer pointId,
+			@Param("userId") int userId,
+			@Param("title") String title, 
+			@Param("posterPath") String posterPath);
 	
 	public List<ContentsView> selectKeyword(String keyword);
 	
@@ -25,6 +33,8 @@ public interface CollectionDAO {
 			@Param("userId") int userId);
 
 	public List<Collection> selectCollectionListByUserId(int userId);
+	
+	public List<CollectionContent> selectCollectionContentList(int userId);
 	
 	public Map<String, Object> selectCollectionMapByUserId(int userId);
 	

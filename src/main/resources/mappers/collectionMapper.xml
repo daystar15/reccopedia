@@ -25,6 +25,29 @@
 		)
  	</insert>
  	
+ 	<insert id="addCollectionContent" parameterType="map">
+ 		INSERT INTO `collection_content`
+ 		(
+			`apiId`
+			, `pointId`
+			, `userId`
+			, `title`
+			, `poster_path`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+		VALUES
+		(	
+			#{apiId}
+			, #{pointId}
+			, #{userId}
+			, #{title}
+			, #{posterPath}
+			, NOW()
+			, NOW()
+		)
+ 	</insert>
+ 	
  	<select id="selectCollectionListByUserId" parameterType="int" resultType="com.reccopedia.collection.model.Collection">
  		SELECT 
  			`id`
@@ -38,6 +61,20 @@
 			`collection`
 		WHERE
 			`userId` = #{userId}
+ 	</select>
+ 	
+ 	<select id="selectCollectionContentList" resultType="com.reccopedia.collection.model.Collection">
+ 		SELECT 
+ 			`id`
+			, `apiId`
+			, `pointId`
+			, `userId`
+			, `title`
+			, `poster_path` AS `posterPath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`collection_content`
  	</select>
  	
  	<select id="selectCollectionMapByUserId" parameterType="int" resultType="map">

@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.reccopedia.collection.bo.CollectionBO;
 import com.reccopedia.collection.model.Collection;
+import com.reccopedia.collection.model.CollectionContent;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -27,7 +27,7 @@ public class CollectionController {
 
 
 	// 컬렉션 생성 페이지
-	@PostMapping("/collection_create_view")
+	@GetMapping("/collection_create_view")
 	public String collectionCreateView(Model model, HttpSession session) {
 		
 		Integer userId = (Integer) session.getAttribute("userId");
@@ -41,9 +41,21 @@ public class CollectionController {
 			result.put("code", 1);
 		}
 		
-		
 		model.addAttribute("viewName", "collection/collectionCreate");
 		return "template/layout";
+	}
+	
+	// 컬렉션 컨텐츠 담는 조각 페이지
+	@GetMapping("/collection_select_view")
+	public String collectionSelectView(Model model, 
+			HttpSession session) {
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		List<CollectionContent> collectionContent = collectionBO.getCollectionContentList(userId);
+		 
+		model.addAttribute("collectionContent", collectionContent);
+		return "collection/collectionSelect";
 	}
 	
 	// 컬렉션 수정 페이지

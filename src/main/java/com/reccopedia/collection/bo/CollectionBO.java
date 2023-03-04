@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reccopedia.collection.dao.CollectionDAO;
 import com.reccopedia.collection.model.Collection;
+import com.reccopedia.collection.model.CollectionContent;
 import com.reccopedia.restAPI.dao.RestTemplateService;
 
 @Service
@@ -29,6 +30,9 @@ public class CollectionBO {
 		collectionDAO.addCollection(userId, subject, content, movieList);
 	};
 	
+	public void addCollectionContent(int apiId, Integer pointId, int userId, String title, String posterPath) {
+		collectionDAO.addCollectionContent(apiId, pointId, userId, title, posterPath);
+	};
 	
 	public List<Map<String, Object>> findKeyword(String title) throws JsonProcessingException {
 		
@@ -48,6 +52,11 @@ public class CollectionBO {
 	
 	public List<Collection> getCollectionList(int userId) {
 		return collectionDAO.selectCollectionListByUserId(userId);
+	}
+	
+	// 내가 추가한 컬렉션리스트들 가져옴
+	public List<CollectionContent> getCollectionContentList(int userId) {
+		return collectionDAO.selectCollectionContentList(userId);
 	}
 	
 	public Collection getCollectionByIdAndUserId(int id, int userId) {

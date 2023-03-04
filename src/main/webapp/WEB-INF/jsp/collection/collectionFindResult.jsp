@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="collection_plus">
-			<img src="/static/images/plus.png" alt="" data-api-id="${result.poster_path}" data-api-title="${result.title}">
+			<img src="/static/images/plus.png" alt="" data-image-path="${result.poster_path}" data-api-id="${result.id}" data-api-title="${result.title}">
 		</div>
 	</div>
 </li>
@@ -31,16 +31,16 @@
 <script>
 	$(document).ready(function() {
 		$(".collection_plus img").on('click', function() {
-			let id = $(this).data('api-id');
+			let apiId = $(this).data('api-id');
 			let title = $(this).data('api-title');
-			$.cookie('cookie', $(this).data('api-id'), {expires: 7, path: '/',  secure: false});
-			$.cookie('title', $(this).data('api-title'), {expires: 7, path: '/',  secure: false});
-
+			let posterPath = $(this).data('image-path');
+			
+			alert(apiId + title + posterPath);
 			
 			$.ajax({
-				type: "GET"
-				, url: "/collection/collection_create_view"
-				, data: {"id":id}
+				type: "POST"
+				, url: "/collection/collection_content_create"
+				, data: {"apiId":apiId, "title":title, "posterPath":posterPath}
 				, success:function(data) {
 					location.href="/collection/collection_create_view"
 				}
