@@ -8,7 +8,12 @@
 	</div>
 </div>
 <div class="collection_create_box">
-	<div class="create_box">
+	<%-- <c:forEach items="${collectionList}" var="list" varStatus="status">
+		<c:if test="${status.last}">
+		<span class="collection_id" data-collection-id="${list.id + 1}"></span>
+		</c:if>
+	</c:forEach> --%>
+	<div class="create_box" data-collection-id="">
 		<form action="" method="post">
 			<div class="subject">
 				<input type="text" name="subject" id="subject" placeholder="컬렉션 제목">
@@ -51,6 +56,10 @@
 <script>
     $('document').ready(function() {
     	
+    	// 지금 작성되고 있는 컬렉션 아이디값
+    	let collectionId = $(".collection_id").data('collection-id');
+    	console.log(collectionId);
+    	
     	let arr1 = new Array();
     	<c:forEach items="${collectionContent}" var="list">
     		arr1.push({
@@ -62,6 +71,8 @@
 		let arr2 = JSON.stringify(arr1);
     	console.log(arr2);
     	
+    	
+    	
     	// 삭제버튼
 		$(".closeBtn img").on('click', function() {
 			let id = $(".closeBtn").data('select-id');
@@ -69,11 +80,9 @@
 			
 			// ajax 컨텐츠 삭제
 			$.ajax({
-				contentType: "application/json"
-				, type: "DELETE"
+				type: "DELETE"
 				, url: "/collection/collection_content_delete"
 				, data: {"id":id}
-				, dataType: "json"
 				, success:function(data) {
 					if (data.code == 1) {
 						alert("삭제 되었습니다.");

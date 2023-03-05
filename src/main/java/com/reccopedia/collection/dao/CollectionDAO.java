@@ -19,10 +19,17 @@ public interface CollectionDAO {
 			@Param("content") String content, 
 			@Param("arr2") String arr2);
 			
+	public void updateCollection(
+			@Param("userId") Integer userId,
+			@Param("subject") String subject, 
+			@Param("content") String content, 
+			@Param("arr2") String arr2);
+			
 	public void addCollectionContent(
 			@Param("apiId") int apiId,
 			@Param("pointId") Integer pointId,
 			@Param("userId") int userId,
+			@Param("collectionId") int collectionId,
 			@Param("title") String title, 
 			@Param("posterPath") String posterPath);
 	
@@ -36,10 +43,8 @@ public interface CollectionDAO {
 	
 	public List<CollectionContent> selectCollectionContentList(int userId);
 	
-	public Map<String, Object> selectCollectionMapByUserId(int userId);
-	
 	public void deleteCollectionContentByIdUserId(int id);
 	
-	public String selectCollectionPosterPath(int userId);
+	
 	
 }

@@ -31,6 +31,7 @@
 			`apiId`
 			, `pointId`
 			, `userId`
+			, `collectionId`
 			, `title`
 			, `poster_path`
 			, `createdAt`
@@ -41,6 +42,7 @@
 			#{apiId}
 			, #{pointId}
 			, #{userId}
+			, #{collectionId}
 			, #{title}
 			, #{posterPath}
 			, NOW()
@@ -63,16 +65,19 @@
 			`userId` = #{userId}
  	</select>
  	
- 	<select id="selectCollectionPosterPath" resultType="com.reccopedia.collection.model.Collection">
- 		SELECT 
- 			`movie_list`
-		FROM
-			`collection`
-		WHERE
-			`userId` = #{userId}
-			AND
-			`id` = #{id}
- 	</select>
+ 	<update id="updateCollection" parameterType="map">
+ 		UPDATE `collection`
+ 		SET
+ 			`id` = #{id}
+ 			, `userId` = #{userId}
+ 			, `content` = #{content}
+ 			, `subject` = #{subject}
+ 			, `movie_list` = #{arr2}
+ 			, `updatedAt` = NOW()
+ 		WHERE
+ 			`id` = #{id}
+ 			AND `userId` = #{userId}
+ 	</update>
  	
  	<select id="selectCollectionContentList" resultType="com.reccopedia.collection.model.CollectionContent">
  		SELECT 
@@ -80,6 +85,7 @@
 			, `apiId`
 			, `pointId`
 			, `userId`
+			, `collectionId`
 			, `title`
 			, `poster_path` AS `posterPath`
 			, `createdAt`

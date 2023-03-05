@@ -43,41 +43,39 @@ public class CollectionController {
 		}
 		
 		List<CollectionContent> collectionContent = collectionBO.getCollectionContentList(userId);
+		List<Collection> collectionList = collectionBO.getCollectionList(userId);
 		
+		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("collectionContent", collectionContent);
 		model.addAttribute("viewName", "collection/collectionCreate");
 		return "template/layout";
 	}
 	
-	// 컬렉션 컨텐츠 담는 조각 페이지
-	@GetMapping("/collection_select_view")
-	public String collectionSelectView(Model model, 
-			HttpSession session) {
-		
-		Integer userId = (Integer) session.getAttribute("userId");
-		
-		List<CollectionContent> collectionContent = collectionBO.getCollectionContentList(userId);
-		 
-		model.addAttribute("collectionContent", collectionContent);
-		model.addAttribute("viewName", "collection/collectionSelect");
-		return "template/layout";
-	}
+	
 	
 	// 컬렉션 수정 페이지
 	@GetMapping("/update_view")
 	public String collectionUpdateView(Model model, HttpSession session) {
 		
 		Integer userId = (Integer) session.getAttribute("userId");
-
+		
+		Map<String, Object> result = new HashMap<>();
+		
 		if (userId == null) {
-			return "redirect:/main";
+			result.put("code", 500);
+			result.put("errorMessage", "로그인을 해주세요!");
+		} else if (userId != null) {
+			result.put("code", 1);
 		}
 		
-		//Collection collection = collectionBO.getCollectionByIdAndUserId(id, userId);
-		Map<String, Object> collectionMap = collectionBO.getCollectionMapByUserId(userId);
-	
-		//model.addAttribute("collection", collection);
-		model.addAttribute("collectionMap", collectionMap);
+				
+		List<Collection> collectionList = collectionBO.getCollectionList(userId);
+		List<CollectionContent> collectionContentList = collectionBO.getCollectionContentList(userId);
+		List<CollectionContent> collectionContent = collectionBO.getCollectionContentList(userId);
+		
+		model.addAttribute("collectionList", collectionList);
+		model.addAttribute("collectionContent", collectionContent);
+		model.addAttribute("collectionContentList", collectionContentList);
 		model.addAttribute("viewName", "collection/collectionUpdate");
 		return "template/layout";
 	}
@@ -94,10 +92,11 @@ public class CollectionController {
 			result.put("code", 500);
 			result.put("errorMessage", "로그인을 해주세요");
 		}
-		collectionBO.getCollectionPosterPath(userId);
+		
+		List<CollectionContent> collectionContentList = collectionBO.getCollectionContentList(userId);
 		List<Collection> collectionList = collectionBO.getCollectionList(userId);
 		
-		//model.addAttribute("list", list);
+		model.addAttribute("collectionContentList", collectionContentList);
 		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("viewName", "collection/collectionList");
 		return "template/layout";
@@ -110,11 +109,12 @@ public class CollectionController {
 		
 		Integer userId = (Integer) session.getAttribute("userId");
 		
-		Map<String, Object> collectionMap = collectionBO.getCollectionMapByUserId(userId);
-		List<Collection> collectionList = collectionBO.getCollectionList(userId);
 		
+		List<Collection> collectionList = collectionBO.getCollectionList(userId);
+		List<CollectionContent> collectionContentList = collectionBO.getCollectionContentList(userId);
+		
+		model.addAttribute("collectionContentList", collectionContentList);
 		model.addAttribute("collectionList", collectionList);
-		model.addAttribute("collectionMap", collectionMap);
 		model.addAttribute("viewName", "collection/collectionPage");
 		return "template/layout";
 	}
@@ -130,9 +130,10 @@ public class CollectionController {
 	// 컬렉션 검색 결과 페이지
 	@GetMapping("/collection_find_result_view")
 	public String findResult(
-			@RequestParam("title") String title,
+			@RequestParam("title") String title, HttpSession session,
 			Model model) throws JsonProcessingException {
 		
+		Integer userId = (Integer) session.getAttribute("userId");
 
 		Map<String, Object> result = new HashMap<>();
 
@@ -143,6 +144,9 @@ public class CollectionController {
 		} else {
 			result.put("errorMessage","검색어를 다시 입력해주세요");
 		}
+		List<Collection> collectionList = collectionBO.getCollectionList(userId);
+		
+		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("keywordList", keywordList);
 		
 		return "collection/collectionFindResult";

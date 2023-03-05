@@ -5,9 +5,9 @@
 <div class="collection_page_box">
 	<div class="collection_box">
 		<div class="collection_list_poster">
-			<c:forEach var="list" items="${collectionList}">
+			<c:forEach var="list" items="${collectionContentList}">
 			<div>
-				<img src="${list.movieList}" alt="">
+				<img src="http://image.tmdb.org/t/p/w500${list.posterPath}" alt="">
 			</div>
 			</c:forEach>
 		</div>
@@ -26,23 +26,31 @@
 		</div>
 		<div class="collection_contents_box">
 			<div class="collection_intro">
-				<h3>${collectionMap.subject}</h3>
-				<p>${collectionMap.content}</p>
+				<c:forEach var="list1" items="${collectionContentList}">
+				<c:forEach var="list2" items="${collectionList}">
+					<c:if test="${list2.id eq list1.collectionId}">
+						<div>
+							<h3>${list2.subject}</h3>
+							<p>${list2.content}</p>
+						</div>
+					</c:if>
+				</c:forEach>
+				</c:forEach>
 			</div>
 			<div class="collection_contents_list">
 				<h4>
-					작품들 <span>{컬렉션에 담긴 작품 개수}개</span>
+					작품들 <span>${fn:length(collectionContentList)}개</span>
 				</h4>
 				<div class="contents_box collection_page_list_box">
 				
-					<c:forEach var="list" items="${collectionList}">
+					<c:forEach var="list" items="${collectionContentList}">
 					<!-- 컨텐츠 하나 -->
 					<a href="#">
 						<div>
 							<div class="contents_box_poster">
-								<img src="${list.movieList}" alt="">
+								<img src="http://image.tmdb.org/t/p/w500${list.posterPath}" alt="">
 							</div>
-							<h4>${list.subject}</h4>
+							<h4>${list.title}</h4>
 							<span>{평균 &#9733; 4.3}</span>
 						</div>
 					</a>

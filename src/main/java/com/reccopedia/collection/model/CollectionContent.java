@@ -8,6 +8,7 @@ public class CollectionContent {
 	private int apiId;
 	private int pointId;
 	private int userId;
+	private int collectionId;
 	private String title;
 	private String posterPath;
 	private Date createdAt;
@@ -37,16 +38,22 @@ public class CollectionContent {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	public int getCollectionId() {
+		return collectionId;
+	}
+	public void setCollectionId(int collectionId) {
+		this.collectionId = collectionId;
+	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getposterPath() {
+	public String getPosterPath() {
 		return posterPath;
 	}
-	public void setposterPath(String posterPath) {
+	public void setPosterPath(String posterPath) {
 		this.posterPath = posterPath;
 	}
 	public Date getCreatedAt() {

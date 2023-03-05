@@ -24,19 +24,25 @@
 	<%-- 작성한 컬렉션이 없을 때 --%>
 	
 	<ul class="list_box">
-		<c:forEach var="list" items="${collectionList}">
-		<li>
+		<c:forEach var="list" items="${collectionList}" varStatus="index">
+		<li data-collection-id="${list.id}">
 			<a href="/collection/collection_view">
 				<div class="setting">
 					<img src="/static/images/setting.png" alt="">
 				</div>
+				
 				<!-- 컬렉션 포스터들 시작 -->
 				<div class="collection_list_poster">
 					<div>
-						<img src="${list.movieList}" alt="">
+						<c:forEach items="${collectionContentList}" var="posterList">
+						<c:if test="${list.id eq posterList.collectionId}">
+							<img src="http://image.tmdb.org/t/p/w500${posterList.posterPath}" alt="">
+						</c:if>
+						</c:forEach>
 					</div>
 				</div>
 				<!-- 컬렉션 포스터들 끝 -->
+				
 				<div class="collection_user user_info">
 					<div>
 						<div class="user_profile_img">
@@ -47,9 +53,10 @@
 						<h2 class="user_name">${userName}</h2>
 					</div>
 					<div class="collection_count">
-						<span>{9}</span>
+						<span>${fn:length(collectionContentList)}</span>
 					</div>
 				</div>
+				
 				<div class="collection_info">
 					<h3>${list.subject}</h3>
 					<p>${list.content}</p>
@@ -60,6 +67,7 @@
 	</ul>
 </div>
 <script type="text/javascript">
+
 	function goBack(){
 		window.history.back();
 	}

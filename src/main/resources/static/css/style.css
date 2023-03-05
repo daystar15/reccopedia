@@ -963,7 +963,8 @@ input:checked + label.star {
     margin-right: 1rem;
 }
 .contents_box_poster {
-    width: 150px;
+    width: 159px;
+    height: 220px;
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid rgb(234, 233, 232);
@@ -1005,7 +1006,7 @@ input:checked + label.star {
 }
 /* 컬렉션 리스트 페이지 */
 .collection_list_box {
-    padding: 14rem 0 6rem;
+    padding: 20rem 0 6rem;
 }
 .no_collection_box {
 	width: 40%;
@@ -1024,6 +1025,7 @@ input:checked + label.star {
 .list_box li {
     background: rgb(242, 242, 242);
     border-radius: 6px;
+    margin-bottom: 8rem
 }
 .list_box li a {
     padding-bottom: 1rem;
@@ -1049,6 +1051,7 @@ input:checked + label.star {
 }
 .collection_list_poster > div {
     width: 20%;
+    display: flex;
 }
 .collection_list_poster > div > img {
     width: 100%;
@@ -1172,8 +1175,6 @@ input:checked + label.star {
     font-weight: 800;
 }
 .added_collection {
-    width: 100px;
-    height: 140px;
     border-radius: 6px;
     overflow: hidden;
 }

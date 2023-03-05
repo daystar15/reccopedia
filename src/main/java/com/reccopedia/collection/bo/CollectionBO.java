@@ -31,8 +31,12 @@ public class CollectionBO {
 		collectionDAO.addCollection(userId, subject, content, arr2);
 	};
 	
-	public void addCollectionContent(int apiId, Integer pointId, int userId, String title, String posterPath) {
-		collectionDAO.addCollectionContent(apiId, pointId, userId, title, posterPath);
+	public void updateCollection(Integer userId, String subject, String content, String arr2) {
+		collectionDAO.updateCollection(userId, subject, content, arr2);
+	};
+	
+	public void addCollectionContent(int apiId, Integer pointId, int userId, int collectionId, String title, String posterPath) {
+		collectionDAO.addCollectionContent(apiId, pointId, userId, collectionId, title, posterPath);
 	};
 	
 	public List<Map<String, Object>> findKeyword(String title) throws JsonProcessingException {
@@ -63,17 +67,11 @@ public class CollectionBO {
 	public Collection getCollectionByIdAndUserId(int id, int userId) {
 		return collectionDAO.selectCollectionByIdAndUserId(id, userId);
 	}
-
-	public Map<String, Object> getCollectionMapByUserId(int userId) {
-		return collectionDAO.selectCollectionMapByUserId(userId);
-	}
 	
 	public void deleteCollectionContentByIdUserId(int id) {
 		collectionDAO.deleteCollectionContentByIdUserId(id);
 	}
 	
-	public String getCollectionPosterPath(int userId) {
-		return collectionDAO.selectCollectionPosterPath(userId); 
-	}
+	
 
 }
