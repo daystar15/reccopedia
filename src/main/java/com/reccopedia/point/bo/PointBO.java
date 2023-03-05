@@ -13,10 +13,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reccopedia.point.dao.PointDAO;
 import com.reccopedia.point.model.Point;
-import com.reccopedia.point.model.PointView;
 import com.reccopedia.restAPI.dao.RestTemplateService;
 import com.reccopedia.user.bo.UserBO;
-import com.reccopedia.user.model.User;
 
 @Service
 public class PointBO {
@@ -26,6 +24,7 @@ public class PointBO {
 	
 	@Autowired
 	private UserBO userBO;
+	
 	
 	@Autowired
 	private RestTemplateService resttemplateservice;
@@ -103,6 +102,5 @@ public class PointBO {
 		return list;
 		
 	}
-
 
 }

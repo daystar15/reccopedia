@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.reccopedia.contents.bo.ContentsBO;
 import com.reccopedia.point.bo.PointBO;
 import com.reccopedia.user.bo.UserBO;
 import com.reccopedia.user.model.User;
@@ -29,18 +30,17 @@ public class PointController {
 	@Autowired
 	private UserBO userBO;
 	
+	@Autowired
+	private ContentsBO contentBO;
+	
 
 	// 평가하기 페이지
 	@GetMapping("/review_view")
 	public String reviewView(Model model, HttpSession session) throws JsonProcessingException {
-		
-		
+
 		User userinfo = userBO.getUserByIntegerId((Integer)session.getAttribute("userId"));
 		List<Map<String, Object>> movieTrending = pointBO.generateMovieTrendingMap();
 		
-		
-			//List<Point> pointList = pointBO.getPointCountByApiId(id, point, (Integer) session.getAttribute("userId"));
-			//model.addAttribute("pointList", pointList);
 		
 		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("movieTrending", movieTrending);

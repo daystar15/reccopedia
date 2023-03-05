@@ -25,6 +25,7 @@
 		<div class="content_list" data-user-id="${userinfo.id}">
 			<ul>
 				<c:forEach var="movieTrending" items="${movieTrending}" >
+				<c:if test="${movieTrending.id eq movieList.apiId}">
 				<li>
 					<!-- 영화 목록 하나 -->
 					<div class="border_box" data-api-id="${movieTrending.id}" id="movieList">
@@ -64,6 +65,7 @@
 					</div>
 					<!-- 영화 목록 하나 끝 -->
 				</li>
+				</c:if>
 				</c:forEach>
 				
 			</ul>
