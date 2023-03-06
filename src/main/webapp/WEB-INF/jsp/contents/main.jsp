@@ -22,7 +22,7 @@
 							<div class="content_info">
 								<span class="year">${fn:substring(now.release_date,0,4)}</span> &middot; <span class="country">${now.original_language}</span>
 							</div>
-							<div class="point">평균 &starf; 4.2</div>
+							<div class="point">평균 &starf; <fmt:formatNumber value="${now.vote_average/2}" pattern=".0"/></div>
 						</a>
 					</li>
 					</c:forEach>
@@ -45,7 +45,7 @@
 								<img src="https://image.tmdb.org/t/p/w500/${netflix.poster_path}" alt="">
 							</div>
 							<h3 class="content_subject">${netflix.title}</h3>
-							<div class="point">평균 &starf; 4.2</div>
+							<div class="point">평균 &starf; <fmt:formatNumber value="${netflix.vote_average/2}" pattern=".0"/></div>
 						</a>
 					</li>
 					</c:forEach>
@@ -67,7 +67,7 @@
 								 <img src="https://image.tmdb.org/t/p/w500/${disneyResult.poster_path}" alt="">
 							</div>
 							<h3 class="content_subject">${disneyResult.title}</h3>
-							<div class="point">평균 &starf; 4.2</div>
+							<div class="point">평균 &starf; <fmt:formatNumber value="${disneyResult.vote_average/2}" pattern=".0"/></div>
 						</a>
 					</li>
 					</c:forEach>
@@ -118,7 +118,7 @@
 								 <img src="https://image.tmdb.org/t/p/w500/${movieTrendingWeek.poster_path}" alt="">
 							</div>
 							<h3 class="content_subject">${movieTrendingWeek.title}</h3>
-							<div class="point">평균 &starf; 4.2</div>
+							<div class="point">평균 &starf; <fmt:formatNumber value="${movieTrendingWeek.vote_average/2}" pattern=".0"/></div>
 						</a>
 					</li>
 					</c:forEach>

@@ -8,9 +8,9 @@
 </div>
 <div class="collection_create_box">
 	<div class="plus_box">
-		<div class="go_keep">
+		<!-- <div class="go_keep">
 			<a href="#">보관함에서 추가</a>
-		</div>
+		</div> -->
 		<form action="/collection/collection_find_result_view" method="get" id="findCollection">
 			<div>
 				<img src="/static/images/search.png" alt=""> 

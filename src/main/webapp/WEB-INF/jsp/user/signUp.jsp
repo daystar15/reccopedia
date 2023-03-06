@@ -35,18 +35,18 @@
 				<input type="password" name="password" id="password" placeholder="비밀번호">
 				<div class="alarm_box">
 					<span id="passwordLength" class="none"><img src="/static/images/warning.png">비밀번호를 6 ~ 12자로 설정해주세요.</span>
-					<span id="usefulPassword" class="none"><img src="/static/images/check.png">안전한 비밀번호 입니다.</span>
+					<!-- <span id="usefulPassword" class="none"><img src="/static/images/check.png">안전한 비밀번호 입니다.</span> -->
 				</div>
 			</div>
 				<input type="submit" value="회원가입" id="signUpBtn">
 			
 		</form>
-		<div class="go_sign_in">
+		<!-- <div class="go_sign_in">
 			<p>
 				이미 가입하셨나요?
 				<a href="#" class="link">로그인</a>
 			</p>
-		</div>
+		</div> -->
 	</div>
 </div>
 

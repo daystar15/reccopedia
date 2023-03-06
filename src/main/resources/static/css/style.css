@@ -194,7 +194,7 @@ textarea {
 }
 .section .inner .contents.person ul {
 	flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-first;
     overflow: auto;
 }
 .section .inner .contents ul li {
@@ -205,7 +205,7 @@ textarea {
 .section .inner .contents ul li:first-child {
 	margin-left: 0;
 }
-.section .inner .contents.person ul li:nth-child(n+5) {
+.section .inner .contents.person ul li:nth-child(5n-4) {
 	margin-left: 0;
 }
 .section .inner .contents.person ul li {
@@ -542,6 +542,7 @@ input:checked + label.star {
 .email_box {
 	display: flex;
 	align-items: center;
+	position: relative;
 }
 .modal_box #duplicatedBtn {
 	width: 30%;
@@ -555,6 +556,11 @@ input:checked + label.star {
     font-weight: 700;
     border-radius: 5px;
     cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: auto;
+    transform: translateY(-50%);
 }
 .alarm_box {
 	font-size: 0.8rem;
@@ -1460,6 +1466,9 @@ input:checked + label.star {
 .contents_point_graph > div {
     display: flex;
     justify-content: space-between;
+}
+#graph_cover{
+	justify-content: center;
 }
 .point_count {
     color: #282828;

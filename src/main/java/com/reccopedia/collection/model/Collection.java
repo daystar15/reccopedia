@@ -1,13 +1,9 @@
 package com.reccopedia.collection.model;
 
 import java.util.Date;
-import java.util.Map;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Collection {
 
 	private int id;

@@ -1,6 +1,7 @@
 package com.reccopedia.contents.bo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -323,17 +324,24 @@ public class ContentsBO {
 		List<Map<String, Object>> list = new ArrayList<>();
 		list = (List<Map<String, Object>>) result.get("results");
 		
-		Map<String, Object> exmap = new HashMap<>();
+		
+		return list;
+		
+	}
+	
+	
+	public List<Map<String, Object>> generatePersonKnownForList() throws JsonProcessingException {
+
+		List<Map<String, Object>> list = generatePersonKnownForMap();
 		
 		List<Map<String, Object>> personList = new ArrayList<>();
 		
 		for (Map<String, Object> map : list) {
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
 				if(entry.getKey().equals("known_for")) {
-					exmap.put(entry.getKey(), entry.getValue());
+					personList.addAll((Collection<? extends Map<String, Object>>) entry.getValue());
 				}
 			}
-			personList.add(exmap);
 		}
 		
 		return personList;

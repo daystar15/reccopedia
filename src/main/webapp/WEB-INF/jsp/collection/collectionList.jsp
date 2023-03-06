@@ -24,9 +24,9 @@
 	<%-- 작성한 컬렉션이 없을 때 --%>
 	
 	<ul class="list_box">
-		<c:forEach var="list" items="${collectionList}" varStatus="index">
+		<c:forEach var="list" items="${collectionList}">
 		<li data-collection-id="${list.id}">
-			<a href="/collection/collection_view">
+			<a href="/collection/collection_view?id=${list.id}">
 				<div class="setting">
 					<img src="/static/images/setting.png" alt="">
 				</div>
@@ -34,9 +34,9 @@
 				<!-- 컬렉션 포스터들 시작 -->
 				<div class="collection_list_poster">
 					<div>
-						<c:forEach items="${collectionContentList}" var="posterList">
-						<c:if test="${list.id eq posterList.collectionId}">
-							<img src="http://image.tmdb.org/t/p/w500${posterList.posterPath}" alt="">
+						<c:forEach items="${collectionContentList}" var="list1">
+						<c:if test="${list.id eq list1.collectionId}">
+							<img src="http://image.tmdb.org/t/p/w500${list1.posterPath}" alt="">
 						</c:if>
 						</c:forEach>
 					</div>

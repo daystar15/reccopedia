@@ -43,17 +43,20 @@
 				</h4>
 				<div class="contents_box collection_page_list_box">
 				
-					<c:forEach var="list" items="${collectionContentList}">
+					<c:forEach var="list1" items="${collectionContentList}">
+					<c:forEach var="list2" items="${collectionList}">
+					<c:if test="${list2.id eq list1.collectionId}">
 					<!-- 컨텐츠 하나 -->
 					<a href="#">
 						<div>
 							<div class="contents_box_poster">
-								<img src="http://image.tmdb.org/t/p/w500${list.posterPath}" alt="">
+								<img src="http://image.tmdb.org/t/p/w500${list1.posterPath}" alt="">
 							</div>
 							<h4>${list.title}</h4>
-							<span>{평균 &#9733; 4.3}</span>
 						</div>
 					</a>
+					</c:if>
+					</c:forEach>
 					</c:forEach>
 					<!-- 컨텐츠 하나 끝 -->
 					

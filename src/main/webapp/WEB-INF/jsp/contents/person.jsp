@@ -8,7 +8,7 @@
 		<div class="inner">
 			<div class="contents person">
 				<ul>
-					<c:forEach var="list" items="${personList}">
+					<c:forEach var="list" items="${list}">
 					<li>
 						<a href="/contents/contents_view?id=${list.id}">
 							<div>

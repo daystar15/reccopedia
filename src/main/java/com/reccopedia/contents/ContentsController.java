@@ -126,23 +126,13 @@ public class ContentsController {
 	// 컨텐츠페이지 - 배우 기본정보
 	@GetMapping("/contents/person_view")
 	public String personView(Model model, int id) throws JsonProcessingException {
+		List<Map<String, Object>> list = contentsBO.generatePersonKnownForList();
 		
-		Map<String, Object> contentInfo = contentsBO.generateContent(id);
-		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
-		String GenreResult = contentsBO.generateGenre(id);
-		String countryResult = contentsBO.generateCountry(id);
-		List<Map<String, Object>> personTrending = contentsBO.generatePersonTrendingMap();
-		List<Map<String, Object>> personList = contentsBO.generatePersonKnownForMap();
 		// 푸터 별점개수
 		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("list", list);
 		model.addAttribute("num", num);
-		model.addAttribute("personTrending", personTrending);
-		model.addAttribute("personList", personList);
-		model.addAttribute("countryResult", countryResult);
-		model.addAttribute("genre", GenreResult);
-		model.addAttribute("crews", contentResult);
-		model.addAttribute("contents", contentInfo);
 		model.addAttribute("viewName", "contents/person");
 		return "template/layout";
 	}

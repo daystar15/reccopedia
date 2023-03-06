@@ -29,19 +29,19 @@
 							<img src="/static/images/plus.png" alt=""> <span>작품추가</span>
 						</a>
 					</div>
-					
 				</div>
 				<%-- 추가한 목록들 --%>
 				<div class="add_collection_list">
 					<c:forEach var="list" items="${collectionContent}">
-						<div class="collection_select_list">
+						<%-- <div class="collection_select_list">
 							<div class="collection_select_list_poster" data-content-id="${list.id}">
 								<img src="https://image.tmdb.org/t/p/w500/${list.posterPath}" alt="">
 							</div>
 							<div class="closeBtn" data-select-id="${list.id}">
 								<img src="/static/images/close.png" alt="">
 							</div>
-						</div>
+						</div> --%>
+						
 					</c:forEach>	
 				</div>
 				<%-- 추가한 목록들 --%>
@@ -55,6 +55,11 @@
 
 <script>
     $('document').ready(function() {
+    	
+    	
+    	$("#resetBtn").on('click', function() {
+    		
+    	})
     	
     	// 지금 작성되고 있는 컬렉션 아이디값
     	let collectionId = $(".collection_id").data('collection-id');
@@ -139,9 +144,6 @@
             
         
         }); //--- 생성버튼
-        
-        
-        
         
         
         

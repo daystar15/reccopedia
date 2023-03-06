@@ -4,6 +4,7 @@
 
 
 <c:forEach var="result" items="${keywordList}">
+<%-- 작성한 컬렉션이 없을 때 오류가 날 수 있음, 그에 대한 코드 만들기 --%>
 	<c:forEach items="${collectionList}" var="list" varStatus="status">
 		<c:if test="${status.last}">
 	
@@ -44,13 +45,14 @@
 			let posterPath = $(this).data('image-path');
 			let collectionId = $(this).data('collection-id');
 			
-			alert(apiId + " ," + title + " ," + posterPath + " ," + collectionId);
+			//alert(apiId + " ," + title + " ," + posterPath + " ," + collectionId);
 			
 			$.ajax({
 				type: "POST"
 				, url: "/collection/collection_content_create"
 				, data: {"apiId":apiId, "title":title, "posterPath":posterPath, "collectionId":collectionId}
 				, success:function(data) {
+					alert('추가완료!');
 					location.href="/collection/collection_create_view"
 				}
 				, error:function(e) {

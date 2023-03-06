@@ -16,7 +16,7 @@
 			<div class="contents_info"  data-api-id="${contents.id}">
 				<h2 class="title" data-api-title="${contents.title}">${contents.title}</h2>
 				<h3>${year} &#183; ${genre} &#183; ${countryResult}</h3>
-				<h4>평균 &#9733;{3.8} ({44만명})</h4>
+				<h4>평균 &#9733;<fmt:formatNumber value="${contents.vote_average/2}" pattern=".0"/> (<fmt:formatNumber value="${contents.vote_count}" pattern="#,###" />)</h4>
 				<div>
 					<div class="star-rating" data-point-id="${pointList[0].point}" data-user-id="${userinfo.id}">
 						<input type="radio" id="5-stars" name="rating" value="5" />
@@ -178,11 +178,13 @@
 					<div>
 						<h5 class="contents_title">별점 그래프</h5>
 						<div class="point_count">
-							평균 &#9733;{평균} </br> <span>{user.id}</span>
+							평균 &#9733; <fmt:formatNumber value="${contents.vote_average/2}" pattern=".0"/></br> <span><fmt:formatNumber value="${contents.vote_count}" pattern="#,###" /></span>
 						</div>
 					</div>
-					<div class="point_graph">
-						<!-- 그래프 -->
+					<div id="graph_cover">
+						<div id="point_graph">
+							<!-- 그래프 -->
+						</div>
 					</div>
 				</div>
 				<div class="contents_comment contents_comm">
@@ -346,6 +348,35 @@
 </div>
 </c:if>
 <%-- 댓글창 끝 --%>
+
+<%-- 구글 그래프 --%>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['bar']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['${contents.title}', 'Point'],
+      ['별점', <fmt:formatNumber value="${contents.vote_average/2}" pattern=".0"/>]
+    ]);
+
+    var chart = new google.charts.Bar(document.getElementById('point_graph'));
+    
+    var options = {
+      chart: {
+        title: '${contents.title}',
+        width: "10%",
+        margin: "auto"
+      }
+    };
+    
+
+    chart.draw(data, google.charts.Bar.convertOptions(options));
+  }
+</script>
+
+
 <script>
     $(document).ready(function () {
     	
@@ -367,6 +398,7 @@
     		
     		if (userId == null) {
     			alert("로그인을 해주세요");
+    			location.href="/main";
     		} else {
     			location.href="/collection/collection_list_view";
     		}
@@ -666,28 +698,30 @@
      	// 컬렉션 버튼 토글
         $("#getCollection").on('click', function() {
         	let userId = $(this).data('user-id');
-        	let id = $('.contents_info').data('api-id');
-        	let title = $(".contents_info .title").data('api-title');
-        	let posterPath = $(".contents_poster img").data('api-img');
+        	//let id = $('.contents_info').data('api-id');
+        	//let title = $(".contents_info .title").data('api-title');
+        	//let posterPath = $(".contents_poster img").data('api-img');
         	
         	//alert(userId);
         	if (userId == null) {
         		alert('로그인을 해주세요!');
+        	} else {
+        		location.href="/collection/collection_list_view"
         	}
         	
-        	$.ajax({
+        	/* $.ajax({
         		type: "post"
         		, url: "/collection/collection_create_view"
         		, data: {"title":title, "posterPath":posterPath, "id":id, "userId":userId}
         		, success:function(data) {
         			if (data.code == 1) {
-						alert("생성 페이지로 넘어갑니다");
+        				location.href="/collection/collection_list_view";
         			}
         		}
         		, error: function(e) {
         			alert("추가/해제에 실패했습니다.");
         		}
-        	})//--ajax
+        	}) *///--ajax
         	
         });//-- 컬렉션 버튼
       

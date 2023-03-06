@@ -24,12 +24,12 @@
                     <a href="#">비밀번호를 잊어버리셨나요?</a>
                 </div> 
                 -->
-		<div class="go_sign_up">
+		<!-- <div class="go_sign_up">
 			<p>
 				계정이 없으신가요?
 				<a href="#" class="link">회원가입</a>
 			</p>
-		</div>
+		</div> -->
 	</div>
 </div>
 

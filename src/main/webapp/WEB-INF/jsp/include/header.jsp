@@ -139,7 +139,7 @@
 			e.preventDefault();
 			
 			let title = $("#contentsTitle").val().trim();
-			
+
 			// ajax
 			$.ajax({
 				type: "get"
@@ -147,7 +147,7 @@
 				, data: {"title":title}
 			
 				, success:function(data) {
-					alert("검색결과 조회에 성공하였습니다.");
+					location.href="/contents/search_view?title="+title;
 				}
 				, error:function(e) {
 					alert("검색 결과 조회에 실패하였습니다");
