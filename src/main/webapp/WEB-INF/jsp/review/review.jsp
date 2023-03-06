@@ -25,7 +25,6 @@
 		<div class="content_list" data-user-id="${userinfo.id}">
 			<ul>
 				<c:forEach var="movieTrending" items="${movieTrending}" >
-				<c:if test="${movieTrending.id eq movieList.apiId}">
 				<li>
 					<!-- 영화 목록 하나 -->
 					<div class="border_box" data-api-id="${movieTrending.id}" id="movieList">
@@ -65,7 +64,6 @@
 					</div>
 					<!-- 영화 목록 하나 끝 -->
 				</li>
-				</c:if>
 				</c:forEach>
 				
 			</ul>
@@ -105,7 +103,7 @@
 </div>
 
 <script> 
-	function button1_click(e) {
+	/* function button1_click(e) {
 		let target = event.target;
 		let parent = target.parentElement;
 	    console.log(parent);
@@ -134,33 +132,8 @@
 		let parent = target.parentElement;
 	    console.log(parent);
 	    parent.style.color="#fc0";
-	}
+	} */
 	$(document).ready(function() {
-		
-
-		// 별점 나타내기 버튼
-        let mypoint = $(".star-rating").data('point-id');
-        if (mypoint == 1) {
-        	$('#1-star').prop('checked', true);
-        } else if (mypoint == 2) {
-        	$('#1-star').prop('checked', true);
-        	$('#2-stars').prop('checked', true);
-        } else if (mypoint == 3) {
-        	$('#1-star').prop('checked', true);
-        	$('#2-stars').prop('checked', true);
-        	$('#3-stars').prop('checked', true);
-        } else if (mypoint == 4) {
-        	$('#1-star').prop('checked', true);
-        	$('#2-stars').prop('checked', true);
-        	$('#3-stars').prop('checked', true);
-        	$('#4-stars').prop('checked', true);
-        } else if (mypoint == 5) {
-        	$('#1-star').prop('checked', true);
-        	$('#2-stars').prop('checked', true);
-        	$('#3-stars').prop('checked', true);
-        	$('#4-stars').prop('checked', true);
-        	$('#5-stars').prop('checked', true);
-        }
         
        	$('.review_more > div').on('click', function(e) {
            	let apiId = $('.review_more').data('api-id');
@@ -240,7 +213,7 @@
         		, url: "/point/contents_point_view"
         		, data: {"point":point, "apiId":apiId, "title":title, "posterPath":posterPath, "userId":userId}
         		, success:function(data) {
-        			$(".filledPoint").html(data);
+        			alert("별점이 입력되었습니다!");
         		} 
         		, error:function(e) {
         			alert("에러");

@@ -10,10 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.reccopedia.collection.bo.CollectionBO;
+import com.reccopedia.collection.model.Collection;
 import com.reccopedia.comment.bo.CommentBO;
 import com.reccopedia.point.bo.PointBO;
 import com.reccopedia.user.bo.UserBO;
-import com.reccopedia.user.model.User;
 import com.reccopedia.watching.bo.WatchingBO;
 import com.reccopedia.wish.bo.WishBO;
 
@@ -37,6 +38,9 @@ public class UserController {
 	
 	@Autowired
 	private WatchingBO watchingBO;
+	
+	@Autowired
+	private CollectionBO collectionBO;
 	
 	// 로그인	
 	@GetMapping("/sign_in_view")
@@ -76,6 +80,9 @@ public class UserController {
 		List<Map<String, Object>> wishList = wishBO.getWishList(userId);
 		List<Map<String, Object>> pointList = pointBO.getPointList(userId);
 		List<Map<String, Object>> commentList = commentBO.getCommentList(userId);
+		List<Collection> collectionList = collectionBO.getCollectionList(userId);
+		
+		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("wishList", wishList);
 		model.addAttribute("pointList", pointList);

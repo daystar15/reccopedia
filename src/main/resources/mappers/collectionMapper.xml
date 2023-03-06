@@ -94,6 +94,20 @@
 			`collection_content`
  	</select>
  	
+ 	<select id="selectCollectionContentByIdAndUserId" resultType="com.reccopedia.collection.model.CollectionContent">
+ 		SELECT 
+ 			`id`
+			, `userId`
+			, `content`
+			, `subject`
+			, `createdAt`
+			, `updatedAt`
+			, `movie_list` AS `movieList`
+		FROM
+			`collection`
+ 	</select>
+ 	
+ 	
  	<select id="selectCollectionMapByUserId" parameterType="int" resultType="map">
  		SELECT 
  			`id`

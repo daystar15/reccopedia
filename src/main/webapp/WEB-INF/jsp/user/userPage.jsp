@@ -48,7 +48,7 @@
 				</li>
 				<li>
 					<a href="/collection/collection_list_view">
-						<h4>{5}</h4>
+						<h4>${fn:length(collectionList)}</h4>
 						<span>컬렉션</span>
 					</a>
 				</li>

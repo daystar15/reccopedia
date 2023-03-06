@@ -38,7 +38,10 @@ public interface CollectionDAO {
 	public Collection selectCollectionByIdAndUserId(
 			@Param("id") int id, 
 			@Param("userId") int userId);
-
+	
+	
+	public Collection selectCollectionContentByIdAndUserId(int id);
+	
 	public List<Collection> selectCollectionListByUserId(int userId);
 	
 	public List<CollectionContent> selectCollectionContentList(int userId);

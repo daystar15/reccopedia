@@ -105,7 +105,7 @@ public class CollectionController {
 	
 	// 컬렉션 페이지
 	@GetMapping("/collection_view")
-	public String collectionView(Model model, HttpSession session) {
+	public String collectionView(Model model, HttpSession session, @RequestParam("id") int id) {
 		
 		Integer userId = (Integer) session.getAttribute("userId");
 		
