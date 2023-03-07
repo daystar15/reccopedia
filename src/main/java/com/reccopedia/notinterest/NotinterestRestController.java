@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.reccopedia.notinterest.bo.NotinterestBO;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class NotinterestRestController {

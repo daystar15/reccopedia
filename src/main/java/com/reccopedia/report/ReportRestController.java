@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.reccopedia.report.bo.ReportBO;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/report")

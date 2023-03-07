@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.reccopedia.collection.bo.CollectionBO;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/collection")

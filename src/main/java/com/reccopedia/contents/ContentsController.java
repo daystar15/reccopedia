@@ -22,7 +22,7 @@ import com.reccopedia.user.model.User;
 import com.reccopedia.watching.bo.WatchingBO;
 import com.reccopedia.wish.bo.WishBO;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ContentsController {

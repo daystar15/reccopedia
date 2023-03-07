@@ -18,7 +18,7 @@ import com.reccopedia.collection.bo.CollectionBO;
 import com.reccopedia.collection.model.Collection;
 import com.reccopedia.collection.model.CollectionContent;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/collection")

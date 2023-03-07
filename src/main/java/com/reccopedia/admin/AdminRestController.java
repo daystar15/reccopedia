@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.reccopedia.admin.bo.AdminBO;
 import com.reccopedia.admin.model.Admin;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/admin")

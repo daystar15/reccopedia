@@ -18,7 +18,7 @@ import com.reccopedia.user.bo.UserBO;
 import com.reccopedia.watching.bo.WatchingBO;
 import com.reccopedia.wish.bo.WishBO;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")

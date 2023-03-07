@@ -12,7 +12,7 @@ import com.reccopedia.comment.bo.CommentBO;
 import com.reccopedia.comment.model.CommentView;
 import com.reccopedia.user.bo.UserBO;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class CommentController {

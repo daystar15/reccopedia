@@ -16,7 +16,7 @@ import com.reccopedia.common.EncryptUtils;
 import com.reccopedia.user.bo.UserBO;
 import com.reccopedia.user.model.User;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
