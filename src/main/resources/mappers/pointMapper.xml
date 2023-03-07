@@ -45,7 +45,23 @@
 			`point`
 	</select>
 	
-	<select id="selectPointListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.point.model.Point">
+	<select id="selectPointListByApiIdOrUserId" parameterType="int" resultType="map">
+		SELECT
+			`id`
+			, `apiId`
+			, `userId`
+			, `point`
+			, `title`
+			, `poster_path` AS `posterPath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`point`
+		WHERE
+			`userId` = #{userId}
+	</select>
+	
+	<select id="selectPointListByApiIdAndUserId" parameterType="int" resultType="map">
 		SELECT
 			`id`
 			, `apiId`

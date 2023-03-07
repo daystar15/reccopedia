@@ -6,7 +6,8 @@
 		<div class="inner">
 			<h2 class="main_title">TV프로그램 인기 순위</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="now" items="${popularResult}" varStatus="status">
 					<li>
 						<a href="/contents/tv_contents_view?id=${now.id}">
@@ -20,15 +21,9 @@
 						</a>
 					</li>
 					</c:forEach>
-					
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
-		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
 		</div>
 	</div>
 	
@@ -36,7 +31,8 @@
 		<div class="inner">
 			<h2 class="main_title">TV프로그램 화제작</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="top" items="${topratedResult}">
 					<li>
 						<a href="/contents/tv_contents_view?id=${top.id}">
@@ -48,15 +44,9 @@
 						</a>
 					</li>
 					</c:forEach>
-					
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
-		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
 		</div>
 	</div>
 	
@@ -64,7 +54,8 @@
 		<div class="inner">
 			<h2 class="main_title">넷플릭스 TV프로그램</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="netflix" items="${netflixResult}">
 					<li>
 						<a href="/contents/tv_contents_view?id=${netflix.id}">
@@ -76,15 +67,9 @@
 						</a>
 					</li>
 					</c:forEach>
-					
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
-		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
 		</div>
 	</div>
 	
@@ -92,7 +77,8 @@
 		<div class="inner">
 			<h2 class="main_title">디즈니 플러스 화제작</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="toprated" items="${topratedResult}">
 					<li>
 						<a href="/contents/contents_view?id=${toprated.id}">
@@ -104,23 +90,18 @@
 						</a>
 					</li>
 					</c:forEach>
-					
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
-		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
 		</div>
 	</div>
 	
-	<div class="section">
+	<%-- <div class="section">
 		<div class="inner">
 			<h2 class="main_title">오늘의 트렌딩</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="tvTrending" items="${tvTrending}">
 					<li>
 						<a href="/contents/tv_contents_view?id=${tvTrending.id}">
@@ -132,23 +113,18 @@
 						</a>
 					</li>
 					</c:forEach>
-					
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
 		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-	</div>
+	</div> --%>
 	
 	<div class="section">
 		<div class="inner">
 			<h2 class="main_title">금주의 Hot</h2>
 			<div class="contents">
-				<ul>
+				<i id="left" class="fa-solid fa-angle-left"></i>
+				<ul class="carousel">
 					<c:forEach var="tvTrendingWeek" items="${tvTrendingWeek}">
 					<li>
 						<a href="/contents/tv_contents_view?id=${tvTrendingWeek.id}">
@@ -159,20 +135,14 @@
 						</a>
 					</li>
 					</c:forEach>
-					
 				</ul>
+				<i id="right" class="fa-solid fa-angle-right"></i>
 			</div>
-		</div>
-		<div class="left">
-			<img src="/static/images/arrow.png" alt="">
-		</div>
-		<div class="right">
-			<img src="/static/images/arrow.png" alt="">
 		</div>
 	</div>
 	
 	
-	<div class="section user_collection">
+	<!-- <div class="section user_collection">
 		<div class="inner">
 			<div class="main_title">
 				<a href="#">
@@ -580,115 +550,92 @@
 		<div class="right">
 			<img src="/static/images/arrow.png" alt="">
 		</div>
-	</div>
+	</div> -->
 </div>
 
 <script>
-	$(document).ready(function() {
-		$(".contents ul li a").on('click', function() {
-			
-		}); // -- 컨텐츠 클릭 시 
-	})
+	const carousel_1 = document.querySelectorAll(".carousel")[0] //첫번째 슬라이드 영역
+	const carousel_2 = document.querySelectorAll(".carousel")[1] //두번째 슬라이드 영역
+	const carousel_3 = document.querySelectorAll(".carousel")[2] //세번쨰 슬라이드 영역
+	const carousel_4 = document.querySelectorAll(".carousel")[3] //네번째 슬라이드 영역
+	const carousel_5 = document.querySelectorAll(".carousel")[4] //다섯번째 슬라이드 영역
+	
+	firstImg1 = carousel_1.querySelectorAll("li")[0]; //첫번째 슬라이드 첫번째 이미지
+	firstImg2 = carousel_2.querySelectorAll("li")[0]; //두번째 슬라이드 첫번째 이미지
+	firstImg3 = carousel_3.querySelectorAll("li")[0]; //세번째 슬라이드 첫번째 이미지
+	firstImg4 = carousel_4.querySelectorAll("li")[0]; //네번째 슬라이드 첫번째 이미지
+	firstImg5 = carousel_5.querySelectorAll("li")[0]; //네번째 슬라이드 첫번째 이미지
+	
+	//arrowIcons = document.querySelectorAll(".contents i");
+	contents_slide = document.querySelectorAll(".contents i"),
+	arrowIcons_1 = [contents_slide[0],contents_slide[1]],
+	arrowIcons_2 = [contents_slide[2],contents_slide[3]],
+	arrowIcons_3 = [contents_slide[4],contents_slide[5]],
+	arrowIcons_4 = [contents_slide[6],contents_slide[7]];
+	arrowIcons_5 = [contents_slide[8],contents_slide[9]];
+	
+	
+	let isDragStart = false, isDragging= false, prevPageX, prevScrollLeft, positionDiff;
+	
+	const showHideIcons = () => {
+	    // showing and hiding prev/next icon according to carousel scroll left value
+	    let scrollWidth = carousel_1.scrollWidth - carousel_1.clientWidth; // getting max scrollable width
+		arrowIcons_1[0].style.display = carousel_1.scrollLeft == 0 ? "none" : "block";
+		arrowIcons_1[1].style.display = carousel_1.scrollLeft == scrollWidth ? "none" : "block";
+		
+		arrowIcons_2[0].style.display = carousel_2.scrollLeft == 0 ? "none" : "block";
+		arrowIcons_2[1].style.display = carousel_2.scrollLeft == scrollWidth ? "none" : "block";
+		
+		arrowIcons_3[0].style.display = carousel_3.scrollLeft == 0 ? "none" : "block";
+		arrowIcons_3[1].style.display = carousel_3.scrollLeft == scrollWidth ? "none" : "block";
+		
+		arrowIcons_4[0].style.display = carousel_4.scrollLeft == 0 ? "none" : "block";
+		arrowIcons_4[1].style.display = carousel_4.scrollLeft == scrollWidth ? "none" : "block";
+		
+		arrowIcons_5[0].style.display = carousel_5.scrollLeft == 0 ? "none" : "block";
+		arrowIcons_5[1].style.display = carousel_5.scrollLeft == scrollWidth ? "none" : "block";
+	}
+	
+	arrowIcons_1.forEach((icon =>{
+		icon.addEventListener("click", () => {
+			let firstImgWidth = firstImg1.clientWidth + 14;
+			carousel_1.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+			setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+		});
+	}));
+	
+	arrowIcons_2.forEach((icon =>{
+		//console.log(icon);
+		icon.addEventListener("click", () => {
+			let firstImgWidth = firstImg2.clientWidth + 14;
+			carousel_2.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+			setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+		});
+	}));
+	
+	
+	arrowIcons_3.forEach((icon =>{
+		icon.addEventListener("click", () => {
+			let firstImgWidth = firstImg3.clientWidth + 14;
+			carousel_3.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+			setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+		});
+	}));
+	
+	
+	arrowIcons_4.forEach((icon =>{
+		icon.addEventListener("click", () => {
+			let firstImgWidth = firstImg4.clientWidth + 14;
+			carousel_4.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+			setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+		});
+	}));
+	
+	arrowIcons_5.forEach((icon =>{
+		icon.addEventListener("click", () => {
+			let firstImgWidth = firstImg5.clientWidth + 14;
+			carousel_5.scrollLeft += icon.id == "left" ? -firstImgWidth : firstImgWidth;
+			setTimeout(() => showHideIcons(), 60); // calling showHideIcons after 60ms
+		});
+	}));
 </script>
-
-
-<!-- 모달배경 -->
-<!-- <div class="modal_back none"></div> -->
-
-<!-- 회원가입 -->
-<!-- <div class="sign_up_modal none">
-	<div class="modal_box">
-		<div class="modal_top">
-			<h1 class="modal_logo">
-				<img src="/static/images/logo.png" alt="">
-			</h1>
-			<p>회원가입</p>
-		</div>
-		<form action="" method="post">
-			<div>
-				<input type="text" name="name" id="name" placeholder="이름">
-			</div>
-			<div>
-				<input type="text" name="email" id="email" placeholder="이메일">
-			</div>
-			<div>
-				<input type="password" name="password" id="password" placeholder="비밀번호">
-			</div>
-			<div class="sign_up_submit">
-				<input type="submit" value="회원가입">
-			</div>
-		</form>
-		<div class="go_sign_in">
-			<p>
-				이미 가입하셨나요?
-				<a href="#" class="link">로그인</a>
-			</p>
-		</div>
-	</div>
-</div> -->
-
-<!-- 로그인 -->
-<!--<div class="sign_in_modal none">
-	<div class="modal_box">
-		<div class="modal_top">
-			<h1 class="modal_logo">
-				<img src="/static/images/logo.png" alt="">
-			</h1>
-			<p>로그인</p>
-		</div>
-		<form action="" method="post">
-			<div>
-				<input type="text" name="email" id="email" placeholder="이메일">
-			</div>
-			<div>
-				<input type="password" name="password" id="password" placeholder="비밀번호">
-			</div>
-			<div class="sign_up_submit">
-				<input type="submit" value="로그인">
-			</div>
-		</form>
-		<!-- 비밀번호 찾기 나중에 처리
-                <div class="forget_password">
-                    <a href="#">비밀번호를 잊어버리셨나요?</a>
-                </div> 
-                
-		<div class="go_sign_up">
-			<p>
-				계정이 없으신가요?
-				<a href="#" class="link">회원가입</a>
-			</p>
-		</div>
-	</div>
-</div> -->
-
-<!-- <script>
-    $(document).ready(function () {
-        $('.sign_up').on('click', function() {
-            $(".sign_up_modal").removeClass('none');
-            $(".modal_back").removeClass('none');
-            $(".go_sign_up").removeClass('none');
-        });
-
-        $('.sign_up_modal .go_sign_in p a').on('click', function() {
-            $(".sign_in_modal").removeClass('none');
-            $(".sign_up_modal").addClass('none');
-        });
-
-        $('.sign_in').on('click', function() {
-            $(".sign_in_modal").removeClass('none');
-            $(".modal_back").removeClass('none');
-            $(".go_sign_in").removeClass('none');
-        });
-
-        $('.sign_in_modal .go_sign_up p a').on('click', function() {
-            $(".sign_up_modal").removeClass('none');
-            $(".sign_in_modal").addClass('none');
-        });
-
-        $('.modal_back').on('click', function() {
-            $(".modal_back").addClass('none');
-            $(".sign_up_modal").addClass('none');
-            $(".sign_in_modal").addClass('none');
-        });
-    });
-</script> -->

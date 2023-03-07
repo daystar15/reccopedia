@@ -38,10 +38,15 @@ public class PointController {
 	@GetMapping("/review_view")
 	public String reviewView(Model model, HttpSession session) throws JsonProcessingException {
 
-		User userinfo = userBO.getUserByIntegerId((Integer)session.getAttribute("userId"));
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		User userinfo = userBO.getUserByIntegerId(userId);
 		List<Map<String, Object>> movieTrending = pointBO.generateMovieTrendingMap();
+		int num = pointBO.getPointCountByUserId();
+		List<Map<String, Object>> listMap = pointBO.pointMovieList(userId);
 		
-		
+		model.addAttribute("num", num);
+		model.addAttribute("listMap", listMap);
 		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("movieTrending", movieTrending);
 		model.addAttribute("viewName", "review/review");

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<div class="contets_wrap" data-api-id="${contents.id}">
+<div class="contets_wrap" data-api-id="${contents.id}" data-type-id="1">
 	<div class="contents_background">
 		<div>
 			<img src="https://image.tmdb.org/t/p/w1280${contents.backdrop_path}" alt="">
@@ -210,6 +210,11 @@
 									</a>
 									<div class="comment_right">&#9733; ${list.pointCount}</div>
 								</div>
+								<c:if test="${list.comment.spoiler == false}">
+									<div class="comment_content" data-spoiler="${list.comment.spoiler}" data-comment-id="${list.comment.id}">
+											${list.comment.content}
+									</div>
+								</c:if>
 								<c:if test="${list.comment.spoiler == true}">
 									<div class="comment_content" data-spoiler="${list.comment.spoiler}" data-comment-id="${list.comment.id}">
 											${list.comment.content}
@@ -437,6 +442,8 @@
         // 댓글 작성
         $("#submitComment").on('click', function(e) {
         	e.preventDefault();
+        	
+        	let type = $(".contets_wrap").('type-id');
         	
         	// 스포일러 됐는지
         	let spoiler = $("#cb1").is(":checked");

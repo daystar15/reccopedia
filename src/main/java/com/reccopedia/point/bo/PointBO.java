@@ -2,8 +2,12 @@ package com.reccopedia.point.bo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -84,6 +88,11 @@ public class PointBO {
 	public List<Map<String, Object>> getPointList(int userId) {
 		return pointDAO.selectPointListByApiIdOrUserId(userId);
 	}
+	
+	// api랑 userid 일치하는 별점목록함수
+	public List<Map<String, Object>> getPointListByApiIdAndUserId(int userId) {
+		return pointDAO.selectPointListByApiIdAndUserId(userId);
+	}
 
 	
 	// 1일 랜덤 영화 API
@@ -98,9 +107,27 @@ public class PointBO {
 		List<Map<String, Object>> list = new ArrayList<>();
 		list = (List<Map<String, Object>>) result.get("results");
 		
-		 
 		return list;
-		
 	}
 
+	
+	public List<Map<String, Object>> pointMovieList(int userId) throws JsonProcessingException {
+		// 별점목록
+		List<Map<String, Object>> pointMovieList = getPointListByApiIdAndUserId(userId);
+		
+		// 랜덤 리스트
+		List<Map<String, Object>> randomMovieList = generateMovieTrendingMap();
+		
+		// 담을 list
+		List<Map<String, Object>> list = pointMovieList.stream()
+				.filter((filter -> randomMovieList.stream()
+						.anyMatch(target->filter.get("apiId").equals(target.get("id")))
+						)).collect(Collectors.toList());
+		
+		
+		return list;
+		
+		
+	}
+	
 }

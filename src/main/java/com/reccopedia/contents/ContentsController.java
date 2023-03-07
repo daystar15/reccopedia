@@ -123,6 +123,29 @@ public class ContentsController {
 		return "template/layout";
 	}
 	
+	
+	// 컨텐츠페이지 - 기본정보
+	@GetMapping("/contents/tv_overview_view")
+	public String tvOverviewView(Model model, int id) throws JsonProcessingException {
+		
+		Map<String, Object> contentInfo = contentsBO.generateTvContents(id);
+		List<Map<String, Object>> contentResult = contentsBO.generateTvContentCrew(id);
+		String GenreResult = contentsBO.generateTvGenre(id);
+		String countryResult = contentsBO.generateTvCountry(id);
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
+		
+		model.addAttribute("num", num);
+		
+		model.addAttribute("countryResult", countryResult);
+		model.addAttribute("genre", GenreResult);
+		model.addAttribute("viewName", "contents/tvOverview");
+		model.addAttribute("crews", contentResult);
+		model.addAttribute("contents", contentInfo);
+		return "template/layout";
+	}
+	
+	
 	// 컨텐츠페이지 - 배우 기본정보
 	@GetMapping("/contents/person_view")
 	public String personView(Model model, int id) throws JsonProcessingException {
@@ -207,6 +230,7 @@ public class ContentsController {
 		
 		User userinfo = userBO.getUserByIntegerId((Integer)session.getAttribute("userId"));
 		List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(id, (Integer)session.getAttribute("userId"));
+		boolean fillMyComment = commentBO.existMyComment(id, (Integer)session.getAttribute("userId"));
 		boolean fillWatching = watchingBO.existwatching(id, (Integer)session.getAttribute("userId"));
 		boolean fillNotinterest = notinterestBO.existNotinterest(id, (Integer)session.getAttribute("userId"));
 		boolean fillWish = wishBO.existWish(id, (Integer)session.getAttribute("userId"));
@@ -214,16 +238,23 @@ public class ContentsController {
 		Map<String, Object> myComment = commentBO.getCommentByObj(id, (Integer)session.getAttribute("userId"));
 		
 		
+		List<Map<String, Object>> similars = contentsBO.generateTvSimilars(id);
 		Map<String, Object> contentInfo = contentsBO.generateTvContents(id);
-		List<Map<String, Object>> contentResult = contentsBO.generateContentCrew(id);
-		String GenreResult = contentsBO.generateGenre(id);
-		String countryResult = contentsBO.generateCountry(id);
-		List<String> yutube = contentsBO.generateVideo(id);
-		List<String> images = contentsBO.generateImages(id);
-		String year = contentsBO.generateYear(id);
+		List<Map<String, Object>> contentResult = contentsBO.generateTvContentCrew(id);
+		String genre = contentsBO.generateTvGenre(id);
+		String countryResult = contentsBO.generateTvCountry(id);
+		List<String> yutube = contentsBO.generateTvVideo(id);
+		List<String> images = contentsBO.generateTvImages(id);
 		
 		model.addAttribute("userinfo", userinfo);
+		model.addAttribute("crews", contentResult);
+		model.addAttribute("images", images);
+		model.addAttribute("similars", similars);
+		model.addAttribute("yutube", yutube);
+		model.addAttribute("genre", genre);
+		model.addAttribute("countryResult", countryResult);
 		model.addAttribute("pointList", pointList);
+		model.addAttribute("fillMyComment", fillMyComment);
 		model.addAttribute("fillNotinterest", fillNotinterest);
 		model.addAttribute("fillWatching", fillWatching);
 		model.addAttribute("fillWish", fillWish);

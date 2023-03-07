@@ -399,7 +399,7 @@ public class RestTemplateService {
  
     }    
         
-    
+    // 영화
     public String callCrewAPI(int id) throws JsonProcessingException {
    	 
         HashMap<String, Object> result = new HashMap<String, Object>(); // 예외처리
@@ -440,6 +440,48 @@ public class RestTemplateService {
     }    
     
     
+    // Tv
+    public String callTvCrewAPI(int id) throws JsonProcessingException {
+   	 
+        HashMap<String, Object> result = new HashMap<String, Object>(); // 예외처리
+        
+        String jsonInString = "";
+        
+        try {
+        	
+            RestTemplate restTemplate = new RestTemplate();
+ 
+            HttpHeaders header = new HttpHeaders();
+            HttpEntity<?> entity = new HttpEntity<>(header);
+ 
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + "tv/" + id + "/credits" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
+ 
+            //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
+            ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
+            result.put("statusCode", resultMap.getStatusCodeValue()); //http status code를 확인
+            result.put("header", resultMap.getHeaders()); //헤더 정보 확인
+            result.put("body", resultMap.getBody()); //실제 데이터 정보 확인
+ 
+            //데이터를 제대로 전달 받았는지 확인 string형태로 파싱해줌
+            ObjectMapper mapper = new ObjectMapper();
+            jsonInString = mapper.writeValueAsString(resultMap.getBody());
+            
+            
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            result.put("statusCode", e.getRawStatusCode());
+            result.put("body"  , e.getStatusText());
+ 
+        } catch (Exception e) {
+            result.put("statusCode", "999");
+            result.put("body"  , "excpetion오류");
+        }
+ 
+        return jsonInString;
+ 
+    }    
+    
+    
+    // 영화
     public String callVideoAPI(int id) throws JsonProcessingException {
       	 
         HashMap<String, Object> result = new HashMap<String, Object>(); // 예외처리
@@ -479,7 +521,47 @@ public class RestTemplateService {
  
     }   
     
+    // Tv
+    public String callTvVideoAPI(int id) throws JsonProcessingException {
+      	 
+        HashMap<String, Object> result = new HashMap<String, Object>(); // 예외처리
+        
+        String jsonInString = "";
+        
+        try {
+        	
+            RestTemplate restTemplate = new RestTemplate();
+ 
+            HttpHeaders header = new HttpHeaders();
+            HttpEntity<?> entity = new HttpEntity<>(header);
+ 
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + "tv/" + id + "/videos" + "?" + "api_key=af1b14dca35a2db111be58155d08e240").build();
+ 
+            //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
+            ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
+            result.put("statusCode", resultMap.getStatusCodeValue()); //http status code를 확인
+            result.put("header", resultMap.getHeaders()); //헤더 정보 확인
+            result.put("body", resultMap.getBody()); //실제 데이터 정보 확인
+ 
+            //데이터를 제대로 전달 받았는지 확인 string형태로 파싱해줌
+            ObjectMapper mapper = new ObjectMapper();
+            jsonInString = mapper.writeValueAsString(resultMap.getBody());
+            
+            
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            result.put("statusCode", e.getRawStatusCode());
+            result.put("body"  , e.getStatusText());
+ 
+        } catch (Exception e) {
+            result.put("statusCode", "999");
+            result.put("body"  , "excpetion오류");
+        }
+ 
+        return jsonInString;
+ 
+    }   
     
+    // 영화
     public String callImagesAPI(int id) throws JsonProcessingException {
      	 
         HashMap<String, Object> result = new HashMap<String, Object>(); // 예외처리
@@ -519,6 +601,46 @@ public class RestTemplateService {
  
     }
     
+    // 드라마
+    public String callTvImagesAPI(int id) throws JsonProcessingException {
+     	 
+        HashMap<String, Object> result = new HashMap<String, Object>(); // 예외처리
+        
+        String jsonInString = "";
+        
+        try {
+        	
+            RestTemplate restTemplate = new RestTemplate();
+ 
+            HttpHeaders header = new HttpHeaders();
+            HttpEntity<?> entity = new HttpEntity<>(header);
+ 
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + "tv/" + id + "/images" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
+ 
+            //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
+            ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
+            result.put("statusCode", resultMap.getStatusCodeValue()); //http status code를 확인
+            result.put("header", resultMap.getHeaders()); //헤더 정보 확인
+            result.put("body", resultMap.getBody()); //실제 데이터 정보 확인
+ 
+            //데이터를 제대로 전달 받았는지 확인 string형태로 파싱해줌
+            ObjectMapper mapper = new ObjectMapper();
+            jsonInString = mapper.writeValueAsString(resultMap.getBody());
+            
+            
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            result.put("statusCode", e.getRawStatusCode());
+            result.put("body"  , e.getStatusText());
+ 
+        } catch (Exception e) {
+            result.put("statusCode", "999");
+            result.put("body"  , "excpetion오류");
+        }
+ 
+        return jsonInString;
+ 
+    }
+    
     public String callSimilarsAPI(int id) throws JsonProcessingException {
     	 
         HashMap<String, Object> result = new HashMap<String, Object>(); // 예외처리
@@ -533,6 +655,46 @@ public class RestTemplateService {
             HttpEntity<?> entity = new HttpEntity<>(header);
  
             UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + "movie/" + id + "/recommendations" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
+ 
+            //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
+            ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
+            result.put("statusCode", resultMap.getStatusCodeValue()); //http status code를 확인
+            result.put("header", resultMap.getHeaders()); //헤더 정보 확인
+            result.put("body", resultMap.getBody()); //실제 데이터 정보 확인
+ 
+            //데이터를 제대로 전달 받았는지 확인 string형태로 파싱해줌
+            ObjectMapper mapper = new ObjectMapper();
+            jsonInString = mapper.writeValueAsString(resultMap.getBody());
+            
+            
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            result.put("statusCode", e.getRawStatusCode());
+            result.put("body"  , e.getStatusText());
+ 
+        } catch (Exception e) {
+            result.put("statusCode", "999");
+            result.put("body"  , "excpetion오류");
+        }
+ 
+        return jsonInString;
+ 
+    }
+    
+    // TV
+    public String callTVSimilarsAPI(int id) throws JsonProcessingException {
+   	 
+        HashMap<String, Object> result = new HashMap<String, Object>(); // 예외처리
+        
+        String jsonInString = "";
+        
+        try {
+        	
+            RestTemplate restTemplate = new RestTemplate();
+ 
+            HttpHeaders header = new HttpHeaders();
+            HttpEntity<?> entity = new HttpEntity<>(header);
+ 
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + "tv/" + id + "/recommendations" + "?" + "api_key=af1b14dca35a2db111be58155d08e240" + "&language=ko").build();
  
             //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
             ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
@@ -876,6 +1038,46 @@ public class RestTemplateService {
             result.put("statusCode", "999");
             result.put("body"  , "excpetion오류");
             System.out.println(e.toString());
+        }
+ 
+        return jsonInString;
+ 
+    }
+    
+    
+    public String callTvInfoAPI(int id) throws JsonProcessingException {
+    	 
+        HashMap<String, Object> result = new HashMap<String, Object>(); // 예외처리
+        
+        String jsonInString = "";
+        
+        try {
+        	
+            RestTemplate restTemplate = new RestTemplate();
+ 
+            HttpHeaders header = new HttpHeaders();
+            HttpEntity<?> entity = new HttpEntity<>(header);
+ 
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(contentUrl + "tv/" + id + "?api_key=af1b14dca35a2db111be58155d08e240&language=ko").build();
+ 
+            //이 한줄의 코드로 API를 호출해 MAP타입으로 전달 받는다.
+            ResponseEntity<Map> resultMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
+            result.put("statusCode", resultMap.getStatusCodeValue()); //http status code를 확인
+            result.put("header", resultMap.getHeaders()); //헤더 정보 확인
+            result.put("body", resultMap.getBody()); //실제 데이터 정보 확인
+ 
+            //데이터를 제대로 전달 받았는지 확인 string형태로 파싱해줌
+            ObjectMapper mapper = new ObjectMapper();
+            jsonInString = mapper.writeValueAsString(resultMap.getBody());
+            
+            
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            result.put("statusCode", e.getRawStatusCode());
+            result.put("body"  , e.getStatusText());
+ 
+        } catch (Exception e) {
+            result.put("statusCode", "999");
+            result.put("body"  , "excpetion오류");
         }
  
         return jsonInString;

@@ -35,6 +35,11 @@
 				<div class="comment_right">&#9733; ${list.pointCount}</div>
 			</div>
 		</div>
+		<c:if test="${list.comment.spoiler == false}">
+			<div class="comment_content" data-spoiler="${list.comment.spoiler}">
+					${list.comment.content}
+			</div>
+		</c:if>
 		<c:if test="${list.comment.spoiler == true}">
 			<div class="comment_content" data-spoiler="${list.comment.spoiler}">
 					${list.comment.content}

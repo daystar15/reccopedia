@@ -239,7 +239,6 @@ textarea {
 }
 .content_subject {
     color: #292a32;
-    width: 257px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

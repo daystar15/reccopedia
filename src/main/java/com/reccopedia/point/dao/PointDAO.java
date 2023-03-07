@@ -27,6 +27,8 @@ public interface PointDAO {
 			@Param("apiId") int apiId, 
 			@Param("userId") int userId);
 	
+	public List<Map<String, Object>> selectPointListByApiIdAndUserId(int userId);
+	
 	public List<Point> selectPointByApiId(
 			@Param("apiId") int apiId,
 			@Param("point") int point,

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="review_wrap">
 	<div class="review_box">
-		<h3 class="review_count">92</h3>
+		<h3 class="review_count">${num}</h3>
 		<p class="pharse">평가를 해주세요</p>
 		<!-- 영화, TV 선택탭 -->
 		<div class="review_menu_tab">
@@ -17,7 +17,7 @@
 		<!-- 랜덤영화 선택 탭 -->
 		<div class="select_tab">
 			<div>
-				<img src="" alt=""> <span>랜덤 영화</span>
+				<span>랜덤 영화</span>
 			</div>
 		</div>
 		<!-- 랜덤영화 선택 탭 끝 -->
@@ -25,6 +25,7 @@
 		<div class="content_list" data-user-id="${userinfo.id}">
 			<ul>
 				<c:forEach var="movieTrending" items="${movieTrending}" >
+				
 				<li>
 					<!-- 영화 목록 하나 -->
 					<div class="border_box" data-api-id="${movieTrending.id}" id="movieList">
@@ -39,19 +40,30 @@
 										<span class="year">${fn:substring(movieTrending.release_date,0,4)}</span> &middot; <span class="country">${movieTrending.original_language}</span>
 									</div>
 								</div>
+							<c:forEach var="listMap" items="${listMap}" >
+							<c:if test="${listMap.apiId eq movieTrending.id}">
+							${listMap.point}
+								<div class="star-rating" data-point-id="${listMap.point}" data-img="${listMap.poster_path}" data-api="${listMap.id}" data-title="${listMap.title}">
+									<label class="star"><input type="radio" name="rating" value="5"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="4"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="3"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="2"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="1"/>&#9733;</label>
+								</div>
+							</c:if>
+							</c:forEach>
+							
+							
+							
+							
 								<div class="star-rating" data-img="${movieTrending.poster_path}" data-api="${movieTrending.id}" data-title="${movieTrending.title}">
-									<label class="star"><input type="radio" name="rating" value="5" onclick="button5_click();"/>&#9733;</label>
-									<label class="star"><input type="radio" name="rating" value="4" onclick="button4_click();"/>&#9733;</label>
-									<label class="star"><input type="radio" name="rating" value="3" onclick="button3_click();" />&#9733;</label>
-									<label class="star"><input type="radio" name="rating" value="2" onclick="button2_click();"/>&#9733;</label>
-									<label class="star"><input type="radio" name="rating" value="1" onclick="button1_click();"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="5"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="4"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="3"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="2"/>&#9733;</label>
+									<label class="star"><input type="radio" name="rating" value="1"/>&#9733;</label>
 								</div>
 								
-								<%-- 별점 눌려있을 때 --%>
-								<div class="filledPoint" >
-								
-								</div>
-								<%-- 별점 눌려있을 때 --%>
 							</div>
 						</div>
 					</div>
@@ -64,8 +76,7 @@
 					</div>
 					<!-- 영화 목록 하나 끝 -->
 				</li>
-				</c:forEach>
-				
+				</c:forEach>	
 			</ul>
 		</div>
 		<!-- 영화 목록 박스 끝 -->
@@ -103,36 +114,7 @@
 </div>
 
 <script> 
-	/* function button1_click(e) {
-		let target = event.target;
-		let parent = target.parentElement;
-	    console.log(parent);
-	    parent.style.color="#fc0";
-	}
-	function button2_click() {
-		let target = event.target;
-		let parent = target.parentElement;
-	    console.log(parent);
-	    parent.style.color="#fc0";
-	}
-	function button3_click() {
-		let target = event.target;
-		let parent = target.parentElement;
-	    console.log(parent);
-	    parent.style.color="#fc0";
-	}
-	function button4_click() {
-		let target = event.target;
-		let parent = target.parentElement;
-	    console.log(parent);
-	    parent.style.color="#fc0";
-	}
-	function button5_click() {
-		let target = event.target;
-		let parent = target.parentElement;
-	    console.log(parent);
-	    parent.style.color="#fc0";
-	} */
+	
 	$(document).ready(function() {
         
        	$('.review_more > div').on('click', function(e) {
@@ -142,7 +124,8 @@
            	$(".comment_modal").removeClass('none');
             $(".modal_back").removeClass('none');
         });
-
+       	
+       
         $('.modal_back').on('click', function() {
             $(".modal_back").addClass('none');
             $(".comment_modal").addClass('none');
@@ -222,9 +205,5 @@
         	
         })// ---별점 버튼
 		
-		$(".review_more").on('click', function() {
-			
-			
-		})
 	})
 </script>
