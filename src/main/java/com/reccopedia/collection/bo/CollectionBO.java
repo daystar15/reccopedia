@@ -31,9 +31,13 @@ public class CollectionBO {
 		collectionDAO.addCollection(userId, subject, content, arr2);
 	};
 	
-	public void updateCollection(Integer userId, String subject, String content, String arr2) {
-		collectionDAO.updateCollection(userId, subject, content, arr2);
+	public void updateCollection(int id,Integer userId, String subject, String content, String arr2) {
+		collectionDAO.updateCollection(id, userId, subject, content, arr2);
 	};
+	
+	public void updateCollectionContent(int id, int apiId, Integer pointId, int userId, int collectionId, String title, String posterPath) {
+		collectionDAO.updateCollectionContent(id, apiId, pointId, userId, collectionId, title, posterPath);
+	}
 	
 	public void addCollectionContent(int apiId, Integer pointId, int userId, int collectionId, String title, String posterPath) {
 		collectionDAO.addCollectionContent(apiId, pointId, userId, collectionId, title, posterPath);
@@ -72,6 +76,30 @@ public class CollectionBO {
 		collectionDAO.deleteCollectionContentByIdUserId(id);
 	}
 	
+	public void deleteCollectionByUserIdApiId(int id) {
+		collectionDAO.deleteCollectionByUserIdApiId(id);
+	}
 	
+	public List<CollectionContent> getCollectionContentByCollectionId(int id) {
+		return collectionDAO.selectCollectionContentByCollectionId(id);
+	}
+	
+	public List<CollectionContent> getCollectionContent() {
+		return collectionDAO.selectCollectionContent();
+	}
+	
+	public Map<String, Object> getCollectionSubjectContent(int id) {
+		return collectionDAO.selectCollectionSubjectContent(id);
+	}
+	
+	// 마지막 번호
+	public int getCollectionId() {
+		return collectionDAO.selectCollectionId();
+	}
+	
+	// 마지막 번호
+	public int getCurrentCollectionId(int id) {
+		return collectionDAO.selectCurrentCollectionId(id);
+	}
 
 }

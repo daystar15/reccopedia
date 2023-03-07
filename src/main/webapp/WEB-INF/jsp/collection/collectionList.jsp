@@ -8,7 +8,7 @@
 			<img src="/static/images/right-arrow.png" alt="" onclick="goBack();">
 			<h2>컬렉션</h2>
 		</div>
-		<a href="/collection/collection_create_view" class="createCollectionBtn">새 컬렉션</a>
+		<a href="/collection/collection_create_view?id=${num + 1}" class="createCollectionBtn">새 컬렉션</a>
 	</div>
 </div>
 <div class="collection_list_box">
@@ -51,9 +51,6 @@
 							</div>
 						</div>
 						<h2 class="user_name">${userName}</h2>
-					</div>
-					<div class="collection_count">
-						<span>${fn:length(collectionContentList)}</span>
 					</div>
 				</div>
 				

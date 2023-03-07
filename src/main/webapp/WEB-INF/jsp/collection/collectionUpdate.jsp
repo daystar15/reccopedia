@@ -18,16 +18,16 @@
 			</div>
 			<div>
 				<div>
-					<h3>작품들</h3>
-					<a href="/collection/collection_find_view">수정하기</a>
+					<h3 style="margin-right: 1rem;">작품들</h3>
+					<a href="/collection/collection_update_find_view">수정하기</a>
 				</div>
 				<div class="added_collection">
-					<c:forEach var="list" items="${collectionContent}">
+					<c:forEach var="list2" items="${collectionContetByCollectionId}">
 						<div class="collection_select_list">
-							<div class="collection_select_list_poster" data-content-id="${list.id}">
-								<img src="https://image.tmdb.org/t/p/w500/${list.posterPath}" alt="">
+							<div class="collection_select_list_poster">
+								<img src="https://image.tmdb.org/t/p/w500/${list2.posterPath}" alt="">
 							</div>
-							<div class="closeBtn" data-select-id="${list.id}">
+							<div class="closeBtn" data-select-id="${list2.id}">
 								<img src="/static/images/close.png" alt="">
 							</div>
 						</div>
@@ -35,7 +35,7 @@
 				</div>
 			</div>
 			<div class="collection_btn">
-				<input type="submit" value="수정하기" id="collectionSubmitBtn">
+				<input type="submit" value="수정하기" id="collectionSubmitBtn" data-collection-id="${num}">
 			</div>
 		</form>
 	</div>
@@ -52,12 +52,12 @@
     		});
     	</c:forEach>
 		let arr2 = JSON.stringify(arr1);
-    	console.log(arr2);
+    	//console.log(arr2);
     	
     	// 삭제버튼
 		$(".closeBtn img").on('click', function() {
 			let id = $(".closeBtn").data('select-id');
-			alert(id);
+			//alert(id);
 			
 			// ajax 컨텐츠 삭제
 			$.ajax({ 
@@ -84,6 +84,7 @@
 
             let collectionSubject = $('#collectionSubject').val().trim();
             let collectionContent =  $('#collectionContent').val();
+            let id = $("#collectionSubmitBtn").data('collection-id');
 
             if (collectionSubject == '') {
                 alert('제목을 입력해주세요');
@@ -94,23 +95,23 @@
                 return false;
             }
             
-         // ajax 댓글 수정
+         // ajax 컬렉션 수정
 			$.ajax ({
 				// request
 				type: "put"
 				, url: "/collection/update"
-				, data: {"subject":subject, "content":content, "arr2[]":arr2}
+				, data: {"subject":collectionSubject, "content":collectionContent, "arr2[]":arr2, "id":id}
 			
             	, success:function(data) {
             		if (data.code == 1) {
-            			alert("컬렉션 생성에 성공했습니다");
+            			alert("컬렉션을 수정했습니다");
             			location.href="/collection/collection_list_view"
             		} else {
             			alert(data.errorMessage + "ajax 에러");
             		}
             	}
 				, error:function(e) {
-					alert("컬렉션을 수정하는데 실패했습니다.");
+					alert("컬렉션 수정에 실패했습니다.");
 				}
 			}); // --- ajax
             

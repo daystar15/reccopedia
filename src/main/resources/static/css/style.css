@@ -1012,7 +1012,7 @@ input:checked + label.star {
 }
 /* 컬렉션 리스트 페이지 */
 .collection_list_box {
-    padding: 20rem 0 6rem;
+    padding: 20rem 0 0rem;
 }
 .no_collection_box {
 	width: 40%;

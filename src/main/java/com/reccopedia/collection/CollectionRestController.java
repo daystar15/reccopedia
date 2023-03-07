@@ -48,6 +48,7 @@ public class CollectionRestController {
 	
 	@PutMapping("/update")
 	public Map<String, Object> update(
+			@RequestParam("id") int id,
 			@RequestParam("subject") String subject,
 			@RequestParam("content") String content,
 			@RequestParam(name="arr2[]", required = false) String arr2,
@@ -62,7 +63,28 @@ public class CollectionRestController {
 			result.put("errorMessage", "로그인을 해주세요");
 		}
 		
-		collectionBO.updateCollection(userId, subject, content, arr2); 
+		collectionBO.updateCollection(id, userId, subject, content, arr2); 
+		
+		result.put("code", 1);
+		
+		return result;
+	}
+	
+	@DeleteMapping("/delete")
+	public Map<String, Object> collectionDelete(
+			@RequestParam("id") int id,
+			HttpSession session) {
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		Map<String, Object> result = new HashMap<>();
+		if (userId == null) {
+			result.put("code", 500);
+			result.put("result", "error");
+			result.put("errorMessage", "로그인을 해주세요");
+		}
+		
+		collectionBO.deleteCollectionByUserIdApiId(id); 
+		
 		result.put("code", 1);
 		
 		return result;
@@ -87,6 +109,31 @@ public class CollectionRestController {
 		}
 		
 		collectionBO.addCollectionContent(apiId, null, userId, collectionId, title, posterPath);
+		result.put("code", 1);
+		
+		return result;
+	}
+	
+	// 컬렉션 컨텐츠 담기
+	@PutMapping("/collection_content_update")
+	public Map<String, Object> collectionUpdateView(Model model, 
+			@RequestParam("id") int id,  
+			@RequestParam("apiId") int apiId, 
+			@RequestParam("collectionId") int collectionId, 
+			@RequestParam("title") String title, 
+			@RequestParam("posterPath") String posterPath,
+			HttpSession session) {
+		
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		Map<String, Object> result = new HashMap<>();
+		if (userId == null) {
+			result.put("code", 500);
+			result.put("result", "error");
+			result.put("errorMessage", "로그인을 해주세요");
+		}
+		
+		collectionBO.updateCollectionContent(id, apiId, null, userId, collectionId, title, posterPath);
 		result.put("code", 1);
 		
 		return result;

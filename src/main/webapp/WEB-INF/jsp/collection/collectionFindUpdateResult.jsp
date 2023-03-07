@@ -27,7 +27,7 @@
 					</div>
 				</div>
 				<div class="collection_plus">
-					<img src="/static/images/plus.png" alt="" data-collection-id="${list.id + 1}" data-image-path="${result.poster_path}" data-api-id="${result.id}" data-api-title="${result.title}">
+					<img src="/static/images/plus.png" data-now-id="${num}" data-collection-id="${list.id + 1}" data-image-path="${result.poster_path}" data-api-id="${result.id}" data-api-title="${result.title}">
 				</div>
 			</div>
 		</li>
@@ -44,16 +44,17 @@
 			let title = $(this).data('api-title');
 			let posterPath = $(this).data('image-path');
 			let collectionId = $(this).data('collection-id');
+			let id = $(this).data('now-id');
 			
 			//alert(apiId + " ," + title + " ," + posterPath + " ," + collectionId);
 			
 			$.ajax({
-				type: "POST"
-				, url: "/collection/collection_content_create"
-				, data: {"apiId":apiId, "title":title, "posterPath":posterPath, "collectionId":collectionId}
+				type: "PUT"
+				, url: "/collection/collection_content_update"
+				, data: {"apiId":apiId, "title":title, "posterPath":posterPath, "collectionId":collectionId, "id":id}
 				, success:function(data) {
 					alert('추가완료!');
-					location.href="/collection/collection_create_view?id=" + collectionId;
+					location.href="/collection/update_view?id=" + id;
 				}
 				, error:function(e) {
 					alert("오류입니다.");

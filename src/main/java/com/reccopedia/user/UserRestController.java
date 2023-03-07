@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.reccopedia.common.EncryptUtils;
 import com.reccopedia.user.bo.UserBO;
 import com.reccopedia.user.model.User;
 
@@ -49,8 +49,10 @@ public class UserRestController {
 			@RequestParam("email") String email,
 			@RequestParam("password") String password) {
 		
+		String encryptPassword = EncryptUtils.md5(password);
+		
 		Map<String, Object> result = new HashMap<>();
-		int insertUserRow = userBO.insertUser(name, email, password);
+		int insertUserRow = userBO.insertUser(name, email, encryptPassword);
 		
 		if (insertUserRow == 1) {
 			result.put("code", 1);
@@ -73,9 +75,9 @@ public class UserRestController {
 		
 		// username은 user / 비번 cbb42cef-6deb-47ef-9fcb-c278a4d242e8
 		// 비밀번호 암호화
-		// String 암호화된Password = 
+		String encryptPassword = EncryptUtils.md5(password);
 		
-		User user = userBO.getUserByLoginEmailPassword(email, password);
+		User user = userBO.getUserByLoginEmailPassword(email, encryptPassword);
 		
 
 		Map<String, Object> result = new HashMap<>();

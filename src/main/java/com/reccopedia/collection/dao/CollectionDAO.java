@@ -20,6 +20,7 @@ public interface CollectionDAO {
 			@Param("arr2") String arr2);
 			
 	public void updateCollection(
+			@Param("id") int id,
 			@Param("userId") Integer userId,
 			@Param("subject") String subject, 
 			@Param("content") String content, 
@@ -33,6 +34,15 @@ public interface CollectionDAO {
 			@Param("title") String title, 
 			@Param("posterPath") String posterPath);
 	
+	public void updateCollectionContent(
+			@Param("id") int id,
+			@Param("apiId") int apiId,
+			@Param("pointId") Integer pointId,
+			@Param("userId") int userId,
+			@Param("collectionId") int collectionId,
+			@Param("title") String title, 
+			@Param("posterPath") String posterPath);
+
 	public List<ContentsView> selectKeyword(String keyword);
 	
 	public Collection selectCollectionByIdAndUserId(
@@ -48,6 +58,16 @@ public interface CollectionDAO {
 	
 	public void deleteCollectionContentByIdUserId(int id);
 	
+	public List<CollectionContent> selectCollectionContentByCollectionId(int id);
+
+	public List<CollectionContent> selectCollectionContent();
 	
+	public Map<String, Object> selectCollectionSubjectContent(int id);
+	
+	public int selectCollectionId();
+	
+	public int selectCurrentCollectionId(int id);
+
+	public void deleteCollectionByUserIdApiId(int id);
 	
 }

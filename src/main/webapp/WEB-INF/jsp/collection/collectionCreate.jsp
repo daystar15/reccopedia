@@ -8,12 +8,12 @@
 	</div>
 </div>
 <div class="collection_create_box">
-	<%-- <c:forEach items="${collectionList}" var="list" varStatus="status">
+	<c:forEach items="${collectionList}" var="list" varStatus="status">
 		<c:if test="${status.last}">
 		<span class="collection_id" data-collection-id="${list.id + 1}"></span>
 		</c:if>
-	</c:forEach> --%>
-	<div class="create_box" data-collection-id="">
+	</c:forEach>
+	<div class="create_box" >
 		<form action="" method="post">
 			<div class="subject">
 				<input type="text" name="subject" id="subject" placeholder="컬렉션 제목">
@@ -31,18 +31,19 @@
 					</div>
 				</div>
 				<%-- 추가한 목록들 --%>
-				<div class="add_collection_list">
-					<c:forEach var="list" items="${collectionContent}">
-						<%-- <div class="collection_select_list">
-							<div class="collection_select_list_poster" data-content-id="${list.id}">
-								<img src="https://image.tmdb.org/t/p/w500/${list.posterPath}" alt="">
+				<div class="add_collection_list" >
+					<c:forEach var="list2" items="${collectionContetByCollectionId}">
+					<c:if test="${num+1 eq list2.collectionId}">
+						<div class="collection_select_list">
+							<div class="collection_select_list_poster">
+								<img src="https://image.tmdb.org/t/p/w500/${list2.posterPath}" alt="">
 							</div>
-							<div class="closeBtn" data-select-id="${list.id}">
+							<div class="closeBtn" data-select-id="${list2.id}">
 								<img src="/static/images/close.png" alt="">
 							</div>
-						</div> --%>
-						
-					</c:forEach>	
+						</div>
+					</c:if>
+					</c:forEach>
 				</div>
 				<%-- 추가한 목록들 --%>
 			</div>
@@ -56,15 +57,6 @@
 <script>
     $('document').ready(function() {
     	
-    	
-    	$("#resetBtn").on('click', function() {
-    		
-    	})
-    	
-    	// 지금 작성되고 있는 컬렉션 아이디값
-    	let collectionId = $(".collection_id").data('collection-id');
-    	console.log(collectionId);
-    	
     	let arr1 = new Array();
     	<c:forEach items="${collectionContent}" var="list">
     		arr1.push({
@@ -74,9 +66,7 @@
     		});
     	</c:forEach>
 		let arr2 = JSON.stringify(arr1);
-    	console.log(arr2);
-    	
-    	
+    	//console.log(arr2);
     	
     	// 삭제버튼
 		$(".closeBtn img").on('click', function() {
@@ -138,14 +128,10 @@
             	, error:function(e) {
             		alert("컬렉션 생성에 실패했습니다. 관리자에게 문의해주세요")
             	}
-            	
-            	
             }); //---ajax
-            
+          
         
         }); //--- 생성버튼
-        
-        
         
         
     }); //---제이쿼리

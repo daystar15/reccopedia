@@ -65,14 +65,43 @@
 			`userId` = #{userId}
  	</select>
  	
+ 	<select id="selectCollectionSubjectContent" resultType="map">
+ 		SELECT 
+ 			`id`
+			, `userId`
+			, `content`
+			, `subject`
+			, `createdAt`
+			, `updatedAt`
+			, `movie_list` AS `movieList`
+		FROM
+			`collection`
+		WHERE
+			`id` = #{id}
+ 	</select>
+ 	
  	<update id="updateCollection" parameterType="map">
  		UPDATE `collection`
  		SET
- 			`id` = #{id}
- 			, `userId` = #{userId}
+ 			`userId` = #{userId}
  			, `content` = #{content}
  			, `subject` = #{subject}
  			, `movie_list` = #{arr2}
+ 			, `updatedAt` = NOW()
+ 		WHERE
+ 			`id` = #{id}
+ 			AND `userId` = #{userId}
+ 	</update>
+ 	
+ 	<update id="updateCollectionContent" parameterType="map">
+ 		UPDATE `collection_content`
+ 		SET
+ 			`apiId` = #{apiId}
+			, `pointId` = #{pointId}
+			, `userId` = #{userId}
+			, `collectionId` = #{collectionId}
+			, `title` = #{title}
+			, `poster_path` = #{posterPath}
  			, `updatedAt` = NOW()
  		WHERE
  			`id` = #{id}
@@ -94,6 +123,40 @@
 			`collection_content`
  	</select>
  	
+ 	<select id="selectCollectionContentByCollectionId" resultType="com.reccopedia.collection.model.CollectionContent">
+ 		SELECT 
+ 			`id`
+			, `apiId`
+			, `pointId`
+			, `userId`
+			, `collectionId`
+			, `title`
+			, `poster_path` AS `posterPath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`collection_content`
+		WHERE
+			`collectionId` = #{id}
+ 	</select>
+ 	
+ 	<select id="selectCollectionContent" resultType="com.reccopedia.collection.model.CollectionContent">
+ 		SELECT 
+ 			`id`
+			, `apiId`
+			, `pointId`
+			, `userId`
+			, `collectionId`
+			, `title`
+			, `poster_path` AS `posterPath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`collection_content`
+		WHERE
+			`collectionId` = #{id}
+ 	</select>
+ 	
  	<select id="selectCollectionContentByIdAndUserId" resultType="com.reccopedia.collection.model.CollectionContent">
  		SELECT 
  			`id`
@@ -106,7 +169,6 @@
 		FROM
 			`collection`
  	</select>
- 	
  	
  	<select id="selectCollectionMapByUserId" parameterType="int" resultType="map">
  		SELECT 
@@ -148,10 +210,30 @@
  			`id` = #{id}
  	</delete>
  	
+ 	<delete id="deleteCollectionByUserIdApiId" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`collection`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
  	
+ 	<select id="selectCollectionId"  resultType="int">
+ 		SELECT 
+ 			`id`
+		FROM
+			`collection`
+		ORDER BY `id` DESC
+		LIMIT 1;
+ 	</select>
  	
+ 	<select id="selectCurrentCollectionId" parameterType="int" resultType="int">
+ 		SELECT 
+ 			`id`
+		FROM
+			`collection`
+		WHERE
+			`id` = #{id}
+ 	</select>
  	
- 	
- 	
- 
  </mapper>
