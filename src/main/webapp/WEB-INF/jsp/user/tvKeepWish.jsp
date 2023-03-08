@@ -5,42 +5,30 @@
 <div class="nav_box">
 	<div>
 		<img src="/static/images/right-arrow.png" alt="" onclick="goBack();">
-		<h2>영화</h2>
+		<h2>보고싶어요</h2>
 	</div>
 </div>
 <div class="keep_box">
 	<div class="evaluate_box">
-		<div class="keep_title">
-			<h3>평가</h3>
-			<span>${fn:length(pointList)}</span>
+		<div class="keep_title wish_title">
+			<img src="/static/images/down-arrow.png" alt=""> <em>담은 순</em>
 		</div>
-		<div class="contents_box">
-			
-			<c:forEach items="${pointList}" var="list">
+		<!-- 컨텐츠 박스 시작 -->
+		<div class="contents_box wish_box">
+		
+			<c:forEach items="${wishList}" var="list">
 			<!-- 컨텐츠 하나 -->
-			<a href="/contents/contents_view?id=${list.apiId}">
+			<a href="/contents/tv_contents_view?id=${list.apiId}">
 				<div class="contents_box_poster">
 					<img src="https://image.tmdb.org/t/p/w500${list.posterPath}" alt="">
 				</div>
 				<h4>${list.title}</h4>
-				<span>평가함 &#9733; ${list.point}</span>
 			</a>
 			<!-- 컨텐츠 하나 끝 -->
 			</c:forEach>
 			
 		</div>
-	</div>
-	<div class="go_wish go">
-		<a href="/user/wish_view">
-			<h4>보고싶어요</h4>
-			<span>${fn:length(wishList)}</span>
-		</a>
-	</div>
-	<div class="go_watching go">
-		<a href="/user/watching_view">
-			<h4>보는중</h4>
-			<span>${fn:length(watchingtList)}</span>
-		</a>
+		<!-- 컨텐츠 박스 끝 -->
 	</div>
 </div>
 

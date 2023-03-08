@@ -35,9 +35,9 @@
 				<div class="collection_list_poster">
 					<div>
 						<c:forEach items="${collectionContentList}" var="list1">
-						<c:if test="${list.id eq list1.collectionId}">
+						<%-- <c:if test="${list.id eq list1.collectionId}"> --%>
 							<img src="http://image.tmdb.org/t/p/w500${list1.posterPath}" alt="">
-						</c:if>
+						<%-- </c:if> --%>
 						</c:forEach>
 					</div>
 				</div>

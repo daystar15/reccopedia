@@ -10,14 +10,14 @@
 				<ul>
 					<c:forEach var="list" items="${list}">
 					<li>
-						<a href="/contents/contents_view?id=${list.id}&type=1">
+						<a href="/contents/contents_view?id=${list.id}">
 							<div>
 								<div class="poster">
 									<img src="https://image.tmdb.org/t/p/w500${list.poster_path}" alt="">
 								</div>
 							</div>
 							<h3 class="content_subject">${list.title}</h3>
-							<div class="point">평균 &starf; 4.2</div>
+							<div class="point">평균 &starf; <fmt:formatNumber value="${list.vote_average/2}" pattern=".0"/></div>
 						</a>
 					</li>
 					</c:forEach>

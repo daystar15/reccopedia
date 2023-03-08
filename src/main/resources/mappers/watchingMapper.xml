@@ -11,7 +11,6 @@
 			`watching`
 		WHERE
 			`apiId` = #{apiId}
-			AND `type` = #{type}
 			<if test="userId != null">
 			AND `userId` = #{userId}
 			</if>
@@ -31,6 +30,26 @@
 			`watching`
 		WHERE
 			`userId` = #{userId}
+			AND
+			`type` = ${1}
+	</select>
+	
+	<select id="selectWatchingTVListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.watching.model.Watching">
+		SELECT
+			`id`
+			, `type`
+			, `apiId`
+			, `userId`
+			, `title`
+			, `poster_path` AS `posterPath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`watching`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`type` = ${2}
 	</select>
 	
 	<select id="selectWatchingObjListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.watching.model.Watching">

@@ -184,33 +184,7 @@ public class CollectionController {
 	}
 	
 	
-	// 컬렉션(수정) 검색 결과 페이지
-	@GetMapping("/collection_update_result_view")
-	public String updateResult(
-			@RequestParam("title") String title, HttpSession session,
-			Model model) throws JsonProcessingException {
-		
-		Integer userId = (Integer) session.getAttribute("userId");
-
-		Map<String, Object> result = new HashMap<>();
-
-		List<Map<String, Object>> keywordList = collectionBO.findKeyword(title);
-
-		if (keywordList.size() >= 1) {
-			result.put("code", 1);
-		} else {
-			result.put("errorMessage","검색어를 다시 입력해주세요");
-		}
-		
-		List<Collection> collectionList = collectionBO.getCollectionList(userId);
-		int num = collectionBO.getCollectionId();
-		
-		model.addAttribute("num", num);
-		model.addAttribute("collectionList", collectionList);
-		model.addAttribute("keywordList", keywordList);
-		
-		return "collection/collectionFindUpdateResult";
-	}
+	
 	
 	
 		

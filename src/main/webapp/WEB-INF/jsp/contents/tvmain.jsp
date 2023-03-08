@@ -10,14 +10,14 @@
 				<ul class="carousel">
 					<c:forEach var="now" items="${popularResult}" varStatus="status">
 					<li>
-						<a href="/contents/tv_contents_view?id=${now.id}&type=2">
+						<a href="/contents/tv_contents_view?id=${now.id}">
 							<div>
 								<div class="poster">
 									<span class="rank">${status.count}</span> <img src="https://image.tmdb.org/t/p/w500/${now.poster_path}" alt="">
 								</div>
 							</div>
 							<h3 class="content_subject">${now.name}</h3>
-							<div class="point">평균 &starf; 4.2</div>
+							<div class="point">평균 &starf; <fmt:formatNumber value="${now.vote_average/2}" pattern=".0"/></div>
 						</a>
 					</li>
 					</c:forEach>
@@ -35,12 +35,12 @@
 				<ul class="carousel">
 					<c:forEach var="top" items="${topratedResult}">
 					<li>
-						<a href="/contents/tv_contents_view?id=${top.id}&type=2">
+						<a href="/contents/tv_contents_view?id=${top.id}">
 							<div class="poster">
 								<img src="https://image.tmdb.org/t/p/w500/${top.poster_path}" alt="">
 							</div>
 							<h3 class="content_subject">${top.name}</h3>
-							<div class="point">평균 &starf; 4.2</div>
+							<div class="point">평균 &starf; <fmt:formatNumber value="${top.vote_average/2}" pattern=".0"/></div>
 						</a>
 					</li>
 					</c:forEach>
@@ -58,12 +58,12 @@
 				<ul class="carousel">
 					<c:forEach var="netflix" items="${netflixResult}">
 					<li>
-						<a href="/contents/tv_contents_view?id=${netflix.id}&type=2">
+						<a href="/contents/tv_contents_view?id=${netflix.id}">
 							<div class="poster">
 								<img src="https://image.tmdb.org/t/p/w500/${netflix.poster_path}" alt="">
 							</div>
 							<h3 class="content_subject">${netflix.name}</h3>
-							<div class="point">평균 &starf; 4.2</div>
+							<div class="point">평균 &starf; <fmt:formatNumber value="${netflix.vote_average/2}" pattern=".0"/></div>
 						</a>
 					</li>
 					</c:forEach>
@@ -81,12 +81,12 @@
 				<ul class="carousel">
 					<c:forEach var="toprated" items="${topratedResult}">
 					<li>
-						<a href="/contents/contents_view?id=${toprated.id}&type=2">
+						<a href="/contents/contents_view?id=${toprated.id}">
 							<div class="poster">
 								 <img src="https://image.tmdb.org/t/p/w500/${toprated.poster_path}" alt="">
 							</div>
 							<h3 class="content_subject">${toprated.title}</h3>
-							<div class="point">평균 &starf; 4.2</div>
+							<div class="point">평균 &starf; <fmt:formatNumber value="${toprated.vote_average/2}" pattern=".0"/></div>
 						</a>
 					</li>
 					</c:forEach>

@@ -11,7 +11,7 @@
 		<!-- <div class="go_keep">
 			<a href="#">보관함에서 추가</a>
 		</div> -->
-		<form action="/collection/collection_find_result_view" method="get" id="findCollection">
+		<form action="" method="get" id="findCollection">
 			<div>
 				<img src="/static/images/search.png" alt=""> 
 				<label> 

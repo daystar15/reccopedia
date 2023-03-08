@@ -40,30 +40,15 @@
 										<span class="year">${fn:substring(movieTrending.release_date,0,4)}</span> &middot; <span class="country">${movieTrending.original_language}</span>
 									</div>
 								</div>
-							<c:forEach var="listMap" items="${listMap}" >
-							<c:if test="${listMap.apiId eq movieTrending.id}">
-							${listMap.point}
-								<div class="star-rating" data-point-id="${listMap.point}" data-img="${listMap.poster_path}" data-api="${listMap.id}" data-title="${listMap.title}">
+							
+								<div class="star-rating"  data-img="${movieTrending.poster_path}" data-api="${movieTrending.id}" data-title="${movieTrending.title}" data-type="1">
 									<label class="star"><input type="radio" name="rating" value="5"/>&#9733;</label>
 									<label class="star"><input type="radio" name="rating" value="4"/>&#9733;</label>
 									<label class="star"><input type="radio" name="rating" value="3"/>&#9733;</label>
 									<label class="star"><input type="radio" name="rating" value="2"/>&#9733;</label>
 									<label class="star"><input type="radio" name="rating" value="1"/>&#9733;</label>
 								</div>
-							</c:if>
-							</c:forEach>
 							
-							
-							
-							
-								<div class="star-rating" data-img="${movieTrending.poster_path}" data-api="${movieTrending.id}" data-title="${movieTrending.title}">
-									<label class="star"><input type="radio" name="rating" value="5"/>&#9733;</label>
-									<label class="star"><input type="radio" name="rating" value="4"/>&#9733;</label>
-									<label class="star"><input type="radio" name="rating" value="3"/>&#9733;</label>
-									<label class="star"><input type="radio" name="rating" value="2"/>&#9733;</label>
-									<label class="star"><input type="radio" name="rating" value="1"/>&#9733;</label>
-								</div>
-								
 							</div>
 						</div>
 					</div>
@@ -98,15 +83,14 @@
 			<textarea name="write_comment_content" id="write_comment_content" maxlength="10000" rows="10" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요.">${myComment.content}</textarea>
 			<div>
 				<div class="write_comment_left">
-					<!-- sns 공유
-                                <span></span> 
-                            -->
-					<span class="no_spoiler"> <img src="/static/images/hide.png" alt="">
-					</span>
+					<div>
+						<input type="checkbox" id="cb1">
+   						<label for="cb1"></label>
+					</div>
 				</div>
 				<div class="write_comment_right">
 					<span class="comment_length">0/10000</span>
-					<input type="submit" value="저장" id="submitComment">
+					<input type="submit" value="저장" id="submitComment" data-type="1">
 				</div>
 			</div>
 		</form>
@@ -140,11 +124,18 @@
         $("#submitComment").on('click', function(e) {
         	e.preventDefault();
         	
+        	let type = e.target.dataset.type;
+        	
+        	// 스포일러 됐는지
+        	let spoiler = $("#cb1").is(":checked");
+        	
         	// 댓글을 작성할 작품 api 번호
-        	let id = $(".modal_box").data('api-id');
+        	let id = $('.review_more').data('api-id');
         	
         	// 작성한 댓글
         	let comment = $("#write_comment_content").val();
+        	
+        	console.log(id + comment);
         	
         	if (comment == '') {
         		alert("댓글을 작성해주세요.")
@@ -154,7 +145,7 @@
         	$.ajax({
         		type:'POST'
         		, url:'/comment/create'
-        		, data: {"id":id, "content":comment}
+        		, data: {"id":id, "content":comment, "type": type, "spoiler":spoiler}
         		, success: function(data) {
         			if (data.code == 1) {
         				alert('댓글이 작성되었습니다!');
@@ -179,12 +170,13 @@
         
         // 별점 버튼
         $("input[name=rating]").on('click', function(e) {
+        	let type = e.target.parentElement.parentElement.dataset.type;
         	let apiId = e.target.parentElement.parentElement.dataset.api;
         	let point = $(this).val();
         	let userId = $(".content_list").data('user-id');
 			let title = e.target.parentElement.parentElement.dataset.title;
 			let posterPath = e.target.parentElement.parentElement.dataset.img;
-        	//console.log(apiId + title + img);
+        	//console.log(apiId + title + posterPath + type);
 		
         	if (userId == 0) {
         		alert("로그인을 해주세요");
@@ -194,7 +186,7 @@
         	$.ajax({
         		type: "post"
         		, url: "/point/contents_point_view"
-        		, data: {"point":point, "apiId":apiId, "title":title, "posterPath":posterPath, "userId":userId}
+        		, data: {"point":point, "apiId":apiId, "title":title, "posterPath":posterPath, "userId":userId, "type":type}
         		, success:function(data) {
         			alert("별점이 입력되었습니다!");
         		} 

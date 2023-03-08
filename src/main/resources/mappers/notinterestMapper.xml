@@ -11,7 +11,6 @@
 			`not_interest`
 		WHERE
 			`apiId` = #{apiId}
-			AND `type` = #{type}
 			<if test="userId != null">
 			AND `userId` = #{userId}
 			</if>
@@ -59,7 +58,6 @@
 		WHERE
 			`apiId` = #{apiId}
 			AND `userId` = #{userId}
-			AND `type` = #{type}
 	</delete>
 	
 	<delete id="deleteNotinterestByApiId" parameterType="int">
@@ -68,7 +66,6 @@
 			`not_interest`
 		WHERE
 			`apiId` = #{apiId}
-			AND `type` = #{type}
 	</delete>
 
 </mapper>

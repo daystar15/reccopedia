@@ -422,8 +422,15 @@
         });
         
         $("#writeYourComment").on('click', function() {
-            $(".comment_modal").removeClass('none');
-            $(".modal_back").removeClass('none');
+			let userId = $(".my_comment_write").data('user-id');
+        	
+        	if (userId == '') {
+        		alert("로그인을 해주세요.")
+        		$(".modal_back").addClass('none');
+        	} else if (userId != null) {
+        		$(".comment_modal").removeClass('none');
+                $(".modal_back").removeClass('none');
+        	}
         });
 
         $('.modal_back').on('click', function() {

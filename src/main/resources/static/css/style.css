@@ -1856,3 +1856,10 @@ input[id="cb1"]:checked + label {
     top: 10px;
     cursor: pointer;
 }
+.section .inner .contents.person ul li .content_subject {
+	width: 257px;
+}
+.header .sign_in:hover,
+.header .sign_up:hover {
+	cursor: pointer;
+}

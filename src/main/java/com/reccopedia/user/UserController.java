@@ -78,13 +78,17 @@ public class UserController {
 		
 		Map<String, Object> userInfo = userBO.getUserByObj(userId);
 		List<Map<String, Object>> wishList = wishBO.getWishList(userId);
+		List<Map<String, Object>> wishTVList = wishBO.getWishTVList(userId);
 		List<Map<String, Object>> pointList = pointBO.getPointList(userId);
+		List<Map<String, Object>> pointTVList = pointBO.getPointTVList(userId);
 		List<Map<String, Object>> commentList = commentBO.getCommentList(userId);
 		List<Collection> collectionList = collectionBO.getCollectionList(userId);
 		
 		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("wishList", wishList);
+		model.addAttribute("pointTVList", pointTVList);
+		model.addAttribute("wishTVList", wishTVList);
 		model.addAttribute("pointList", pointList);
 		model.addAttribute("commentList", commentList);
 		
@@ -132,6 +136,25 @@ public class UserController {
 		return "template/layout";
 	}
 	
+	// 유저페이지 - 평가페이지 -tv
+	@GetMapping("/tv_evaluate_view")
+	public String tvEvaluateView(Model model,
+			HttpSession session) {
+		
+		Integer userId  = (Integer)session.getAttribute("userId");
+		
+		List<Map<String, Object>> wishTVList = wishBO.getWishTVList(userId);
+		List<Map<String, Object>> pointTVList = pointBO.getPointTVList(userId);
+		List<Map<String, Object>> watchingTVList = watchingBO.getWatchingTVList(userId);
+		
+		model.addAttribute("watchingTVList", watchingTVList);
+		model.addAttribute("wishTVList", wishTVList);
+		model.addAttribute("pointTVList", pointTVList);
+		
+		model.addAttribute("viewName", "user/tvKeepEvaluate");
+		return "template/layout";
+	}
+	
 	// 유저페이지 - 보는중
 	@GetMapping("/watching_view")
 	public String watchingView(Model model,
@@ -146,6 +169,20 @@ public class UserController {
 		return "template/layout";
 	}
 	
+	// 유저페이지 - 보는중 - tv
+	@GetMapping("/tv_watching_view")
+	public String tvWatchingView(Model model,
+			HttpSession session) {
+		
+		Integer userId  = (Integer)session.getAttribute("userId");
+		
+		List<Map<String, Object>> watchingTVList = watchingBO.getWatchingTVList(userId);
+		
+		model.addAttribute("watchingTVList", watchingTVList);
+		model.addAttribute("viewName", "user/tvKeepWatching");
+		return "template/layout";
+	}
+	
 	// 유저페이지 - 보고싶어요
 	@GetMapping("/wish_view")
 	public String wishView(Model model,
@@ -157,6 +194,20 @@ public class UserController {
 
 		model.addAttribute("wishList", wishList);
 		model.addAttribute("viewName", "user/keepWish");
+		return "template/layout";
+	}
+	
+	// 유저페이지 - 보고싶어요 - tv
+	@GetMapping("/tv_wish_view")
+	public String tvWishView(Model model,
+			HttpSession session) {
+		
+		Integer userId  = (Integer)session.getAttribute("userId");
+		
+		List<Map<String, Object>> wishTVList = wishBO.getWishTVList(userId);
+
+		model.addAttribute("wishList", wishTVList);
+		model.addAttribute("viewName", "user/tvKeepWish");
 		return "template/layout";
 	}
 

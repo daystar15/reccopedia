@@ -119,8 +119,6 @@
  			`comment`
  		WHERE
  			`id` = #{id}
- 			AND
- 			`type` = #{type}
  	</delete>
  	
  	<update id="updateComment" parameterType="map">

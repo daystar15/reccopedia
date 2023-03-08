@@ -20,10 +20,11 @@ public interface WatchingDAO {
 
 	public int selectWatchingByApiIdOrUserId(
 			@Param("apiId") int id, 
-			@Param("type") int type,
 			@Param("userId") Integer userId);
 	
 	public List<Map<String, Object>> selectWatchingListByApiIdOrUserId(int userId);
+	
+	public List<Map<String, Object>> selectWatchingTVListByApiIdOrUserId(int userId);
 	
 	public List<Watching> selectWatchingObjListByApiIdOrUserId(int userId);
 	
@@ -33,6 +34,5 @@ public interface WatchingDAO {
 	
 	public void deleteWatchingByApiIdUserId(
 			@Param("apiId") int id, 
-			@Param("type") int type,
 			@Param("userId") int userId);
 }

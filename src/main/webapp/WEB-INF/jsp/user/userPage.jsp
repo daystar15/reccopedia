@@ -62,7 +62,7 @@
 					<span>영화</span>
 				</li>
 				<li>
-					<h4>{5}</h4>
+					<h4>${fn:length(pointTVList)}</h4>
 					<span>TV</span>
 				</li>
 			</ul>
@@ -96,13 +96,13 @@
 				</a>
 			</li>
 			<li class="keep_tv_box">
-				<a href="#">
+				<a href="/user/tv_evaluate_view">
 					<div class="keep_type">
 						<h5>TV</h5>
-						<h5 class="keep_list_point">&#9733; {8}</h5>
+						<h5 class="keep_list_point">&#9733; ${fn:length(pointTVList)}</h5>
 					</div>
 					<div class="keep_bottom_box">
-						<span>보고싶어요 102</span>
+						<span>보고싶어요 ${fn:length(wishTVList)}</span>
 					</div>
 				</a>
 			</li>

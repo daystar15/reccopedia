@@ -17,7 +17,7 @@
 	</select>
 	
 	
-	<select id="selectWishListByApiIdOrUserId" parameterType="map" resultType="com.reccopedia.wish.model.Wish">
+	<select id="selectWishListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.wish.model.Wish">
 		SELECT
 			`id`
 			, `type`
@@ -31,6 +31,26 @@
 			`wish`
 		WHERE
 			`userId` = #{id}
+			AND
+			`type` = ${1}
+	</select>
+	
+	<select id="selectWishTVListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.wish.model.Wish">
+		SELECT
+			`id`
+			, `type`
+			, `apiId`
+			, `userId`
+			, `title`
+			, `poster_path` AS `posterPath`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`wish`
+		WHERE
+			`userId` = #{id}
+			AND
+			`type` = ${2}
 	</select>
 	
 
@@ -64,7 +84,6 @@
 		WHERE
 			`apiId` = #{apiId}
 			AND `userId` = #{userId}
-			AND `type` = #{type}
 	</delete>
 	
 	<delete id="deleteWishByApiId" parameterType="int">
@@ -73,7 +92,6 @@
 			`wish`
 		WHERE
 			`apiId` = #{apiId}
-			AND `type` = #{type}
 	</delete>
 
 </mapper>

@@ -406,7 +406,7 @@
     	}
     	
     	$("#getCollection").on('click', function() {
-    		let userId = $("#wish").data('user-id');
+    		let userId = $(this).data('user-id');
     		
     		if (userId == null) {
     			alert("로그인을 해주세요");

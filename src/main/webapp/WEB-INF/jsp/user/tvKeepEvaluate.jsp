@@ -12,13 +12,13 @@
 	<div class="evaluate_box">
 		<div class="keep_title">
 			<h3>평가</h3>
-			<span>${fn:length(pointList)}</span>
+			<span>${fn:length(pointTVList)}</span>
 		</div>
 		<div class="contents_box">
 			
-			<c:forEach items="${pointList}" var="list">
+			<c:forEach items="${pointTVList}" var="list">
 			<!-- 컨텐츠 하나 -->
-			<a href="/contents/contents_view?id=${list.apiId}">
+			<a href="/contents/tv_contents_view?id=${list.apiId}">
 				<div class="contents_box_poster">
 					<img src="https://image.tmdb.org/t/p/w500${list.posterPath}" alt="">
 				</div>
@@ -31,15 +31,15 @@
 		</div>
 	</div>
 	<div class="go_wish go">
-		<a href="/user/wish_view">
+		<a href="/user/tv_wish_view">
 			<h4>보고싶어요</h4>
-			<span>${fn:length(wishList)}</span>
+			<span>${fn:length(wishTVList)}</span>
 		</a>
 	</div>
 	<div class="go_watching go">
-		<a href="/user/watching_view">
+		<a href="/user/tv_watching_view">
 			<h4>보는중</h4>
-			<span>${fn:length(watchingtList)}</span>
+			<span>${fn:length(watchingTVList)}</span>
 		</a>
 	</div>
 </div>

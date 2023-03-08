@@ -178,16 +178,15 @@ public class ContentsController {
 	
 	// 컨텐츠페이지 - 컨텐츠 개별 페이지
 	@GetMapping("/contents/contents_view")
-	public String contentsView(Model model, 
-			int type, int id, Integer point, 
+	public String contentsView(Model model, int id, Integer point, 
 			HttpSession session) throws JsonProcessingException {
 		
 		User userinfo = userBO.getUserByIntegerId((Integer)session.getAttribute("userId"));
-		List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(id, type, (Integer)session.getAttribute("userId"));
-		boolean fillMyComment = commentBO.existMyComment(id, (Integer)session.getAttribute("userId"));
-		boolean fillWatching = watchingBO.existwatching(id, type, (Integer)session.getAttribute("userId"));
-		boolean fillNotinterest = notinterestBO.existNotinterest(id,type, (Integer)session.getAttribute("userId"));
-		boolean fillWish = wishBO.existWish(id, type,(Integer)session.getAttribute("userId"));
+		List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(id, point, (Integer)session.getAttribute("userId"));
+		boolean fillMyComment = commentBO.existMyComment(id,(Integer)session.getAttribute("userId"));
+		boolean fillWatching = watchingBO.existwatching(id, (Integer)session.getAttribute("userId"));
+		boolean fillNotinterest = notinterestBO.existNotinterest(id,(Integer)session.getAttribute("userId"));
+		boolean fillWish = wishBO.existWish(id, (Integer)session.getAttribute("userId"));
 		List<CommentView> commentList = commentBO.generateCommentViewListByApiId(id);
 		Map<String, Object> myComment = commentBO.getCommentByObj(id, (Integer)session.getAttribute("userId"));
 		
@@ -226,15 +225,15 @@ public class ContentsController {
 	
 	// 컨텐츠페이지 - tv컨텐츠 개별 페이지
 	@GetMapping("/contents/tv_contents_view")
-	public String contentsTvView(Model model, int id, Integer point, int type,
+	public String contentsTvView(Model model, int id, Integer point,
 			HttpSession session) throws JsonProcessingException {
 		
 		User userinfo = userBO.getUserByIntegerId((Integer)session.getAttribute("userId"));
-		List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(id, type, (Integer)session.getAttribute("userId"));
+		List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(id, point, (Integer)session.getAttribute("userId"));
 		boolean fillMyComment = commentBO.existMyComment(id, (Integer)session.getAttribute("userId"));
-		boolean fillWatching = watchingBO.existwatching(id, type,(Integer)session.getAttribute("userId"));
-		boolean fillNotinterest = notinterestBO.existNotinterest(id, type, (Integer)session.getAttribute("userId"));
-		boolean fillWish = wishBO.existWish(id, type,(Integer)session.getAttribute("userId"));
+		boolean fillWatching = watchingBO.existwatching(id,(Integer)session.getAttribute("userId"));
+		boolean fillNotinterest = notinterestBO.existNotinterest(id, (Integer)session.getAttribute("userId"));
+		boolean fillWish = wishBO.existWish(id, (Integer)session.getAttribute("userId"));
 		List<CommentView> commentList = commentBO.generateCommentViewListByApiId(id);
 		Map<String, Object> myComment = commentBO.getCommentByObj(id, (Integer)session.getAttribute("userId"));
 		

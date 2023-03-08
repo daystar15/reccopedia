@@ -16,7 +16,6 @@ public interface NotinterestDAO {
 
 	public int selectNotinterestByApiIdOrUserId(
 			@Param("apiId") int id, 
-			@Param("type") int type,
 			@Param("userId") Integer userId);
 	
 	public List<Map<String, Object>> selectNotinterestListByApiIdOrUserId(int userId);
@@ -27,6 +26,5 @@ public interface NotinterestDAO {
 	
 	public void deleteNotinterestByApiIdUserId(
 			@Param("apiId") int id, 
-			@Param("type") int type,
 			@Param("userId") int userId);
 }

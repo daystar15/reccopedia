@@ -17,7 +17,7 @@
 								</div>
 							</div>
 							<h3 class="content_subject">${list.title}</h3>
-							<div class="point">평균 &starf; 4.2</div>
+							<div class="point">평균 &starf; <fmt:formatNumber value="${list.vote_average/2}" pattern=".0"/></div>
 						</a>
 					</li>
 					</c:forEach>

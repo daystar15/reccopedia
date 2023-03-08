@@ -18,7 +18,7 @@
 		
 			<c:forEach items="${wishList}" var="list">
 			<!-- 컨텐츠 하나 -->
-			<a href="/contents/contents_view?id=${list.apiId}&type=1">
+			<a href="/contents/contents_view?id=${list.apiId}">
 				<div class="contents_box_poster">
 					<img src="https://image.tmdb.org/t/p/w500${list.posterPath}" alt="">
 				</div>

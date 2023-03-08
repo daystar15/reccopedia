@@ -16,9 +16,9 @@
 		<!-- 컨텐츠 박스 시작 -->
 		<div class="contents_box wish_box">
 		
-			<c:forEach items="${watchingtList}" var="list">
+			<c:forEach items="${watchingTVList}" var="list">
 				<!-- 컨텐츠 하나 -->
-				<a href="/contents/contents_view?id=${list.apiId}">
+				<a href="/contents/tv_contents_view?id=${list.apiId}">
 					<div class="contents_box_poster">
 						<img src="https://image.tmdb.org/t/p/w500${list.posterPath}" alt="">
 					</div>

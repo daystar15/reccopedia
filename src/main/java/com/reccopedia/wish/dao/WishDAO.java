@@ -18,10 +18,11 @@ public interface WishDAO {
 
 	public int selectWishByApiIdOrUserId(
 			@Param("apiId") int id,
-			@Param("type") int type, 
 			@Param("userId") Integer userId);
 	
 	public List<Map<String, Object>> selectWishListByApiIdOrUserId(int userId);
+	
+	public List<Map<String, Object>> selectWishTVListByApiIdOrUserId(int userId);
 	
 	public void deleteWishByApiId(
 			@Param("apiId") int id,
@@ -29,7 +30,6 @@ public interface WishDAO {
 	
 	public void deleteWishByApiIdUserId(
 			@Param("apiId") int id, 
-			@Param("type") int type,
 			@Param("userId") int userId);
 	
 }

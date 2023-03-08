@@ -43,10 +43,10 @@ public class PointController {
 		User userinfo = userBO.getUserByIntegerId(userId);
 		List<Map<String, Object>> movieTrending = pointBO.generateMovieTrendingMap();
 		int num = pointBO.getPointCountByUserId();
-		List<Map<String, Object>> listMap = pointBO.pointMovieList(userId);
+		//List<Map<String, Object>> listMap = pointBO.pointMovieList(userId);
 		
 		model.addAttribute("num", num);
-		model.addAttribute("listMap", listMap);
+		//model.addAttribute("listMap", listMap);
 		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("movieTrending", movieTrending);
 		model.addAttribute("viewName", "review/review");
@@ -54,35 +54,6 @@ public class PointController {
 		return "template/layout";
 	}
 	
-	// 평가하기 페이지
-	/*
-	 * @PostMapping("/point/{id}") public String reviewView(
-	 * 
-	 * @PathVariable int id, String title, String posterPath, int point, HttpSession
-	 * session, Model model) throws JsonProcessingException {
-	 * 
-	 * Map<String, Object> result = new HashMap<>();
-	 * 
-	 * // 로그인 여부 Integer userId = (Integer) session.getAttribute("userId");
-	 * 
-	 * if(userId == null) { result.put("code", 500); result.put("errorMessage",
-	 * "로그인을 해주세요"); }
-	 * 
-	 * pointBO.pointToggle(id, userId, point, title, posterPath);
-	 * 
-	 * 
-	 * User userinfo =
-	 * userBO.getUserByIntegerId((Integer)session.getAttribute("userId"));
-	 * List<Map<String, Object>> movieTrending = pointBO.generateMovieTrendingMap();
-	 * List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(id,
-	 * (Integer)session.getAttribute("userId"));
-	 * 
-	 * model.addAttribute("pointList", pointList); model.addAttribute("userinfo",
-	 * userinfo); model.addAttribute("movieTrending", movieTrending);
-	 * model.addAttribute("viewName", "review/review");
-	 * 
-	 * return "template/layout"; }
-	 */
 
 	
 	// 컨텐츠페이지 - 별점 정보
@@ -103,7 +74,7 @@ public class PointController {
 			result.put("errorMessage", "로그인을 해주세요");
 		}
 		
-		pointBO.pointToggle(apiId, type, point, userId, title, posterPath);
+		pointBO.pointToggle(type, point, apiId, userId, title, posterPath);
 		//List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(apiId, (Integer)session.getAttribute("userId"));
 		
 		//model.addAttribute("pointList", pointList);

@@ -35,26 +35,26 @@ public class PointBO {
 
 	public void pointToggle(int type, int point, int apiId,  int userId, String title, String posterPath) {
 		// 위시 리스트에 있는지 확인
-		if (pointDAO.selectPointByApiIdOrUserId(apiId, type, userId, point) > 0) {
+		if (pointDAO.selectPointByApiIdOrUserId(apiId, userId, point) > 0) {
 			// 있으면 제거
-			pointDAO.deletePointByApiIdUserId(apiId, type, userId, point);
+			pointDAO.deletePointByApiIdUserId(apiId, userId, point);
 		} else {
 			// 없으면 추가
 			pointDAO.insertPoint(type, point, apiId, userId, title, posterPath);
 		}
 	};
 	
-	public boolean existPoint(int apiId, int type, Integer point, Integer userId) {
+	public boolean existPoint(int apiId, Integer point, Integer userId) {
 		if(userId == null) {
 			return false;
 		}
 		if (point == null) {
 			return true;
 		}
-		return pointDAO.selectPointByApiIdOrUserId(apiId, type, point, userId) > 0 ? true:false;
+		return pointDAO.selectPointByApiIdOrUserId(apiId, point, userId) > 0 ? true:false;
 	}
 	
-	public List<Point> getPointCountByApiId(int id, int type, int point, Integer userId) {
+	public List<Point> getPointCountByApiId(int id, int point, Integer userId) {
 
 		List<Point> pointViewList = new ArrayList<>();
 		
@@ -67,8 +67,8 @@ public class PointBO {
 		return pointViewList;
 	}
 	
-	public List<Point> getPointCountListByApiIdAndUserId(int apiId, int type, Integer userId) {
-		return pointDAO.selectPointCountListByApiIdAndUserId(apiId, type, userId);
+	public List<Point> getPointCountListByApiIdAndUserId(int apiId, Integer point, Integer userId) {
+		return pointDAO.selectPointCountListByApiIdAndUserId(apiId, point, userId);
 	}
 	
 	public int getPointCountByApiIdAndUserId(int id, int type, int userId) {
@@ -87,6 +87,11 @@ public class PointBO {
 	// 별점목록 가져오는 함수
 	public List<Map<String, Object>> getPointList(int userId) {
 		return pointDAO.selectPointListByApiIdOrUserId(userId);
+	}
+	
+	// TV별점목록 가져오는 함수
+	public List<Map<String, Object>> getPointTVList(int userId) {
+		return pointDAO.selectPointTVListByApiIdOrUserId(userId);
 	}
 	
 	// api랑 userid 일치하는 별점목록함수

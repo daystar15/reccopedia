@@ -28,6 +28,7 @@ public interface CollectionDAO {
 			
 	public void addCollectionContent(
 			@Param("apiId") int apiId,
+			@Param("type") int type,
 			@Param("pointId") Integer pointId,
 			@Param("userId") int userId,
 			@Param("collectionId") int collectionId,

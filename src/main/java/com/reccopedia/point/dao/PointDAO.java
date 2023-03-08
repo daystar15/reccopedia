@@ -20,7 +20,6 @@ public interface PointDAO {
 			@Param("posterPath") String posterPath);
 	
 	public int selectPointByApiIdOrUserId(
-			@Param("type") int type,
 			@Param("apiId") int id,  
 			@Param("point") int point, 
 			@Param("userId") int userId);
@@ -34,12 +33,11 @@ public interface PointDAO {
 	
 	public List<Point> selectPointByApiId(
 			@Param("apiId") int apiId,
-			@Param("point") int point,
 			@Param("userId") Integer userId);
 	
 	public List<Point> selectPointCountListByApiIdAndUserId(
 			@Param("apiId") int apiId,
-			@Param("type") int type,
+			@Param("point") Integer point,
 			@Param("userId") Integer userId);
 	
 	public Map<String, Object> selectPointMapByApiIdAndUserId(
@@ -48,13 +46,14 @@ public interface PointDAO {
 	
 	public List<Map<String, Object>> selectPointListByApiIdOrUserId(int userId);
 	
+	public List<Map<String, Object>> selectPointTVListByApiIdOrUserId(int userId);
+	
 	public void deletePointByApiId(
 			@Param("id") int id,
 			@Param("type") int type);
 	
 	public void deletePointByApiIdUserId(
 			@Param("apiId") int id,
-			@Param("type") int type,
 			@Param("point") int point, 
 			@Param("userId") int userId);
 	

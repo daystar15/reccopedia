@@ -16,20 +16,20 @@ public class NotinterestBO {
 	
 	public void notinterestToggle(int id, int type, int userId) {
 		// 위시 리스트에 있는지 확인
-		if (notinterestDAO.selectNotinterestByApiIdOrUserId(id, type, userId) > 0) {
+		if (notinterestDAO.selectNotinterestByApiIdOrUserId(id, userId) > 0) {
 			// 있으면 제거
-			notinterestDAO.deleteNotinterestByApiIdUserId(id, type, userId);
+			notinterestDAO.deleteNotinterestByApiIdUserId(id, userId);
 		} else {
 			// 없으면 추가
 			notinterestDAO.insertNotinterest(id,type, userId);
 		}
 	};
 	
-	public boolean existNotinterest(int id, int type, Integer userId) {
+	public boolean existNotinterest(int id, Integer userId) {
 		if(userId == null) {
 			return false;
 		}
-		return notinterestDAO.selectNotinterestByApiIdOrUserId(id, type, userId) > 0 ? true:false;
+		return notinterestDAO.selectNotinterestByApiIdOrUserId(id, userId) > 0 ? true:false;
 	}
 	
 	
