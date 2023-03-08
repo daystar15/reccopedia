@@ -14,27 +14,27 @@ public class NotinterestBO {
 	@Autowired
 	private NotinterestDAO notinterestDAO;
 	
-	public void notinterestToggle(int id, int userId) {
+	public void notinterestToggle(int id, int type, int userId) {
 		// 위시 리스트에 있는지 확인
-		if (notinterestDAO.selectNotinterestByApiIdOrUserId(id, userId) > 0) {
+		if (notinterestDAO.selectNotinterestByApiIdOrUserId(id, type, userId) > 0) {
 			// 있으면 제거
-			notinterestDAO.deleteNotinterestByApiIdUserId(id, userId);
+			notinterestDAO.deleteNotinterestByApiIdUserId(id, type, userId);
 		} else {
 			// 없으면 추가
-			notinterestDAO.insertNotinterest(id, userId);
+			notinterestDAO.insertNotinterest(id,type, userId);
 		}
 	};
 	
-	public boolean existNotinterest(int id, Integer userId) {
+	public boolean existNotinterest(int id, int type, Integer userId) {
 		if(userId == null) {
 			return false;
 		}
-		return notinterestDAO.selectNotinterestByApiIdOrUserId(id, userId) > 0 ? true:false;
+		return notinterestDAO.selectNotinterestByApiIdOrUserId(id, type, userId) > 0 ? true:false;
 	}
 	
 	
-	public void deleteNotinterestByApiId(int id) {
-		notinterestDAO.deleteNotinterestByApiId(id);
+	public void deleteNotinterestByApiId(int id, int type) {
+		notinterestDAO.deleteNotinterestByApiId(id, type);
 	}
 	
 	public List<Map<String, Object>> getNotinterestList(int userId) {

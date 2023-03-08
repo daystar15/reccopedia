@@ -208,6 +208,11 @@
 									</a>
 									<div class="comment_right">&#9733; ${list.pointCount}</div>
 								</div>
+								<c:if test="${list.comment.spoiler == false}">
+									<div class="comment_content" data-spoiler="${list.comment.spoiler}" data-comment-id="${list.comment.id}">
+											${list.comment.content}
+									</div>
+								</c:if>
 								<c:if test="${list.comment.spoiler == true}">
 									<div class="comment_content" data-spoiler="${list.comment.spoiler}" data-comment-id="${list.comment.id}">
 											${list.comment.content}
@@ -436,6 +441,8 @@
         $("#submitComment").on('click', function(e) {
         	e.preventDefault();
         	
+        	let type = $(".contets_wrap").data('type-id');
+        	
         	// 스포일러 됐는지
         	let spoiler = $("#cb1").is(":checked");
         	
@@ -455,7 +462,7 @@
         	$.ajax({
         		type:'POST'
         		, url:'/comment/create'
-        		, data: {"id":id, "content":comment, "spoiler":spoiler}
+        		, data: {"id":id, "content":comment, "spoiler":spoiler, "type":type}
         		, success: function(data) {
        				if (data.code == 1) {
            				alert('댓글이 작성되었습니다!');
@@ -479,13 +486,14 @@
         // 댓글 삭제
         $("#deleteBtn").on('click', function() {
         	let id = $('.my_comment').data('comment-id');
+        	let type = $(".contets_wrap").data('type-id');
         	
         	// ajax 글 삭제
 			$.ajax ({
 				// request
 				type: "DELETE"
 				, url: "/comment/delete"
-				, data: {"id":id}
+				, data: {"id":id, "type":type}
 				
 				// response
 				, success:function(data) {
@@ -505,6 +513,7 @@
         
         // 댓글 수정
         $("#commentUpdateBtn").on('click', function() {
+        	let type = $(".contets_wrap").data('type-id');
         	let commentId = $('.my_comment').data('comment-id');
         	let comment = $("#write_comment_content").val();
         	$(".comment_modal").removeClass('none');
@@ -515,7 +524,7 @@
 				// request
 				type: "put"
 				, url: "/comment/update"
-				, data: {"commentId":commentId, "content":comment}
+				, data: {"commentId":commentId, "content":comment, "type":type}
 				
 				// response
 				, success:function(data) {
@@ -659,6 +668,7 @@
         
         // 별점 버튼
         $("input[name=rating]").on('click', function() {
+        	let type = $(".contets_wrap").data('type-id');
         	let apiId = $(".contents_info").data('api-id');
         	let point = $(this).val();
         	let userId = $(".contents_info").data('user-id');
@@ -673,7 +683,7 @@
         	$.ajax({
         		type: "post"
         		, url: "/point/contents_point_view"
-        		, data: {"point":point, "apiId":apiId, "title":title, "posterPath":posterPath, "userId":userId}
+        		, data: {"point":point, "apiId":apiId, "title":title, "posterPath":posterPath, "userId":userId, "type":type}
         		, success:function(data) {
         			if (data.code == 500) {
         				alert(data.errorMessage)
@@ -726,6 +736,7 @@
         
         // 보고싶어요 버튼 토글
         $("#wish").on('click', function() {
+        	let type = $(".contets_wrap").data('type-id');
         	let userId = $(this).data('user-id');
         	let id = $('.contents_info').data('api-id');
         	let title = $(".contents_info .title").data('api-title');
@@ -734,7 +745,7 @@
         	$.ajax({
         		type: "post"
         		, url: "/wish/" + id
-        		, data: {"title":title, "posterPath":posterPath}
+        		, data: {"title":title, "posterPath":posterPath, "type":type}
         		, success:function(data) {
         			if (data.code == 1) {
         				location.reload(true);
@@ -752,6 +763,7 @@
 
         // 보는중 버튼 토글
         $("#watching").on('click', function() {
+        	let type = $(".contets_wrap").data('type-id');
         	let userId = $(this).data('user-id');
         	let id = $('.contents_info').data('api-id');
         	let title = $(".contents_info .title").data('api-title');
@@ -760,7 +772,7 @@
         	$.ajax({
         		type: "post"
             	, url: "/watching/" + id
-        		, data: {"title":title, "posterPath":posterPath}
+        		, data: {"title":title, "posterPath":posterPath, "type":type}
         		, success:function(data) {
         			if (data.code == 1) {
         				location.reload(true);
@@ -778,12 +790,14 @@
         
        // 관심없어요 버튼 토글
        $("#notInterest").on('click', function() {
+       		let type = $(".contets_wrap").data('type-id');
 	       	let userId = $(this).data('user-id');
 	       	let id = $('.contents_info').data('api-id');
 	
 	       	$.ajax({
 	 			type: "post"
 	       		, url: "/notinterest/" + id
+	       		, data: {"type":type}
 	       		, success:function(data) {
 	       			if (data.code == 1) {
 	       				location.reload(true);

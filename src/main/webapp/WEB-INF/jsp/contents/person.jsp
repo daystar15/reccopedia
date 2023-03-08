@@ -10,7 +10,7 @@
 				<ul>
 					<c:forEach var="list" items="${list}">
 					<li>
-						<a href="/contents/contents_view?id=${list.id}">
+						<a href="/contents/contents_view?id=${list.id}&type=1">
 							<div>
 								<div class="poster">
 									<img src="https://image.tmdb.org/t/p/w500${list.poster_path}" alt="">

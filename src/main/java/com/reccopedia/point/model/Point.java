@@ -5,6 +5,7 @@ import java.util.Date;
 public class Point {
 
 	private int id;
+	private int type;
 	private int point;
 	private String title;
 	private String posterPath;
@@ -13,6 +14,12 @@ public class Point {
 	private Date createdAt;
 	private Date updatedAt;
 	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public int getId() {
 		return id;
 	}

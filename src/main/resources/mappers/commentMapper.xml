@@ -20,6 +20,7 @@
  		INSERT INTO `comment`
  		(
  			`apiId`
+ 			,`type`
 			, `pointId`
 			, `userId`
 			, `content`
@@ -30,6 +31,7 @@
  		VALUES
  		(
  			#{id}
+ 			, #{type}
  			, #{pointId}
  			, #{userId}
  			, #{content}
@@ -42,6 +44,7 @@
  	<select id="selectCommentListByApiId" parameterType="int" resultType="com.reccopedia.comment.model.Comment">
  		SELECT
  			`id`
+ 			,`type`
 			, `apiId`
 			, `pointId`
 			, `userId`
@@ -58,6 +61,7 @@
  	<select id="selectCommentListById" parameterType="int" resultType="com.reccopedia.comment.model.Comment">
  		SELECT
  			`id`
+ 			,`type`
 			, `apiId`
 			, `pointId`
 			, `userId`
@@ -72,6 +76,7 @@
  	<select id="selectCommentListByUserId" parameterType="int" resultType="com.reccopedia.comment.model.Comment">
  		SELECT
  			`id`
+ 			,`type`
 			, `apiId`
 			, `pointId`
 			, `userId`
@@ -88,6 +93,7 @@
  	<select id="selectCommentListByApiIdAndUserId" parameterType="map" resultType="com.reccopedia.comment.model.Comment">
  		SELECT
  			`id`
+ 			,`type`
 			, `apiId`
 			, `pointId`
 			, `userId`
@@ -113,12 +119,15 @@
  			`comment`
  		WHERE
  			`id` = #{id}
+ 			AND
+ 			`type` = #{type}
  	</delete>
  	
  	<update id="updateComment" parameterType="map">
  		UPDATE `comment`
  		SET
  			`id` = #{id}
+ 			,`type` = #{type}
 			, `spoiler` = #{spoiler}
  			, `userId` = #{userId}
  			, `content` = #{content}

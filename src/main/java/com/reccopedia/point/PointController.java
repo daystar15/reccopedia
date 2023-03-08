@@ -88,6 +88,7 @@ public class PointController {
 	// 컨텐츠페이지 - 별점 정보
 	@PostMapping("/contents_point_view")
 	public String contentsPointView(Model model,
+		@RequestParam("type") int type,
 		@RequestParam("point") int point,
 		@RequestParam("apiId") int apiId,
 		@RequestParam("title") String title,
@@ -102,7 +103,7 @@ public class PointController {
 			result.put("errorMessage", "로그인을 해주세요");
 		}
 		
-		pointBO.pointToggle(apiId, point, userId, title, posterPath);
+		pointBO.pointToggle(apiId, type, point, userId, title, posterPath);
 		//List<Point> pointList = pointBO.getPointCountListByApiIdAndUserId(apiId, (Integer)session.getAttribute("userId"));
 		
 		//model.addAttribute("pointList", pointList);

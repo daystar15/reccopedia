@@ -21,7 +21,7 @@ public class NotinterestRestController {
 
 	@PostMapping("/notinterest/{id}")
 	public Map<String, Object> notinterest(
-			@PathVariable int id,
+			@PathVariable int id, int type,
 			HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<>();
@@ -35,7 +35,7 @@ public class NotinterestRestController {
 			return result;
 		}
 		
-		notinterestBO.notinterestToggle(id, userId);
+		notinterestBO.notinterestToggle(id, type, userId);
 		
 		result.put("code", 1);
 		result.put("result", "성공");

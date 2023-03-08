@@ -14,7 +14,8 @@ public interface CommentDAO {
 	public void createComment(
 			@Param("userId") int userId, 
 			@Param("pointId") Integer pointId, 
-			@Param("id") int id, 
+			@Param("id") int id,  
+			@Param("type") int type, 
 			@Param("content") String content,
 			@Param("spoiler") boolean spoiler);
 	
@@ -32,11 +33,14 @@ public interface CommentDAO {
 			@Param("id") int id, 
 			@Param("userId") Integer userId);
 	
-	public void deleteCommentByUserIdApiId(int id);
+	public void deleteCommentByUserIdApiId(
+			@Param("id") int id,
+			@Param("type") int type );
 	
 	public void updateComment(
 			@Param("userId") int userId,
-			@Param("id") int id, 
+			@Param("id") int id,
+			@Param("type") int type,
 			@Param("content") String content);
 	
 }

@@ -11,17 +11,22 @@ public interface NotinterestDAO {
 
 	public void insertNotinterest(
 			@Param("apiId") int id, 
+			@Param("type") int type,
 			@Param("userId") int userId);
 
 	public int selectNotinterestByApiIdOrUserId(
 			@Param("apiId") int id, 
+			@Param("type") int type,
 			@Param("userId") Integer userId);
 	
 	public List<Map<String, Object>> selectNotinterestListByApiIdOrUserId(int userId);
 	
-	public void deleteNotinterestByApiId(int id);
+	public void deleteNotinterestByApiId(
+			@Param("apiId") int id,
+			@Param("type") int type);
 	
 	public void deleteNotinterestByApiIdUserId(
 			@Param("apiId") int id, 
+			@Param("type") int type,
 			@Param("userId") int userId);
 }

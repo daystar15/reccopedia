@@ -20,6 +20,7 @@
 	<select id="selectWishListByApiIdOrUserId" parameterType="map" resultType="com.reccopedia.wish.model.Wish">
 		SELECT
 			`id`
+			, `type`
 			, `apiId`
 			, `userId`
 			, `title`
@@ -37,6 +38,7 @@
 		INSERT INTO `wish`
  		(
  			`apiId`
+ 			, `type`
 			, `userId`
 			, `title`
 			, `poster_path`
@@ -46,6 +48,7 @@
  		VALUES
  		(
  			#{apiId}
+ 			, #{type}
  			, #{userId}
  			, #{title}
  			, #{posterPath}
@@ -61,6 +64,7 @@
 		WHERE
 			`apiId` = #{apiId}
 			AND `userId` = #{userId}
+			AND `type` = #{type}
 	</delete>
 	
 	<delete id="deleteWishByApiId" parameterType="int">
@@ -69,6 +73,7 @@
 			`wish`
 		WHERE
 			`apiId` = #{apiId}
+			AND `type` = #{type}
 	</delete>
 
 </mapper>

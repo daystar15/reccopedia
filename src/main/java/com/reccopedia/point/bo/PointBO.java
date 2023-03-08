@@ -33,28 +33,28 @@ public class PointBO {
 	@Autowired
 	private RestTemplateService resttemplateservice;
 
-	public void pointToggle(int apiId, int userId, int point, String title, String posterPath) {
+	public void pointToggle(int type, int point, int apiId,  int userId, String title, String posterPath) {
 		// 위시 리스트에 있는지 확인
-		if (pointDAO.selectPointByApiIdOrUserId(apiId, userId, point) > 0) {
+		if (pointDAO.selectPointByApiIdOrUserId(apiId, type, userId, point) > 0) {
 			// 있으면 제거
-			pointDAO.deletePointByApiIdUserId(apiId, userId, point);
+			pointDAO.deletePointByApiIdUserId(apiId, type, userId, point);
 		} else {
 			// 없으면 추가
-			pointDAO.insertPoint(point, userId, apiId, title, posterPath);
+			pointDAO.insertPoint(type, point, apiId, userId, title, posterPath);
 		}
 	};
 	
-	public boolean existPoint(int apiId, Integer point, Integer userId) {
+	public boolean existPoint(int apiId, int type, Integer point, Integer userId) {
 		if(userId == null) {
 			return false;
 		}
 		if (point == null) {
 			return true;
 		}
-		return pointDAO.selectPointByApiIdOrUserId(apiId, point, userId) > 0 ? true:false;
+		return pointDAO.selectPointByApiIdOrUserId(apiId, type, point, userId) > 0 ? true:false;
 	}
 	
-	public List<Point> getPointCountByApiId(int id, int point, Integer userId) {
+	public List<Point> getPointCountByApiId(int id, int type, int point, Integer userId) {
 
 		List<Point> pointViewList = new ArrayList<>();
 		
@@ -67,12 +67,12 @@ public class PointBO {
 		return pointViewList;
 	}
 	
-	public List<Point> getPointCountListByApiIdAndUserId(int apiId, Integer userId) {
-		return pointDAO.selectPointCountListByApiIdAndUserId(apiId, userId);
+	public List<Point> getPointCountListByApiIdAndUserId(int apiId, int type, Integer userId) {
+		return pointDAO.selectPointCountListByApiIdAndUserId(apiId, type, userId);
 	}
 	
-	public int getPointCountByApiIdAndUserId(int id, int userId) {
-		return pointDAO.selectPointByApiIdAndUserId(id, userId);
+	public int getPointCountByApiIdAndUserId(int id, int type, int userId) {
+		return pointDAO.selectPointByApiIdAndUserId(id, type, userId);
 	}
 	
 	public int getPointCountByUserId() {
@@ -80,8 +80,8 @@ public class PointBO {
 	}
 	
 	
-	public void deletePointByApiId(int id) {
-		pointDAO.deletePointByApiId(id);
+	public void deletePointByApiId(int id, int type) {
+		pointDAO.deletePointByApiId(id, type);
 	}
 	
 	// 별점목록 가져오는 함수

@@ -15,27 +15,27 @@ public class WatchingBO {
 	@Autowired
 	private WatchingDAO watchingDAO;
 	
-	public void watchingToggle(int id, int userId, String title, String posterPath) {
+	public void watchingToggle(int id, int type, int userId, String title, String posterPath) {
 		// 위시 리스트에 있는지 확인
-		if (watchingDAO.selectWatchingByApiIdOrUserId(id, userId) > 0) {
+		if (watchingDAO.selectWatchingByApiIdOrUserId(id, type, userId) > 0) {
 			// 있으면 제거
-			watchingDAO.deleteWatchingByApiIdUserId(id, userId);
+			watchingDAO.deleteWatchingByApiIdUserId(id, type, userId);
 		} else {
 			// 없으면 추가
-			watchingDAO.insertWatching(id, userId, title, posterPath);
+			watchingDAO.insertWatching(id, type, userId, title, posterPath);
 		}
 	};
 	
-	public boolean existwatching(int id, Integer userId) {
+	public boolean existwatching(int id, int type, Integer userId) {
 		if(userId == null) {
 			return false;
 		}
-		return watchingDAO.selectWatchingByApiIdOrUserId(id, userId) > 0 ? true:false;
+		return watchingDAO.selectWatchingByApiIdOrUserId(id, type, userId) > 0 ? true:false;
 	}
 	
 	
-	public void deleteWatchingByApiId(int id) {
-		watchingDAO.deleteWatchingByApiId(id);
+	public void deleteWatchingByApiId(int id, int type) {
+		watchingDAO.deleteWatchingByApiId(id, type);
 	}
 	
 

@@ -25,6 +25,7 @@ public class CommentRestController {
 	@PostMapping("/create")
 	public Map<String, Object> createComment(
 			@RequestParam("id") int id,
+			@RequestParam("type") int type,
 			@RequestParam("content") String content,
 			@RequestParam("spoiler") boolean spoiler,
 			HttpSession session) {
@@ -40,7 +41,7 @@ public class CommentRestController {
 			return result;
 		}
 		
-		commentBO.createComment(userId, null, id, content, spoiler);
+		commentBO.createComment(userId, null, id, type, content, spoiler);
 		result.put("code", 1);
 		result.put("result", "success");
 		
@@ -53,6 +54,7 @@ public class CommentRestController {
 	@DeleteMapping("/delete")
 	public Map<String, Object> delete(
 			@RequestParam("id") int id,
+			@RequestParam("type") int type,
 			HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<>();
@@ -64,7 +66,7 @@ public class CommentRestController {
 			return result;
 		}
 		
-		commentBO.deleteCommentByUserIdApiId(id);
+		commentBO.deleteCommentByUserIdApiId(id, type);
 		result.put("code", 1);
 		
 		return result;
@@ -74,6 +76,7 @@ public class CommentRestController {
 	
 	@PutMapping("/update")
 	public Map<String, Object> update(
+			@RequestParam("type") int type,
 			@RequestParam("commentId") int id,
 			@RequestParam("comment") String content,
 			HttpSession session) {
@@ -81,7 +84,7 @@ public class CommentRestController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		// update db
-		commentBO.updateComment(userId, id, content);
+		commentBO.updateComment(userId, id, type, content);
 		
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 1);

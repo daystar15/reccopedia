@@ -11,6 +11,7 @@
 			`not_interest`
 		WHERE
 			`apiId` = #{apiId}
+			AND `type` = #{type}
 			<if test="userId != null">
 			AND `userId` = #{userId}
 			</if>
@@ -20,6 +21,7 @@
 	<select id="selectNotinterestListByApiIdOrUserId" parameterType="map" resultType="com.reccopedia.notinterest.model.Notinterest">
 		SELECT
 			`id`
+			, `type`
 			, `apiId`
 			, `userId`
 			, `createdAt`
@@ -35,6 +37,7 @@
 		INSERT INTO `not_interest`
  		(
  			`apiId`
+			, `type`
 			, `userId`
 			, `createdAt`
 			, `updatedAt`
@@ -42,6 +45,7 @@
  		VALUES
  		(
  			#{apiId}
+			, #{type}
  			, #{userId}
  			, now()
  			, now()
@@ -55,6 +59,7 @@
 		WHERE
 			`apiId` = #{apiId}
 			AND `userId` = #{userId}
+			AND `type` = #{type}
 	</delete>
 	
 	<delete id="deleteNotinterestByApiId" parameterType="int">
@@ -63,6 +68,7 @@
 			`not_interest`
 		WHERE
 			`apiId` = #{apiId}
+			AND `type` = #{type}
 	</delete>
 
 </mapper>

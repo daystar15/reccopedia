@@ -6,7 +6,8 @@
  	<insert id="insertPoint" parameterType="map">
  		INSERT INTO `point`
  		(
- 			point
+ 			type
+ 			, point
 			, apiId
 			, userId
 			, title
@@ -16,7 +17,8 @@
  		)
  		VALUES
  		(
-	 		#{point}
+ 			#{type}
+	 		, #{point}
 	 		, #{apiId}
 	 		, #{userId} 
 	 		, #{title}
@@ -48,6 +50,7 @@
 	<select id="selectPointListByApiIdOrUserId" parameterType="int" resultType="map">
 		SELECT
 			`id`
+ 			, type
 			, `apiId`
 			, `userId`
 			, `point`
@@ -64,6 +67,7 @@
 	<select id="selectPointListByApiIdAndUserId" parameterType="int" resultType="map">
 		SELECT
 			`id`
+ 			, type
 			, `apiId`
 			, `userId`
 			, `point`
@@ -81,6 +85,7 @@
 	<select id="selectPointByApiId" parameterType="int" resultType="com.reccopedia.point.model.Point">
 		SELECT
 			`id`
+ 			, type
 			, `apiId`
 			, `userId`
 			, `point`
@@ -90,6 +95,7 @@
 			`point`
 		WHERE
 			`apiId` = #{apiId}
+			AND `type` = #{type}
 			<if test="userId != null">
 			AND `userId` = #{userId}
 			</if>
@@ -103,6 +109,7 @@
 		WHERE
 			`apiId` = #{apiId}
 			AND `userId` = #{userId}
+			AND `type` = #{type}
 	</select>
 	
 	<select id="selectPointCountListByApiIdAndUserId" parameterType="map" resultType="com.reccopedia.point.model.Point">
@@ -113,6 +120,7 @@
 		WHERE
 			`apiId` = #{apiId}
 			AND `userId` = #{userId}
+			AND `type` = #{type}
 		ORDER BY `updatedAt`
 		LIMIT 1
 	</select>
@@ -124,6 +132,7 @@
 		WHERE
 			`apiId` = #{apiId}
 			AND `userId` = #{userId}
+			AND `type` = #{type}
 	</delete>
 	
 	<delete id="deletePointByApiId" parameterType="int">
@@ -132,6 +141,7 @@
 			`point`
 		WHERE
 			`apiId` = #{apiId}
+			AND `type` = #{type}
 	</delete>
  	
  	

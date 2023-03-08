@@ -11,6 +11,7 @@
 			`watching`
 		WHERE
 			`apiId` = #{apiId}
+			AND `type` = #{type}
 			<if test="userId != null">
 			AND `userId` = #{userId}
 			</if>
@@ -19,6 +20,7 @@
 	<select id="selectWatchingListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.watching.model.Watching">
 		SELECT
 			`id`
+			, `type`
 			, `apiId`
 			, `userId`
 			, `title`
@@ -34,6 +36,7 @@
 	<select id="selectWatchingObjListByApiIdOrUserId" parameterType="int" resultType="com.reccopedia.watching.model.Watching">
 		SELECT
 			`id`
+			, `type`
 			, `apiId`
 			, `userId`
 			, `title`
@@ -44,12 +47,14 @@
 			`watching`
 		WHERE
 			`userId` = #{userId}
+			AND `type` = #{type}
 	</select>
 
 	<insert id="insertWatching" parameterType="map">
 		INSERT INTO `watching`
  		(
  			`apiId`
+ 			, `type`
  			, `userId`
 			, `title`
 			, `poster_path`
@@ -59,6 +64,7 @@
  		VALUES
  		(
  			#{apiId}
+ 			, #{type}
  			, #{userId}
 			, #{title}
 			, #{posterPath}
@@ -74,6 +80,7 @@
 		WHERE
 			`apiId` = #{apiId}
 			AND `userId` = #{userId}
+			AND `type` = #{type}
 	</delete>
 	
 	<delete id="deleteWatchingByApiId" parameterType="int">
@@ -82,6 +89,7 @@
 			`watching`
 		WHERE
 			`apiId` = #{apiId}
+			AND `type` = #{type}
 	</delete>
  
  </mapper>

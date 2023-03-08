@@ -27,8 +27,8 @@ public class CommentBO {
 	@Autowired
 	private CommentDAO commentDAO;
 	
-	public void createComment(int userId, Integer pointId, int id, String content, boolean check) {
-		commentDAO.createComment(userId, null, id, content, check);
+	public void createComment(int userId, Integer pointId, int id, int type, String content, boolean check) {
+		commentDAO.createComment(userId, null, id, type, content, check);
 	}
 	
 	public boolean existMyComment(int id, Integer userId) {
@@ -66,8 +66,8 @@ public class CommentBO {
 	}
 	
 	
-	public void deleteCommentByUserIdApiId(int id) {
-		commentDAO.deleteCommentByUserIdApiId(id);
+	public void deleteCommentByUserIdApiId(int id, int type) {
+		commentDAO.deleteCommentByUserIdApiId(id, type);
 	}
 	
 	public List<CommentView> generateCommentViewListByApiId(int id) {
@@ -92,7 +92,7 @@ public class CommentBO {
 	}
 	
 	
-	public void updateComment(int userId, int id, String content) {
+	public void updateComment(int userId, int id, int type, String content) {
 		Comment comment = getCommentListByApiIdAndUserId(id, userId);
 		
 		if (comment == null) {
@@ -100,7 +100,7 @@ public class CommentBO {
 			return;
 		}
 		
-		commentDAO.updateComment(userId, id, content);
+		commentDAO.updateComment(userId, id, type, content);
 	};
 	
 	

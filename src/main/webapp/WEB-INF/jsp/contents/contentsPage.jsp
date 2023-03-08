@@ -261,7 +261,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="contents_right_bottom">
+				<%-- <div class="contents_right_bottom">
 					<div class="contain_collection">
 						<h5 class="contents_title">이 작품이 담긴 컬렉션</h5>
 						<ul>
@@ -296,7 +296,7 @@
 							</li>
 							<!-- 컬렉션 하나 끝 -->
 						</ul>
-					</div>
+					</div>--%>
 					<!-- 비슷한 작품 -->
 					<div class="similar">
 						<h5 class="contents_title">비슷한 작품</h5>
@@ -333,6 +333,7 @@
 			</span>
 		</div>
 		<form action="" method="post">
+			<!-- <input type="hidden" name="_method" value="put"> -->
 			<textarea name="write_comment_content" id="write_comment_content" maxlength="10000" rows="10" placeholder="이 작품에 대한 생각을 자유롭게 표현해주세요.">${myComment.content}</textarea>
 			<div>
 				<div class="write_comment_left">
@@ -344,7 +345,12 @@
 				<div class="write_comment_right">
 					<div>
 						<span class="comment_length">0/10000</span>
+						<c:if test="${empty myComment.content}">
 						<input type="submit" value="저장" id="submitComment">
+						</c:if>
+						<c:if test="${not empty myComment.content}">
+						<input type="submit" value="수정" id="updateCommentBtn">
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -384,9 +390,10 @@
 
 <script>
     $(document).ready(function () {
-    	
+    	// 스포일러 상태
     	let status = $(".comment_content").data("spoiler");
     	
+    	// 스포일러
     	if (status == true) {
     		let comment = $(".comment_content").text();
     		
@@ -423,6 +430,11 @@
             
         });
         
+        $("#commentUpdateBtn").on('click', function() {
+        	 $(".comment_modal").removeClass('none');
+             $(".modal_back").removeClass('none');
+        });
+        
         $("#writeYourComment").on('click', function() {
             $(".comment_modal").removeClass('none');
             $(".modal_back").removeClass('none');
@@ -443,7 +455,7 @@
         $("#submitComment").on('click', function(e) {
         	e.preventDefault();
         	
-        	let type = $(".contets_wrap").('type-id');
+        	let type = $(".contets_wrap").data('type-id');
         	
         	// 스포일러 됐는지
         	let spoiler = $("#cb1").is(":checked");
@@ -455,7 +467,6 @@
         	
         	// 작성한 댓글
         	let comment = $("#write_comment_content").val();
-        	
         	if (comment == '') {
         		alert("댓글을 작성해주세요.")
         		return;
@@ -464,7 +475,7 @@
         	$.ajax({
         		type:'POST'
         		, url:'/comment/create'
-        		, data: {"id":id, "content":comment, "spoiler":spoiler}
+        		, data: {"id":id, "content":comment, "spoiler":spoiler, "type": type}
         		, success: function(data) {
        				if (data.code == 1) {
            				alert('댓글이 작성되었습니다!');
@@ -487,6 +498,7 @@
         
         // 댓글 삭제
         $("#deleteBtn").on('click', function() {
+        	let type = $(".contets_wrap").data('type-id');
         	let id = $('.my_comment').data('comment-id');
         	
         	// ajax 글 삭제
@@ -494,7 +506,7 @@
 				// request
 				type: "DELETE"
 				, url: "/comment/delete"
-				, data: {"id":id}
+				, data: {"id":id, "type":type}
 				
 				// response
 				, success:function(data) {
@@ -513,18 +525,17 @@
         }); // --댓글 삭제 
         
         // 댓글 수정
-        $("#commentUpdateBtn").on('click', function() {
+        $("#updateCommentBtn").on('click', function() {
+        	let type = $(".contets_wrap").data('type-id');
         	let commentId = $('.my_comment').data('comment-id');
         	let comment = $("#write_comment_content").val();
-        	$(".comment_modal").removeClass('none');
-        	$(".modal_back").removeClass('none');
         	
         	// ajax 댓글 수정
 			$.ajax ({
 				// request
 				type: "put"
 				, url: "/comment/update"
-				, data: {"commentId":commentId, "content":comment}
+				, data: {"commentId":commentId, "content":comment, "type":type}
 				
 				// response
 				, success:function(data) {
@@ -668,6 +679,7 @@
         
         // 별점 버튼
         $("input[name=rating]").on('click', function() {
+        	let type = $(".contets_wrap").data('type-id');
         	let apiId = $(".contents_info").data('api-id');
         	let point = $(this).val();
         	let userId = $(".contents_info").data('user-id');
@@ -682,7 +694,7 @@
         	$.ajax({
         		type: "post"
         		, url: "/point/contents_point_view"
-        		, data: {"point":point, "apiId":apiId, "title":title, "posterPath":posterPath, "userId":userId}
+        		, data: {"point":point, "apiId":apiId, "title":title, "posterPath":posterPath, "userId":userId, "type":type}
         		, success:function(data) {
         			if (data.code == 500) {
         				alert(data.errorMessage)
@@ -735,6 +747,7 @@
         
         // 보고싶어요 버튼 토글
         $("#wish").on('click', function() {
+        	let type = $(".contets_wrap").data('type-id');
         	let userId = $(this).data('user-id');
         	let id = $('.contents_info').data('api-id');
         	let title = $(".contents_info .title").data('api-title');
@@ -743,7 +756,7 @@
         	$.ajax({
         		type: "post"
         		, url: "/wish/" + id
-        		, data: {"title":title, "posterPath":posterPath}
+        		, data: {"title":title, "posterPath":posterPath, "type":type}
         		, success:function(data) {
         			if (data.code == 1) {
         				location.reload(true);
@@ -761,6 +774,8 @@
 
         // 보는중 버튼 토글
         $("#watching").on('click', function() {
+
+        	let type = $(".contets_wrap").data('type-id');
         	let userId = $(this).data('user-id');
         	let id = $('.contents_info').data('api-id');
         	let title = $(".contents_info .title").data('api-title');
@@ -769,7 +784,7 @@
         	$.ajax({
         		type: "post"
             	, url: "/watching/" + id
-        		, data: {"title":title, "posterPath":posterPath}
+        		, data: {"title":title, "posterPath":posterPath, "type":type}
         		, success:function(data) {
         			if (data.code == 1) {
         				location.reload(true);
@@ -787,12 +802,14 @@
         
        // 관심없어요 버튼 토글
        $("#notInterest").on('click', function() {
+    	    let type = $(".contets_wrap").data('type-id');
 	       	let userId = $(this).data('user-id');
 	       	let id = $('.contents_info').data('api-id');
 	
 	       	$.ajax({
 	 			type: "post"
 	       		, url: "/notinterest/" + id
+	       		, data:{"type":type}
 	       		, success:function(data) {
 	       			if (data.code == 1) {
 	       				location.reload(true);

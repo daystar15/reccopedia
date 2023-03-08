@@ -10,7 +10,7 @@
 				<ul class="carousel">
 					<c:forEach var="now" items="${popularResult}" varStatus="status">
 					<li>
-						<a href="/contents/tv_contents_view?id=${now.id}">
+						<a href="/contents/tv_contents_view?id=${now.id}&type=2">
 							<div>
 								<div class="poster">
 									<span class="rank">${status.count}</span> <img src="https://image.tmdb.org/t/p/w500/${now.poster_path}" alt="">
@@ -35,7 +35,7 @@
 				<ul class="carousel">
 					<c:forEach var="top" items="${topratedResult}">
 					<li>
-						<a href="/contents/tv_contents_view?id=${top.id}">
+						<a href="/contents/tv_contents_view?id=${top.id}&type=2">
 							<div class="poster">
 								<img src="https://image.tmdb.org/t/p/w500/${top.poster_path}" alt="">
 							</div>
@@ -58,7 +58,7 @@
 				<ul class="carousel">
 					<c:forEach var="netflix" items="${netflixResult}">
 					<li>
-						<a href="/contents/tv_contents_view?id=${netflix.id}">
+						<a href="/contents/tv_contents_view?id=${netflix.id}&type=2">
 							<div class="poster">
 								<img src="https://image.tmdb.org/t/p/w500/${netflix.poster_path}" alt="">
 							</div>
@@ -81,7 +81,7 @@
 				<ul class="carousel">
 					<c:forEach var="toprated" items="${topratedResult}">
 					<li>
-						<a href="/contents/contents_view?id=${toprated.id}">
+						<a href="/contents/contents_view?id=${toprated.id}&type=2">
 							<div class="poster">
 								 <img src="https://image.tmdb.org/t/p/w500/${toprated.poster_path}" alt="">
 							</div>
@@ -127,7 +127,7 @@
 				<ul class="carousel">
 					<c:forEach var="tvTrendingWeek" items="${tvTrendingWeek}">
 					<li>
-						<a href="/contents/tv_contents_view?id=${tvTrendingWeek.id}">
+						<a href="/contents/tv_contents_view?id=${tvTrendingWeek.id}&type=2">
 							<div class="poster">
 								 <img src="https://image.tmdb.org/t/p/w500/${tvTrendingWeek.poster_path}" alt="">
 							</div>

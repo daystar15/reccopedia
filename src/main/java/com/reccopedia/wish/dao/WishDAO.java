@@ -11,20 +11,25 @@ public interface WishDAO {
 	
 	public void insertWish(
 			@Param("apiId") int id, 
+			@Param("type") int type,
 			@Param("userId") int userId,
 			@Param("title") String title, 
 			@Param("posterPath") String posterPath);
 
 	public int selectWishByApiIdOrUserId(
-			@Param("apiId") int id, 
+			@Param("apiId") int id,
+			@Param("type") int type, 
 			@Param("userId") Integer userId);
 	
 	public List<Map<String, Object>> selectWishListByApiIdOrUserId(int userId);
 	
-	public void deleteWishByApiId(int id);
+	public void deleteWishByApiId(
+			@Param("apiId") int id,
+			@Param("type") int type);
 	
 	public void deleteWishByApiIdUserId(
 			@Param("apiId") int id, 
+			@Param("type") int type,
 			@Param("userId") int userId);
 	
 }

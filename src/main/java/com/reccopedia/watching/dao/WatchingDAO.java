@@ -13,21 +13,26 @@ public interface WatchingDAO {
 
 	public void insertWatching(
 			@Param("apiId") int id, 
+			@Param("type") int type,
 			@Param("userId") int userId, 
 			@Param("title") String title, 
 			@Param("posterPath") String posterPath);
 
 	public int selectWatchingByApiIdOrUserId(
 			@Param("apiId") int id, 
+			@Param("type") int type,
 			@Param("userId") Integer userId);
 	
 	public List<Map<String, Object>> selectWatchingListByApiIdOrUserId(int userId);
 	
 	public List<Watching> selectWatchingObjListByApiIdOrUserId(int userId);
 	
-	public void deleteWatchingByApiId(int id);
+	public void deleteWatchingByApiId(
+			@Param("id") int id,
+			@Param("type") int type);
 	
 	public void deleteWatchingByApiIdUserId(
 			@Param("apiId") int id, 
+			@Param("type") int type,
 			@Param("userId") int userId);
 }
