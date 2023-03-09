@@ -83,7 +83,10 @@ public class UserController {
 		List<Map<String, Object>> pointTVList = pointBO.getPointTVList(userId);
 		List<Map<String, Object>> commentList = commentBO.getCommentList(userId);
 		List<Collection> collectionList = collectionBO.getCollectionList(userId);
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("wishList", wishList);
@@ -102,7 +105,10 @@ public class UserController {
 			HttpSession session) {
 		
 		Integer userId  = (Integer)session.getAttribute("userId");
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		Map<String, Object> userInfo = userBO.getUserByObj(userId);
 		List<Map<String, Object>> wishList = wishBO.getWishList(userId);
 		List<Map<String, Object>> pointList = pointBO.getPointList(userId);
@@ -127,8 +133,10 @@ public class UserController {
 		List<Map<String, Object>> pointList = pointBO.getPointList(userId);
 		List<Map<String, Object>> watchingtList = watchingBO.getWatchingList(userId);
 		List<Map<String, Object>> wishList = wishBO.getWishList(userId);
-
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		model.addAttribute("wishList", wishList);
 		model.addAttribute("watchingtList", watchingtList);
 		model.addAttribute("pointList", pointList);
@@ -146,7 +154,10 @@ public class UserController {
 		List<Map<String, Object>> wishTVList = wishBO.getWishTVList(userId);
 		List<Map<String, Object>> pointTVList = pointBO.getPointTVList(userId);
 		List<Map<String, Object>> watchingTVList = watchingBO.getWatchingTVList(userId);
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		model.addAttribute("watchingTVList", watchingTVList);
 		model.addAttribute("wishTVList", wishTVList);
 		model.addAttribute("pointTVList", pointTVList);
@@ -163,7 +174,10 @@ public class UserController {
 		Integer userId  = (Integer)session.getAttribute("userId");
 		
 		List<Map<String, Object>> watchingtList = watchingBO.getWatchingList(userId);
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		model.addAttribute("watchingtList", watchingtList);
 		model.addAttribute("viewName", "user/keepWatching");
 		return "template/layout";
@@ -175,7 +189,10 @@ public class UserController {
 			HttpSession session) {
 		
 		Integer userId  = (Integer)session.getAttribute("userId");
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		List<Map<String, Object>> watchingTVList = watchingBO.getWatchingTVList(userId);
 		
 		model.addAttribute("watchingTVList", watchingTVList);
@@ -189,7 +206,10 @@ public class UserController {
 			HttpSession session) {
 		
 		Integer userId  = (Integer)session.getAttribute("userId");
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		List<Map<String, Object>> wishList = wishBO.getWishList(userId);
 
 		model.addAttribute("wishList", wishList);
@@ -203,7 +223,10 @@ public class UserController {
 			HttpSession session) {
 		
 		Integer userId  = (Integer)session.getAttribute("userId");
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		List<Map<String, Object>> wishTVList = wishBO.getWishTVList(userId);
 
 		model.addAttribute("wishList", wishTVList);

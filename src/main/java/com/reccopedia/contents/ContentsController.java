@@ -90,8 +90,10 @@ public class ContentsController {
 		List<Map<String, Object>> topratedResult = contentsBO.generateTvTopratedMap();
 		List<Map<String, Object>> tvTrending = contentsBO.generateTvTrendingMap();
 		List<Map<String, Object>> tvTrendingWeek = contentsBO.generateTvTrendingWeekMap();
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
-		
+		model.addAttribute("num", num);
 		model.addAttribute("tvTrending", tvTrending);
 		model.addAttribute("tvTrendingWeek", tvTrendingWeek);
 		model.addAttribute("popularResult", popularResult);
@@ -236,7 +238,10 @@ public class ContentsController {
 		boolean fillWish = wishBO.existWish(id, (Integer)session.getAttribute("userId"));
 		List<CommentView> commentList = commentBO.generateCommentViewListByApiId(id);
 		Map<String, Object> myComment = commentBO.getCommentByObj(id, (Integer)session.getAttribute("userId"));
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
 		
+		model.addAttribute("num", num);
 		
 		List<Map<String, Object>> similars = contentsBO.generateTvSimilars(id);
 		Map<String, Object> contentInfo = contentsBO.generateTvContents(id);

@@ -3,6 +3,8 @@ package com.reccopedia.comment;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.reccopedia.comment.bo.CommentBO;
 import com.reccopedia.comment.model.CommentView;
+import com.reccopedia.point.bo.PointBO;
 import com.reccopedia.user.bo.UserBO;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class CommentController {
@@ -22,6 +23,9 @@ public class CommentController {
 	
 	@Autowired
 	private UserBO userBO;
+	
+	@Autowired
+	private PointBO pointBO;
 
 	// 댓글 페이지
 	@GetMapping("/comment_view")
@@ -39,7 +43,10 @@ public class CommentController {
 		}
 		
 		List<CommentView> commentList = commentBO.generateCommentViewListByApiId(id);
-
+		// 푸터 별점개수
+		int num = pointBO.getPointCountByUserId();
+		
+		model.addAttribute("num", num);
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("viewName", "comment/comment");
 		return "template/layout";
