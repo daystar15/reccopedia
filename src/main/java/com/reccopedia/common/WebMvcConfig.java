@@ -14,6 +14,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		
 		registry
 		.addResourceHandler("/images/**") // 웹 이미지 주소 
-		.addResourceLocations("file:///" + FileManagerService.FILE_UPLOAD_PATH); // 실제 파일 위치 윈도우는 슬래시 3개, 맥은 2개
+		//.addResourceLocations("file:///" + FileManagerService.FILE_UPLOAD_PATH); // 실제 파일 위치 윈도우는 슬래시 3개, 맥은 2개
+		.addResourceLocations("file://" + FileManagerService.FILE_UPLOAD_PATH); // 실제 파일 위치 윈도우는 슬래시 3개, 리눅스는 2개
 	}
 }
