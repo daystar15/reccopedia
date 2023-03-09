@@ -18,7 +18,9 @@ public class FileManagerService {
 
 	// 실제 이미지가 저장될 경로(서버)
 	// static final 같이 있으면 상수가 되고 대문자로 쓴다. 주소 마지막에 꼭 슬래시를 넣는다★★
-	public static final String FILE_UPLOAD_PATH = "C:\\Users\\lg\\Desktop\\6_spring_project\\notebook\\notebook_reccopedia\\workspace\\images/";
+	//public static final String FILE_UPLOAD_PATH = "C:\\Users\\lg\\Desktop\\6_spring_project\\notebook\\notebook_reccopedia\\workspace\\images/";
+	// aws 경로
+	public static final String FILE_UPLOAD_PATH = "/home/ec2-user/images/";
 	
 	// input: MultipartFile, email
 	// output: image path
