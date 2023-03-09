@@ -90,6 +90,40 @@
 			`userId` = #{id}
  	</select>
  	
+ 	<select id="selectMvCommentListById" parameterType="int" resultType="com.reccopedia.comment.model.Comment">
+ 		SELECT
+ 			`id`
+ 			,`type`
+			, `apiId`
+			, `pointId`
+			, `userId`
+			, `content`
+			, `spoiler`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`type` = ${1}
+ 	</select>
+ 	
+ 	<select id="selectTvCommentListById" parameterType="int" resultType="com.reccopedia.comment.model.Comment">
+ 		SELECT
+ 			`id`
+ 			,`type`
+			, `apiId`
+			, `pointId`
+			, `userId`
+			, `content`
+			, `spoiler`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`type` = ${2}
+ 	</select>
+ 	
  	<select id="selectCommentListByApiIdAndUserId" parameterType="map" resultType="com.reccopedia.comment.model.Comment">
  		SELECT
  			`id`

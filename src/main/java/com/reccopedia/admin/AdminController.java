@@ -103,8 +103,12 @@ public class AdminController {
 		List<User> userList = userBO.getuserListById(id);
 		List<Report> reportList = reportBO.getreportCommentListById(id);
 		List<Comment> commentList = commentBO.getCommentListById(id);
+		List<Comment> commentTvList = commentBO.getTvCommentListById(id);
+		List<Comment> commentMvList = commentBO.getMvCommentListById(id);
 		
 		model.addAttribute("commentList", commentList);
+		model.addAttribute("commentMvList", commentMvList);
+		model.addAttribute("commentTvList", commentTvList);
 		model.addAttribute("userList", userList);
 		model.addAttribute("reportList", reportList);
 		model.addAttribute("viewName", "admin/mainBoard");

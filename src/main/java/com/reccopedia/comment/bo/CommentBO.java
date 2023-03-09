@@ -103,5 +103,13 @@ public class CommentBO {
 		commentDAO.updateComment(userId, id, type, content);
 	};
 	
+	public List<Comment> getTvCommentListById(int id) {
+		return commentDAO.selectTvCommentListById(id);
+	};
+	
+	public List<Comment> getMvCommentListById(int id) {
+		return commentDAO.selectMvCommentListById(id);
+	}
+	
 	
 }

@@ -115,43 +115,33 @@
     
     
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script type="text/javascript">
-		google.charts.load('current', {'packages':['line']});
-	    google.charts.setOnLoadCallback(drawChart);
-	
-	    function drawChart() {
-	
-	      var data = new google.visualization.DataTable();
-	      data.addColumn('number', 'Week');
-	      data.addColumn('number', '영화');
-	      data.addColumn('number', 'TV');
-	
-	      data.addRows([
-	        [1,  37.8, 80.8],
-	        [2,  30.9, 69.5],
-	        [3,  25.4,   57],
-	        [4,  11.7, 18.8],
-	        [5,  11.9, 17.6],
-	        [6,   8.8, 13.6],
-	        [7,   7.6, 12.3]
-	      ]);
-	
-	      var options = {
-	        chart: {
-	          title: '영화 및 TV 댓글',
-	          subtitle: '월 ~ 일'
-	        },
-	        width: 1400,
-	        height: 400,
-	        axes: {
-	          x: {
-	            0: {side: 'bottom'}
-	          }
-	        }
-	      };
-	
-	      var chart = new google.charts.Line(document.getElementById('chart'));
-	
-	      chart.draw(data, google.charts.Line.convertOptions(options));
-    }
+	<script type="text/javascript">  
+	  google.charts.load('current', {packages: ['corechart', 'bar']});
+	  google.charts.setOnLoadCallback(drawBasic);
+
+	  function drawBasic() {
+	  var data = new google.visualization.DataTable();
+	  data.addColumn('string', '댓글');
+	  data.addColumn('number', '댓글수');
+
+	  data.addRows([
+		  ['영화', ${fn:length(commentMvList)}],
+		  ['TV', ${fn:length(commentTvList)}]
+	  ]);
+
+	  var options = {
+		  title: '영화 / TV 댓글',
+		  hAxis: {
+		  	title: '댓글',
+		  },
+		  vAxis: {
+		  	title: '댓글수'
+		  }
+	  };
+
+	  var chart = new google.visualization.ColumnChart(
+	  document.getElementById('chart'));
+
+	  chart.draw(data, options);
+	  }
 </script>
