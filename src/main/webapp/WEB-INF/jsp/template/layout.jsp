@@ -10,7 +10,7 @@
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
         
 	<script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript" ></script>
-    <title>Reccopedia</title>
+    <title>Recopedia</title>
     <meta name="og:site_name" content="Recopedia" />
     <meta name="og:title" content="Recopedia" />
     <meta name="og:description" content="영화 및 TV프로그램 추천 사이트"/>
