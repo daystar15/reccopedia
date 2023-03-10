@@ -108,15 +108,22 @@ public class UserController {
 		// 푸터 별점개수
 		int num = pointBO.getPointCountByUserId();
 		
-		model.addAttribute("num", num);
 		Map<String, Object> userInfo = userBO.getUserByObj(userId);
 		List<Map<String, Object>> wishList = wishBO.getWishList(userId);
+		List<Map<String, Object>> wishTVList = wishBO.getWishTVList(userId);
 		List<Map<String, Object>> pointList = pointBO.getPointList(userId);
+		List<Map<String, Object>> pointTVList = pointBO.getPointTVList(userId);
 		List<Map<String, Object>> commentList = commentBO.getCommentList(userId);
+		List<Collection> collectionList = collectionBO.getCollectionList(userId);
+		
+		model.addAttribute("num", num);
+		model.addAttribute("num", num);
+		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("wishList", wishList);
+		model.addAttribute("pointTVList", pointTVList);
+		model.addAttribute("wishTVList", wishTVList);
 		model.addAttribute("pointList", pointList);
-		model.addAttribute("commentList", commentList);
 		model.addAttribute("viewName", "user/userPageUpdate");
 		
 		return "template/layout";

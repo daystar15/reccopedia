@@ -9,21 +9,21 @@
 		<!-- 영화, TV 선택탭 -->
 		<div class="review_menu_tab">
 			<ul>
-				<li class="on">영화</li>
-				<li><a href="/point/tv_review_view">TV 프로그램</a></li>
+				<li><a href="/point/review_view">영화</a></li>
+				<li class="on">TV 프로그램</li>
 			</ul>
 		</div>
 		<!-- 영화, TV 선택탭 끝 -->
 		<!-- 랜덤영화 선택 탭 -->
 		<div class="select_tab">
 			<div>
-				<span class="on">랜덤 영화</span>
-				<span>랜덤 TV프로그램</span>
+				<span>랜덤 영화</span>
+				<span class="on">랜덤 TV프로그램</span>
 			</div>
 		</div>
 		<!-- 랜덤영화 선택 탭 끝 -->
 		<!-- 영화 목록 박스 -->
-		<div class="content_list on" data-user-id="${userinfo.id}">
+		<%-- <div class="content_list on" data-user-id="${userinfo.id}">
 			<ul>
 				<c:forEach var="movieTrending" items="${movieTrending}" >
 				
@@ -64,11 +64,11 @@
 				</li>
 				</c:forEach>	
 			</ul>
-		</div>
+		</div> --%>
 		<!-- 영화 목록 박스 끝 -->
 		
 		<!-- tv 목록 박스 -->
-		<%-- <div class="content_list" data-user-id="${userinfo.id}" data-type="2">
+		<div class="content_list on" data-user-id="${userinfo.id}" data-type="2">
 			<ul>
 				<c:forEach var="tvTrending" items="${tvTrending}" >
 				
@@ -109,7 +109,7 @@
 				</li>
 				</c:forEach>	
 			</ul>
-		</div> --%>
+		</div>
 		<!-- tv 목록 박스 끝 -->
 		
 	</div>
@@ -137,7 +137,7 @@
 				</div>
 				<div class="write_comment_right">
 					<span class="comment_length">0/10000</span>
-					<input type="submit" value="저장" id="submitComment"  data-type-id=1>
+					<input type="submit" value="저장" id="submitComment" data-type-id=2>
 				</div>
 			</div>
 		</form>
@@ -146,7 +146,6 @@
 
 <script> 
 	$(document).ready(function() {
-		
 		$('.review_more > div').on('click', function(e) {
            	let apiId = $('.review_more').data('api-id');
 			let title = e.target.attributes[0].value;
@@ -155,7 +154,6 @@
             $(".modal_back").removeClass('none');
         });
        	
-       
         $('.modal_back').on('click', function() {
             $(".modal_back").addClass('none');
             $(".comment_modal").addClass('none');
@@ -165,7 +163,6 @@
             $(".modal_back").addClass('none');
             $(".comment_modal").addClass('none');
         });
-        
         
         
      	// 댓글 작성

@@ -12,7 +12,7 @@
 			<!-- 백그라운드이미지 -->
 			<%-- 기본 이미지, 유저가 업로드 하면 이미지 변경됨 --%>
 			<input type="file" id="user_background_file" class="none" accept=".gif, .jpg, .png, .jpeg">
-			<div class="user_background">
+			<div class="user_background" style="cursor: pointer;">
 				<c:if test="${empty userInfo.backgroundImagePath}">
 				<img src="/static/images/user_page_background.jpg" alt="">
 				</c:if>
@@ -25,12 +25,14 @@
 			<div class="user_info">
 				<input type="file" id="user_profile_file" class="none" accept=".gif, .jpg, .png, .jpeg">
 				<div class="user_profile_img">	
-					<c:if test="${empty userInfo.profileImagePath}">
-					<img src="${userInfo.profileImagePath}" alt="">
-					</c:if>
+					<div class="profile_box empty_box" style="cursor: pointer;">
+						<img src="/static/images/pngegg.png" alt="">
+					</div>
+					<c:if test="${userInfo.profileImagePath ne null}">
 					<div class="profile_box">
 						<img src="${userInfo.profileImagePath}" alt="">
 					</div>
+					</c:if>
 				</div>
 				<div class="user_update_name">
 					<input type="text" name="name" id="user_name" value="${userInfo.name}">
@@ -57,20 +59,16 @@
 			<h3 class="analyze_title">나의 list</h3>
 			<ul class="analyze_info">
 				<li>
-					<a href="#">
-						<h4>${fn:length(pointList)}</h4>
-						<span>평가</span>
-					</a>
+					<h4>${fn:length(pointList)}</h4>
+					<span>평가</span>
 				</li>
 				<li>
-					<a href="#">
-						<h4>${fn:length(commentList)}</h4>
-						<span>코멘트</span>
-					</a>
+					<h4>${fn:length(commentList)}</h4>
+					<span>코멘트</span>
 				</li>
 				<li>
 					<a href="/collection/collection_list_view">
-						<h4>{5}</h4>
+						<h4>${fn:length(collectionList)}</h4>
 						<span>컬렉션</span>
 					</a>
 				</li>
@@ -84,7 +82,7 @@
 					<span>영화</span>
 				</li>
 				<li>
-					<h4>{5}</h4>
+					<h4>${fn:length(pointTVList)}</h4>
 					<span>TV</span>
 				</li>
 			</ul>
@@ -118,13 +116,13 @@
 				</a>
 			</li>
 			<li class="keep_tv_box">
-				<a href="#">
+				<a href="/user/tv_evaluate_view">
 					<div class="keep_type">
 						<h5>TV</h5>
-						<h5 class="keep_list_point">&#9733; {8}</h5>
+						<h5 class="keep_list_point">&#9733; ${fn:length(pointTVList)}</h5>
 					</div>
 					<div class="keep_bottom_box">
-						<span>보고싶어요 102</span>
+						<span>보고싶어요 ${fn:length(wishTVList)}</span>
 					</div>
 				</a>
 			</li>

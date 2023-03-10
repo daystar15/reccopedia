@@ -42,14 +42,32 @@ public class PointController {
 		
 		User userinfo = userBO.getUserByIntegerId(userId);
 		List<Map<String, Object>> movieTrending = pointBO.generateMovieTrendingMap();
+		List<Map<String, Object>> tvTrending = pointBO.generateDayTvTrendingMap();
 		int num = pointBO.getPointCountByUserId();
-		//List<Map<String, Object>> listMap = pointBO.pointMovieList(userId);
 		
 		model.addAttribute("num", num);
-		//model.addAttribute("listMap", listMap);
+		model.addAttribute("tvTrending", tvTrending);
 		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("movieTrending", movieTrending);
 		model.addAttribute("viewName", "review/review");
+		
+		return "template/layout";
+	}
+	
+	// 평가하기 페이지
+	@GetMapping("/tv_review_view")
+	public String tvReviewView(Model model, HttpSession session) throws JsonProcessingException {
+
+		Integer userId = (Integer) session.getAttribute("userId");
+		
+		User userinfo = userBO.getUserByIntegerId(userId);
+		List<Map<String, Object>> tvTrending = pointBO.generateDayTvTrendingMap();
+		int num = pointBO.getPointCountByUserId();
+		
+		model.addAttribute("num", num);
+		model.addAttribute("tvTrending", tvTrending);
+		model.addAttribute("userinfo", userinfo);
+		model.addAttribute("viewName", "review/tvReview");
 		
 		return "template/layout";
 	}
