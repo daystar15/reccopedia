@@ -1863,3 +1863,24 @@ input[id="cb1"]:checked + label {
 .header .sign_up:hover {
 	cursor: pointer;
 }
+.empty_box {
+	width: 104px;
+	height: 90px;
+	background: #c8e6ef;
+	position: relative;
+}
+.empty_box img {
+	width: 83%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-57%,-34%);
+}
+.content_list,
+.select_tab span {
+	display: none;
+}
+.select_tab span.on,
+.content_list.on {
+	display: block;
+}

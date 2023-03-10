@@ -23,12 +23,14 @@
 		<!-- 유저 정보 -->
 		<div class="user_info">
 			<div class="user_profile_img">	
-				<c:if test="${empty userInfo.profileImagePath}">
-				<img src="${userInfo.profileImagePath}" alt="">
-				</c:if>
+				<div class="profile_box empty_box">
+					<img src="/static/images/pngegg.png" alt="">
+				</div>
+				<c:if test="${userInfo.profileImagePath ne null}">
 				<div class="profile_box">
 					<img src="${userInfo.profileImagePath}" alt="">
 				</div>
+				</c:if>
 			</div>
 			<h2 class="user_name">${userInfo.name}</h2>
 			<p class="user_introduce">${userInfo.info}</p>
