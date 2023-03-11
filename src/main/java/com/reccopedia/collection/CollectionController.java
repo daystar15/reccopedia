@@ -125,7 +125,7 @@ public class CollectionController {
 		
 		List<Collection> collectionList = collectionBO.getCollectionList(userId);
 		List<CollectionContent> collectionContentList = collectionBO.getCollectionContentList(userId);
-		List<CollectionContent> collectionContetByCollectionId = collectionBO.getCollectionContentByCollectionId(id);
+		List<CollectionContent> collectionContetByCollectionId = collectionBO.getCollectionContentByCollectionId(id-1);
 		Map<String, Object> collectionSubjectContent = collectionBO.getCollectionSubjectContent(id);
 		int num = collectionBO.getCurrentCollectionId(id);
 		
@@ -174,6 +174,9 @@ public class CollectionController {
 		} else {
 			result.put("errorMessage","검색어를 다시 입력해주세요");
 		}
+		int num = collectionBO.getCollectionId();
+		
+		model.addAttribute("num", num);
 		
 		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("keywordList", keywordList);

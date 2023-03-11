@@ -26,6 +26,8 @@ public class CollectionRestController {
 	// 캐시
 	@PostMapping("/cash_create")
 	public Map<String, Object> cashCreate(
+			@RequestParam("subject") String subject,
+			@RequestParam("content") String content,
 			HttpSession session) {
 		
 
@@ -37,7 +39,7 @@ public class CollectionRestController {
 			result.put("errorMessage", "로그인을 해주세요");
 		}
 		
-		collectionBO.addCashCollection(userId); 
+		collectionBO.addCashCollection(userId, null, null); 
 		result.put("code", 1);
 		
 		return result;
@@ -112,7 +114,6 @@ public class CollectionRestController {
 	@PostMapping("/collection_content_create")
 	public Map<String, Object> collectionSelectView(Model model, 
 			@RequestParam("apiId") int apiId, 
-			@RequestParam("type") int type, 
 			@RequestParam("collectionId") int collectionId, 
 			@RequestParam("title") String title, 
 			@RequestParam("posterPath") String posterPath,
@@ -127,7 +128,7 @@ public class CollectionRestController {
 			result.put("errorMessage", "로그인을 해주세요");
 		}
 		
-		collectionBO.addCollectionContent(apiId, type, null, userId, collectionId, title, posterPath);
+		collectionBO.addCollectionContent(apiId, null, userId, collectionId, title, posterPath);
 		result.put("code", 1);
 		
 		return result;

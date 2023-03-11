@@ -13,9 +13,16 @@
 		</div>
 		<div class="user_info">
 			<div>
-				<div class="user_profile_img">
-					<div class="profile_box">
-						<img src="${userProfile}" alt="">
+				<div class="user_profile_img" style="border-radius:inherit">
+					<div class="comment_user_profile">
+	                	<c:if test="${userProfile eq null}">
+	                	<div class="empty_box" style="width: 90px;">
+							<img src="/static/images/pngegg.png" alt="" style="width: 54%; transform: translate(-90%,-79%);">
+						</div>
+						</c:if>
+						<div class="profile_box">
+							<img src="${userProfile}" alt="">
+						</div>
 					</div>
 				</div>
 				<h2 class="user_name">${userName}</h2>

@@ -21,7 +21,7 @@
 			</div>
 		</form>
 		<!-- 영화 목록 박스 (검색해서 있을 때 나타남)-->
-		<div class="content_list">
+		<div class="content_list" style="display:block;">
 			<ul id="content_list_box">
 				
 			</ul>
@@ -49,8 +49,6 @@
 				, data: {"title":title}
 				, success:function(data) {
 					$("#content_list_box").html(data);
-					alert('성공');
-					console.log(data);
 				}
 				, error:function(e) {
 					alert("오류입니다.");

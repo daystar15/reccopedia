@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div class="collection_plus">
-				<img src="/static/images/plus.png" alt=""  data-image-path="${result.poster_path}" data-api-id="${result.id}" data-api-title="${result.title}">
+				<img src="/static/images/plus.png" alt="" data-collection-id="${num}"  data-image-path="${result.poster_path}" data-api-id="${result.id}" data-api-title="${result.title}">
 			</div>
 		</div>
 	</li>

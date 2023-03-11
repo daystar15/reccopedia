@@ -8,7 +8,12 @@
 	</div>
 </div>
 <div class="collection_create_box">
-	
+	<div class="warning">
+		<p>
+			임시 저장 중입니다. <br>
+			만약, 컬렉션을 생성하지 않으실 경우 꼭 취소버튼을 눌러주세요.
+		</p>
+	</div>
 	<div class="create_box" >
 		<form action="" method="post">
 			<div class="subject">
@@ -42,6 +47,7 @@
 				<%-- 추가한 목록들 --%>
 			</div>
 			<div class="collection_btn">
+				<button type="button" id="deleteCollectionContent">취소</button>
 				<input type="submit" value="제출하기" id="collectionSubmitBtn">
 			</div>
 		</form>
@@ -50,6 +56,44 @@
 
 <script>
     $('document').ready(function() {
+    	
+    	// 취소버튼
+    	$("#deleteCollectionContent").on('click', function() {
+    		let id = $(".closeBtn").data('select-id');
+    		
+    		// ajax 컨텐츠 삭제
+			$.ajax({
+				type: "DELETE"
+				, url: "/collection/delete"
+				, data: {"id":id}
+				, success:function(data) {
+					if (data.code == 1) {
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert('오류입니다');
+				}
+			}); //---ajax
+			
+			// ajax 컨텐츠 삭제
+			$.ajax({
+				type: "DELETE"
+				, url: "/collection/collection_content_delete"
+				, data: {"id":id}
+				, success:function(data) {
+					if (data.code == 1) {
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e) {
+					alert('오류입니다');
+				}
+			}); //---ajax
+			
+    	}); //---취소버튼 끝
     	
     	
     	// 삭제버튼

@@ -26,8 +26,8 @@ public class CollectionBO {
 	@Autowired
 	private RestTemplateService resttemplateservice;
 	
-	public void addCashCollection(Integer userId) {
-		collectionDAO.addCashCollection(userId);
+	public void addCashCollection(Integer userId, String subject, String content) {
+		collectionDAO.addCashCollection(userId, subject, content);
 	};
 	
 	public void addCollection(Integer userId, String subject, String content) {
@@ -42,8 +42,8 @@ public class CollectionBO {
 		collectionDAO.updateCollectionContent(id, apiId, pointId, userId, collectionId, title, posterPath);
 	}
 	
-	public void addCollectionContent(int apiId, int type, Integer pointId, int userId, int collectionId, String title, String posterPath) {
-		collectionDAO.addCollectionContent(apiId, type, pointId, userId, collectionId, title, posterPath);
+	public void addCollectionContent(int apiId, Integer pointId, int userId, int collectionId, String title, String posterPath) {
+		collectionDAO.addCollectionContent(apiId,  pointId, userId, collectionId, title, posterPath);
 	};
 	
 	public List<Map<String, Object>> findKeyword(String title) throws JsonProcessingException {

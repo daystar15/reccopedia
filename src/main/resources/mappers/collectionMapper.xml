@@ -9,12 +9,16 @@
  		INSERT INTO `cash_collection`
  		(
 			`userId`
+			, `content`
+			, `subject`
 			, `createdAt`
 			, `updatedAt`
  		)
 		VALUES
 		(	
 			#{userId}
+			, #{content}
+			, #{subject}
 			, NOW()
 			, NOW()
 		)
@@ -43,7 +47,6 @@
  		INSERT INTO `collection_content`
  		(
 			`apiId`
-			, `type`
 			, `pointId`
 			, `userId`
 			, `collectionId`
@@ -55,7 +58,6 @@
 		VALUES
 		(	
 			#{apiId}
-			, #{type}
 			, #{pointId}
 			, #{userId}
 			, #{collectionId}
