@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +18,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.reccopedia.collection.bo.CollectionBO;
 import com.reccopedia.collection.model.Collection;
 import com.reccopedia.collection.model.CollectionContent;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/collection")
@@ -158,7 +158,8 @@ public class CollectionController {
 	// 컬렉션 검색 결과 페이지
 	@GetMapping("/collection_find_result_view")
 	public String findResult(
-			@RequestParam("title") String title, HttpSession session,
+			@RequestParam("title") String title, 
+			HttpSession session,
 			Model model) throws JsonProcessingException {
 		
 		Integer userId = (Integer) session.getAttribute("userId");
@@ -166,6 +167,7 @@ public class CollectionController {
 		Map<String, Object> result = new HashMap<>();
 
 		List<Map<String, Object>> keywordList = collectionBO.findKeyword(title);
+		List<Collection> collectionList = collectionBO.getCollectionList(userId);
 
 		if (keywordList.size() >= 1) {
 			result.put("code", 1);
@@ -173,10 +175,6 @@ public class CollectionController {
 			result.put("errorMessage","검색어를 다시 입력해주세요");
 		}
 		
-		List<Collection> collectionList = collectionBO.getCollectionList(userId);
-		int num = collectionBO.getCollectionId();
-		
-		model.addAttribute("num", num);
 		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("keywordList", keywordList);
 		

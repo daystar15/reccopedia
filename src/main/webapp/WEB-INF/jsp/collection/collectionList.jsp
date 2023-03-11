@@ -8,7 +8,7 @@
 			<img src="/static/images/right-arrow.png" alt="" onclick="goBack();">
 			<h2>컬렉션</h2>
 		</div>
-		<a href="/collection/collection_create_view?id=${num + 1}" class="createCollectionBtn">새 컬렉션</a>
+		<a href="/collection/collection_create_view?id=${num}" class="createCollectionBtn">새 컬렉션</a>
 	</div>
 </div>
 <div class="collection_list_box">
@@ -64,6 +64,27 @@
 	</ul>
 </div>
 <script type="text/javascript">
+
+	$(document).ready(function() {
+		$("#createCollectionBtn").on('click', function() {
+			
+			$.ajax({
+            	type: "post" 
+            	, url: "/collection/cash_create"
+            	
+            	, success:function(data) {
+            		if (data.code == 1) {
+            			alert("컬렉션이 임시로 생성되었습니다");
+            		} else {
+            			alert(data.errorMessage + "ajax 에러");
+            		}
+            	}
+            	, error:function(e) {
+            		alert("컬렉션 생성에 실패했습니다. 관리자에게 문의해주세요")
+            	}
+            }); //---ajax
+		})
+	})
 
 	function goBack(){
 		window.history.back();

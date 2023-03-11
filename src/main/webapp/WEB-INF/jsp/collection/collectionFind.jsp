@@ -33,7 +33,7 @@
 
 <script>
 	$(document).ready(function() {
-		$("#findCollection #find_contents").on('click', function(e) {
+		$("#find_contents").on('click', function(e) {
 			e.preventDefault();
 			
 			let title = $('#findCollection input[name=title]').val().trim();
@@ -42,15 +42,15 @@
 				alert('검색어를 입력해주세요');
 				return;
 			};
-			
 			    
 			$.ajax({
 				type: "GET"
 				, url: "/collection/collection_find_result_view"
 				, data: {"title":title}
-			
 				, success:function(data) {
 					$("#content_list_box").html(data);
+					alert('성공');
+					console.log(data);
 				}
 				, error:function(e) {
 					alert("오류입니다.");
@@ -59,8 +59,6 @@
 			});//--- ajax
 			
 		});//--- 검색버튼
-		
-		
 		
 	});//--- 제이쿼리
 	

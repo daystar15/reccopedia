@@ -8,11 +8,7 @@
 	</div>
 </div>
 <div class="collection_create_box">
-	<c:forEach items="${collectionList}" var="list" varStatus="status">
-		<c:if test="${status.last}">
-		<span class="collection_id" data-collection-id="${list.id + 1}"></span>
-		</c:if>
-	</c:forEach>
+	
 	<div class="create_box" >
 		<form action="" method="post">
 			<div class="subject">
@@ -33,16 +29,14 @@
 				<%-- 추가한 목록들 --%>
 				<div class="add_collection_list" >
 					<c:forEach var="list2" items="${collectionContetByCollectionId}">
-					<c:if test="${num+1 eq list2.collectionId}">
 						<div class="collection_select_list">
 							<div class="collection_select_list_poster">
-								<img src="https://image.tmdb.org/t/p/w500/${list2.posterPath}" alt="">
+								<img src="https://image.tmdb.org/t/p/w500${list2.posterPath}" alt="">
 							</div>
 							<div class="closeBtn" data-select-id="${list2.id}">
 								<img src="/static/images/close.png" alt="">
 							</div>
 						</div>
-					</c:if>
 					</c:forEach>
 				</div>
 				<%-- 추가한 목록들 --%>
@@ -57,16 +51,6 @@
 <script>
     $('document').ready(function() {
     	
-    	let arr1 = new Array();
-    	<c:forEach items="${collectionContent}" var="list">
-    		arr1.push({
-    			id: "${list.id}"
-    			, title: "${list.title}"
-    			, posterPath: "${list.posterPath}"
-    		});
-    	</c:forEach>
-		let arr2 = JSON.stringify(arr1);
-    	//console.log(arr2);
     	
     	// 삭제버튼
 		$(".closeBtn img").on('click', function() {
@@ -109,14 +93,11 @@
                 alert('내용을 입력해주세요');
                 return false;
             }
-            if (arr2.length == 0) {
-            	alert('컨텐츠를 선택해주세요');
-            }
             
             $.ajax({
             	type: "post" 
             	, url: "/collection/create"
-            	, data: {"subject":subject, "content":content, "arr2[]":arr2}
+            	, data: {"subject":subject, "content":content}
             	, success:function(data) {
             		if (data.code == 1) {
             			alert("컬렉션 생성에 성공했습니다");

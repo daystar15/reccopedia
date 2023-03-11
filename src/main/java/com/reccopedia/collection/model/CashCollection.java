@@ -2,9 +2,8 @@ package com.reccopedia.collection.model;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-public class Collection {
+// 캐시역할만을 할 테이블
+public class CashCollection {
 
 	private int id;
 	private int userId;
@@ -49,7 +48,6 @@ public class Collection {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
 	
 	
 }

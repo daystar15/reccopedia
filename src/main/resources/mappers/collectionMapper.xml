@@ -4,6 +4,22 @@
  
  <mapper namespace="com.reccopedia.collection.dao.CollectionDAO">
  
+ 
+ 	<insert id="addCashCollection" parameterType="int">
+ 		INSERT INTO `cash_collection`
+ 		(
+			`userId`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+		VALUES
+		(	
+			#{userId}
+			, NOW()
+			, NOW()
+		)
+ 	</insert>
+ 
  	<insert id="addCollection" parameterType="map">
  		INSERT INTO `collection`
  		(
@@ -12,7 +28,6 @@
 			, `subject`
 			, `createdAt`
 			, `updatedAt`
-			, `movie_list`
  		)
 		VALUES
 		(	
@@ -21,7 +36,6 @@
 			, #{subject}
 			, NOW()
 			, NOW()
-			, #{arr2}
 		)
  	</insert>
  	
@@ -60,7 +74,6 @@
 			, `subject`
 			, `createdAt`
 			, `updatedAt`
-			, `movie_list` AS `movieList`
 		FROM
 			`collection`
 		WHERE
@@ -75,7 +88,6 @@
 			, `subject`
 			, `createdAt`
 			, `updatedAt`
-			, `movie_list` AS `movieList`
 		FROM
 			`collection`
 		WHERE
@@ -88,7 +100,6 @@
  			`userId` = #{userId}
  			, `content` = #{content}
  			, `subject` = #{subject}
- 			, `movie_list` = #{arr2}
  			, `updatedAt` = NOW()
  		WHERE
  			`id` = #{id}
@@ -167,7 +178,6 @@
 			, `subject`
 			, `createdAt`
 			, `updatedAt`
-			, `movie_list` AS `movieList`
 		FROM
 			`collection`
  	</select>
@@ -180,7 +190,6 @@
 			, `subject`
 			, `createdAt`
 			, `updatedAt`
-			, `movie_list` AS `movieList`
 		FROM
 			`collection`
 		WHERE
@@ -195,7 +204,6 @@
 			, `subject`
 			, `createdAt`
 			, `updatedAt`
-			, `movie_list` AS `movieList`
 		FROM
 			`collection`
 		WHERE

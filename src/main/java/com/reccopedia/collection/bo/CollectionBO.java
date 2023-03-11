@@ -26,13 +26,16 @@ public class CollectionBO {
 	@Autowired
 	private RestTemplateService resttemplateservice;
 	
-	
-	public void addCollection(Integer userId, String subject, String content, String arr2) {
-		collectionDAO.addCollection(userId, subject, content, arr2);
+	public void addCashCollection(Integer userId) {
+		collectionDAO.addCashCollection(userId);
 	};
 	
-	public void updateCollection(int id,Integer userId, String subject, String content, String arr2) {
-		collectionDAO.updateCollection(id, userId, subject, content, arr2);
+	public void addCollection(Integer userId, String subject, String content) {
+		collectionDAO.addCollection(userId, subject, content);
+	};
+	
+	public void updateCollection(int id,Integer userId, String subject, String content) {
+		collectionDAO.updateCollection(id, userId, subject, content);
 	};
 	
 	public void updateCollectionContent(int id, int apiId, Integer pointId, int userId, int collectionId, String title, String posterPath) {
