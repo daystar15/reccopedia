@@ -194,7 +194,7 @@ textarea {
 }
 .section .inner .contents.person ul {
 	flex-wrap: wrap;
-    justify-content: flex-first;
+    justify-content: flex-start;
     overflow: auto;
 }
 .section .inner .contents ul li {

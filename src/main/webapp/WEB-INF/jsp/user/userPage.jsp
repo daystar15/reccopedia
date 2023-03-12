@@ -22,10 +22,13 @@
 		<!-- 백그라운드이미지 끝-->
 		<!-- 유저 정보 -->
 		<div class="user_info">
-			<div class="user_profile_img">	
+			<div class="user_profile_img">
+				<c:if test="${userInfo.profileImagePath eq null}">
 				<div class="profile_box empty_box">
 					<img src="/static/images/pngegg.png" alt="">
 				</div>
+				</c:if>
+				
 				<c:if test="${userInfo.profileImagePath ne null}">
 				<div class="profile_box">
 					<img src="${userInfo.profileImagePath}" alt="">
