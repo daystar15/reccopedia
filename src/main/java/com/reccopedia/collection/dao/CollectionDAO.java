@@ -12,23 +12,25 @@ import com.reccopedia.contents.model.ContentsView;
 
 @Repository
 public interface CollectionDAO {
+	
+	public void addCashCollection(
+			@Param("userId") Integer userId,
+			@Param("subject") String subject, 
+			@Param("content") String content);
 
 	public void addCollection(
 			@Param("userId") Integer userId,
 			@Param("subject") String subject, 
-			@Param("content") String content, 
-			@Param("arr2") String arr2);
+			@Param("content") String content);
 			
 	public void updateCollection(
 			@Param("id") int id,
 			@Param("userId") Integer userId,
 			@Param("subject") String subject, 
-			@Param("content") String content, 
-			@Param("arr2") String arr2);
+			@Param("content") String content);
 			
 	public void addCollectionContent(
 			@Param("apiId") int apiId,
-			@Param("type") int type,
 			@Param("pointId") Integer pointId,
 			@Param("userId") int userId,
 			@Param("collectionId") int collectionId,

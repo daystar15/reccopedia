@@ -194,7 +194,7 @@ textarea {
 }
 .section .inner .contents.person ul {
 	flex-wrap: wrap;
-    justify-content: flex-first;
+    justify-content: flex-start;
     overflow: auto;
 }
 .section .inner .contents ul li {
@@ -1157,6 +1157,8 @@ input:checked + label.star {
     width: 100%;
     margin-top: 1rem;
     height: 50px;
+    display: flex;
+    justify-content: flex-end;
 }
 .collection_create_box input[type=submit] {
     background: #ff2f6e;
@@ -1166,7 +1168,26 @@ input:checked + label.star {
     border-radius: 6px;
     font-size: 1.1rem;
     cursor: pointer;
-    float: right;
+    margin-left: 1rem;
+}
+.collection_create_box button {
+	color: #fff;
+    padding: 0.8rem 1.2rem;
+    font-weight: 800;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    background: #adadad;
+}
+.warning {
+	width: 45%;
+	margin: 0 auto 1rem;
+}
+.warning p {
+	text-align: right;
+	line-height: 1.6;
+	fon-size: 0.9rem;
 }
 /* 수정하기 */
 .create_box form > div > div {
@@ -1858,10 +1879,6 @@ input[id="cb1"]:checked + label {
 }
 .section .inner .contents.person ul li .content_subject {
 	width: 257px;
-}
-.header .sign_in:hover,
-.header .sign_up:hover {
-	cursor: pointer;
 }
 .empty_box {
 	width: 104px;

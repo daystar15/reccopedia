@@ -8,7 +8,7 @@
 			<img src="/static/images/right-arrow.png" alt="" onclick="goBack();">
 			<h2>컬렉션</h2>
 		</div>
-		<a href="/collection/collection_create_view?id=${num + 1}" class="createCollectionBtn">새 컬렉션</a>
+		<a href="/collection/collection_create_view?id=${num+1}" class="createCollectionBtn">새 컬렉션</a>
 	</div>
 </div>
 <div class="collection_list_box">
@@ -35,9 +35,9 @@
 				<div class="collection_list_poster">
 					<div>
 						<c:forEach items="${collectionContentList}" var="list1">
-						<%-- <c:if test="${list.id eq list1.collectionId}"> --%>
+						<c:if test="${list.id eq list1.collectionId + 1}">
 							<img src="http://image.tmdb.org/t/p/w500${list1.posterPath}" alt="">
-						<%-- </c:if> --%>
+						</c:if>
 						</c:forEach>
 					</div>
 				</div>
@@ -45,9 +45,16 @@
 				
 				<div class="collection_user user_info">
 					<div>
-						<div class="user_profile_img">
-							<div class="profile_box">
-								<img src="${userProfile}" alt="">
+						<div class="user_profile_img" style="border-radius:inherit">
+							<div class="comment_user_profile">
+			                	<c:if test="${userProfile eq null}">
+			                	<div class="empty_box" style="width: 90px;">
+									<img src="/static/images/pngegg.png" alt="" style="width: 54%; transform: translate(-90%,-79%);">
+								</div>
+								</c:if>
+								<div class="profile_box">
+									<img src="${userProfile}" alt="">
+								</div>
 							</div>
 						</div>
 						<h2 class="user_name">${userName}</h2>
@@ -64,6 +71,28 @@
 	</ul>
 </div>
 <script type="text/javascript">
+
+	$(document).ready(function() {
+		$("#createCollectionBtn").on('click', function() {
+			
+			$.ajax({
+            	type: "post" 
+            	, url: "/collection/cash_create"
+            	, data: {}
+            	
+            	, success:function(data) {
+            		if (data.code == 1) {
+            			alert("컬렉션이 임시로 생성되었습니다");
+            		} else {
+            			alert(data.errorMessage + "ajax 에러");
+            		}
+            	}
+            	, error:function(e) {
+            		alert("컬렉션 생성에 실패했습니다. 관리자에게 문의해주세요")
+            	}
+            }); //---ajax
+		})
+	})
 
 	function goBack(){
 		window.history.back();

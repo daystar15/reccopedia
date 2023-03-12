@@ -23,12 +23,11 @@ public class CollectionRestController {
 	@Autowired
 	private CollectionBO collectionBO;
 	
-	
-	@PostMapping("/create")
-	public Map<String, Object> create(
+	// 캐시
+	@PostMapping("/cash_create")
+	public Map<String, Object> cashCreate(
 			@RequestParam("subject") String subject,
 			@RequestParam("content") String content,
-			@RequestParam(name="arr2[]", required = false) String arr2,
 			HttpSession session) {
 		
 
@@ -40,7 +39,29 @@ public class CollectionRestController {
 			result.put("errorMessage", "로그인을 해주세요");
 		}
 		
-		collectionBO.addCollection(userId, subject, content, arr2); 
+		collectionBO.addCashCollection(userId, null, null); 
+		result.put("code", 1);
+		
+		return result;
+	}
+	
+	
+	@PostMapping("/create")
+	public Map<String, Object> create(
+			@RequestParam("subject") String subject,
+			@RequestParam("content") String content,
+			HttpSession session) {
+		
+
+		Integer userId = (Integer) session.getAttribute("userId");
+		Map<String, Object> result = new HashMap<>();
+		if (userId == null) {
+			result.put("code", 500);
+			result.put("result", "error");
+			result.put("errorMessage", "로그인을 해주세요");
+		}
+		
+		collectionBO.addCollection(userId, subject, content); 
 		result.put("code", 1);
 		
 		return result;
@@ -51,7 +72,6 @@ public class CollectionRestController {
 			@RequestParam("id") int id,
 			@RequestParam("subject") String subject,
 			@RequestParam("content") String content,
-			@RequestParam(name="arr2[]", required = false) String arr2,
 			HttpSession session) {
 		
 
@@ -63,7 +83,7 @@ public class CollectionRestController {
 			result.put("errorMessage", "로그인을 해주세요");
 		}
 		
-		collectionBO.updateCollection(id, userId, subject, content, arr2); 
+		collectionBO.updateCollection(id, userId, subject, content); 
 		
 		result.put("code", 1);
 		
@@ -94,7 +114,6 @@ public class CollectionRestController {
 	@PostMapping("/collection_content_create")
 	public Map<String, Object> collectionSelectView(Model model, 
 			@RequestParam("apiId") int apiId, 
-			@RequestParam("type") int type, 
 			@RequestParam("collectionId") int collectionId, 
 			@RequestParam("title") String title, 
 			@RequestParam("posterPath") String posterPath,
@@ -109,7 +128,7 @@ public class CollectionRestController {
 			result.put("errorMessage", "로그인을 해주세요");
 		}
 		
-		collectionBO.addCollectionContent(apiId, type, null, userId, collectionId, title, posterPath);
+		collectionBO.addCollectionContent(apiId, null, userId, collectionId, title, posterPath);
 		result.put("code", 1);
 		
 		return result;

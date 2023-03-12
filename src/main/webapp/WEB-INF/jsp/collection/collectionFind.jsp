@@ -21,7 +21,7 @@
 			</div>
 		</form>
 		<!-- 영화 목록 박스 (검색해서 있을 때 나타남)-->
-		<div class="content_list">
+		<div class="content_list" style="display:block;">
 			<ul id="content_list_box">
 				
 			</ul>
@@ -33,7 +33,7 @@
 
 <script>
 	$(document).ready(function() {
-		$("#findCollection #find_contents").on('click', function(e) {
+		$("#find_contents").on('click', function(e) {
 			e.preventDefault();
 			
 			let title = $('#findCollection input[name=title]').val().trim();
@@ -42,13 +42,11 @@
 				alert('검색어를 입력해주세요');
 				return;
 			};
-			
 			    
 			$.ajax({
 				type: "GET"
 				, url: "/collection/collection_find_result_view"
 				, data: {"title":title}
-			
 				, success:function(data) {
 					$("#content_list_box").html(data);
 				}
@@ -59,8 +57,6 @@
 			});//--- ajax
 			
 		});//--- 검색버튼
-		
-		
 		
 	});//--- 제이쿼리
 	
