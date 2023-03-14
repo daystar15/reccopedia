@@ -20,7 +20,8 @@ http://43.200.163.147:8080/admin/login<br/>
 * 테이블 설계 : https://docs.google.com/spreadsheets/d/1F2QyPs_9ZR0TStjXLO5ghdRcHQhgNDS1dGjM3SAKR_s/edit#gid=0 <br/>
 * URL 설계: https://docs.google.com/spreadsheets/d/1F2QyPs_9ZR0TStjXLO5ghdRcHQhgNDS1dGjM3SAKR_s/edit#gid=546147353 <br/>
 * API 설계: https://docs.google.com/spreadsheets/d/1F2QyPs_9ZR0TStjXLO5ghdRcHQhgNDS1dGjM3SAKR_s/edit#gid=1420148930 <br/>
-* ERD 다이어그램: 
+* ERD 다이어그램: ![QuickDBD-Free Diagram](https://user-images.githubusercontent.com/101237400/224982004-57845e85-1c39-4f68-8665-3a2ce68b6244.png)
+
 * 포트폴리오 문서: https://www.notion.so/Recopedia-4a0e95927510427dbbdfb034288d8ce6?pvs=4
 
 -----
@@ -33,6 +34,9 @@ http://43.200.163.147:8080/admin/login<br/>
 회원가입 기능은 사용자가 이름, 이메일, 비밀번호를 입력하면, 입력된 정보를 서버로 전송하고 서버에서는 입력된 정보를 데이터베이스에 저장합니다. 저장이 완료되면, 서버는 회원가입 성공 페이지로 응답하고 저장이 실패하면 서버는 회원가입 실패 페이지로 응답합니다.
 
 중복확인 기능은 사용자가 이메일 중복확인 버튼을 클릭하면, 입력된 이메일을 서버로 전송하고 서버에서는 입력된 이메일이 이미 데이터베이스에 저장되어 있는지 확인합니다. 만약 중복이 아니면, 서버는 "사용 가능한 이메일입니다"라는 안내 메시지를 응답하고 중복이면, 서버는 "이미 사용 중인 이메일입니다"라는 안내 메시지를 응답합니다.
+
+![Recopedia_-_Chrome_2023-03-14_18-22-41_AdobeExpress_AdobeExpress (1)](https://user-images.githubusercontent.com/101237400/224982784-6b563bba-75d4-4396-8b68-1e32874ee1aa.gif)
+
 
 ## 2. 메인 페이지
 
@@ -60,6 +64,9 @@ TMDB API는 영화 및 TV 데이터베이스를 OpenAPI 형태로 무료로 제�
 
 뷰에서는 **구글 차트**를 이용하여 사용자가 해당 컨텐츠의 평점 정보를 쉽게 확인할 수 있도록 합니다. 뷰에서는 영화 정보 JSON의 vote_average 값을 가져와 자바스크립트로 구글 차트 API를 호출하고, 평점 값을 담은 데이터를 차트 형식으로 표현합니다. 다만, 레코피디아에서는 5점 만점으로 하기 때문에 가져온 값을 2로 나누어 표현합니다. 이처럼 사용자는 차트를 통해 컨텐츠의 평점 정보를 한 눈에 확인할 수 있습니다.
 
+![main-content (1)](https://user-images.githubusercontent.com/101237400/224982458-79cbca81-c8d8-4f9c-9c7f-28fb6f7209c5.gif)
+
+
 ## 4. 보고싶어요, 보는중, 관심없어요, 평점주기
 
 해당 프로젝트에서는 CRUD를 구현하여 사용자가 편리하게 평점주기, 보고싶어요, 보는 중, 관심없어요 버튼을 토글로 선택할 수 있도록 하고 있습니다. 이를 위해 스프링 MVC를 기반으로 하여 구현하였습니다. 
@@ -82,11 +89,17 @@ TMDB API는 영화 및 TV 데이터베이스를 OpenAPI 형태로 무료로 제�
 
 마지막으로 댓글 삭제 기능은 내가 쓴 댓글들은 삭제 버튼을 통해 삭제할 수 있도록 하였습니다. 이를 위해 댓글 삭제 버튼을 누르면 해당 댓글의 정보를 서버로 전송하고, 서버에서는 이를 데이터베이스에서 삭제하도록 구현하였습니다.
 
+![Recopedia_-_Chrome_2023-03-14_18-24-10_AdobeExpress_AdobeExpress](https://user-images.githubusercontent.com/101237400/224984178-6f187292-b1ca-4049-8e5a-049e8120a6a2.gif)
+
+
 ## 6. 평가하기 페이지
 
 영화와 TV로 나뉘는 구성으로 스프링 MVC 패턴을 사용하여 댓글 및 평점 등의 사용자 요청을 처리합니다. 댓글이나 평점을 입력할 때는 **HTTP POST** 요청을 사용하며, BO에서는 **RESTTemplate**을 이용하여 일일 트렌드 API 정보를 가져옵니다.
 
 사용자가 댓글이나 평점을 입력하면 각각의 DAO에서 해당 데이터를 처리하여 데이터베이스에 저장합니다. 입력된 별점에 대해서는 입력할 때마다 "별점이 입력되었습니다"라는 안내 문구가 표시되도록 구현합니다.
+
+![Recopedia_-_Chrome_2023-03-14_18-26-56_AdobeExpress_AdobeExpress](https://user-images.githubusercontent.com/101237400/224983940-ef2fd36e-44e9-4571-93eb-a02a8216db89.gif)
+
 
 ## 7. 컬렉션
 
@@ -100,6 +113,8 @@ TMDB API는 영화 및 TV 데이터베이스를 OpenAPI 형태로 무료로 제�
 
 사용자가 컬렉션을 삭제하면 컬렉션과 매칭된 작품 정보도 함께 삭제되어야 하기 때문에, 이를 안내하는 메시지를 사용자에게 보여줄 필요가 있습니다. 아직 이 부분은 사용자에게 임시저장 문구를 통해 안내하고 있지만 다음 버전에서는 예를 들어, "컬렉션을 삭제하시겠습니까?라는 문구를 띄워  해당 컬렉션에 포함된 모든 작품 정보도 함께 삭제될 수 있도록 처리할 예정입니다. 삭제하시려면 '확인' 버튼을 눌러주세요."와 같은 메시지를 보여줄 수 있습니다. 이를 구현하기 위해서는 JavaScript와 AJAX를 사용하여 Confirm 메시지를 띄우고, 확인 버튼을 누르면 AJAX를 통해 서버에 컬렉션 삭제 요청을 보내는 방식으로 구현할 수 있습니다.
 
+![Recopedia_-_Chrome_2023-03-14_18-52-24_AdobeExpress_AdobeExpress](https://user-images.githubusercontent.com/101237400/224983540-9fad0ded-a07c-4811-b87e-1501ad953f90.gif)
+
 ## 8. 관리자 페이지
 
 관리자 페이지에서는 회원 목록과 댓글 신고 목록을 확인할 수 있습니다. 회원 목록과 댓글 신고 목록을 보여주기 위해서는 데이터베이스와 연동이 필요합니다. 따라서, 데이터베이스와의 연동을 위해 MyBatis를 이용하였습니다. AdminController는 회원 목록은 UserBO를 불러오며 UserBO는  회원 목록을 조회하고, 조회된 회원 목록을 모델에 담아서 관리자 페이지의 뷰 페이지로 전달합니다. 관리자 뷰 페이지에서는 모델에 담긴 회원 목록을 테이블로 표현하여 보여줍니다.
@@ -107,6 +122,8 @@ TMDB API는 영화 및 TV 데이터베이스를 OpenAPI 형태로 무료로 제�
 댓글 신고 목록도 AdminController가 CommentBO를 불러와 댓글 신고 목록을 조회하고, 조회된 댓글 신고 목록을 모델에 담아서 뷰 페이지로 전달합니다. 뷰 페이지에서는 모델에 담긴 댓글 신고 목록을 테이블로 표현하여 보여줍니다.
 
 TV와 영화에 입력된 댓글 수는 **Google Charts API**를 이용하여 시각적으로 표현됩니다. CommentBO는 TV와 영화에 입력된 댓글 수를 조회하고, 조회된 데이터를 모델에 담아서 AdminController가 뷰 페이지로 전달합니다. 뷰 페이지에서는 모델에 담긴 데이터를 Google Charts API를 이용하여 차트로 표현하여 보여줍니다.
+
+![Document_-_Chrome_2023-03-14_18-25-32_AdobeExpress_AdobeExpress](https://user-images.githubusercontent.com/101237400/224983341-baac387d-f0f4-4f9a-befc-2610e695115d.gif)
 
 ## 9. 유저 페이지
 
@@ -118,6 +135,8 @@ HTML에서는 file 태그를 사용하여 이미지 파일을 선택할 수 있�
 또한, 사용자의 닉네임과 자기소개도 함께 변경할 수 있습니다. 이를 위해 POST 방식으로 요청을 보내고, Controller에서는 DAO를 통해 DB에 변경된 정보를 저장합니다.
 
 유저가 남긴 평점 개수, 댓글 개수, 컬렉션 수부터 영화와 TV별로 유저가 담은 보고싶어요, 보는중, 평가하기 값들이 나타납니다. 이를 위해 DAO를 통해 DB에서 정보를 가져오고, HTML에서는 숫자로 나타내기 위해 jstl의 length를 사용하여 처리했습니다. 이를 통해 유저 페이지에서는 다양한 정보를 제공할 수 있습니다.
+
+![Recopedia_-_Chrome_2023-03-14_18-30-14_AdobeExpress_AdobeExpress](https://user-images.githubusercontent.com/101237400/224984366-7faf14f5-4151-44d7-af1f-05b95f88573e.gif)
 
 -----
 # 향후과제
