@@ -15,8 +15,13 @@
 		<div class="comment_user">
 			<a class="comment_left">
 				<span class="comment_user_profile"> 
+					<c:if test="${userProfile eq null}">
+	                	<div class="empty_box" style="width: 90px;">
+							<img src="/static/images/pngegg.png" alt="" style="width: 54%; transform: translate(-90%,-79%);">
+						</div>
+					</c:if>
 					<div class="profile_box">
-						<img src="${userInfo.profileImagePath}" alt="">
+						<img src="${userProfile}" alt="">
 					</div>
 				</span> 
 				<span class="comment_user_name">${list.user.name} </span>
@@ -114,11 +119,12 @@
         
        // 댓글 신고
        $(".reportBtn").on('click', function() {
-       	    let apiId = $('.comment_box').data('api-id');
-       		let userId = $('.comment_box').data('user-id');
-          	let commentId = $('.comment_box').data('comment-id');
-          	let content = $(".comment_content").data('comment-content');
+       	    let apiId = $(this).parent().parent().parent().parent().data('api-id');
+       		let userId = $(this).parent().parent().parent().parent().data('user-id');
+          	let commentId = $(this).parent().parent().parent().parent().data('comment-id');
+          	let content = $(this).parent().parent().parent().siblings().text();
           	let reportConfirm = confirm("정말 신고하시겠습니까?");
+          	console.log(content);
 
 	       	// ajax 댓글 신고
 			$.ajax ({

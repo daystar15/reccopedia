@@ -102,12 +102,12 @@ public class CollectionController {
 			result.put("errorMessage", "로그인을 해주세요");
 		}
 		
-		int num = collectionBO.getCollectionId();
+		
 		List<CollectionContent> collectionContentList = collectionBO.getCollectionContentList(userId);
 		List<Collection> collectionList = collectionBO.getCollectionList(userId);
 		List<CollectionContent> collectionContent = collectionBO.getCollectionContent();
 		
-		model.addAttribute("num", num);
+		
 		model.addAttribute("collectionContent", collectionContent);
 		model.addAttribute("collectionContentList", collectionContentList);
 		model.addAttribute("collectionList", collectionList);
@@ -127,9 +127,9 @@ public class CollectionController {
 		List<CollectionContent> collectionContentList = collectionBO.getCollectionContentList(userId);
 		List<CollectionContent> collectionContetByCollectionId = collectionBO.getCollectionContentByCollectionId(id-1);
 		Map<String, Object> collectionSubjectContent = collectionBO.getCollectionSubjectContent(id);
-		int num = collectionBO.getCurrentCollectionId(id);
+		//int num = collectionBO.getCurrentCollectionId(id);
 		
-		model.addAttribute("num", num);
+		//model.addAttribute("num", num);
 		model.addAttribute("collectionSubjectContent", collectionSubjectContent);
 		model.addAttribute("collectionContetByCollectionId", collectionContetByCollectionId);
 		model.addAttribute("collectionContentList", collectionContentList);

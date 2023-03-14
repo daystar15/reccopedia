@@ -12,12 +12,14 @@
 		<!-- 백그라운드이미지 -->
 		<%-- 기본 이미지, 유저가 업로드 하면 이미지 변경됨 --%>
 		<div class="user_background">
-			<c:if test="${empty userInfo.backgroundImagePath}">
+			<c:if test="${userInfo.backgroundImagePath eq null}">
 			<img src="/static/images/user_page_background.jpg" alt="">
 			</c:if>
+			<c:if test="${userInfo.backgroundImagePath ne null}">
 			<div>
 				<img src="${userInfo.backgroundImagePath}" alt="">
 			</div>
+			</c:if>
 		</div>
 		<!-- 백그라운드이미지 끝-->
 		<!-- 유저 정보 -->
@@ -78,7 +80,7 @@
 			<div></div>
 			<ul class="analyze_info">
 				<li>
-					<h4>{5}</h4>
+					<h4>${point}</h4>
 					<span>별점 평균</span>
 				</li>
 				<li>
