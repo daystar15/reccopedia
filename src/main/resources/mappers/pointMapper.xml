@@ -131,6 +131,15 @@
 			AND `userId` = #{userId}
 	</select>
 	
+	<select id="selectPointIntegerListByApiIdOrUserId" parameterType="map" resultType="com.reccopedia.point.model.Point">
+		SELECT
+			 `point`
+		FROM
+			`point`
+		WHERE
+			`userId` = #{userId}
+	</select>
+	
 	<select id="selectPointCountListByApiIdAndUserId" parameterType="map" resultType="com.reccopedia.point.model.Point">
 		SELECT
 			 `point`

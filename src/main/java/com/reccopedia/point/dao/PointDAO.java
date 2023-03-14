@@ -59,4 +59,7 @@ public interface PointDAO {
 	
 	public int selectPointCount();
 	
+	// 별점목록 별점만 가져오는 함수
+	public List<Integer> selectPointIntegerListByApiIdOrUserId(int userId);
+	
 }

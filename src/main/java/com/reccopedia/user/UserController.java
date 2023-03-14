@@ -80,6 +80,7 @@ public class UserController {
 		List<Map<String, Object>> wishList = wishBO.getWishList(userId);
 		List<Map<String, Object>> wishTVList = wishBO.getWishTVList(userId);
 		List<Map<String, Object>> pointList = pointBO.getPointList(userId);
+		int point = pointBO.plusPoint(userId);
 		List<Map<String, Object>> pointTVList = pointBO.getPointTVList(userId);
 		List<Map<String, Object>> commentList = commentBO.getCommentList(userId);
 		List<Collection> collectionList = collectionBO.getCollectionList(userId);
@@ -87,6 +88,7 @@ public class UserController {
 		int num = pointBO.getPointCountByUserId();
 		
 		model.addAttribute("num", num);
+		model.addAttribute("point", point);
 		model.addAttribute("collectionList", collectionList);
 		model.addAttribute("userInfo", userInfo);
 		model.addAttribute("wishList", wishList);

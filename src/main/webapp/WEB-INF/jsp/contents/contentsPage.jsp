@@ -203,8 +203,13 @@
 								<div class="comment_user">
 									<a href="#" class="comment_left">
 										<span class="comment_user_profile">
+											<c:if test="${userProfile eq null}">
+							                	<div class="empty_box" style="width: 90px;">
+													<img src="/static/images/pngegg.png" alt="" style="width: 54%; transform: translate(-90%,-79%);">
+												</div>
+											</c:if>
 											<div class="profile_box">
-												<img src="${userinfo.profileImagePath}" alt="">
+												<img src="${userProfile}" alt="">
 											</div>
 										</span> <span class="comment_user_name"> ${list.user.name} </span>
 									</a>
@@ -721,10 +726,12 @@
         	//let title = $(".contents_info .title").data('api-title');
         	//let posterPath = $(".contents_poster img").data('api-img');
         	
-        	//alert(userId);
-        	if (userId == null) {
+        	
+        	if (userId == '') {
         		alert('로그인을 해주세요!');
-        	} else {
+        		window.location.replace("/main");
+        		
+        	} else if (userId != '') {
         		location.href="/collection/collection_list_view"
         	}
         	

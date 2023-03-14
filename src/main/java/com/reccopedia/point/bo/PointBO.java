@@ -89,6 +89,21 @@ public class PointBO {
 		return pointDAO.selectPointListByApiIdOrUserId(userId);
 	}
 	
+	// 별점목록 별점만 가져오는 함수
+	public List<Integer> getPointIntegerList(int userId) {
+		return pointDAO.selectPointIntegerListByApiIdOrUserId(userId);
+	}
+	
+	public int plusPoint(int userId) {
+		List<Integer> list = getPointIntegerList(userId);
+		
+		int sum = 0;
+		for (int i = 0; i < list.size(); i++) {
+			sum += i;
+		}
+		return sum / list.size();
+	}
+	
 	// TV별점목록 가져오는 함수
 	public List<Map<String, Object>> getPointTVList(int userId) {
 		return pointDAO.selectPointTVListByApiIdOrUserId(userId);

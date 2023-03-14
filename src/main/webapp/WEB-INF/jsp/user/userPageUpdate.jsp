@@ -24,12 +24,14 @@
 			<!-- 유저 정보 -->
 			<div class="user_info">
 				<input type="file" id="user_profile_file" class="none" accept=".gif, .jpg, .png, .jpeg">
-				<div class="user_profile_img">	
+				<div class="user_profile_img">
+					<c:if test="${userInfo.profileImagePath eq null}">	
 					<div class="profile_box empty_box" style="cursor: pointer;">
 						<img src="/static/images/pngegg.png" alt="">
 					</div>
+					</c:if>
 					<c:if test="${userInfo.profileImagePath ne null}">
-					<div class="profile_box">
+					<div class="profile_box" style="cursor: pointer;">
 						<img src="${userInfo.profileImagePath}" alt="">
 					</div>
 					</c:if>
