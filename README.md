@@ -16,13 +16,13 @@ http://43.200.163.147:8080/main<br/>
 http://43.200.163.147:8080/admin/login<br/>
 어드민 계정: admin / admin<br/>
 
+* 시연영상 : https://www.youtube.com/watch?v=wCiXt68KMw4
+* 포트폴리오 문서: https://www.notion.so/Recopedia-4a0e95927510427dbbdfb034288d8ce6?pvs=4
 * 일정 : https://docs.google.com/spreadsheets/d/13H9KnPqFq9CeIpvmd-0mHuuwhWSSFfISBZb5xugIfnQ/edit#gid=0 <br/>
 * 테이블 설계 : https://docs.google.com/spreadsheets/d/1F2QyPs_9ZR0TStjXLO5ghdRcHQhgNDS1dGjM3SAKR_s/edit#gid=0 <br/>
 * URL 설계: https://docs.google.com/spreadsheets/d/1F2QyPs_9ZR0TStjXLO5ghdRcHQhgNDS1dGjM3SAKR_s/edit#gid=546147353 <br/>
 * API 설계: https://docs.google.com/spreadsheets/d/1F2QyPs_9ZR0TStjXLO5ghdRcHQhgNDS1dGjM3SAKR_s/edit#gid=1420148930 <br/>
 * ERD 다이어그램: ![QuickDBD-Free Diagram](https://user-images.githubusercontent.com/101237400/224982004-57845e85-1c39-4f68-8665-3a2ce68b6244.png)
-
-* 포트폴리오 문서: https://www.notion.so/Recopedia-4a0e95927510427dbbdfb034288d8ce6?pvs=4
 
 -----
 # 기능명세
