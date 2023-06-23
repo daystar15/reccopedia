@@ -9,11 +9,11 @@
 ### 개발 문서
 
 * 메인페이지<br/>
-http://43.200.163.147:8080/main<br/>
+http://43.200.181.220:8080/main<br/>
 테스트 가계정: test@test.com / testtest<br/>
 
 * 어드민페이지<br/>
-http://43.200.163.147:8080/admin/login<br/>
+http://43.200.181.220:8080/admin/login<br/>
 어드민 계정: admin / admin<br/>
 
 * 시연영상 : https://www.youtube.com/watch?v=wCiXt68KMw4
